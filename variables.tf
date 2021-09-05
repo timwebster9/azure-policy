@@ -1,8 +1,15 @@
+#####################
+# Policy Naming
+#####################
 variable "sig_only_policy_name" {
     type = string
 }
 
 variable "sig_only_display_name" {
+    type = string
+}
+
+variable "kv_network_access" {
     type = string
 }
 

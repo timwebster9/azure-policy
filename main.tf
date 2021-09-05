@@ -40,3 +40,19 @@ METADATA
 }
 PARAMETERS
 }
+
+resource "azurerm_management_group_policy_assignment" "key_vault_network_access" {
+  name                 = var.kv_network_access
+  policy_definition_id = data.azurerm_policy_definition.key_vault_network_access.id
+  management_group_id  = data.azurerm_management_group.parent.id
+  description          = "Policy Assignment test"
+  display_name         = var.sig_only_display_name
+
+  parameters = <<PARAMETERS
+{
+  "Effect": {
+    "value": "Deny"
+  }
+}
+PARAMETERS
+}

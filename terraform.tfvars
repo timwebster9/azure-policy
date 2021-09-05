@@ -1,5 +1,10 @@
+#####################
+# Policy Naming
+#####################
 sig_only_policy_name  = "allow-sig-only"
 sig_only_display_name = "Only allow VMs to be deployed from Shared Image Gallery images"
+
+kv_network_access = "[Preview]: Azure Key Vault should disable public network access"
 
 ############
 # General 

@@ -1,8 +1,9 @@
 resource "azurerm_policy_definition" "allow_sig_only" {
-  name         = var.sig_only_policy_name
-  policy_type  = "Custom"
-  mode         = "Indexed"
-  display_name = var.sig_only_display_name
+  name                  = var.sig_only_policy_name
+  policy_type           = "Custom"
+  mode                  = "Indexed"
+  display_name          = var.sig_only_display_name
+  management_group_name = data.azurerm_management_group.parent.id
 
   metadata = <<METADATA
     {

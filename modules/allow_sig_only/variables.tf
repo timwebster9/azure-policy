@@ -9,6 +9,14 @@ variable "sig_only_display_name" {
     type = string
 }
 
+variable "policy_definition_mgmt_group_name" {
+    type = string
+}
+
+variable "policy_assignment_mgmt_group_name" {
+    type = string
+}
+
 variable location {
   type = string
 }

@@ -12,7 +12,7 @@ resource "azurerm_policy_definition" "allow_sig_only" {
 METADATA
 
   policy_rule = file("policy_defs/compute/allow_sig_only/rules.json")
-  parameters = file("policy_defs/compute/allow_sig_only/rules.json")
+  parameters = file("policy_defs/compute/allow_sig_only/parameters.json")
 }
 
 resource "azurerm_policy_assignment" "allow_sig_only" {
@@ -24,7 +24,7 @@ resource "azurerm_policy_assignment" "allow_sig_only" {
 
   metadata = <<METADATA
     {
-    "category": "General"
+    "category": "Compute"
     }
 METADATA
 

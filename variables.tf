@@ -37,3 +37,7 @@ variable "source_image_sku" {
 variable "source_image_version" {
   type = string
 }
+
+variable "allowed_source_image_id" {
+  type = string
+}

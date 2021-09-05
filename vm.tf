@@ -32,10 +32,12 @@ resource "azurerm_linux_virtual_machine" "linux_vm" {
     storage_account_type = "Standard_LRS"
   }
 
-  source_image_reference {
-    publisher = var.source_image_publisher
-    offer     = var.source_image_offer
-    sku       = var.source_image_sku
-    version   = var.source_image_version
-  }
+  source_image_id = var.allowed_source_image_id
+  
+#   source_image_reference {
+#     publisher = var.source_image_publisher
+#     offer     = var.source_image_offer
+#     sku       = var.source_image_sku
+#     version   = var.source_image_version
+#   }
 }

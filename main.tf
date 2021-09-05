@@ -15,10 +15,10 @@ METADATA
   parameters = file("policy_defs/compute/allow_sig_only/parameters.json")
 }
 
-resource "azurerm_policy_assignment" "allow_sig_only" {
+resource "azurerm_management_group_policy_assignment" "allow_sig_only" {
   name                 = var.sig_only_policy_name
-  scope                = data.azurerm_management_group.parent.id
   policy_definition_id = azurerm_policy_definition.allow_sig_only.id
+  management_group_id  = data.azurerm_management_group.parent.id
   description          = "Policy Assignment test"
   display_name         = var.sig_only_display_name
 
@@ -35,5 +35,4 @@ METADATA
   }
 }
 PARAMETERS
-
 }

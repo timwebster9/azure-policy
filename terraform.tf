@@ -13,6 +13,6 @@ terraform {
     resource_group_name  = "mgmt-rg"
     storage_account_name = "mgmtstorage3445354"
     container_name       = "tfstate"
-    key                  = "bastion.tfstate"
+    key                  = "policy.tfstate"
   }
 }

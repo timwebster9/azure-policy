@@ -34,4 +34,8 @@ resource "azurerm_key_vault" "test_kv" {
     bypass         = "AzureServices"
     default_action = var.network_acls_default_action
   }
+
+  depends_on = [
+    azurerm_management_group_policy_assignment.key_vault_network_access
+  ]
 }

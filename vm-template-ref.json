@@ -1,0 +1,87 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualMachines_ggtf_name": {
+            "defaultValue": "ggtf",
+            "type": "String"
+        },
+        "disks_ggtf_OsDisk_1_b2bf44db5b354a97a6d0bcc566f0ce29_externalid": {
+            "defaultValue": "/subscriptions/2ca65474-3b7b-40f2-b242-0d2fba4bde6e/resourceGroups/policy-test-rg/providers/Microsoft.Compute/disks/ggtf_OsDisk_1_b2bf44db5b354a97a6d0bcc566f0ce29",
+            "type": "String"
+        },
+        "networkInterfaces_ggtf135_externalid": {
+            "defaultValue": "/subscriptions/2ca65474-3b7b-40f2-b242-0d2fba4bde6e/resourceGroups/policy-test-rg/providers/Microsoft.Network/networkInterfaces/ggtf135",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2021-03-01",
+            "name": "[parameters('virtualMachines_ggtf_name')]",
+            "location": "uksouth",
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_D2ds_v4"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "canonical",
+                        "offer": "0001-com-ubuntu-server-focal",
+                        "sku": "20_04-lts",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "osType": "Linux",
+                        "name": "[concat(parameters('virtualMachines_ggtf_name'), '_OsDisk_1_b2bf44db5b354a97a6d0bcc566f0ce29')]",
+                        "createOption": "FromImage",
+                        "caching": "ReadWrite",
+                        "managedDisk": {
+                            "storageAccountType": "Premium_LRS",
+                            "id": "[parameters('disks_ggtf_OsDisk_1_b2bf44db5b354a97a6d0bcc566f0ce29_externalid')]"
+                        },
+                        "diskSizeGB": 30
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "[parameters('virtualMachines_ggtf_name')]",
+                    "adminUsername": "azureuser",
+                    "linuxConfiguration": {
+                        "disablePasswordAuthentication": true,
+                        "ssh": {
+                            "publicKeys": [
+                                {
+                                    "path": "/home/azureuser/.ssh/authorized_keys",
+                                    "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCjQyyyZ0re9TRqeeu9mP7eeUP9ZU3V6lpGNDBs9QgG5np+DoeVg2BqjE3gptdcREl/TBV5277jYxViEF6aadtDJsZpo622Xfd8+3g57yVDbzKR9fd6mCm2tqxWGNUTJgQ1QgRsDA49px2gg1vXJXKsfRB82z7F3j5j40TD+1hCSb8tjOURuKcBhxcgyit6OxMVC909V0uESV8vSZGguNhLg/6xf3JsZdihkneAysAPt208U2EhzEhwWkTupoe/8brYW4ruWp/tubSU6//kW0ZOyNZXrfzLL+96y9Ev2uZJEzRdHoHtzJ/5FDOclaQTF/2f+FW3ZQ2E003Ou+jZy6YvQ+0dHS4OjHSsU7rsvLKBbLJtOOhk9Tywf/TClVc8jEk/D0GSITPuuRvu2fcLHuy0twffJeFEtV+g44+tSsjHe1oXRSuDY3KrqsvcTgUk5q5tzCc8z+kScPYiiUinjn6k5JNYFvidIbZ4pNSDkOyRBUQWoAirsS8BxJoZ6cY3DK6EKgw9Ai6VvfhCD3UGsM45IoooLutm9Dnj8GM/7e0bq6Bit9e4hHqoRj85maZKveMjgfLtWvHiC4PyONeKZ7XCG/rAw6+rZDuHFhA8YHPGrc++/atkp+g3r0BZbMbx1j495mh4j7vz4Lhe1tqjCur+Ia5Jkt2EpXLXIJmH+am0Dw== tim.webster@contino.io"
+                                }
+                            ]
+                        },
+                        "provisionVMAgent": true,
+                        "patchSettings": {
+                            "patchMode": "ImageDefault",
+                            "assessmentMode": "ImageDefault"
+                        }
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true,
+                    "requireGuestProvisionSignal": true
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[parameters('networkInterfaces_ggtf135_externalid')]"
+                        }
+                    ]
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": true
+                    }
+                }
+            }
+        }
+    ]
+}

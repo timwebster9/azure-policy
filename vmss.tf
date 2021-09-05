@@ -1,0 +1,36 @@
+resource "azurerm_linux_virtual_machine_scale_set" "linux_vmss" {
+  name                = "linux-vm"
+  resource_group_name = azurerm_resource_group.policy.name
+  location            = azurerm_resource_group.policy.location
+  size                = var.vm_size
+  disable_password_authentication = false
+  admin_username      = "azureuser"
+  admin_password      = "sadf8sa7asfas!"
+
+  depends_on = [
+      azurerm_management_group_policy_assignment.allow_sig_only
+  ]
+
+  network_interface {
+    name    = "linux-vmss-nic"
+    primary = true
+
+    ip_configuration {
+      name      = "internal"
+      primary   = true
+      subnet_id = azurerm_subnet.host_sn.id
+    }
+  }
+
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
+
+  source_image_reference {
+    publisher = var.source_image_publisher
+    offer     = var.source_image_offer
+    sku       = var.source_image_sku
+    version   = var.source_image_version
+  }
+}

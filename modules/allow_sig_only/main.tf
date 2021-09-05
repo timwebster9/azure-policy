@@ -3,7 +3,7 @@ resource "azurerm_policy_definition" "allow_sig_only" {
   policy_type           = "Custom"
   mode                  = "Indexed"
   display_name          = var.sig_only_display_name
-  management_group_name = data.azurerm_management_group.parent.name
+  management_group_name = data.azurerm_management_group.policy_definition_mgmt_group.name
 
   metadata = <<METADATA
     {
@@ -19,7 +19,7 @@ METADATA
 resource "azurerm_management_group_policy_assignment" "allow_sig_only" {
   name                 = var.sig_only_policy_name
   policy_definition_id = azurerm_policy_definition.allow_sig_only.id
-  management_group_id  = data.azurerm_management_group.parent.id
+  management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"
   display_name         = var.sig_only_display_name
 

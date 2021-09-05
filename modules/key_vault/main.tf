@@ -15,7 +15,7 @@ PARAMETERS
 }
 
 resource "azurerm_resource_group" "policy_rg" {
-  name     = "kv-policy-rg"
+  name     = var.resource_group_name
   location = var.location
 }
 

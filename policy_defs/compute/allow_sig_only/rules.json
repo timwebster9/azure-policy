@@ -8,7 +8,7 @@
                         "equals": "Microsoft.Compute/virtualMachines"
                     },
                     {
-                        "field": "Microsoft.Compute/virtualMachines/storageProfile/imageReference",
+                        "field": "Microsoft.Compute/virtualMachines/storageProfile.imageReference.id",
                         "notLike": "[parameters('sharedImageGalleryIDs')]"
                     }
                 ]
@@ -20,7 +20,7 @@
                         "equals": "Microsoft.Compute/virtualMachineScaleSets"
                     },
                     {
-                        "field": "Microsoft.Compute/virtualMachineScaleSets/storageProfile/imageReference",
+                        "field": "Microsoft.Compute/virtualMachineScaleSets/storageProfile.imageReference.id",
                         "notLike": "[parameters('sharedImageGalleryIDs')]"
                     }
                 ]

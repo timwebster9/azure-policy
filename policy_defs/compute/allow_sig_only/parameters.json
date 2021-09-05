@@ -1,6 +1,6 @@
 {
     "sharedImageGalleryIDs": {
-        "type": "Array",
+        "type": "String",
         "metadata": {
             "description": "The IDs of the shared image galleries to allow",
             "displayName": "Share Image Gallery IDs"

@@ -1,9 +1,22 @@
 {
-    "sharedImageGalleryIDs": {
+    "sharedImageGalleryID": {
         "type": "String",
         "metadata": {
-            "description": "The IDs of the shared image galleries to allow",
-            "displayName": "Share Image Gallery IDs"
+            "description": "The ID of the shared image gallery to allow",
+            "displayName": "Share Image Gallery ID"
+        }
+    },
+    "effect": {
+        "type": "String",
+        "defaultValue": "Deny",
+        "allowedValues": [
+            "Audit",
+            "Deny",
+            "Disabled"
+        ],
+        "metadata": {
+            "displayName": "Effect",
+            "description": "The effect determines what happens when the policy rule is evaluated to match"
         }
     }
 }

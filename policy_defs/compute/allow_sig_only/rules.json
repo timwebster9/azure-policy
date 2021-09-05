@@ -1,33 +1,25 @@
 {
     "if": {
-        "anyOf": [
+        "allOf": [
             {
-                "allOf": [
+                "anyOf": [
                     {
                         "field": "type",
                         "equals": "Microsoft.Compute/virtualMachines"
                     },
                     {
-                        "field": "Microsoft.Compute/imageId",
-                        "notLike": "[parameters('sharedImageGalleryIDs')]"
+                        "field": "type",
+                        "equals": "Microsoft.Compute/virtualMachineScaleSets"
                     }
                 ]
             },
             {
-                "allOf": [
-                    {
-                        "field": "type",
-                        "equals": "Microsoft.Compute/virtualMachineScaleSets"
-                    },
-                    {
-                        "field": "Microsoft.Compute/imageId",
-                        "notLike": "[parameters('sharedImageGalleryIDs')]"
-                    }
-                ]
+                "field": "Microsoft.Compute/imageId",
+                "notLike": "[parameters('sharedImageGalleryID')]"
             }
         ]
     },
     "then": {
-        "effect": "Deny"
+        "effect": "[parameters('effect')]"
     }
 }

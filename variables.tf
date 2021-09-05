@@ -9,7 +9,7 @@ variable "sig_only_display_name" {
     type = string
 }
 
-variable "kv_network_access" {
+variable "kv_network_access_name" {
     type = string
 }
 

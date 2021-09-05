@@ -3,7 +3,7 @@ resource "azurerm_policy_definition" "allow_sig_only" {
   policy_type           = "Custom"
   mode                  = "Indexed"
   display_name          = var.sig_only_display_name
-  management_group_name = data.azurerm_management_group.parent.id
+  management_group_name = data.azurerm_management_group.parent.name
 
   metadata = <<METADATA
     {

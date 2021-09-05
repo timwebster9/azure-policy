@@ -36,7 +36,7 @@ METADATA
   },
   "effect": {
     "value": "Deny"
-  },
+  }
 }
 PARAMETERS
 }

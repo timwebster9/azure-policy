@@ -31,8 +31,8 @@ METADATA
 
   parameters = <<PARAMETERS
 {
-  "listOfAllowedSKUs": {
-    "value": [ "Standard_B2s" ]
+  "sharedImageGalleryIDs": {
+    "value": [ "/subscriptions/2ca65474-3b7b-40f2-b242-0d2fba4bde6e/resourceGroups/mgmt-rg/providers/Microsoft.Compute/galleries/policytestsig/*" ]
   }
 }
 PARAMETERS

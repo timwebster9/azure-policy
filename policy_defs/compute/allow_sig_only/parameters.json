@@ -1,10 +1,9 @@
 {
-    "listOfAllowedSKUs": {
+    "sharedImageGalleryIDs": {
         "type": "Array",
         "metadata": {
-            "description": "The list of size SKUs that can be specified for virtual machines.",
-            "displayName": "Allowed Size SKUs",
-            "strongType": "VMSKUs"
+            "description": "The IDs of the shared image galleries to allow",
+            "displayName": "Share Image Gallery IDs"
         }
     }
 }

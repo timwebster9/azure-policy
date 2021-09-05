@@ -17,7 +17,7 @@ METADATA
 
 resource "azurerm_policy_assignment" "allow_sig_only" {
   name                 = var.sig_only_policy_name
-  scope                = azurerm_management_group.parent.id
+  scope                = data.azurerm_management_group.parent.id
   policy_definition_id = azurerm_policy_definition.allow_sig_only.id
   description          = "Policy Assignment test"
   display_name         = var.sig_only_display_name

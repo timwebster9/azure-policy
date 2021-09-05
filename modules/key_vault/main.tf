@@ -1,7 +1,7 @@
 resource "azurerm_management_group_policy_assignment" "key_vault_network_access" {
   name                 = "kv-network-access"
   policy_definition_id = data.azurerm_policy_definition.key_vault_network_access.id
-  management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group_name.id
+  management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"
   display_name         = data.azurerm_policy_definition.key_vault_network_access.display_name
 
@@ -31,6 +31,7 @@ resource "azurerm_key_vault" "test_kv" {
   sku_name = "standard"
 
   network_acls {
+    bypass         = "AzureServices"
     default_action = var.network_acls_default_action
   }
 }

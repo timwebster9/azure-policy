@@ -3,7 +3,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "linux_vmss" {
   resource_group_name = azurerm_resource_group.policy.name
   location            = azurerm_resource_group.policy.location
   sku                 = var.vm_size
-  instances           = 1
+  instances           = 2
   admin_username      = "azureuser"
   admin_password      = "sdafasdfsaghdgkjhIOU897£"
   disable_password_authentication = false

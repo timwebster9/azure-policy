@@ -32,8 +32,8 @@ jobs:
       - name: Terraform init
         run: terraform init
 
-      - name: Terrafrom plan
-        run: terraform plan
+      # - name: Terrafrom plan
+      #   run: terraform plan
 
       - name: Terrafrom apply
         if: ${{ success() }}

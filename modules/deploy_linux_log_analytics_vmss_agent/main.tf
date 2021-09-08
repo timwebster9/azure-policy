@@ -30,6 +30,10 @@ resource "azurerm_management_group_policy_assignment" "policy_assignment" {
   description          = "Policy Assignment test"
   display_name         = var.policy_display_name
 
+  identity {
+    type = "SystemAssigned"
+  }
+
   metadata = <<METADATA
     {
     "category": "Compute"

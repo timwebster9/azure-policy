@@ -43,7 +43,7 @@
 # Linux VM Log Analytics Agent policy
 ########################################
 module "linux_vmss_log_agent" {
-    source = "./modules/deploy_linux_log_analytics_vmss_agent"
+    source = "./modules/deploy_log_analytics_agent"
 
     location                          = var.location
     resource_group_name               = "policy-rg"

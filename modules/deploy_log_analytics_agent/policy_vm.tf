@@ -1,13 +1,8 @@
-locals {
-  policy_name         = "deploy_oms_linux_vm"
-  policy_display_name = "Deploy Log Analytics Agent for Linux VM"
-}
-
 resource "azurerm_policy_definition" "policy_def_vm" {
-  name                  = local.policy_name
+  name                  = "deploy_oms_linux_vm"
   policy_type           = "Custom"
   mode                  = "Indexed"
-  display_name          = local.policy_display_name
+  display_name          = "Deploy Log Analytics Agent for Linux VM"
   management_group_name = data.azurerm_management_group.policy_definition_mgmt_group.name
 
   metadata = <<METADATA
@@ -22,11 +17,11 @@ METADATA
 }
 
 resource "azurerm_management_group_policy_assignment" "policy_assignment_vm" {
-  name                 = local.policy_name
+  name                 = "deploy_oms_linux_vm"
   policy_definition_id = azurerm_policy_definition.policy_def_vm.id
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"
-  display_name         = local.policy_display_name
+  display_name         = "Deploy Log Analytics Agent for Linux VM"
   location             = azurerm_resource_group.policy.location
 
   identity {

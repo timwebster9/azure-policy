@@ -53,3 +53,14 @@ METADATA
 PARAMETERS
 }
 
+resource "azurerm_role_assignment" "role" {
+  scope                = data.azurerm_management_group.policy_assignment_mgmt_group.id
+  role_definition_name = "Contributor"
+  principal_id         = data.azurerm_management_group_policy_assignment.policy_assignment.identity.principal_id 
+}
+
+resource "azurerm_policy_remediation" "rem" {
+  name                 = "example-policy-remediation"
+  scope                = azurerm_policy_assignment.policy_assignment.scope
+  policy_assignment_id = azurerm_policy_assignment.policy_assignment.id
+}

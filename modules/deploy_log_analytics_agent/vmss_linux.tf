@@ -18,7 +18,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "linux_vmss" {
     primary = true
 
     ip_configuration {
-      name      = "internal"
+      name      = "linux-vmss-ipconfig"
       primary   = true
       subnet_id = azurerm_subnet.host_sn.id
     }

@@ -1,5 +1,5 @@
 resource "azurerm_network_interface" "linux_vm" {
-  name                = "example-nic"
+  name                = "linux-vm-nic"
   location            = azurerm_resource_group.policy.location
   resource_group_name = azurerm_resource_group.policy.name
 

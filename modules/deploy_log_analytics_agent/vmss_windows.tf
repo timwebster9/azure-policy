@@ -17,7 +17,7 @@ resource "azurerm_windows_virtual_machine_scale_set" "windows_vmss" {
     primary = true
 
     ip_configuration {
-      name      = "internal"
+      name      = "windows-vm-ipconfig"
       primary   = true
       subnet_id = azurerm_subnet.host_sn.id
     }

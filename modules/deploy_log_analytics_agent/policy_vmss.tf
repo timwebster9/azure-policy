@@ -12,8 +12,8 @@ resource "azurerm_policy_definition" "policy_def_vmss" {
 
 METADATA
 
-  policy_rule = file("./modules/deploy_log_analytics_vmss_agent/policy_defs/vmss/rules.json")
-  parameters = file("./modules/deploy_log_analytics_vmss_agent/policy_defs/vmss/parameters.json")
+  policy_rule = file("${path.module}/policy_defs/vmss/rules.json")
+  parameters = file("${path.module}/policy_defs/vmss/parameters.json")
 }
 
 resource "azurerm_management_group_policy_assignment" "policy_assignment_vmss" {

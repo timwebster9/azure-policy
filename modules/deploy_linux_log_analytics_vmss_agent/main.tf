@@ -1,3 +1,10 @@
+resource "azurerm_log_analytics_workspace" "workspace" {
+  name                = "acctest-01"
+  location            = azurerm_resource_group.policy.location
+  resource_group_name = azurerm_resource_group.policy.name
+  sku                 = "Free"
+}
+
 resource "azurerm_policy_definition" "policy_def" {
   name                  = var.policy_name
   policy_type           = "Custom"
@@ -31,11 +38,11 @@ METADATA
 
   parameters = <<PARAMETERS
 {
-  "sharedImageGalleryID": {
-    "value": "/subscriptions/2ca65474-3b7b-40f2-b242-0d2fba4bde6e/resourceGroups/mgmt-rg/providers/Microsoft.Compute/galleries/policytestsig/*"
+  "workspaceId": {
+    "value": "${azurerm_log_analytics_workspace.workspace.id}"
   },
   "effect": {
-    "value": "Deny"
+    "value": "DeployIfNotExists"
   }
 }
 PARAMETERS

@@ -10,7 +10,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "linux_vmss" {
   disable_password_authentication = false
   
   depends_on = [
-    azurerm_management_group_policy_assignment.policy_assignment_vmss
+    azurerm_management_group_policy_assignment.policy_assignment_linux_vmss
   ]
 
   network_interface {

@@ -6,7 +6,8 @@ resource "azurerm_linux_virtual_machine_scale_set" "linux_vmss" {
   instances           = 1
   admin_username      = "azureuser"
   admin_password      = "sdafasdfsaghdgkjh"
-
+  disable_password_authentication = false
+  
   depends_on = [
     azurerm_management_group_policy_assignment.policy_assignment
   ]

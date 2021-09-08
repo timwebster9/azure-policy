@@ -1,4 +1,4 @@
-resource "azurerm_policy_definition" "allow_sig_only" {
+resource "azurerm_policy_definition" "policy_def" {
   name                  = var.policy_name
   policy_type           = "Custom"
   mode                  = "Indexed"
@@ -12,11 +12,11 @@ resource "azurerm_policy_definition" "allow_sig_only" {
 
 METADATA
 
-  policy_rule = file("./modules/allow_sig_only/policy_defs/compute/allow_sig_only/rules.json")
-  parameters = file("./modules/allow_sig_only/policy_defs/compute/allow_sig_only/parameters.json")
+  policy_rule = file("./modules/deploy_linux_log_analytics_vmss_agent/policy_defs/rules.json")
+  parameters = file("./modules/deploy_linux_log_analytics_vmss_agent/policy_defs/parameters.json")
 }
 
-resource "azurerm_management_group_policy_assignment" "allow_sig_only" {
+resource "azurerm_management_group_policy_assignment" "policy_assignment" {
   name                 = var.policy_name
   policy_definition_id = azurerm_policy_definition.allow_sig_only.id
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id

@@ -46,7 +46,7 @@ module "linux_vmss_log_agent" {
     source = "./modules/deploy_linux_log_analytics_vmss_agent"
 
     location                          = var.location
-    resource_group_name               = "image-policy-rg"
+    resource_group_name               = "policy-rg"
 
     policy_name                       = "deploy_oms_vmss"
     policy_display_name               = "Deploy Log Analytics Agent for VMSS"

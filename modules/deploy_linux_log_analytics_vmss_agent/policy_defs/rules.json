@@ -7,7 +7,7 @@
             },
             {
                 "field": "Microsoft.Compute/VirtualMachineScaleSets/osProfile.linuxConfiguration",
-                "equals": "*"
+                "exists": "true"
             }
         ]
     },

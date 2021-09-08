@@ -53,7 +53,7 @@ resource "azurerm_role_assignment" "role_windows_vmss" {
 }
 
 resource "azurerm_policy_remediation" "rem_windows_vmss" {
-  name                    = "windows-vm-remediation"
+  name                    = "windows-vmss-remediation"
   #resource_discovery_mode = "ReEvaluateCompliance"
   scope                   = azurerm_management_group_policy_assignment.policy_assignment_windows_vmss.management_group_id
   policy_assignment_id    = azurerm_management_group_policy_assignment.policy_assignment_windows_vmss.id

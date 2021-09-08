@@ -1,5 +1,5 @@
 resource "azurerm_windows_virtual_machine_scale_set" "windows_vmss" {
-  name                = "windows-vmss"
+  name                = "win-vmss"
   resource_group_name = azurerm_resource_group.policy.name
   location            = azurerm_resource_group.policy.location
   sku                 = var.vm_size

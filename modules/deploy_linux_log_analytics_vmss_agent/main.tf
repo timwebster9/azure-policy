@@ -29,6 +29,7 @@ resource "azurerm_management_group_policy_assignment" "policy_assignment" {
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"
   display_name         = var.policy_display_name
+  location             = azurerm_resource_group.policy.location
 
   identity {
     type = "SystemAssigned"

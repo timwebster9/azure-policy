@@ -46,13 +46,13 @@ METADATA
 PARAMETERS
 }
 
-resource "azurerm_role_assignment" "role_vm" {
+resource "azurerm_role_assignment" "role_linux_vm" {
   scope                = data.azurerm_management_group.policy_assignment_mgmt_group.id
   role_definition_name = "Contributor"
   principal_id         = azurerm_management_group_policy_assignment.policy_assignment_linux_vm.identity[0].principal_id 
 }
 
-resource "azurerm_policy_remediation" "rem_vm" {
+resource "azurerm_policy_remediation" "rem_linux_vm" {
   name                    = "linux-vm-remediation"
   #resource_discovery_mode = "ReEvaluateCompliance"
   scope                   = azurerm_management_group_policy_assignment.policy_assignment_linux_vm.management_group_id

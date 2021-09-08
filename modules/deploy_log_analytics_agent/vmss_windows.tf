@@ -7,7 +7,6 @@ resource "azurerm_windows_virtual_machine_scale_set" "windows_vmss" {
   admin_username      = "azureuser"
   admin_password      = "sdafasdfsaghdgkjhIOU897£"
   upgrade_mode        = "Automatic"
-  disable_password_authentication = false
   
   depends_on = [
     azurerm_management_group_policy_assignment.policy_assignment_windows_vmss

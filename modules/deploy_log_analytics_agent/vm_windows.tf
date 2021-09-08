@@ -15,7 +15,6 @@ resource "azurerm_windows_virtual_machine" "windows_vm" {
   resource_group_name = azurerm_resource_group.policy.name
   location            = azurerm_resource_group.policy.location
   size                = var.vm_size
-  disable_password_authentication = false
   admin_username      = "azureuser"
   admin_password      = "sdafasdfsaghdgkjhIOU897£"
 

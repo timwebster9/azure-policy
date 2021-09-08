@@ -1,4 +1,4 @@
-resource "azurerm_policy_definition" "policy_def_vmss" {
+resource "azurerm_policy_definition" "policy_def_linux_vmss" {
   name                  = "deploy_oms_linux_vmss"
   policy_type           = "Custom"
   mode                  = "Indexed"
@@ -16,9 +16,9 @@ METADATA
   parameters = file("${path.module}/policy_defs/linux/vmss/parameters.json")
 }
 
-resource "azurerm_management_group_policy_assignment" "policy_assignment_vmss" {
+resource "azurerm_management_group_policy_assignment" "policy_assignment_linux_vmss" {
   name                 = "deploy_oms_linux_vmss"
-  policy_definition_id = azurerm_policy_definition.policy_def_vmss.id
+  policy_definition_id = azurerm_policy_definition.policy_def_linux_vmss.id
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"
   display_name         = "Deploy Log Analytics Agent for Linux VMSS"
@@ -46,15 +46,15 @@ METADATA
 PARAMETERS
 }
 
-resource "azurerm_role_assignment" "role_vmss" {
+resource "azurerm_role_assignment" "role_linux_vmss" {
   scope                = data.azurerm_management_group.policy_assignment_mgmt_group.id
   role_definition_name = "Contributor"
-  principal_id         = azurerm_management_group_policy_assignment.policy_assignment_vmss.identity[0].principal_id 
+  principal_id         = azurerm_management_group_policy_assignment.policy_assignment_linux_vmss.identity[0].principal_id 
 }
 
-resource "azurerm_policy_remediation" "rem_vmss" {
+resource "azurerm_policy_remediation" "rem_linux_vmss" {
   name                    = "linux-vmss-remediation"
   #resource_discovery_mode = "ReEvaluateCompliance"
-  scope                   = azurerm_management_group_policy_assignment.policy_assignment_vmss.management_group_id
-  policy_assignment_id    = azurerm_management_group_policy_assignment.policy_assignment_vmss.id
+  scope                   = azurerm_management_group_policy_assignment.policy_assignment_linux_vmss.management_group_id
+  policy_assignment_id    = azurerm_management_group_policy_assignment.policy_assignment_linux_vmss.id
 }

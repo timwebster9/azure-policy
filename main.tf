@@ -48,8 +48,6 @@ module "linux_vmss_log_agent" {
     location                          = var.location
     resource_group_name               = "policy-rg"
 
-    policy_name                       = "deploy_oms_vmss"
-    policy_display_name               = "Deploy Log Analytics Agent for VMSS"
     policy_definition_mgmt_group_name = "parent-mgmt-group"
     policy_assignment_mgmt_group_name = "parent-mgmt-group"
 

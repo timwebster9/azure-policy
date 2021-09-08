@@ -1,14 +1,6 @@
 #####################
 # Policy Naming
 #####################
-variable "policy_name" {
-    type = string
-}
-
-variable "policy_display_name" {
-    type = string
-}
-
 variable "policy_definition_mgmt_group_name" {
     type = string
 }

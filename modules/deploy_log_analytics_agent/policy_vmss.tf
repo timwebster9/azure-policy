@@ -1,8 +1,14 @@
+locals {
+  policy_name         = "deploy_oms_linux_vmss"
+  policy_display_name = "Deploy Log Analytics Agent for Linux VMSS"
+}
+
+
 resource "azurerm_policy_definition" "policy_def_vmss" {
-  name                  = var.policy_name
+  name                  = local.policy_name
   policy_type           = "Custom"
   mode                  = "Indexed"
-  display_name          = var.policy_display_name
+  display_name          = local.policy_display_name
   management_group_name = data.azurerm_management_group.policy_definition_mgmt_group.name
 
   metadata = <<METADATA
@@ -17,11 +23,11 @@ METADATA
 }
 
 resource "azurerm_management_group_policy_assignment" "policy_assignment_vmss" {
-  name                 = var.policy_name
+  name                 = local.policy_name
   policy_definition_id = azurerm_policy_definition.policy_def_vmss.id
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"
-  display_name         = var.policy_display_name
+  display_name         = local.policy_display_name
   location             = azurerm_resource_group.policy.location
 
   identity {

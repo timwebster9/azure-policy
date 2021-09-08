@@ -12,8 +12,8 @@ resource "azurerm_policy_definition" "policy_def_vm" {
 
 METADATA
 
-  policy_rule = file("${path.module}/deploy_log_analytics_agent/policy_defs/linux/vm/rules.json")
-  parameters = file("${path.module}/deploy_log_analytics_agent/policy_defs/linux/vm/parameters.json")
+  policy_rule = file("policy_defs/linux/vm/rules.json")
+  parameters = file("policy_defs/linux/vm/parameters.json")
 }
 
 resource "azurerm_management_group_policy_assignment" "policy_assignment_vm" {

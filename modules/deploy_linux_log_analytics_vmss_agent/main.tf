@@ -18,7 +18,7 @@ METADATA
 
 resource "azurerm_management_group_policy_assignment" "policy_assignment" {
   name                 = var.policy_name
-  policy_definition_id = azurerm_policy_definition.allow_sig_only.id
+  policy_definition_id = azurerm_policy_definition.policy_def.id
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"
   display_name         = var.policy_display_name

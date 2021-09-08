@@ -7,3 +7,7 @@ data "azurerm_management_group" "policy_definition_mgmt_group" {
 data "azurerm_management_group" "policy_assignment_mgmt_group" {
   name = var.policy_assignment_mgmt_group_name
 }
+
+data "local_file" "ssh_public_key" {
+  filename = "/Users/timw/"
+}

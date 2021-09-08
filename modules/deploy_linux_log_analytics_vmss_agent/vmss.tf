@@ -5,14 +5,10 @@ resource "azurerm_linux_virtual_machine_scale_set" "linux_vmss" {
   sku                 = var.vm_size
   instances           = 1
   admin_username      = "azureuser"
-
-  admin_ssh_key {
-    username   = "azureuser"
-    public_key = file("~/.ssh/id_rsa.pub")
-  }
+  admin_password      = "sdafasdfsaghdgkjh"
 
   depends_on = [
-    azurerm_management_group_policy_assignment.allow_sig_only
+    azurerm_management_group_policy_assignment.policy_assignment
   ]
 
   network_interface {

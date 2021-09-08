@@ -54,7 +54,7 @@ resource "azurerm_role_assignment" "role_vm" {
 
 resource "azurerm_policy_remediation" "rem_vm" {
   name                    = "linux-vm-remediation"
-  resource_discovery_mode = "ReEvaluateCompliance"
+  #resource_discovery_mode = "ReEvaluateCompliance"
   scope                   = azurerm_management_group_policy_assignment.policy_assignment_vm.management_group_id
   policy_assignment_id    = azurerm_management_group_policy_assignment.policy_assignment_vm.id
 }

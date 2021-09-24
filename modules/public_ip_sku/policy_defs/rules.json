@@ -7,7 +7,7 @@
             },
             {
                 "field": "location",
-                "in": "parameters('locations')]"
+                "in": "[parameters('locations')]"
             },
             {
                 "not": {

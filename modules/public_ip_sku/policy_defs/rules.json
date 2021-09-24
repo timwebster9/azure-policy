@@ -6,20 +6,28 @@
                 "equals": "Microsoft.Network/publicIPAddresses"
             },
             {
-                "field": "location",
-                "in": "[parameters('locations')]"
-            },
-            {
-                "not": {
-                    "field": "Microsoft.Network/publicIPAddresses/sku.name",
-                    "equals": "Standard"
-                }
-            },
-            {
-                "count": {
-                    "field": "Microsoft.Network/publicIPAddresses/zones[*]"
-                },
-                "less": "[parameters('numZones')]"
+                "anyOf": [
+                    {
+                        "allOf": [
+                            {
+                                "field": "location",
+                                "in": "[parameters('locations')]"
+                            },
+                            {
+                                "count": {
+                                    "field": "Microsoft.Network/publicIPAddresses/zones[*]"
+                                },
+                                "less": "[parameters('numZones')]"
+                            }
+                        ]
+                    },
+                    {
+                        "not": {
+                            "field": "Microsoft.Network/publicIPAddresses/sku.name",
+                            "equals": "Standard"
+                        }
+                    }
+                ]
             }
         ]
     },

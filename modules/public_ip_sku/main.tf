@@ -40,7 +40,7 @@ PARAMETERS
 
 resource "azurerm_resource_group" "policy_rg" {
   name     = var.resource_group_name
-  location = "uksouth"
+  location = var.location
 }
 
 resource "azurerm_public_ip" "example" {

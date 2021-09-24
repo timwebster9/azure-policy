@@ -43,14 +43,43 @@ resource "azurerm_resource_group" "policy_rg" {
   location = var.location
 }
 
-resource "azurerm_public_ip" "example" {
-  name                = "policy-pip"
+# should pass - standard SKU and zone-redundant
+resource "azurerm_public_ip" "basic_sku" {
+  name                = "policy-pip-standard-3AZ"
   resource_group_name = azurerm_resource_group.policy_rg.name
-  location            = azurerm_resource_group.policy_rg.location
+  location            = "uksouth"        # triggers zone-redundant check
   allocation_method   = "Static"
+  sku                 = "Standard"       # PASS
+  availability_zone   = "Zone-Redundant" # PASS
 
  depends_on = [
     azurerm_management_group_policy_assignment.public_ip_sku_zones
   ]
+}
 
+# should pass - standard SKU and UK West doesn't support AZ
+resource "azurerm_public_ip" "ukwest_nozone" {
+  name                = "policy-pip-ukwest-nozone"
+  resource_group_name = azurerm_resource_group.policy_rg.name
+  location            = "ukwest"        # exempt from zone-redundant check
+  allocation_method   = "Static"
+  sku                 = "Standard" # PASS
+  availability_zone   = "No-Zone"  # PASS - ukwest doesn't support AZ
+
+ depends_on = [
+    azurerm_management_group_policy_assignment.public_ip_sku_zones
+  ]
+}
+
+# should fail - Basic SKU not allowed
+resource "azurerm_public_ip" "basic_sku" {
+  name                = "policy-pip-basic-sku"
+  resource_group_name = azurerm_resource_group.policy_rg.name
+  location            = azurerm_resource_group.policy_rg.location
+  allocation_method   = "Static"
+  sku                 = "Basic" # FAIL!!!
+
+ depends_on = [
+    azurerm_management_group_policy_assignment.public_ip_sku_zones
+  ]
 }

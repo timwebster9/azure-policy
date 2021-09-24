@@ -32,7 +32,7 @@ resource "azurerm_management_group_policy_assignment" "public_ip_sku_zones" {
     "value": ["uksouth"]
   },
   "numZones": {
-    "value": 3
+    "value": 2
   }
 }
 PARAMETERS

@@ -26,7 +26,7 @@ resource "azurerm_management_group_policy_assignment" "public_ip_sku_zones" {
   parameters = <<PARAMETERS
 {
   "effect": {
-    "value": "Deny"
+    "value": "Audit"
   },
   "locations": {
     "value": ["uksouth"]

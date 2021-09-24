@@ -26,7 +26,7 @@ resource "azurerm_management_group_policy_assignment" "public_ip_sku_zones" {
   parameters = <<PARAMETERS
 {
   "effect": {
-    "value": "Audit"
+    "value": "Deny"
   },
   "locations": {
     "value": ["uksouth"]
@@ -99,11 +99,24 @@ resource "azurerm_public_ip" "standard_sku_zone1" {
   ]
 }
 
-# should fail - Basic SKU not allowed
+# should fail - UK South and Basic SKU not allowed
 resource "azurerm_public_ip" "basic_sku" {
   name                = "policy-pip-basic-sku"
   resource_group_name = azurerm_resource_group.policy_rg.name
   location            = azurerm_resource_group.policy_rg.location
+  allocation_method   = "Static"
+  sku                 = "Basic" # FAIL!!!
+
+ depends_on = [
+    azurerm_management_group_policy_assignment.public_ip_sku_zones
+  ]
+}
+
+# should fail - UK West and Basic SKU not allowed
+resource "azurerm_public_ip" "basic_sku" {
+  name                = "policy-pip-basic-sku"
+  resource_group_name = azurerm_resource_group.policy_rg.name
+  location            = "ukwest"
   allocation_method   = "Static"
   sku                 = "Basic" # FAIL!!!
 

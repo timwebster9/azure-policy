@@ -100,8 +100,8 @@ resource "azurerm_public_ip" "standard_sku_zone1" {
 }
 
 # should fail - UK South and Basic SKU not allowed
-resource "azurerm_public_ip" "basic_sku" {
-  name                = "policy-pip-basic-sku"
+resource "azurerm_public_ip" "basic_sku_uksoth" {
+  name                = "policy-pip-basic-sku-uks"
   resource_group_name = azurerm_resource_group.policy_rg.name
   location            = azurerm_resource_group.policy_rg.location
   allocation_method   = "Static"
@@ -113,8 +113,8 @@ resource "azurerm_public_ip" "basic_sku" {
 }
 
 # should fail - UK West and Basic SKU not allowed
-resource "azurerm_public_ip" "basic_sku" {
-  name                = "policy-pip-basic-sku"
+resource "azurerm_public_ip" "basic_sku_ukwest" {
+  name                = "policy-pip-basic-sku-ukw"
   resource_group_name = azurerm_resource_group.policy_rg.name
   location            = "ukwest"
   allocation_method   = "Static"

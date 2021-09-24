@@ -1,0 +1,78 @@
+{
+    "authorization": {
+        "action": "Microsoft.Network/publicIPAddresses/write",
+        "scope": "/subscriptions/2ca65474-3b7b-40f2-b242-0d2fba4bde6e/resourceGroups/policy-rg/providers/Microsoft.Network/publicIPAddresses/policy-pip-standard-3AZ"
+    },
+    "caller": "df4e53f6-74d3-488e-9219-e5686c37ac25",
+    "channels": "Operation",
+    "claims": {
+        "aud": "https://management.azure.com/",
+        "iss": "https://sts.windows.net/d8d82719-a4e3-4922-8d10-be2b4a616bcd/",
+        "iat": "1632524377",
+        "nbf": "1632524377",
+        "exp": "1632528277",
+        "aio": "E2ZgYDBP2v14kgnbHhNtgcWf/6eXAQA=",
+        "appid": "22d9ae9e-35f5-47fe-9183-418f3c46abf2",
+        "appidacr": "1",
+        "groups": "6d8c6fc3-20aa-4675-8e6d-2c3d6f23a0a4",
+        "http://schemas.microsoft.com/identity/claims/identityprovider": "https://sts.windows.net/d8d82719-a4e3-4922-8d10-be2b4a616bcd/",
+        "http://schemas.microsoft.com/identity/claims/objectidentifier": "df4e53f6-74d3-488e-9219-e5686c37ac25",
+        "rh": "0.ATwAGSfY2OOkIkmNEL4rSmFrzZ6u2SL1Nf5HkYNBjzxGq_I8AAA.",
+        "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier": "df4e53f6-74d3-488e-9219-e5686c37ac25",
+        "http://schemas.microsoft.com/identity/claims/tenantid": "d8d82719-a4e3-4922-8d10-be2b4a616bcd",
+        "uti": "KVLyPQnPkE2xuB28yj9QAA",
+        "ver": "1.0",
+        "xms_tcdt": "1567440341"
+    },
+    "correlationId": "043b4140-39f9-bca7-e993-a9f7813227b3",
+    "description": "",
+    "eventDataId": "3239de45-62e9-4af1-94ac-861244267b0d",
+    "eventName": {
+        "value": "EndRequest",
+        "localizedValue": "EndRequest"
+    },
+    "category": {
+        "value": "Administrative",
+        "localizedValue": "Administrative"
+    },
+    "eventTimestamp": "2021-09-24T23:07:51.3779701Z",
+    "id": "/subscriptions/2ca65474-3b7b-40f2-b242-0d2fba4bde6e/resourceGroups/policy-rg/providers/Microsoft.Network/publicIPAddresses/policy-pip-standard-3AZ/events/3239de45-62e9-4af1-94ac-861244267b0d/ticks/637681216713779701",
+    "level": "Error",
+    "operationId": "dcb967da-ad87-4801-b32d-b99fe2fbe893",
+    "operationName": {
+        "value": "Microsoft.Network/publicIPAddresses/write",
+        "localizedValue": "Microsoft.Network/publicIPAddresses/write"
+    },
+    "resourceGroupName": "policy-rg",
+    "resourceProviderName": {
+        "value": "Microsoft.Network",
+        "localizedValue": "Microsoft.Network"
+    },
+    "resourceType": {
+        "value": "Microsoft.Network/publicIPAddresses",
+        "localizedValue": "Microsoft.Network/publicIPAddresses"
+    },
+    "resourceId": "/subscriptions/2ca65474-3b7b-40f2-b242-0d2fba4bde6e/resourceGroups/policy-rg/providers/Microsoft.Network/publicIPAddresses/policy-pip-standard-3AZ",
+    "status": {
+        "value": "Failed",
+        "localizedValue": "Failed"
+    },
+    "subStatus": {
+        "value": "Forbidden",
+        "localizedValue": "Forbidden"
+    },
+    "submissionTimestamp": "2021-09-24T23:09:19.1361051Z",
+    "subscriptionId": "2ca65474-3b7b-40f2-b242-0d2fba4bde6e",
+    "tenantId": "d8d82719-a4e3-4922-8d10-be2b4a616bcd",
+    "properties": {
+        "statusCode": "Forbidden",
+        "serviceRequestId": null,
+        "statusMessage": "{\"error\":{\"code\":\"RequestDisallowedByPolicy\",\"target\":\"policy-pip-standard-3AZ\",\"message\":\"Resource 'policy-pip-standard-3AZ' was disallowed by policy. Policy identifiers: '[{\\\"policyAssignment\\\":{\\\"name\\\":\\\"Public IP Addresses must be Standard SKU and use availability zones\\\",\\\"id\\\":\\\"/providers/Microsoft.Management/managementGroups/parent-mgmt-group/providers/Microsoft.Authorization/policyAssignments/public-ip-sku-zones\\\"},\\\"policyDefinition\\\":{\\\"name\\\":\\\"Public IP Addresses must be Standard SKU and use availability zones\\\",\\\"id\\\":\\\"/providers/Microsoft.Management/managementgroups/parent-mgmt-group/providers/Microsoft.Authorization/policyDefinitions/public-ip-sku-zones\\\"}}]'.\",\"additionalInfo\":[{\"type\":\"PolicyViolation\"}]}}",
+        "responseBody": "{\"error\":{\"code\":\"RequestDisallowedByPolicy\",\"target\":\"policy-pip-standard-3AZ\",\"message\":\"Resource 'policy-pip-standard-3AZ' was disallowed by policy. Policy identifiers: '[{\\\"policyAssignment\\\":{\\\"name\\\":\\\"Public IP Addresses must be Standard SKU and use availability zones\\\",\\\"id\\\":\\\"/providers/Microsoft.Management/managementGroups/parent-mgmt-group/providers/Microsoft.Authorization/policyAssignments/public-ip-sku-zones\\\"},\\\"policyDefinition\\\":{\\\"name\\\":\\\"Public IP Addresses must be Standard SKU and use availability zones\\\",\\\"id\\\":\\\"/providers/Microsoft.Management/managementgroups/parent-mgmt-group/providers/Microsoft.Authorization/policyDefinitions/public-ip-sku-zones\\\"}}]'.\",\"additionalInfo\":[{\"type\":\"PolicyViolation\",\"info\":{\"policyDefinitionDisplayName\":\"Public IP Addresses must be Standard SKU and use availability zones\",\"evaluationDetails\":{\"evaluatedExpressions\":[{\"result\":\"True\",\"expressionKind\":\"Field\",\"expression\":\"type\",\"path\":\"type\",\"expressionValue\":\"Microsoft.Network/publicIPAddresses\",\"targetValue\":\"Microsoft.Network/publicIPAddresses\",\"operator\":\"Equals\"},{\"result\":\"True\",\"expressionKind\":\"Field\",\"expression\":\"location\",\"path\":\"location\",\"expressionValue\":\"uksouth\",\"targetValue\":[\"uksouth\"],\"operator\":\"In\"},{\"result\":\"True\",\"expressionKind\":\"Count\",\"expression\":\"Microsoft.Network/publicIPAddresses/zones[*]\",\"path\":\"zones[*]\",\"expressionValue\":2,\"targetValue\":3,\"operator\":\"Less\"}]},\"policyDefinitionId\":\"/providers/Microsoft.Management/managementgroups/parent-mgmt-group/providers/Microsoft.Authorization/policyDefinitions/public-ip-sku-zones\",\"policyDefinitionName\":\"public-ip-sku-zones\",\"policyDefinitionEffect\":\"Deny\",\"policyAssignmentId\":\"/providers/Microsoft.Management/managementGroups/parent-mgmt-group/providers/Microsoft.Authorization/policyAssignments/public-ip-sku-zones\",\"policyAssignmentName\":\"public-ip-sku-zones\",\"policyAssignmentDisplayName\":\"Public IP Addresses must be Standard SKU and use availability zones\",\"policyAssignmentScope\":\"/providers/Microsoft.Management/managementGroups/parent-mgmt-group\"}}]}}",
+        "eventCategory": "Administrative",
+        "entity": "/subscriptions/2ca65474-3b7b-40f2-b242-0d2fba4bde6e/resourceGroups/policy-rg/providers/Microsoft.Network/publicIPAddresses/policy-pip-standard-3AZ",
+        "message": "Microsoft.Network/publicIPAddresses/write",
+        "hierarchy": "d8d82719-a4e3-4922-8d10-be2b4a616bcd/parent-mgmt-group/2ca65474-3b7b-40f2-b242-0d2fba4bde6e"
+    },
+    "relatedEvents": []
+}

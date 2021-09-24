@@ -1,0 +1,29 @@
+{
+    "if": {
+        "allOf": [
+            {
+                "field": "type",
+                "equals": "Microsoft.Network/publicIPAddresses"
+            },
+            {
+                "field": "location",
+                "in": "parameters('locations')]"
+            },
+            {
+                "not": {
+                    "field": "Microsoft.Network/publicIPAddresses/sku.name",
+                    "equals": "Standard"
+                }
+            },
+            {
+                "count": {
+                    "field": "Microsoft.Network/publicIPAddresses/zones[*]"
+                },
+                "less": "[parameters('numZones')]"
+            }
+        ]
+    },
+    "then": {
+        "effect": "[parameters('effect')]"
+    }
+}

@@ -1,0 +1,33 @@
+{
+    "effect": {
+        "type": "String",
+        "defaultValue": "Deny",
+        "allowedValues": [
+            "Deny",
+            "Audit",
+            "Disabled"
+        ],
+        "metadata": {
+            "displayName": "Effect",
+            "description": "Enable or disable the execution of the policy"
+        }
+    },
+    "locations": {
+        "type": "Array",
+        "metadata": {
+            "displayName": "Locations",
+            "description": "A list of locations where this policy is applicable"
+        }
+    },
+    "numZones": {
+        "type": "Integer",
+        "defaultValue": 3,
+        "allowedValues": [
+            1,2,3
+        ],
+        "metadata": {
+            "displayName": "numZones",
+            "description": "An integer of the least number of zones that should be configured for a Resource within a Region (location)"
+        }
+    }
+}

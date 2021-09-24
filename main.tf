@@ -66,7 +66,7 @@
 # Public IP policy
 ########################################
 module "public_ip_policy" {
-    source = "./modules/public_ip"
+    source = "./modules/public_ip_sku"
 
     location                          = var.location
     resource_group_name               = "policy-rg"

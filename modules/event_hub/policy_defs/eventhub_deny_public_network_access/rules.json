@@ -7,7 +7,7 @@
             },
             {
                 "not": {
-                    "field": "Microsoft.EventHub/Namespaces/NetworkRuleSets/defaultAction",
+                    "field": "Microsoft.EventHub/Namespaces/NetworkRuleSets/default.defaultAction",
                     "equals": "Deny"
                 }
             }

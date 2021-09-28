@@ -1,6 +1,6 @@
 ### Deny public network access
 resource "azurerm_policy_definition" "event_hub_network_access_community" {
-  name                  = "eh-network-access"
+  name                  = "comm-network-access"
   policy_type           = "Custom"
   mode                  = "Indexed"
   display_name          = "Allow only selected IPs for Event Hub firewall"
@@ -18,7 +18,7 @@ METADATA
 }
 
 resource "azurerm_management_group_policy_assignment" "event_hub_network_access_community" {
-  name                 = "eh-network-access"
+  name                 = "comm-network-access"
   policy_definition_id = azurerm_policy_definition.event_hub_network_access_community.id
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"

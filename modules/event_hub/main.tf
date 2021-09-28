@@ -44,11 +44,20 @@ resource "azurerm_resource_group" "policy_rg" {
 }
 
 resource "azurerm_eventhub_namespace" "example" {
-  name                = "example-namespace"
+  name                = "timwpolicyehnamespace"
   location            = azurerm_resource_group.policy_rg.location
   resource_group_name = azurerm_resource_group.policy_rg.name
   sku                 = "Standard"
   capacity            = 2
+
+  network_rulesets {
+      default_action = "Allow"
+
+      ip_rule {
+          ip_mask = "212.159.71.60"
+          action = "Allow"
+      }
+  }
 
   depends_on = [
     azurerm_management_group_policy_assignment.event_hub_deny_public_access

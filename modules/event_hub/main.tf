@@ -94,7 +94,7 @@ resource "azurerm_eventhub_namespace" "example" {
   zone_redundant      = true
 
   network_rulesets {
-      default_action = "Deny"
+      default_action = "Allow"
 
       ip_rule {
           ip_mask = "1.1.1.1"

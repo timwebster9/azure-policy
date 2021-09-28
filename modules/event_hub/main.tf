@@ -1,9 +1,9 @@
 ### Deny public network access
-resource "azurerm_policy_definition" "event_hub_deny_public_access" {
+resource "azurerm_policy_definition" "event_hub_network_access_community" {
   name                  = "eh-network-access"
   policy_type           = "Custom"
   mode                  = "Indexed"
-  display_name          = "Event Hubs public access should be disallowed"
+  display_name          = "Allow only selected IPs for Event Hub firewall"
   management_group_name = data.azurerm_management_group.policy_definition_mgmt_group.name
 
   metadata = <<METADATA
@@ -13,16 +13,16 @@ resource "azurerm_policy_definition" "event_hub_deny_public_access" {
 
 METADATA
 
-  policy_rule = file("${path.module}/policy_defs/eventhub_deny_public_network_access/rules.json")
-  parameters = file("${path.module}/policy_defs/eventhub_deny_public_network_access/parameters.json")
+  policy_rule = file("${path.module}/policy_defs/event_hub_network_access_community/rules.json")
+  parameters = file("${path.module}/policy_defs/event_hub_network_access_community/parameters.json")
 }
 
-resource "azurerm_management_group_policy_assignment" "event_hub_deny_public_access" {
+resource "azurerm_management_group_policy_assignment" "event_hub_network_access_community" {
   name                 = "eh-network-access"
-  policy_definition_id = azurerm_policy_definition.event_hub_deny_public_access.id
+  policy_definition_id = azurerm_policy_definition.event_hub_network_access_community.id
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"
-  display_name         = "Event Hubs public access should be disallowed"
+  display_name         = "Allow only selected IPs for Event Hub firewall"
 
   metadata = <<METADATA
     {
@@ -32,8 +32,8 @@ METADATA
 
   parameters = <<PARAMETERS
 {
-  "effect": {
-    "value": "Deny"
+  "allowedIps": {
+    "value": ["1.1.1.1"]
   }
 }
 PARAMETERS
@@ -103,7 +103,7 @@ resource "azurerm_eventhub_namespace" "example" {
   }
 
   depends_on = [
-    azurerm_management_group_policy_assignment.event_hub_deny_public_access,
+    azurerm_management_group_policy_assignment.event_hub_network_access_community,
     azurerm_management_group_policy_assignment.event_hub_zone_redundant
   ]
 }

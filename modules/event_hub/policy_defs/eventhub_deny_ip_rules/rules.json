@@ -3,11 +3,11 @@
         "allOf": [
             {
                 "field": "type",
-                "equals": "Microsoft.EventHub/namespaces/networkRuleSets"
+                "equals": "Microsoft.EventHub/Namespaces/NetworkRuleSets"
             },
             {
                 "count": {
-                    "field": "Microsoft.EventHub/namespaces/networkRuleSets/ipRules[*]"
+                    "field": "Microsoft.EventHub/Namespaces/NetworkRuleSets/ipRules[*]"
                 },
                 "greater": 0
             }

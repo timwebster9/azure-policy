@@ -15,6 +15,6 @@ terraform {
     container_name       = "tfstate"
     key                  = "policy.tfstate"
     #subscription_id      = "2ca65474-3b7b-40f2-b242-0d2fba4bde6e"
-    #tenant_id            = "valud8d82719-a4e3-4922-8d10-be2b4a616bcde"
+    #tenant_id            = "d8d82719-a4e3-4922-8d10-be2b4a616bcd"
   }
 }

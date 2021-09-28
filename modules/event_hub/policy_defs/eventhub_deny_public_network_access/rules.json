@@ -3,11 +3,11 @@
         "allOf": [
             {
                 "field": "type",
-                "equals": "Microsoft.EventHub/namespaces/networkRuleSets"
+                "equals": "Microsoft.EventHub/Namespaces/NetworkRuleSets"
             },
             {
                 "not": {
-                    "field": "Microsoft.EventHub/namespaces/networkRuleSets/defaultAction",
+                    "field": "Microsoft.EventHub/Namespaces/NetworkRuleSets/defaultAction",
                     "equals": "Deny"
                 }
             }

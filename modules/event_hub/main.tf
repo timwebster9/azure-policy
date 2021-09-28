@@ -91,6 +91,7 @@ resource "azurerm_eventhub_namespace" "example" {
   resource_group_name = azurerm_resource_group.policy_rg.name
   sku                 = "Standard"
   capacity            = 2
+  zone_redundant      = true
 
   network_rulesets {
       default_action = "Allow"

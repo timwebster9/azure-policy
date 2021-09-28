@@ -26,13 +26,13 @@ resource "azurerm_management_group_policy_assignment" "public_ip_sku_zones" {
   parameters = <<PARAMETERS
 {
   "effect": {
-    "value": "Deny"
+    "value": "Audit"
   },
   "locations": {
     "value": ["uksouth"]
   },
   "numZones": {
-    "value": 2
+    "value": 3
   }
 }
 PARAMETERS
@@ -50,7 +50,7 @@ resource "azurerm_public_ip" "standard_sku_az" {
   location            = "uksouth"        # triggers zone-redundant check
   allocation_method   = "Static"
   sku                 = "Standard"       # PASS
-  #availability_zone   = "Zone-Redundant" # PASS
+  availability_zone   = "Zone-Redundant" # PASS
 
  depends_on = [
     azurerm_management_group_policy_assignment.public_ip_sku_zones

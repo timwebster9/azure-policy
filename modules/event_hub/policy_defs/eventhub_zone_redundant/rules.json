@@ -1,0 +1,19 @@
+{
+    "if": {
+        "allOf": [
+            {
+                "field": "type",
+                "equals": "Microsoft.EventHub/namespaces"
+            },
+            {
+                "not": {
+                    "field": "Microsoft.EventHub/namespaces/zoneRedundant",
+                    "equals": true
+                }
+            }
+        ]
+    },
+    "then": {
+        "effect": "[parameters('effect')]"
+    }
+}

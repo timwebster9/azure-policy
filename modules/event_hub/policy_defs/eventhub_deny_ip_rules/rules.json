@@ -1,0 +1,19 @@
+{
+    "if": {
+        "allOf": [
+            {
+                "field": "type",
+                "equals": "Microsoft.EventHub/namespaces/networkRuleSets"
+            },
+            {
+                "count": {
+                    "field": "Microsoft.EventHub/namespaces/networkRuleSets/ipRules[*]"
+                },
+                "greater": 0
+            }
+        ]
+    },
+    "then": {
+        "effect": "[parameters('effect')]"
+    }
+}

@@ -1,5 +1,5 @@
 resource "azurerm_policy_definition" "event_hub_deny_public_access" {
-  name                  = "event-hubs-network-access"
+  name                  = "eh-network-access"
   policy_type           = "Custom"
   mode                  = "Indexed"
   display_name          = "Event Hubs public access should be disallowed"
@@ -17,7 +17,7 @@ METADATA
 }
 
 resource "azurerm_management_group_policy_assignment" "event_hub_deny_public_access" {
-  name                 = "event-hubs-network-access"
+  name                 = "eh-network-access"
   policy_definition_id = azurerm_policy_definition.event_hub_deny_public_access.id
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"

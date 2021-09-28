@@ -38,10 +38,15 @@ METADATA
 PARAMETERS
 }
 
+resource "azurerm_resource_group" "policy_rg" {
+  name     = var.resource_group_name
+  location = var.location
+}
+
 resource "azurerm_eventhub_namespace" "example" {
   name                = "example-namespace"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.policy_rg.location
+  resource_group_name = azurerm_resource_group.policy_rg.name
   sku                 = "Standard"
   capacity            = 2
 

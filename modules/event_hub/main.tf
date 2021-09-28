@@ -96,10 +96,10 @@ resource "azurerm_eventhub_namespace" "example" {
   network_rulesets {
       default_action = "Allow"
 
-      ip_rule {
-          ip_mask = "212.159.71.60"
-          action = "Allow"
-      }
+    #   ip_rule {
+    #       ip_mask = "212.159.71.60"
+    #       action = "Allow"
+    #   }
   }
 
   depends_on = [

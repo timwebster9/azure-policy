@@ -13,8 +13,8 @@ resource "azurerm_policy_definition" "event_hub_network_access_community" {
 
 METADATA
 
-  policy_rule = file("${path.module}/policy_defs/event_hub_network_access_community/rules.json")
-  parameters = file("${path.module}/policy_defs/event_hub_network_access_community/parameters.json")
+  policy_rule = file("${path.module}/policy_defs/eventhub_network_access_community/rules.json")
+  parameters = file("${path.module}/policy_defs/eventhub_network_access_community/parameters.json")
 }
 
 resource "azurerm_management_group_policy_assignment" "event_hub_network_access_community" {

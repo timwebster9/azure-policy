@@ -68,7 +68,7 @@ resource "azurerm_management_group_policy_assignment" "appgateway_frontend_ports
   parameters = <<PARAMETERS
 {
   "effect": {
-    "value": "Deny"
+    "value": "Audit"
   }
 }
 PARAMETERS
@@ -99,6 +99,23 @@ resource "azurerm_management_group_policy_assignment" "appgateway_listener_https
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"
   display_name         = azurerm_policy_definition.appgateway_listener_https_only.display_name
+
+  parameters = <<PARAMETERS
+{
+  "effect": {
+    "value": "Audit"
+  }
+}
+PARAMETERS
+}
+
+# WAF SKU
+resource "azurerm_management_group_policy_assignment" "appgateway_waf_sku" {
+  name                 = data.azurerm_policy_definition.appgateway_waf.name
+  policy_definition_id = data.azurerm_policy_definition.appgateway_waf.id
+  management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
+  description          = "Policy Assignment test"
+  display_name         = data.azurerm_policy_definition.appgateway_waf.display_name
 
   parameters = <<PARAMETERS
 {

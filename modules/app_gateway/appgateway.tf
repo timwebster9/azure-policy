@@ -29,6 +29,7 @@ resource "azurerm_public_ip" "example" {
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
   allocation_method   = "Dynamic"
+  sku                 = "Standard"
 }
 
 #&nbsp;since these variables are re-used - a locals block makes this more maintainable

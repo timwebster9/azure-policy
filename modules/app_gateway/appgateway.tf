@@ -51,7 +51,8 @@ resource "azurerm_application_gateway" "network" {
 
   depends_on = [
     azurerm_management_group_policy_assignment.appgateway_zones,
-    azurerm_management_group_policy_assignment.appgateway_frontend_ports
+    azurerm_management_group_policy_assignment.appgateway_frontend_ports,
+    azurerm_management_group_policy_assignment.waf_enabled
   ]
 
   waf_configuration {

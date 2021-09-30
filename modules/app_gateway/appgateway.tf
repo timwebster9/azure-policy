@@ -47,6 +47,7 @@ resource "azurerm_application_gateway" "network" {
   name                = "example-appgateway"
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
+  zones = [ "1","2","3" ]
 
   depends_on = [
     azurerm_management_group_policy_assignment.appgateway_zones

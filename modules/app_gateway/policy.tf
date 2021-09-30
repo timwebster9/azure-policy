@@ -110,12 +110,30 @@ PARAMETERS
 }
 
 # WAF SKU
-resource "azurerm_management_group_policy_assignment" "appgateway_waf_sku" {
-  name                 = "appwateway-waf"
-  policy_definition_id = data.azurerm_policy_definition.appgateway_waf.id
+resource "azurerm_policy_definition" "appgateway_waf_enabled" {
+  name                  = "appgateway-waf"
+  policy_type           = "Custom"
+  mode                  = "Indexed"
+  display_name          = "WAF should be enabled for Application Gateway"
+  management_group_name = data.azurerm_management_group.policy_definition_mgmt_group.name
+
+  metadata = <<METADATA
+    {
+    "category": "Network"
+    }
+
+METADATA
+
+  policy_rule = file("${path.module}/policy_defs/waf_enabled/rules.json")
+  parameters = file("${path.module}/policy_defs/waf_enabled/parameters.json")
+}
+
+resource "azurerm_management_group_policy_assignment" "appgateway_waf_enabled" {
+  name                 = azurerm_policy_definition.appgateway_waf_enabled.name
+  policy_definition_id = azurerm_policy_definition.appgateway_waf_enabled.id
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"
-  display_name         = data.azurerm_policy_definition.appgateway_waf.display_name
+  display_name         = azurerm_policy_definition.appgateway_waf_enabled.display_name
 
   parameters = <<PARAMETERS
 {

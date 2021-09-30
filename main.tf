@@ -76,8 +76,18 @@
 #     policy_assignment_mgmt_group_name = "parent-mgmt-group"
 # }
 
-module "event_hubs" {
-    source = "./modules/event_hub"
+# module "event_hubs" {
+#     source = "./modules/event_hub"
+
+#     location                          = var.location
+#     resource_group_name               = "policy-rg"
+
+#     policy_definition_mgmt_group_name = "parent-mgmt-group"
+#     policy_assignment_mgmt_group_name = "parent-mgmt-group"
+# }
+
+module "app_gateway" {
+    source = "./modules/app_gateway"
 
     location                          = var.location
     resource_group_name               = "policy-rg"

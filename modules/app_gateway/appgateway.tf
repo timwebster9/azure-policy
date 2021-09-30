@@ -50,7 +50,8 @@ resource "azurerm_application_gateway" "network" {
   zones = [ "1","2","3" ]
 
   depends_on = [
-    azurerm_management_group_policy_assignment.appgateway_zones
+    azurerm_management_group_policy_assignment.appgateway_zones,
+    azurerm_management_group_policy_assignment.appgateway_frontend_ports
   ]
 
   sku {

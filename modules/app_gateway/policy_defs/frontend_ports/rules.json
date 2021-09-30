@@ -1,0 +1,19 @@
+{
+    "if": {
+        "allOf": [
+            {
+                "field": "type",
+                "equals": "Microsoft.Network/applicationGateways"
+            },
+            {
+                "not": {
+                    "field": "Microsoft.Network/applicationGateways/frontendPorts[*].port",
+                    "equals": "443"
+                }
+            }
+        ]
+    },
+    "then": {
+        "effect": "[parameters('effect')]"
+    }
+}

@@ -67,7 +67,7 @@ resource "azurerm_application_gateway" "network" {
 
   frontend_port {
     name = local.frontend_port_name
-    port = 80
+    port = 443
   }
 
   frontend_ip_configuration {

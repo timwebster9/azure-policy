@@ -41,7 +41,7 @@ PARAMETERS
 
 # Front end port policy
 resource "azurerm_policy_definition" "appgateway_frontend_ports" {
-  name                  = "appgateway-frontend-ports"
+  name                  = "appgateway-ports"
   policy_type           = "Custom"
   mode                  = "Indexed"
   display_name          = "Application Gateway front end ports should only use port 443"

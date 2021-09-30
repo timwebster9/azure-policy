@@ -54,6 +54,13 @@ resource "azurerm_application_gateway" "network" {
     azurerm_management_group_policy_assignment.appgateway_frontend_ports
   ]
 
+  waf_configuration {
+    enabled          = true
+    rule_set_type    = "OWASP"
+    rule_set_version = "3.1"
+    firewall_mode    = "Prevention"
+  }
+
   sku {
     name     = "WAF_v2"
     tier     = "WAF_v2"

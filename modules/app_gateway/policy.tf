@@ -111,7 +111,7 @@ PARAMETERS
 
 # WAF SKU
 resource "azurerm_management_group_policy_assignment" "appgateway_waf_sku" {
-  name                 = data.azurerm_policy_definition.appgateway_waf.name
+  name                 = "appwateway-waf"
   policy_definition_id = data.azurerm_policy_definition.appgateway_waf.id
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"

@@ -30,56 +30,6 @@ resource "azurerm_key_vault" "example" {
 
  access_policy {
     tenant_id = data.azurerm_client_config.current.tenant_id
-    object_id = azurerm_api_management.example.identity.principal_id
-
-    certificate_permissions = [
-      "create",
-      "delete",
-      "deleteissuers",
-      "get",
-      "getissuers",
-      "import",
-      "list",
-      "listissuers",
-      "managecontacts",
-      "manageissuers",
-      "setissuers",
-      "update",
-    ]
-
-    key_permissions = [
-      "backup",
-      "create",
-      "decrypt",
-      "delete",
-      "encrypt",
-      "get",
-      "import",
-      "list",
-      "purge",
-      "recover",
-      "restore",
-      "sign",
-      "unwrapKey",
-      "update",
-      "verify",
-      "wrapKey",
-    ]
-
-    secret_permissions = [
-      "backup",
-      "delete",
-      "get",
-      "list",
-      "purge",
-      "recover",
-      "restore",
-      "set",
-    ]
-  }
-
- access_policy {
-    tenant_id = data.azurerm_client_config.current.tenant_id
     object_id = data.azurerm_client_config.current.object_id
 
     certificate_permissions = [
@@ -129,6 +79,23 @@ resource "azurerm_key_vault" "example" {
   }
 }
 
+resource "azurerm_user_assigned_identity" "apim_uami" {
+  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.example.location
+
+  name = "apim-uami"
+}
+
+resource "azurerm_key_vault_access_policy" "uami" {
+  key_vault_id = azurerm_key_vault.example.id
+  tenant_id    = data.azurerm_client_config.current.tenant_id
+  object_id    = azurerm_user_assigned_identity.apim_uami.principal_id
+
+  secret_permissions = [
+    "Get", "List"
+  ]
+}
+
 resource "azurerm_key_vault_certificate" "example" {
   name         = "apim-cert"
   key_vault_id = azurerm_key_vault.example.id
@@ -154,13 +121,6 @@ resource "azurerm_key_vault_certificate" "example" {
       content_type = "application/x-pkcs12"
     }
   }
-}
-
-resource "azurerm_user_assigned_identity" "apim_uami" {
-  resource_group_name = azurerm_resource_group.example.name
-  location            = azurerm_resource_group.example.location
-
-  name = "apim-uami"
 }
 
 resource "azurerm_api_management" "example" {
@@ -195,6 +155,7 @@ resource "azurerm_api_management" "example" {
     azurerm_management_group_policy_assignment.apim_zones,
     azurerm_management_group_policy_assignment.apim_vnet,
     azurerm_management_group_policy_assignment.apim_skus,
-    azurerm_management_group_policy_assignment.apim_custom_domain
+    azurerm_management_group_policy_assignment.apim_custom_domain,
+    azurerm_key_vault_access_policy.uami
   ]
 }

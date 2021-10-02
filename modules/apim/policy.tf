@@ -27,7 +27,7 @@ resource "azurerm_management_group_policy_assignment" "apim_zones" {
   parameters = <<PARAMETERS
 {
   "effect": {
-    "value": "Deny"
+    "value": "Audit"
   },
   "locations": {
     "value": ["uksouth"]

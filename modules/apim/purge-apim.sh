@@ -1,0 +1,2 @@
+az rest --method delete --header "Accept=application/json" \
+  -u 'https://management.azure.com/subscriptions/2ca65474-3b7b-40f2-b242-0d2fba4bde6e/providers/Microsoft.ApiManagement/locations/uksouth/deletedservices/twpolicyapim8979uaaf?api-version=2020-06-01-preview'

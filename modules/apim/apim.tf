@@ -143,12 +143,12 @@ resource "azurerm_api_management" "example" {
     type = "SystemAssigned"
   }
 
-  hostname_configuration {
-    proxy {
-      host_name = "api.deggymacets.com"
-      key_vault_id = azurerm_key_vault_certificate.example.secret_id
-    }
-  }
+  # hostname_configuration {
+  #   proxy {
+  #     host_name = "api.deggymacets.com"
+  #     key_vault_id = azurerm_key_vault_certificate.example.secret_id
+  #   }
+  # }
 
   depends_on = [
     azurerm_management_group_policy_assignment.apim_zones,
@@ -157,4 +157,13 @@ resource "azurerm_api_management" "example" {
     azurerm_management_group_policy_assignment.apim_custom_domain,
    # azurerm_key_vault_access_policy.uami
   ]
+}
+
+resource "azurerm_api_management_custom_domain" "example" {
+  api_management_id = azurerm_api_management.example.id
+
+  proxy {
+    host_name    = "api.deggymacets.com"
+    key_vault_id = azurerm_key_vault_certificate.example.secret_id
+  }
 }

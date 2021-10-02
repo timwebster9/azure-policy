@@ -79,22 +79,22 @@ resource "azurerm_key_vault" "example" {
   }
 }
 
-resource "azurerm_user_assigned_identity" "apim_uami" {
-  resource_group_name = azurerm_resource_group.example.name
-  location            = azurerm_resource_group.example.location
+# resource "azurerm_user_assigned_identity" "apim_uami" {
+#   resource_group_name = azurerm_resource_group.example.name
+#   location            = azurerm_resource_group.example.location
 
-  name = "apim-uami"
-}
+#   name = "apim-uami"
+# }
 
-resource "azurerm_key_vault_access_policy" "uami" {
-  key_vault_id = azurerm_key_vault.example.id
-  tenant_id    = data.azurerm_client_config.current.tenant_id
-  object_id    = azurerm_user_assigned_identity.apim_uami.principal_id
+# resource "azurerm_key_vault_access_policy" "uami" {
+#   key_vault_id = azurerm_key_vault.example.id
+#   tenant_id    = data.azurerm_client_config.current.tenant_id
+#   object_id    = azurerm_user_assigned_identity.apim_uami.principal_id
 
-  secret_permissions = [
-    "Get", "List"
-  ]
-}
+#   secret_permissions = [
+#     "Get", "List"
+#   ]
+# }
 
 resource "azurerm_key_vault_certificate" "example" {
   name         = "apim-cert"
@@ -140,8 +140,7 @@ resource "azurerm_api_management" "example" {
   }
 
   identity {
-    type = "UserAssigned"
-    identity_ids = [ azurerm_user_assigned_identity.apim_uami.id ]
+    type = "SystemAssigned"
   }
 
   hostname_configuration {

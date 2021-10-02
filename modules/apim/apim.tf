@@ -148,6 +148,7 @@ resource "azurerm_api_management" "example" {
     proxy {
       host_name = "api.deggymacets.com"
       key_vault_id = azurerm_key_vault.example.id
+      ssl_keyvault_identity_client_id = azurerm_key_vault_access_policy.uami.client_id
     }
   }
 

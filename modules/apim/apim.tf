@@ -23,6 +23,7 @@ resource "azurerm_api_management" "example" {
   resource_group_name = azurerm_resource_group.example.name
   publisher_name      = "asdfasfsda"
   publisher_email     = "joe@blow.com"
+  zones               = ["1","2","3"]
 
   sku_name = "Developer_1"
 

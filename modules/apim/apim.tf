@@ -155,6 +155,6 @@ resource "azurerm_api_management" "example" {
     azurerm_management_group_policy_assignment.apim_vnet,
     azurerm_management_group_policy_assignment.apim_skus,
     azurerm_management_group_policy_assignment.apim_custom_domain,
-    azurerm_key_vault_access_policy.uami
+   # azurerm_key_vault_access_policy.uami
   ]
 }

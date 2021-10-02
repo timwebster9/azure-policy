@@ -156,12 +156,12 @@ resource "azurerm_key_vault_certificate" "example" {
   }
 }
 
-# resource "azurerm_user_assigned_identity" "apim_uami" {
-#   resource_group_name = azurerm_resource_group.example.name
-#   location            = azurerm_resource_group.example.location
+resource "azurerm_user_assigned_identity" "apim_uami" {
+  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.example.location
 
-#   name = "apim-uami"
-# }
+  name = "apim-uami"
+}
 
 resource "azurerm_api_management" "example" {
   name                = "twpolicyapim8979uaaf"
@@ -180,7 +180,8 @@ resource "azurerm_api_management" "example" {
   }
 
   identity {
-    type = "SystemAssigned"
+    type = "UserAssigned"
+    identity_ids = [ azurerm_user_assigned_identity.apim_uami.id ]
   }
 
   hostname_configuration {

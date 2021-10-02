@@ -1,0 +1,27 @@
+{
+    "if": {
+        "allOf": [
+            {
+                "field": "type",
+                "equals": "Microsoft.ApiManagement/service"
+            },
+            {
+                "allOf": [
+                    {
+                        "field": "location",
+                        "in": "[parameters('locations')]"
+                    },
+                    {
+                        "count": {
+                            "field": "Microsoft.ApiManagement/service/zones[*]"
+                        },
+                        "less": "[parameters('numZones')]"
+                    }
+                ]
+            }
+        ]
+    },
+    "then": {
+        "effect": "[parameters('effect')]"
+    }
+}

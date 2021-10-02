@@ -25,7 +25,7 @@ resource "azurerm_api_management" "example" {
   publisher_email     = "joe@blow.com"
   zones               = ["1","2","3"]
 
-  sku_name = "Developer_1"
+  sku_name = "Premium_1"
 
   virtual_network_type = "Internal"
 

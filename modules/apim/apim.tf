@@ -186,7 +186,7 @@ resource "azurerm_api_management" "example" {
   hostname_configuration {
     proxy {
       host_name = "api.deggymacets.com"
-      keu_vault_id = azurerm_key_vault.example.id
+      key_vault_id = azurerm_key_vault.example.id
     }
   }
 

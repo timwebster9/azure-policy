@@ -103,7 +103,7 @@ resource "azurerm_management_group_policy_assignment" "apim_custom_domain" {
   parameters = <<PARAMETERS
 {
   "effect": {
-    "value": "Deny"
+    "value": "Audit"
   }
 }
 PARAMETERS

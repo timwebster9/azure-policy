@@ -86,15 +86,15 @@ resource "azurerm_key_vault" "example" {
 #   name = "apim-uami"
 # }
 
-# resource "azurerm_key_vault_access_policy" "uami" {
-#   key_vault_id = azurerm_key_vault.example.id
-#   tenant_id    = data.azurerm_client_config.current.tenant_id
-#   object_id    = azurerm_user_assigned_identity.apim_uami.principal_id
+resource "azurerm_key_vault_access_policy" "apim_msi" {
+  key_vault_id = azurerm_key_vault.example.id
+  tenant_id    = data.azurerm_client_config.current.tenant_id
+  object_id    = azurerm_api_management.example.identity.principal_id
 
-#   secret_permissions = [
-#     "Get", "List"
-#   ]
-# }
+  secret_permissions = [
+    "Get", "List"
+  ]
+}
 
 resource "azurerm_key_vault_certificate" "example" {
   name         = "apim-cert"

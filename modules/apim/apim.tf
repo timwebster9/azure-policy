@@ -27,11 +27,11 @@ resource "azurerm_api_management" "example" {
 
   sku_name = "Developer_1"
 
-  #virtual_network_type = "Internal"
+  virtual_network_type = "Internal"
 
-#   virtual_network_configuration {
-#     subnet_id = azurerm_subnet.example.id
-#   }
+  virtual_network_configuration {
+    subnet_id = azurerm_subnet.example.id
+  }
 
   depends_on = [
     azurerm_management_group_policy_assignment.apim_zones,

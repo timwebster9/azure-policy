@@ -74,6 +74,41 @@ resource "azurerm_management_group_policy_assignment" "apim_vnet" {
 PARAMETERS
 }
 
+# APIM Custom Domain
+resource "azurerm_policy_definition" "apim_custom_domain" {
+  name                  = "apim_custom_domain"
+  policy_type           = "Custom"
+  mode                  = "Indexed"
+  display_name          = "API Management should have at least one custom domain of type Proxy which matches *.deggymacets.com"
+  management_group_name = data.azurerm_management_group.policy_definition_mgmt_group.name
+
+  metadata = <<METADATA
+    {
+    "category": "API Management"
+    }
+
+METADATA
+
+  policy_rule = file("${path.module}/policy_defs/apim_custom_domain/rules.json")
+  parameters = file("${path.module}/policy_defs/apim_custom_domain/parameters.json")
+}
+
+resource "azurerm_management_group_policy_assignment" "apim_custom_domain" {
+  name                 = azurerm_policy_definition.apim_custom_domain.name
+  policy_definition_id = azurerm_policy_definition.apim_custom_domain.id
+  management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
+  description          = "Policy Assignment test"
+  display_name         = azurerm_policy_definition.apim_custom_domain.display_name
+
+  parameters = <<PARAMETERS
+{
+  "effect": {
+    "value": "Deny"
+  }
+}
+PARAMETERS
+}
+
 # VNET SKU
 resource "azurerm_management_group_policy_assignment" "apim_skus" {
   name                 = "apim-skus"

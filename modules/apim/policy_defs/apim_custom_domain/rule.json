@@ -1,0 +1,32 @@
+{
+    "if": {
+        "allOf": [
+            {
+                "field": "type",
+                "equals": "Microsoft.ApiManagement/service"
+            },
+            {
+                "count": {
+                    "field": "Microsoft.ApiManagement/service/hostnameConfigurations[*]",
+                    "where": {
+                        "allOf": [
+                            {
+                                "field": "Microsoft.ApiManagement/service/hostnameConfigurations[*].hostname",
+                                "like": "*.deggymacets.com"
+                            },
+                            {
+                                "field": "Microsoft.ApiManagement/service/hostnameConfigurations[*].type",
+                                "equals": "Proxy"
+                            }
+                        ]
+
+                    }
+                },
+                "greater": 0
+            }
+        ]
+    },
+    "then": {
+        "effect": "[parameters('effect')]"
+    }
+}

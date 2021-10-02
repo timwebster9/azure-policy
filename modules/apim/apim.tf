@@ -27,7 +27,7 @@ resource "azurerm_api_management" "example" {
   virtual_network_type = "Internal"
 
   virtual_network_configuration {
-    subnet_id = azurerm_virtual_network.example.subnet[0].id
+    subnet_id = tolist(azurerm_virtual_network.example.subnet)[0]
   }
 
   depends_on = [

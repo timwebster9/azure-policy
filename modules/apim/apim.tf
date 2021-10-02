@@ -8,11 +8,13 @@ resource "azurerm_virtual_network" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   address_space       = ["10.0.0.0/16"]
+}
 
-  subnet {
-    name           = "subnet1"
-    address_prefix = "10.0.1.0/24"
-  }
+resource "azurerm_subnet" "example" {
+  name                 = "example-subnet"
+  resource_group_name  = azurerm_resource_group.example.name
+  virtual_network_name = azurerm_virtual_network.example.name
+  address_prefixes     = ["10.0.1.0/24"]
 }
 
 resource "azurerm_api_management" "example" {
@@ -27,7 +29,7 @@ resource "azurerm_api_management" "example" {
   virtual_network_type = "Internal"
 
   virtual_network_configuration {
-    subnet_id = tolist(azurerm_virtual_network.example.subnet)[0]
+    subnet_id = azurerm_subnet.example.id
   }
 
   depends_on = [

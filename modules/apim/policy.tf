@@ -109,6 +109,41 @@ resource "azurerm_management_group_policy_assignment" "apim_custom_domain" {
 PARAMETERS
 }
 
+# APIM Backends HTTPS
+resource "azurerm_policy_definition" "apim_backends_https" {
+  name                  = "apim_backends_https"
+  policy_type           = "Custom"
+  mode                  = "Indexed"
+  display_name          = "API Management backends should use HTTPS"
+  management_group_name = data.azurerm_management_group.policy_definition_mgmt_group.name
+
+  metadata = <<METADATA
+    {
+    "category": "API Management"
+    }
+
+METADATA
+
+  policy_rule = file("${path.module}/policy_defs/apim_backends_https/rules.json")
+  parameters = file("${path.module}/policy_defs/apim_backends_https/parameters.json")
+}
+
+resource "azurerm_management_group_policy_assignment" "apim_backends_https" {
+  name                 = azurerm_policy_definition.apim_backends_https.name
+  policy_definition_id = azurerm_policy_definition.apim_backends_https.id
+  management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
+  description          = "Policy Assignment test"
+  display_name         = azurerm_policy_definition.apim_backends_https.display_name
+
+  parameters = <<PARAMETERS
+{
+  "effect": {
+    "value": "Deny"
+  }
+}
+PARAMETERS
+}
+
 # VNET SKU
 resource "azurerm_management_group_policy_assignment" "apim_skus" {
   name                 = "apim-skus"

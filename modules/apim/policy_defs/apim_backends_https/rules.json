@@ -1,0 +1,17 @@
+{
+    "if": {
+        "allOf": [
+            {
+                "field": "type",
+                "equals": "Microsoft.ApiManagement/service"
+            },
+            {
+                "field": "Microsoft.ApiManagement/service/backends[*].url",
+                "notLike": "https*"
+            }
+        ]
+    },
+    "then": {
+        "effect": "[parameters('effect')]"
+    }
+}

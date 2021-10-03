@@ -154,7 +154,6 @@ resource "azurerm_api_management" "example" {
     azurerm_management_group_policy_assignment.apim_zones,
     azurerm_management_group_policy_assignment.apim_vnet,
     azurerm_management_group_policy_assignment.apim_skus,
-    azurerm_management_group_policy_assignment.apim_custom_domain,
    # azurerm_key_vault_access_policy.uami
   ]
 }
@@ -166,6 +165,10 @@ resource "azurerm_api_management_custom_domain" "example" {
     host_name    = "api.deggymacets.com"
     key_vault_id = azurerm_key_vault_certificate.example.secret_id
   }
+
+  depends_on = [
+    azurerm_management_group_policy_assignment.apim_custom_domain
+  ]
 }
 
 resource "azurerm_api_management_backend" "example" {
@@ -174,4 +177,8 @@ resource "azurerm_api_management_backend" "example" {
   api_management_name = azurerm_api_management.example.name
   protocol            = "http"
   url                 = "http://backend"
+
+  depends_on = [
+    azurerm_management_group_policy_assignment.apim_backends_https
+  ]
 }

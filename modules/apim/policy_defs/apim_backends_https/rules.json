@@ -3,10 +3,10 @@
         "allOf": [
             {
                 "field": "type",
-                "equals": "Microsoft.ApiManagement/service"
+                "equals": "Microsoft.ApiManagement/service/backends"
             },
             {
-                "field": "Microsoft.ApiManagement/service/backends[*].url",
+                "field": "Microsoft.ApiManagement/service/backends/url",
                 "notLike": "https*"
             }
         ]

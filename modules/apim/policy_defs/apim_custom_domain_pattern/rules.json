@@ -6,16 +6,22 @@
                 "equals": "Microsoft.ApiManagement/service"
             },
             {
-                "allOf": [
-                    {
-                        "field": "Microsoft.ApiManagement/service/hostnameConfigurations[*].hostname",
-                        "notLike": "[parameters('domain1')]"
-                    },
-                    {
-                        "field": "Microsoft.ApiManagement/service/hostnameConfigurations[*].hostname",
-                        "notLike": "[parameters('domain2')]"
+                "count": {
+                    "field": "Microsoft.ApiManagement/service/hostnameConfigurations[*]",
+                    "where": {
+                        "allOf": [
+                            {
+                                "field": "Microsoft.ApiManagement/service/hostnameConfigurations[*].hostname",
+                                "notLike": "[parameters('domain1')]"
+                            },
+                            {
+                                "field": "Microsoft.ApiManagement/service/hostnameConfigurations[*].hostname",
+                                "notLike": "[parameters('domain2')]"
+                            }
+                        ]
                     }
-                ]
+                },
+                "greater": 0
             }
         ]
     },

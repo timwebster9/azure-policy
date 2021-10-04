@@ -12,6 +12,10 @@
                         "allOf": [
                             {
                                 "field": "Microsoft.ApiManagement/service/hostnameConfigurations[*].hostname",
+                                "notLike": "*.azure-api.net"
+                            },
+                            {
+                                "field": "Microsoft.ApiManagement/service/hostnameConfigurations[*].hostname",
                                 "notLike": "[parameters('domain1')]"
                             },
                             {

@@ -180,7 +180,7 @@ resource "azurerm_management_group_policy_assignment" "apim_custom_domain_patter
   },
   "domain2": {
     "value": "*.kife.com"
-  },
+  }
 }
 PARAMETERS
 }

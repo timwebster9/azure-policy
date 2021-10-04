@@ -164,7 +164,7 @@ METADATA
 }
 
 resource "azurerm_management_group_policy_assignment" "apim_custom_domain_pattern" {
-  name                 = azurerm_policy_definition.apim_backeapim_custom_domain_patternnds_https.name
+  name                 = azurerm_policy_definition.apim_custom_domain_pattern.name
   policy_definition_id = azurerm_policy_definition.apim_custom_domain_pattern.id
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"

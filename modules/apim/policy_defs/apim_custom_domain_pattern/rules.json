@@ -1,0 +1,25 @@
+{
+    "if": {
+        "allOf": [
+            {
+                "field": "type",
+                "equals": "Microsoft.ApiManagement/service"
+            },
+            {
+                "allOf": [
+                    {
+                        "field": "Microsoft.ApiManagement/service/hostnameConfigurations[*].hostname",
+                        "notLike": "[parameters('domain1')]"
+                    },
+                    {
+                        "field": "Microsoft.ApiManagement/service/hostnameConfigurations[*].hostname",
+                        "notLike": "[parameters('domain2')]"
+                    }
+                ]
+            }
+        ]
+    },
+    "then": {
+        "effect": "[parameters('effect')]"
+    }
+}

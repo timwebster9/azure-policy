@@ -167,7 +167,8 @@ resource "azurerm_api_management_custom_domain" "example" {
   }
 
   depends_on = [
-    azurerm_management_group_policy_assignment.apim_custom_domain
+    azurerm_management_group_policy_assignment.apim_custom_domain,
+    azurerm_management_group_policy_assignment.apim_custom_domain_pattern
   ]
 }
 

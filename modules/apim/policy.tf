@@ -144,6 +144,47 @@ resource "azurerm_management_group_policy_assignment" "apim_backends_https" {
 PARAMETERS
 }
 
+# APIM custom domain pattern
+resource "azurerm_policy_definition" "apim_custom_domain_pattern" {
+  name                  = "apim_pattern"
+  policy_type           = "Custom"
+  mode                  = "Indexed"
+  display_name          = "API Management custom domains must use allowed names"
+  management_group_name = data.azurerm_management_group.policy_definition_mgmt_group.name
+
+  metadata = <<METADATA
+    {
+    "category": "API Management"
+    }
+
+METADATA
+
+  policy_rule = file("${path.module}/policy_defs/apim_custom_domain_pattern/rules.json")
+  parameters = file("${path.module}/policy_defs/apim_custom_domain_pattern/parameters.json")
+}
+
+resource "azurerm_management_group_policy_assignment" "apim_custom_domain_pattern" {
+  name                 = azurerm_policy_definition.apim_backeapim_custom_domain_patternnds_https.name
+  policy_definition_id = azurerm_policy_definition.apim_custom_domain_pattern.id
+  management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
+  description          = "Policy Assignment test"
+  display_name         = azurerm_policy_definition.apim_custom_domain_pattern.display_name
+
+  parameters = <<PARAMETERS
+{
+  "effect": {
+    "value": "Deny"
+  },
+  "domain1": {
+    "value": "*.deggymacets.com"
+  },
+  "domain2": {
+    "value": "*.kife.com"
+  },
+}
+PARAMETERS
+}
+
 # VNET SKU
 resource "azurerm_management_group_policy_assignment" "apim_skus" {
   name                 = "apim-skus"

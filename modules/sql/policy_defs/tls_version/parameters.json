@@ -14,7 +14,7 @@
     },
     "tlsVersion": {
         "type": "String",
-        "defaultValue": "Deny",
+        "defaultValue": "1.2",
         "allowedValues": [
             "1.0",
             "1.1",

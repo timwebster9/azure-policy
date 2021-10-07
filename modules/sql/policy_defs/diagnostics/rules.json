@@ -1,164 +1,134 @@
 {
-    "name": "sql-srv-diagnostic-settings-dine",
-    "properties": {
-        "displayName": "Apply diagnostic settings for Azure SQL Servers - Log Analytics",
-        "description": "This policy automatically deploys and enable diagnostic settings to Log Analytics",
-        "metadata": {
-            "category": "Monitoring",
-            "version": "1.0.0"
-        },
-        "mode": "All",
-        "parameters": {
-            "logAnalyticsWorkspaceId": {
-                "type": "string",
-                "metadata": {
-                    "displayName": "Log Analytics workspace",
-                    "description": "Select the Log Analytics workspace from dropdown list",
-                    "strongType": "omsWorkspace"
-                }
-            },
-            "metricsAndLogsEnabled": {
-                "type": "string",
-                "defaultValue": "true",
-                "metadata": {
-                    "displayName": "Metrics and Logs Enabled",
-                    "description": "Select whether metrics and logs collection is enabled or diabled"
-                }
-            }
-        },
-        "policyRule": {
-            "if": {
-                "field": "type",
-                "equals": "Microsoft.Sql/servers/databases"
-            },
-            "then": {
-                "effect": "deployIfNotExists",
-                "details": {
-                    "type": "Microsoft.Insights/diagnosticSettings",
-                    "roleDefinitionIds": [
-                        "/providers/Microsoft.Authorization/roleDefinitions/92aaf0da-9dab-42b6-94a3-d43ce8d16293"
-                    ],
-                    "existenceCondition": {
-                        "allOf": [
-                            {
-                                "field": "Microsoft.Insights/diagnosticSettings/logs.enabled",
-                                "equals": "True"
-                            },
-                            {
-                                "field": "Microsoft.Insights/diagnosticSettings/metrics.enabled",
-                                "equals": "True"
-                            },
-                            {
-                                "field": "Microsoft.Insights/diagnosticSettings/workspaceId",
-                                "matchInsensitively": "[parameters('logAnalyticsWorkspaceId')]"
-                            }
-                        ]
+    "if": {
+        "field": "type",
+        "equals": "Microsoft.Sql/servers/databases"
+    },
+    "then": {
+        "effect": "deployIfNotExists",
+        "details": {
+            "type": "Microsoft.Insights/diagnosticSettings",
+            "roleDefinitionIds": [
+                "/providers/Microsoft.Authorization/roleDefinitions/92aaf0da-9dab-42b6-94a3-d43ce8d16293"
+            ],
+            "existenceCondition": {
+                "allOf": [
+                    {
+                        "field": "Microsoft.Insights/diagnosticSettings/logs.enabled",
+                        "equals": "True"
                     },
-                    "deployment": {
-                        "properties": {
-                            "mode": "incremental",
-                            "template": {
-                                "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-                                "contentVersion": "1.0.0.0",
-                                "parameters": {
-                                    "serverName": {
-                                        "type": "string"
-                                    },
-                                    "logAnalyticsWorkspaceId": {
-                                        "type": "string"
-                                    },
-                                    "location": {
-                                        "type": "string"
-                                    },
-                                    "metricsAndLogsEnabled": {
-                                        "type": "Bool"
-                                    }
-                                },
-                                "variables": {},
-                                "resources": [
-                                    {
-                                        "type": "Microsoft.Sql/servers/databases/providers/diagnosticSettings",
-                                        "apiVersion": "2017-05-01-preview",
-                                        "name": "[concat(parameters('serverName'),'master','/microsoft.insights', '/', 'setByPolicy')]",
-                                        "location": "[parameters('location')]",
-                                        "dependsOn": [],
-                                        "properties": {
-                                            "workspaceId": "[parameters('logAnalyticsWorkspaceId')]",
-                                            "metrics": [
-                                                {
-                                                    "category": "Basic",
-                                                    "enabled": "[bool(parameters('metricsAndLogsEnabled'))]"
-                                                },
-                                                {
-                                                    "category": "InstanceAndAppAdvanced",
-                                                    "enabled": "[bool(parameters('metricsAndLogsEnabled'))]"
-                                                },
-                                                {
-                                                    "category": "WorkloadManagement",
-                                                    "enabled": "[bool(parameters('metricsAndLogsEnabled'))]"
-                                                }
-                                            ],
-                                            "logs": [
-                                                {
-                                                    "category": "SQLSecurityAuditEvents",
-                                                    "enabled": "[bool(parameters('metricsAndLogsEnabled'))]"
-                                                },
-                                                {
-                                                    "category": "SQLInsights",
-                                                    "enabled": "[bool(parameters('metricsAndLogsEnabled'))]"
-                                                },
-                                                {
-                                                    "category": "AutomaticTuning",
-                                                    "enabled": "[bool(parameters('metricsAndLogsEnabled'))]"
-                                                },
-                                                {
-                                                    "category": "QueryStoreRuntimeStatistics",
-                                                    "enabled": "[bool(parameters('metricsAndLogsEnabled'))]"
-                                                },
-                                                {
-                                                    "category": "QueryStoreWaitStatistics",
-                                                    "enabled": "[bool(parameters('metricsAndLogsEnabled'))]"
-                                                },
-                                                {
-                                                    "category": "Errors",
-                                                    "enabled": "[bool(parameters('metricsAndLogsEnabled'))]"
-                                                },
-                                                {
-                                                    "category": "DatabaseWaitStatistics",
-                                                    "enabled": "[bool(parameters('metricsAndLogsEnabled'))]"
-                                                },
-                                                {
-                                                    "category": "Timeouts",
-                                                    "enabled": "[bool(parameters('metricsAndLogsEnabled'))]"
-                                                },
-                                                {
-                                                    "category": "Blocks",
-                                                    "enabled": "[bool(parameters('metricsAndLogsEnabled'))]"
-                                                },
-                                                {
-                                                    "category": "Deadlocks",
-                                                    "enabled": "[bool(parameters('metricsAndLogsEnabled'))]"
-                                                }
-                                            ]
-                                        }
-                                    }
-                                ],
-                                "outputs": {}
+                    {
+                        "field": "Microsoft.Insights/diagnosticSettings/metrics.enabled",
+                        "equals": "True"
+                    },
+                    {
+                        "field": "Microsoft.Insights/diagnosticSettings/workspaceId",
+                        "matchInsensitively": "[parameters('logAnalyticsWorkspaceId')]"
+                    }
+                ]
+            },
+            "deployment": {
+                "properties": {
+                    "mode": "incremental",
+                    "template": {
+                        "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                        "contentVersion": "1.0.0.0",
+                        "parameters": {
+                            "serverName": {
+                                "type": "string"
                             },
-                            "parameters": {
-                                "logAnalyticsWorkspaceId": {
-                                    "value": "[parameters('logAnalyticsWorkspaceId')]"
-                                },
-                                "location": {
-                                    "value": "[field('location')]"
-                                },
-                                "metricsAndLogsEnabled": {
-                                    "value": "[bool(parameters('metricsAndLogsEnabled'))]"
-                                },
-                                "serverName": {
-                                    "value": "[replace(field('fullName'),field('name'),'')]"
+                            "logAnalyticsWorkspaceId": {
+                                "type": "string"
+                            },
+                            "location": {
+                                "type": "string"
+                            },
+                            "metricsAndLogsEnabled": {
+                                "type": "Bool"
+                            }
+                        },
+                        "variables": {},
+                        "resources": [
+                            {
+                                "type": "Microsoft.Sql/servers/databases/providers/diagnosticSettings",
+                                "apiVersion": "2017-05-01-preview",
+                                "name": "[concat(parameters('serverName'),'master','/microsoft.insights', '/', 'setByPolicy')]",
+                                "location": "[parameters('location')]",
+                                "dependsOn": [],
+                                "properties": {
+                                    "workspaceId": "[parameters('logAnalyticsWorkspaceId')]",
+                                    "metrics": [
+                                        {
+                                            "category": "Basic",
+                                            "enabled": "[bool(parameters('metricsAndLogsEnabled'))]"
+                                        },
+                                        {
+                                            "category": "InstanceAndAppAdvanced",
+                                            "enabled": "[bool(parameters('metricsAndLogsEnabled'))]"
+                                        },
+                                        {
+                                            "category": "WorkloadManagement",
+                                            "enabled": "[bool(parameters('metricsAndLogsEnabled'))]"
+                                        }
+                                    ],
+                                    "logs": [
+                                        {
+                                            "category": "SQLSecurityAuditEvents",
+                                            "enabled": "[bool(parameters('metricsAndLogsEnabled'))]"
+                                        },
+                                        {
+                                            "category": "SQLInsights",
+                                            "enabled": "[bool(parameters('metricsAndLogsEnabled'))]"
+                                        },
+                                        {
+                                            "category": "AutomaticTuning",
+                                            "enabled": "[bool(parameters('metricsAndLogsEnabled'))]"
+                                        },
+                                        {
+                                            "category": "QueryStoreRuntimeStatistics",
+                                            "enabled": "[bool(parameters('metricsAndLogsEnabled'))]"
+                                        },
+                                        {
+                                            "category": "QueryStoreWaitStatistics",
+                                            "enabled": "[bool(parameters('metricsAndLogsEnabled'))]"
+                                        },
+                                        {
+                                            "category": "Errors",
+                                            "enabled": "[bool(parameters('metricsAndLogsEnabled'))]"
+                                        },
+                                        {
+                                            "category": "DatabaseWaitStatistics",
+                                            "enabled": "[bool(parameters('metricsAndLogsEnabled'))]"
+                                        },
+                                        {
+                                            "category": "Timeouts",
+                                            "enabled": "[bool(parameters('metricsAndLogsEnabled'))]"
+                                        },
+                                        {
+                                            "category": "Blocks",
+                                            "enabled": "[bool(parameters('metricsAndLogsEnabled'))]"
+                                        },
+                                        {
+                                            "category": "Deadlocks",
+                                            "enabled": "[bool(parameters('metricsAndLogsEnabled'))]"
+                                        }
+                                    ]
                                 }
                             }
+                        ],
+                        "outputs": {}
+                    },
+                    "parameters": {
+                        "logAnalyticsWorkspaceId": {
+                            "value": "[parameters('logAnalyticsWorkspaceId')]"
+                        },
+                        "location": {
+                            "value": "[field('location')]"
+                        },
+                        "metricsAndLogsEnabled": {
+                            "value": "[bool(parameters('metricsAndLogsEnabled'))]"
+                        },
+                        "serverName": {
+                            "value": "[replace(field('fullName'),field('name'),'')]"
                         }
                     }
                 }

@@ -9,9 +9,6 @@ resource "azurerm_management_group_policy_assignment" "deny_public_access" {
 {
   "effect": {
     "value": "Deny"
-  },
-  "version": {
-    "value": "deny-inbound-pres-tcp"
   }
 }
 PARAMETERS

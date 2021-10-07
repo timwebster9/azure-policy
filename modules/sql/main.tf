@@ -10,7 +10,7 @@ resource "azurerm_mssql_server" "example" {
   version                      = "12.0"
   administrator_login          = "missadministrator"
   administrator_login_password = "thisIsKat11"
-  minimum_tls_version          = "1.1"
+  minimum_tls_version          = "1.2"
   public_network_access_enabled = false
 
   # azuread_administrator {

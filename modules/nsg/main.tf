@@ -35,7 +35,7 @@ resource "azurerm_subnet_network_security_group_association" "example" {
 
 # Policy Def
 resource "azurerm_policy_definition" "default_nsg_rule" {
-  name                  = "apim_zones"
+  name                  = "default_nsg_rule"
   policy_type           = "Custom"
   mode                  = "Indexed"
   display_name          = "Append default NSG rules"

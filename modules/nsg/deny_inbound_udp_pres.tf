@@ -1,9 +1,9 @@
 resource "azurerm_management_group_policy_assignment" "deny_inbound_udp_pres" {
-  name                 = azurerm_policy_definition.default_nsg_rule.name
+  name                 = "deny_inbound_udp_pres"
   policy_definition_id = azurerm_policy_definition.default_nsg_rule.id
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"
-  display_name         = azurerm_policy_definition.default_nsg_rule.display_name
+  display_name         = azurerm_management_group_policy_assignment.deny_inbound_udp_pres.name
 
   parameters = <<PARAMETERS
 {

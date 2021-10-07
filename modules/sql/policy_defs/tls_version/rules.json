@@ -1,0 +1,25 @@
+{
+    "if": {
+        "allOf": [
+            {
+                "field": "type",
+                "equals": "Microsoft.Sql/servers"
+            },
+            {
+                "anyOf": [
+                  {
+                    "field": "Microsoft.Sql/servers/minimalTlsVersion",
+                    "exists": false
+                  },
+                  {
+                    "field": "Microsoft.Sql/servers/minimalTlsVersion",
+                    "notEquals": "[parameters('tlsVersion')]"
+                  }
+                ]
+              }
+        ]
+    },
+    "then": {
+        "effect": "[parameters('effect')]"
+    }
+}

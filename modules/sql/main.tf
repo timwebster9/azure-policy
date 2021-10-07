@@ -24,3 +24,11 @@ resource "azurerm_mssql_server" "example" {
     azurerm_management_group_policy_assignment.tls_version
   ]
 }
+
+resource "azurerm_sql_firewall_rule" "example" {
+  name                = "FirewallRule1"
+  resource_group_name = azurerm_resource_group.example.name
+  server_name         = azurerm_sql_server.example.name
+  start_ip_address    = "212.159.71.60"
+  end_ip_address      = "212.159.71.60"
+}

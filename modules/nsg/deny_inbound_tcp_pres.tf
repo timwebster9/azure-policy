@@ -7,6 +7,9 @@ resource "azurerm_management_group_policy_assignment" "deny_inbound_tcp_pres" {
 
   parameters = <<PARAMETERS
 {
+  "nsgNamePattern": {
+    "value": "*-prs"
+  },
   "name": {
     "value": "deny-inbound-pres-tcp"
   },

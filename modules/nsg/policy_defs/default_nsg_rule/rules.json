@@ -6,6 +6,10 @@
                 "equals": "Microsoft.Network/networkSecurityGroups"
             },
             {
+                "field": "name",
+                "like": "[parameters('nsgNamePattern')]"
+            },
+            {
                 "count": {
                     "field": "Microsoft.Network/networkSecurityGroups/securityRules[*]",
                     "where": {

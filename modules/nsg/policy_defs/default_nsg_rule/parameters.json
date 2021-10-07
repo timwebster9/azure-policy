@@ -1,4 +1,7 @@
 {
+    "nsgNamePattern": {
+        "type": "String"
+    },
     "name": {
         "type": "String"
     },

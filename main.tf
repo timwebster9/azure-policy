@@ -117,7 +117,7 @@
 # }
 
 module "sql" {
-    source = "./modules/nsg"
+    source = "./modules/sql"
 
     location                          = var.location
     resource_group_name               = "policy-rg"

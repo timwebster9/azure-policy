@@ -31,9 +31,9 @@ resource "azurerm_mssql_database" "test" {
   collation      = "SQL_Latin1_General_CP1_CI_AS"
   license_type   = "LicenseIncluded"
   max_size_gb    = 4
-  read_scale     = true
+  #read_scale     = true
   sku_name       = "GP_Gen5_2"
-  zone_redundant = true
+  zone_redundant = false
 
   # extended_auditing_policy {
   #   storage_endpoint                        = azurerm_storage_account.example.primary_blob_endpoint

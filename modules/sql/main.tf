@@ -11,7 +11,7 @@ resource "azurerm_mssql_server" "example" {
   administrator_login          = "missadministrator"
   administrator_login_password = "thisIsKat11"
   minimum_tls_version          = "1.1"
-  public_network_access_enabled = true
+  public_network_access_enabled = false
 
   # azuread_administrator {
   #   login_username = "AzureAD Admin"
@@ -19,6 +19,8 @@ resource "azurerm_mssql_server" "example" {
   # }
 
   depends_on = [
-    azurerm_management_group_policy_assignment.deny_firewall_rules
+    azurerm_management_group_policy_assignment.deny_firewall_rules,
+    azurerm_management_group_policy_assignment.deny_public_access,
+    azurerm_management_group_policy_assignment.tls_version
   ]
 }

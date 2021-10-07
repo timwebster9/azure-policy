@@ -8,7 +8,7 @@ resource "azurerm_management_group_policy_assignment" "deny_inbound_udp_pres" {
   parameters = <<PARAMETERS
 {
   "name": {
-    "value": "deny-inbound-pres-tcp"
+    "value": "deny-inbound-pres-udp"
   },
   "protocol": {
     "value": "UDP"

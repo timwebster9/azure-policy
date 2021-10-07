@@ -96,8 +96,18 @@
 #     policy_assignment_mgmt_group_name = "parent-mgmt-group"
 # }
 
-module "apim" {
-    source = "./modules/apim"
+# module "apim" {
+#     source = "./modules/apim"
+
+#     location                          = var.location
+#     resource_group_name               = "policy-rg"
+
+#     policy_definition_mgmt_group_name = "parent-mgmt-group"
+#     policy_assignment_mgmt_group_name = "parent-mgmt-group"
+# }
+
+module "nsg" {
+    source = "./modules/nsg"
 
     location                          = var.location
     resource_group_name               = "policy-rg"

@@ -21,7 +21,8 @@ resource "azurerm_mssql_server" "example" {
   depends_on = [
     azurerm_management_group_policy_assignment.deny_firewall_rules,
     azurerm_management_group_policy_assignment.deny_public_access,
-    azurerm_management_group_policy_assignment.tls_version
+    azurerm_management_group_policy_assignment.tls_version,
+    azurerm_management_group_policy_assignment.sql_diagnostics
   ]
 }
 

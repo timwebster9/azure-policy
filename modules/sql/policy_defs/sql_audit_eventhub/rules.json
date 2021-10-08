@@ -13,10 +13,6 @@
                     {
                         "field": "Microsoft.Sql/auditingSettings.state",
                         "equals": "Enabled"
-                    },
-                    {
-                        "field": "Microsoft.Sql/devOpsAuditingSettings.state",
-                        "equals": "Enabled"
                     }
                 ]
             },

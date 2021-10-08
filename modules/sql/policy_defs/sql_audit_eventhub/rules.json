@@ -29,6 +29,9 @@
                             "fullName": {
                                 "type": "string"
                             },
+                            "name": {
+                                "type": "string"
+                            },
                             "location": {
                                 "type": "string"
                             },
@@ -45,7 +48,7 @@
                         "resources": [
                             {
                                 "type": "databases/providers/diagnosticSettings",
-                                "name": "[concat(parameters('fullName'), '/', 'Microsoft.Insights/',parameters('profileName'))]",
+                                "name": "[concat(parameters('name'), '/', 'Microsoft.Insights/',parameters('profileName'))]",
                                 "location": "[parameters('location')]",
                                 "apiVersion": "2017-05-01-preview",
                                 "properties": {
@@ -75,7 +78,7 @@
                             {
                                 "apiVersion": "2017-03-01-preview",
                                 "type": "servers/auditingSettings",
-                                "name": "[concat(parameters('fullName'), '/', 'DefaultAuditingSettings')]",
+                                "name": "[concat(parameters('name'), '/', 'DefaultAuditingSettings')]",
                                 "properties": {
                                     "State": "Enabled",
                                     "isAzureMonitorTargetEnabled": true
@@ -84,7 +87,7 @@
                             {
                                 "type": "servers/devOpsAuditingSettings",
                                 "apiVersion": "2020-08-01-preview",
-                                "name": "[concat(parameters('fullName'), '/', 'Default')]",
+                                "name": "[concat(parameters('name'), '/', 'Default')]",
                                 "properties": {
                                     "State": "Enabled",
                                     "isAzureMonitorTargetEnabled": true
@@ -98,6 +101,9 @@
                         },
                         "fullName": {
                             "value": "[field('fullName')]"
+                        },
+                        "name": {
+                            "value": "[field('name')]"
                         },
                         "eventHubRuleId": {
                             "value": "[parameters('eventHubRuleId')]"

@@ -32,9 +32,6 @@ resource "azurerm_management_group_policy_assignment" "sql_server_audit" {
 {
   "auditActionsAndGroups": {
     "value": ["BATCH_COMPLETED_GROUP","SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP","FAILED_DATABASE_AUTHENTICATION_GROUP"]
-  },
-  "metricsAndLogsEnabled": {
-    "value": "true"
   }
 }
 PARAMETERS

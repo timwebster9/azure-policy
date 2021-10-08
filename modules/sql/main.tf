@@ -11,6 +11,32 @@ resource "azurerm_log_analytics_workspace" "example" {
   retention_in_days   = 30
 }
 
+resource "azurerm_eventhub_namespace" "example" {
+  name                = "timwpolicyeh9874534"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  sku                 = "Standard"
+  capacity            = 2
+}
+
+resource "azurerm_eventhub" "example" {
+  name                = "policyeh"
+  namespace_name      = azurerm_eventhub_namespace.example.name
+  resource_group_name = azurerm_resource_group.example.name
+  partition_count     = 2
+  message_retention   = 1
+}
+
+resource "azurerm_eventhub_namespace_authorization_rule" "example" {
+  name                = "logs"
+  namespace_name      = azurerm_eventhub_namespace.example.name
+  resource_group_name = azurerm_resource_group.example.name
+
+  listen = false
+  send   = true
+  manage = false
+}
+
 resource "azurerm_mssql_server" "example" {
   name                         = "timwpolicysql098as0fsd"
   resource_group_name          = azurerm_resource_group.example.name
@@ -30,7 +56,8 @@ resource "azurerm_mssql_server" "example" {
     azurerm_management_group_policy_assignment.deny_firewall_rules,
     azurerm_management_group_policy_assignment.deny_public_access,
     azurerm_management_group_policy_assignment.tls_version,
-    azurerm_management_group_policy_assignment.sql_diagnostics
+    azurerm_management_group_policy_assignment.sql_diagnostics,
+    azurerm_management_group_policy_assignment.sql_diagnostics_eh,
   ]
 }
 

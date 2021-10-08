@@ -47,8 +47,8 @@
                         },
                         "resources": [
                             {
-                                "type": "databases/providers/diagnosticSettings",
-                                "name": "[concat(parameters('name'), '/', 'Microsoft.Insights/',parameters('profileName'))]",
+                                "type": "Microsoft.Sql/servers/databases/providers/diagnosticSettings",
+                                "name": "[concat(parameters('fullName'), 'master', '/Microsoft.Insights/', parameters('profileName'))]",
                                 "location": "[parameters('location')]",
                                 "apiVersion": "2017-05-01-preview",
                                 "properties": {
@@ -76,17 +76,17 @@
                             },
                             {
                                 "apiVersion": "2017-03-01-preview",
-                                "type": "servers/auditingSettings",
-                                "name": "[concat(parameters('name'), '/', 'DefaultAuditingSettings')]",
+                                "type": "Microsoft.Sql/servers/auditingSettings",
+                                "name": "[concat(parameters('fullName'), '/DefaultAuditingSettings')]",
                                 "properties": {
                                     "State": "Enabled",
                                     "isAzureMonitorTargetEnabled": true
                                 }
                             },
                             {
-                                "type": "servers/devOpsAuditingSettings",
+                                "type": "Microsoft.Sql/servers/devOpsAuditingSettings",
                                 "apiVersion": "2020-08-01-preview",
-                                "name": "[concat(parameters('name'), '/', 'Default')]",
+                                "name": "[concat(parameters('fullName'), '/Default')]",
                                 "properties": {
                                     "State": "Enabled",
                                     "isAzureMonitorTargetEnabled": true

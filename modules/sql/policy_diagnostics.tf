@@ -22,6 +22,7 @@ resource "azurerm_management_group_policy_assignment" "sql_diagnostics" {
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"
   display_name         = "sql_diagnostics"
+  location             = var.location
 
   identity {
     type = "SystemAssigned"

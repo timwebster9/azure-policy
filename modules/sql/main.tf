@@ -56,8 +56,7 @@ resource "azurerm_mssql_server" "example" {
     azurerm_management_group_policy_assignment.deny_firewall_rules,
     azurerm_management_group_policy_assignment.deny_public_access,
     azurerm_management_group_policy_assignment.tls_version,
-    azurerm_management_group_policy_assignment.diagnostics_eventhub,
-    #azurerm_management_group_policy_assignment.sql_diagnostics_eh,
+    azurerm_management_group_policy_assignment.sql_diagnostics_eh,
     azurerm_management_group_policy_assignment.sql_server_audit
   ]
 }

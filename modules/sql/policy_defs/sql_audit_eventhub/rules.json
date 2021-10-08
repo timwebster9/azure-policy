@@ -11,8 +11,12 @@
             "existenceCondition": {
                 "allOf": [
                     {
-                        "field": "Microsoft.Insights/diagnosticSettings/name",
-                        "equals": "[parameters('profileName')]"
+                        "field": "Microsoft.Sql/auditingSettings.state",
+                        "equals": "Enabled"
+                    },
+                    {
+                        "field": "Microsoft.Sql/devOpsAuditingSettings.state",
+                        "equals": "Enabled"
                     }
                 ]
             },

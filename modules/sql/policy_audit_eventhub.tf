@@ -40,8 +40,8 @@ resource "azurerm_management_group_policy_assignment" "sql_audit_eventhub" {
 PARAMETERS
 }
 
-resource "azurerm_role_assignment" "sql_audit_policy_eh" {
-  scope                = data.azurerm_subscription.current.id
-  role_definition_name = "Contributor"
-  principal_id         = azurerm_management_group_policy_assignment.sql_diagnostics.identity[0].principal_id
-}
+# resource "azurerm_role_assignment" "sql_audit_policy_eh" {
+#   scope                = data.azurerm_subscription.current.id
+#   role_definition_name = "Contributor"
+#   principal_id         = azurerm_management_group_policy_assignment.sql_diagnostics.identity[0].principal_id
+# }

@@ -32,9 +32,9 @@ resource "azurerm_eventhub_namespace_authorization_rule" "example" {
   namespace_name      = azurerm_eventhub_namespace.example.name
   resource_group_name = azurerm_resource_group.example.name
 
-  listen = false
+  listen = true
   send   = true
-  manage = false
+  manage = true
 }
 
 resource "azurerm_mssql_server" "example" {

@@ -74,7 +74,7 @@
                             },
                             {
                                 "apiVersion": "2017-03-01-preview",
-                                "type": "Microsoft.Sql/servers/auditingSettings",
+                                "type": "servers/auditingSettings",
                                 "name": "[concat(parameters('fullName'), '/', 'DefaultAuditingSettings')]",
                                 "properties": {
                                     "State": "Enabled",
@@ -82,7 +82,7 @@
                                 }
                             },
                             {
-                                "type": "Microsoft.Sql/servers/devOpsAuditingSettings",
+                                "type": "servers/devOpsAuditingSettings",
                                 "apiVersion": "2020-08-01-preview",
                                 "name": "[concat(parameters('fullName'), '/', 'Default')]",
                                 "properties": {

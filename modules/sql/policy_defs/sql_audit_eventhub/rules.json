@@ -11,11 +11,7 @@
             "existenceCondition": {
                 "allOf": [
                     {
-                        "field": "Microsoft.Sql/servers/auditingSettings.state",
-                        "equals": "Enabled"
-                    },
-                    {
-                        "field": "Microsoft.Sql/servers/devOpsAuditingSettings.state",
+                        "field": "Microsoft.Sql/auditingSettings.state",
                         "equals": "Enabled"
                     }
                 ]

@@ -18,7 +18,7 @@ METADATA
 
 resource "azurerm_management_group_policy_assignment" "diagnostics_eventhub" {
   name                 = "diagnostics_eventhub"
-  policy_definition_id = azurerm_policy_definition.sql_diagnostics.id
+  policy_definition_id = azurerm_policy_definition.diagnostics_eventhub.id
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"
   display_name         = "diagnostics_eventhub"

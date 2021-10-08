@@ -45,6 +45,6 @@ PARAMETERS
 
 resource "azurerm_role_assignment" "policy_logs" {
   scope                = azurerm_log_analytics_workspace.example.id
-  role_definition_name = "Log Analytics Contributor"
-  principal_id         = azurerm_management_group_policy_assignment.sql_diagnostics.identity[0].principal_id
+  role_definition_name = "Contributor"
+  principal_id         = azurerm_management_group_policy_assignment.diagnostics_eventhub.identity[0].principal_id
 }

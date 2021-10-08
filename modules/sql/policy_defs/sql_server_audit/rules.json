@@ -25,7 +25,7 @@
                             "serverName": {
                                 "type": "string"
                             },
-                            "allowedAuditActionsAndGroups": {
+                            "auditActionsAndGroups": {
                                 "type": "array"
                             }
                         },

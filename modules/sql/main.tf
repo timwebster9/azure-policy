@@ -58,7 +58,7 @@ resource "azurerm_mssql_server" "example" {
     azurerm_management_group_policy_assignment.tls_version,
     azurerm_management_group_policy_assignment.sql_diagnostics,
     azurerm_management_group_policy_assignment.sql_diagnostics_eh,
-    azurerm_management_group_policy_assignment.sql_audit_eventhub
+    azurerm_management_group_policy_assignment.sql_server_audit
   ]
 }
 

@@ -1,0 +1,60 @@
+{
+    "if": {
+        "field": "type",
+        "equals": "Microsoft.Sql/servers"
+    },
+    "then": {
+        "effect": "DeployIfNotExists",
+        "details": {
+            "type": "Microsoft.Sql/servers/auditingSettings",
+            "name": "Default",
+            "existenceCondition": {
+                "field": "Microsoft.Sql/auditingSettings.state",
+                "equals": "Enabled"
+            },
+            "roleDefinitionIds": [
+                "/providers/microsoft.authorization/roleDefinitions/056cd41c-7e88-42e1-933e-88ba6a50c9c3"
+            ],
+            "deployment": {
+                "properties": {
+                    "mode": "incremental",
+                    "template": {
+                        "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                        "contentVersion": "1.0.0.0",
+                        "parameters": {
+                            "serverName": {
+                                "type": "string"
+                            },
+                            "allowedAuditActionsAndGroups": {
+                                "type": "array"
+                            }
+                        },
+                        "variables": {},
+                        "resources": [
+                            {
+                                "name": "[concat(parameters('serverName'), '/Default')]",
+                                "type": "Microsoft.Sql/servers/auditingSettings",
+                                "apiVersion": "2021-02-01-preview",
+                                "properties": {
+                                    "state": "Enabled",
+                                    "retentionDays": 180,
+                                    "auditActionsAndGroups": "[parameters('auditActionsAndGroups')]",
+                                    "isDevopsAuditEnabled": true,
+                                    "isAzureMonitorTargetEnabled": true
+                                }
+                            }
+                        ]
+                    },
+                    "parameters": {
+                        "serverName": {
+                            "value": "[field('fullName')]"
+                        },
+                        "auditActionsAndGroups": {
+                            "value": "[parameters('auditActionsAndGroups')]"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "auditActionsAndGroups": {
+        "type": "array",
+        "metadata": {
+            "description": "The list of audit actions and groups",
+            "displayName": "Audit actions and groups",
+            "allowedValues": [
+                "BATCH_COMPLETED_GROUP",
+                "SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP",
+                "FAILED_DATABASE_AUTHENTICATION_GROUP"
+            ]
+        }
+    }
+}

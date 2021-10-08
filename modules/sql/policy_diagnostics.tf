@@ -26,7 +26,7 @@ resource "azurerm_management_group_policy_assignment" "sql_diagnostics" {
   parameters = <<PARAMETERS
 {
   "logAnalyticsWorkspaceId": {
-    "value": "${data.azurerm_log_analytics_workspace.mgmt_workspace.workspace_id}"
+    "value": "${azurerm_log_analytics_workspace.example.workspace_id}"
   },
   "metricsAndLogsEnabled": {
     "value": "true"

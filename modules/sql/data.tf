@@ -11,8 +11,3 @@ data "azurerm_management_group" "policy_assignment_mgmt_group" {
 data "azurerm_policy_definition" "sql_deny_public_access" {
   name = "1b8ca024-1d5c-4dec-8995-b1a932b41780"
 }
-
-data "azurerm_log_analytics_workspace" "mgmt_workspace" {
-  name                = "mgmtstorage3445354"
-  resource_group_name = "mgmt-rg"
-}

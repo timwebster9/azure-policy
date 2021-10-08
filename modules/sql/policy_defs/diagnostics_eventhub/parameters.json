@@ -1,0 +1,15 @@
+{
+    "eventHubRuleId": {
+        "type": "string"
+    },
+    "metricsEnabled": {
+        "type": "string"
+    },
+    "logsEnabled": {
+        "type": "string"
+    },
+    "profileName": {
+        "type": "string",
+        "defaultValue": "deployedByPolicy"
+    }
+}

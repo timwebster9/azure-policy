@@ -1,5 +1,5 @@
-resource "azurerm_policy_definition" "sql_diagnostics" {
-  name                  = "diagnostics"
+resource "azurerm_policy_definition" "diagnostics_eventhub" {
+  name                  = "diagnostics_eventhub"
   policy_type           = "Custom"
   mode                  = "Indexed"
   display_name          = "Deploy diagnostics settings for SQL databases"
@@ -12,16 +12,16 @@ resource "azurerm_policy_definition" "sql_diagnostics" {
 
 METADATA
 
-  policy_rule = file("${path.module}/policy_defs/diagnostics/rules.json")
-  parameters = file("${path.module}/policy_defs/diagnostics/parameters.json")
+  policy_rule = file("${path.module}/policy_defs/diagnostics_eventhub/rules.json")
+  parameters = file("${path.module}/policy_defs/diagnostics_eventhub/parameters.json")
 }
 
-resource "azurerm_management_group_policy_assignment" "sql_diagnostics" {
-  name                 = "sql_diagnostics"
+resource "azurerm_management_group_policy_assignment" "diagnostics_eventhub" {
+  name                 = "diagnostics_eventhub"
   policy_definition_id = azurerm_policy_definition.sql_diagnostics.id
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"
-  display_name         = "sql_diagnostics"
+  display_name         = "diagnostics_eventhub"
   location             = var.location
 
   identity {
@@ -30,10 +30,13 @@ resource "azurerm_management_group_policy_assignment" "sql_diagnostics" {
 
   parameters = <<PARAMETERS
 {
-  "logAnalyticsWorkspaceId": {
-    "value": "${azurerm_log_analytics_workspace.example.id}"
+  "eventHubRuleId": {
+    "value": "${azurerm_eventhub_namespace_authorization_rule.example.id}"
   },
-  "metricsAndLogsEnabled": {
+  "metricsEnabled": {
+    "value": "true"
+  },
+  "logsEnabled": {
     "value": "true"
   }
 }

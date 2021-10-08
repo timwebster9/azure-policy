@@ -52,7 +52,6 @@
                                 "location": "[parameters('location')]",
                                 "apiVersion": "2017-05-01-preview",
                                 "properties": {
-                                    "name": "[parameters('profileName')]",
                                     "eventHubAuthorizationRuleId": "[parameters('eventHubRuleId')]",
                                     "eventHubName": "[parameters('eventHubName')]",
                                     "logs": [

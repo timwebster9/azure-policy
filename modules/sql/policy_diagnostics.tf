@@ -23,6 +23,10 @@ resource "azurerm_management_group_policy_assignment" "sql_diagnostics" {
   description          = "Policy Assignment test"
   display_name         = "sql_diagnostics"
 
+  identity {
+    type = "SystemAssigned"
+  }
+
   parameters = <<PARAMETERS
 {
   "logAnalyticsWorkspaceId": {
@@ -33,4 +37,10 @@ resource "azurerm_management_group_policy_assignment" "sql_diagnostics" {
   }
 }
 PARAMETERS
+}
+
+resource "azurerm_role_assignment" "policy_logs" {
+  scope                = azurerm_log_analytics_workspace.example.id
+  role_definition_name = "Log Analytics Contributor"
+  principal_id         = azurerm_management_group_policy_assignment.identity.principal_id
 }

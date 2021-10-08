@@ -1,0 +1,20 @@
+{
+    "eventHubRuleId": {
+        "type": "string",
+        "metadata": {
+            "displayName": "Event Hub namespace rule ID",
+            "description": "Namespace-scoped authorization rule (aka shared access policy) ID"
+        }
+    },
+    "eventHubName": {
+        "type": "string"
+    },
+    "profileName": {
+        "type": "string",
+        "defaultValue": "auditSetByPolicy",
+        "metadata": {
+            "displayName": "Metrics and Logs Enabled",
+            "description": "Select whether metrics and logs collection is enabled or diabled"
+        }
+    }
+}

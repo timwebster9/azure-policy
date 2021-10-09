@@ -56,7 +56,7 @@ resource "azurerm_eventhub_namespace_authorization_rule" "namespace_rule" {
 }
 
 resource "azurerm_mssql_server" "example" {
-  name                         = "timwpolicysql098as0fsd"
+  name                         = "timw9078safsaf"
   resource_group_name          = azurerm_resource_group.example.name
   location                     = azurerm_resource_group.example.location
   version                      = "12.0"

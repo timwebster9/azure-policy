@@ -45,10 +45,7 @@
                             "logAnalyticsWorkspaceId": {
                                 "type": "string"
                             },
-                            "storageAccountSubscriptionId": {
-                                "type": "string"
-                            },
-                            "storageEndpoint": {
+                            "storageAccountId": {
                                 "type": "string"
                             },
                             "metricsEnabled": {
@@ -71,8 +68,7 @@
                                     "eventHubAuthorizationRuleId": "[parameters('eventHubRuleId')]",
                                     "eventHubName": "[parameters('eventHubName')]",
                                     "workspaceId": "[parameters('logAnalyticsWorkspaceId')]",
-                                    "storageAccountSubscriptionId": "[parameters('storageAccountSubscriptionId')]",
-                                    "storageEndpoint": "[parameters('storageEndpoint')]",
+                                    "storageAccountId": "[parameters('storageAccountId')]",
                                     "metrics": [
                                         {
                                             "category": "AllMetrics",
@@ -155,11 +151,8 @@
                         "logAnalyticsWorkspaceId": {
                             "value": "[parameters('logAnalyticsWorkspaceId')]"
                         },
-                        "storageAccountSubscriptionId": {
-                            "value": "[parameters('storageAccountSubscriptionId')]"
-                        },
-                        "storageEndpoint": {
-                            "value": "[parameters('storageEndpoint')]"
+                        "storageAccountId": {
+                            "value": "[parameters('storageAccountId')]"
                         },
                         "metricsEnabled": {
                             "value": "[parameters('metricsEnabled')]"

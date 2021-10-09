@@ -1,7 +1,7 @@
 {
     "profileName": {
         "type": "String",
-        "defaultValue": "setbypolicy",
+        "defaultValue": "setByPolicy",
         "metadata": {
             "displayName": "Profile name",
             "description": "The diagnostic settings profile name"

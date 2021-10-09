@@ -4,10 +4,6 @@
             {
                 "field": "type",
                 "equals": "Microsoft.Sql/servers"
-            },
-            {
-                "field": "location",
-                "equals": "[parameters('resourceLocation')]"
             }
         ]
     },

@@ -37,15 +37,15 @@ resource "azurerm_eventhub_authorization_rule" "logs_rule" {
   manage              = false
 }
 
-# resource "azurerm_eventhub_namespace_authorization_rule" "example" {
-#   name                = "namespace_logs"
-#   namespace_name      = azurerm_eventhub_namespace.example.name
-#   resource_group_name = azurerm_resource_group.example.name
+resource "azurerm_eventhub_namespace_authorization_rule" "namespace_rule" {
+  name                = "namespace_logs"
+  namespace_name      = azurerm_eventhub_namespace.example.name
+  resource_group_name = azurerm_resource_group.example.name
 
-#   listen = true
-#   send   = true
-#   manage = true
-# }
+  listen = true
+  send   = true
+  manage = true
+}
 
 resource "azurerm_mssql_server" "example" {
   name                         = "timwpolicysql098as0fsd"

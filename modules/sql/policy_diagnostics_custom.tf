@@ -31,7 +31,7 @@ resource "azurerm_management_group_policy_assignment" "sql_diagnostics_custom" {
   parameters = <<PARAMETERS
 {
   "eventHubRuleId": {
-    "value": "${azurerm_eventhub_authorization_rule.logs_rule.id}"
+    "value": "${azurerm_eventhub_namespace_authorization_rule.namespace_rule.id}"
   },
   "eventHubName": {
     "value": "${azurerm_eventhub.logs.name}"

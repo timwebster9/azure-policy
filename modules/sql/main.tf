@@ -58,7 +58,7 @@ resource "azurerm_eventhub_namespace_authorization_rule" "namespace_rule" {
 resource "azurerm_mssql_server" "example" {
   name                         = "timwpolicysql098as0fsd"
   resource_group_name          = azurerm_resource_group.example.name
-  location                     = "ukwest" #azurerm_resource_group.example.location
+  location                     = azurerm_resource_group.example.location
   version                      = "12.0"
   administrator_login          = "missadministrator"
   administrator_login_password = "thisIsKat11"
@@ -86,7 +86,7 @@ resource "azurerm_mssql_database" "test" {
   max_size_gb    = 4
   #read_scale     = true
   sku_name       = "GP_Gen5_2"
-  zone_redundant = false
+  zone_redundant = true
 
   depends_on = [
     azurerm_management_group_policy_assignment.sql_diagnostics_custom,

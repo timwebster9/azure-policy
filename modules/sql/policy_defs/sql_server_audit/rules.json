@@ -97,9 +97,9 @@
                                 }
                             },
                             {
-                                "type": "Microsoft.Sql/servers/databases/auditingSettings",
+                                "type": "Microsoft.Sql/servers/auditingSettings",
                                 "name": "[concat(parameters('resourceName'), '/Default')]",
-                                "apiVersion": "2017-03-01-preview",
+                                "apiVersion": "2021-02-01-preview",
                                 "properties": {
                                     "auditActionsAndGroups": "[parameters('auditActionsAndGroups')]",
                                     "State": "Enabled",

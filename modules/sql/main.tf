@@ -58,7 +58,7 @@ resource "azurerm_eventhub_namespace_authorization_rule" "namespace_rule" {
 resource "azurerm_mssql_server" "example" {
   name                         = "timwpolicysql098as0fsd"
   resource_group_name          = azurerm_resource_group.example.name
-  location                     = azurerm_resource_group.example.location
+  location                     = "ukwest" #azurerm_resource_group.example.location
   version                      = "12.0"
   administrator_login          = "missadministrator"
   administrator_login_password = "thisIsKat11"

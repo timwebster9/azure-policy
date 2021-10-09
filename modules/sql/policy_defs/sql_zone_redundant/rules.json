@@ -1,0 +1,21 @@
+{
+    "if": {
+        "allOf": [
+            {
+                "field": "type",
+                "equals": "Microsoft.Sql/servers/databases"
+            },
+            {
+                "field": "location",
+                "in": "[parameters('locations')]"
+            },
+            {
+                "field": "Microsoft.Sql/servers/elasticPools/zoneRedundant",
+                "notEquals": "true"
+            }
+        ]
+    },
+    "then": {
+        "effect": "[parameters('effect')]"
+    }
+}

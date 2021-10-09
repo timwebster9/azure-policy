@@ -31,6 +31,20 @@
             "strongType": "omsWorkspace"
         }
     },
+    "storageAccountSubscriptionId": {
+        "type": "string",
+        "metadata": {
+            "displayName": "Storage account subsscription ID",
+            "description": "Storage account subsscription ID"
+        }
+    },
+    "storageEndpoint": {
+        "type": "string",
+        "metadata": {
+            "displayName": "Storage account endpoint",
+            "description": "Storage account URL. e.g. https://MyAccount.blob.core.windows.net"
+        }
+    },
     "metricsEnabled": {
         "type": "String",
         "metadata": {

@@ -98,7 +98,7 @@
                             },
                             {
                                 "type": "Microsoft.Sql/servers/auditingSettings",
-                                "name": "[concat(parameters('resourceName'), '/Default')]",
+                                "name": "[concat(parameters('resourceName'), '/setByPolicy')]",
                                 "apiVersion": "2021-02-01-preview",
                                 "properties": {
                                     "auditActionsAndGroups": "[parameters('auditActionsAndGroups')]",

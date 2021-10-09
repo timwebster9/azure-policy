@@ -65,6 +65,10 @@ resource "azurerm_mssql_server" "example" {
   minimum_tls_version          = "1.2"
   public_network_access_enabled = true # testing diagnostics only
 
+  identity {
+    type = "SystemAssigned"
+  }
+
   # azuread_administrator {
   #   login_username = "AzureAD Admin"
   #   object_id      = "00000000-0000-0000-0000-000000000000"
@@ -76,6 +80,12 @@ resource "azurerm_mssql_server" "example" {
     azurerm_management_group_policy_assignment.tls_version,
     azurerm_management_group_policy_assignment.sql_server_audit
   ]
+}
+
+resource "azurerm_role_assignment" "sql_msi_storage" {
+  scope                = azurerm_storage_account.example.id
+  role_definition_name = "Storage Blob Data Contributor"
+  principal_id         = azurerm_mssql_server.example.identity.0.principal_id
 }
 
 resource "azurerm_mssql_database" "test" {

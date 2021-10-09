@@ -45,6 +45,9 @@ resource "azurerm_management_group_policy_assignment" "sql_server_audit" {
   "storageAccountId": {
     "value": "${azurerm_storage_account.example.id}"
   },
+  "storageEndpoint": {
+    "value": "${azurerm_storage_account.example.primary_blob_endpoint}"
+  },
   "storageRetentionDays": {
     "value": 365
   },

@@ -55,6 +55,9 @@
                             "storageAccountId": {
                                 "type": "string"
                             },
+                            "storageEndpoint": {
+                                "type": "string"
+                            },
                             "storageRetentionDays": {
                                 "type": "int"
                             },
@@ -102,8 +105,11 @@
                                 "apiVersion": "2021-02-01-preview",
                                 "properties": {
                                     "auditActionsAndGroups": "[parameters('auditActionsAndGroups')]",
-                                    "State": "Enabled",
-                                    "isAzureMonitorTargetEnabled": true
+                                    "state": "Enabled",
+                                    "retentionDays": "[parameters('storageRetentionDays')]",
+                                    "isAzureMonitorTargetEnabled": true,
+                                    "isDevopsAuditEnabled": true,
+                                    "storageEndpoint": "[parameters('storageEndpoint')]"
                                 }
                             }
                         ],
@@ -124,6 +130,9 @@
                         },
                         "storageAccountId": {
                             "value": "[parameters('storageAccountId')]"
+                        },
+                        "storageEndpoint": {
+                            "value": "[parameters('storageEndpoint')]"
                         },
                         "storageRetentionDays": {
                             "value": "[parameters('storageRetentionDays')]"

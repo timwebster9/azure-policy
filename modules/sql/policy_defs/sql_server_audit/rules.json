@@ -43,6 +43,9 @@
                             "eventHubRuleId": {
                                 "type": "string"
                             },
+                            "auditActionsAndGroups": {
+                                "type": "array"
+                            },
                             "eventHubName": {
                                 "type": "string"
                             },

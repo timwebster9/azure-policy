@@ -74,9 +74,7 @@ resource "azurerm_mssql_server" "example" {
     azurerm_management_group_policy_assignment.deny_firewall_rules,
     azurerm_management_group_policy_assignment.deny_public_access,
     azurerm_management_group_policy_assignment.tls_version,
-    azurerm_management_group_policy_assignment.sql_server_audit,
-    azurerm_management_group_policy_assignment.sql_diagnostics_custom,
-    azurerm_management_group_policy_assignment.sql_zone_redundant
+    azurerm_management_group_policy_assignment.sql_server_audit
   ]
 }
 
@@ -89,6 +87,11 @@ resource "azurerm_mssql_database" "test" {
   #read_scale     = true
   sku_name       = "GP_Gen5_2"
   zone_redundant = false
+
+  depends_on = [
+    azurerm_management_group_policy_assignment.sql_diagnostics_custom,
+    azurerm_management_group_policy_assignment.sql_zone_redundant
+  ]
 
   # extended_auditing_policy {
   #   storage_endpoint                        = azurerm_storage_account.example.primary_blob_endpoint

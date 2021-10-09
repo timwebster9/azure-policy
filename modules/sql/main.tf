@@ -89,7 +89,7 @@ resource "azurerm_mssql_database" "test" {
   zone_redundant = true
 
   depends_on = [
-    azurerm_management_group_policy_assignment.sql_diagnostics_custom,
+    azurerm_management_group_policy_assignment.sql_db_diagnostics_custom,
     azurerm_management_group_policy_assignment.sql_zone_redundant
   ]
 
@@ -109,11 +109,11 @@ resource "azurerm_mssql_elasticpool" "example" {
   server_name         = azurerm_mssql_server.example.name
   license_type        = "LicenseIncluded"
   max_size_gb         = 756
-  zone_redundant      = true
+  zone_redundant      = false
 
   sku {
-    name     = "BC_Gen5"
-    tier     = "BusinessCritical"
+    name     = "GP_Gen5"
+    tier     = "GeneralPurpose"
     family   = "Gen5"
     capacity = 4
   }
@@ -124,6 +124,7 @@ resource "azurerm_mssql_elasticpool" "example" {
   }
 
   depends_on = [
-    azurerm_management_group_policy_assignment.sql_ep_zone_redundant
+    azurerm_management_group_policy_assignment.sql_ep_zone_redundant,
+    azurerm_management_group_policy_assignment.sql_ep_diagnostics_custom
   ]
 }

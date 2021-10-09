@@ -1,5 +1,5 @@
-resource "azurerm_policy_definition" "sql_diagnostics_custom" {
-  name                  = "sql_diagnostics_custom"
+resource "azurerm_policy_definition" "sql_db_diagnostics_custom" {
+  name                  = "sql_db_diagnostics"
   policy_type           = "Custom"
   mode                  = "Indexed"
   display_name          = "Deploy Diagnostic Settings for Azure SQL Database"
@@ -12,16 +12,16 @@ resource "azurerm_policy_definition" "sql_diagnostics_custom" {
 
 METADATA
 
-  policy_rule = file("${path.module}/policy_defs/sql_diagnostics_custom/rules.json")
-  parameters = file("${path.module}/policy_defs/sql_diagnostics_custom/parameters.json")
+  policy_rule = file("${path.module}/policy_defs/sql_db_diagnostics_custom/rules.json")
+  parameters = file("${path.module}/policy_defs/sql_db_diagnostics_custom/parameters.json")
 }
 
-resource "azurerm_management_group_policy_assignment" "sql_diagnostics_custom" {
-  name                 = "sql_diagnostics_eh"
-  policy_definition_id = azurerm_policy_definition.sql_diagnostics_custom.id
+resource "azurerm_management_group_policy_assignment" "sql_db_diagnostics_custom" {
+  name                 = "sql_db_diagnostics"
+  policy_definition_id = azurerm_policy_definition.sql_db_diagnostics_custom.id
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"
-  display_name         = azurerm_policy_definition.sql_diagnostics_custom.display_name
+  display_name         = azurerm_policy_definition.sql_db_diagnostics_custom.display_name
   location             = var.location
 
   identity {
@@ -55,9 +55,9 @@ resource "azurerm_management_group_policy_assignment" "sql_diagnostics_custom" {
 PARAMETERS
 }
 
-resource "azurerm_role_assignment" "sql_diagnostics_custom" {
+resource "azurerm_role_assignment" "sql_db_diagnostics_custom" {
   scope                = data.azurerm_subscription.current.id
   role_definition_name = "Contributor"
-  principal_id         = azurerm_management_group_policy_assignment.sql_diagnostics_custom.identity[0].principal_id
+  principal_id         = azurerm_management_group_policy_assignment.sql_db_diagnostics_custom.identity[0].principal_id
 }
 

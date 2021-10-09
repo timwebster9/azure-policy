@@ -1,0 +1,125 @@
+{
+    "if": {
+        "field": "type",
+        "equals": "Microsoft.Sql/servers/elasticPools"
+    },
+    "then": {
+        "effect": "DeployIfNotExists",
+        "details": {
+            "type": "Microsoft.Insights/diagnosticSettings",
+            "name": "[parameters('profileName')]",
+            "existenceCondition": {
+                "allOf": [
+                    {
+                        "field": "Microsoft.Insights/diagnosticSettings/logs[*].enabled",
+                        "equals": "[parameters('logsEnabled')]"
+                    },
+                    {
+                        "field": "Microsoft.Insights/diagnosticSettings/metrics[*].enabled",
+                        "equals": "[parameters('metricsEnabled')]"
+                    }
+                ]
+            },
+            "roleDefinitionIds": [
+                "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+            ],
+            "deployment": {
+                "properties": {
+                    "mode": "incremental",
+                    "template": {
+                        "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                        "contentVersion": "1.0.0.0",
+                        "parameters": {
+                            "fullName": {
+                                "type": "string"
+                            },
+                            "location": {
+                                "type": "string"
+                            },
+                            "eventHubRuleId": {
+                                "type": "string"
+                            },
+                            "eventHubName": {
+                                "type": "string"
+                            },
+                            "logAnalyticsWorkspaceId": {
+                                "type": "string"
+                            },
+                            "storageAccountId": {
+                                "type": "string"
+                            },
+                            "storageRetentionDays": {
+                                "type": "int"
+                            },
+                            "metricsEnabled": {
+                                "type": "string"
+                            },
+                            "profileName": {
+                                "type": "string"
+                            }
+                        },
+                        "resources": [
+                            {
+                                "type": "Microsoft.Sql/servers/elasticPools/providers/diagnosticSettings",
+                                "apiVersion": "2021-05-01-preview",
+                                "name": "[concat(parameters('fullName'), '/', 'Microsoft.Insights/', parameters('profileName'))]",
+                                "location": "[parameters('location')]",
+                                "properties": {
+                                    "eventHubAuthorizationRuleId": "[parameters('eventHubRuleId')]",
+                                    "eventHubName": "[parameters('eventHubName')]",
+                                    "workspaceId": "[parameters('logAnalyticsWorkspaceId')]",
+                                    "storageAccountId": "[parameters('storageAccountId')]",
+                                    "metrics": [
+                                        {
+                                            "category": "Basic",
+                                            "enabled": "[bool(parameters('metricsEnabled'))]"
+                                        },
+                                        {
+                                            "category": "InstanceAndAppAdvanced",
+                                            "enabled": "[bool(parameters('metricsEnabled'))]"
+                                        }
+                                    ]
+                                }
+                            }
+                        ],
+                        "outputs": {
+                            "policy": {
+                                "type": "string",
+                                "value": "[concat('Enabled diagnostic settings for ', parameters('fullName'))]"
+                            }
+                        }
+                    },
+                    "parameters": {
+                        "location": {
+                            "value": "[field('location')]"
+                        },
+                        "fullName": {
+                            "value": "[field('fullName')]"
+                        },
+                        "eventHubRuleId": {
+                            "value": "[parameters('eventHubRuleId')]"
+                        },
+                        "eventHubName": {
+                            "value": "[parameters('eventHubName')]"
+                        },
+                        "logAnalyticsWorkspaceId": {
+                            "value": "[parameters('logAnalyticsWorkspaceId')]"
+                        },
+                        "storageAccountId": {
+                            "value": "[parameters('storageAccountId')]"
+                        },
+                        "storageRetentionDays": {
+                            "value": "[parameters('storageRetentionDays')]"
+                        },
+                        "metricsEnabled": {
+                            "value": "[parameters('metricsEnabled')]"
+                        },
+                        "profileName": {
+                            "value": "[parameters('profileName')]"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -40,7 +40,7 @@ resource "azurerm_management_group_policy_assignment" "sql_diagnostics_custom" {
     "value": "${azurerm_log_analytics_workspace.example.id}"
   },
   "storageAccountSubscriptionId": {
-    "value": "${data.azurerm_client_config.current.subscripton_id}"
+    "value": "${data.azurerm_client_config.current.subscription_id}"
   },
   "storageEndpoint": {
     "value": "${azurerm_storage_account.example.primary_blob_endpoint}"

@@ -58,10 +58,9 @@
                         "resources": [
                             {
                                 "type": "Microsoft.Sql/servers/databases/providers/diagnosticSettings",
-                                "apiVersion": "2017-05-01-preview",
+                                "apiVersion": "2021-05-01-preview",
                                 "name": "[concat(parameters('fullName'), '/', 'Microsoft.Insights/', parameters('profileName'))]",
                                 "location": "[parameters('location')]",
-                                "dependsOn": [],
                                 "properties": {
                                     "eventHubAuthorizationRuleId": "[parameters('eventHubRuleId')]",
                                     "eventHubName": "[parameters('eventHubName')]",

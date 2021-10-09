@@ -109,7 +109,7 @@ resource "azurerm_mssql_elasticpool" "example" {
   server_name         = azurerm_mssql_server.example.name
   license_type        = "LicenseIncluded"
   max_size_gb         = 756
-  zone_redundant      = false
+  zone_redundant      = true
 
   sku {
     name     = "BC_Gen5"

@@ -42,6 +42,9 @@ resource "azurerm_management_group_policy_assignment" "sql_diagnostics_custom" {
   "storageAccountId": {
     "value": "${azurerm_storage_account.example.id}"
   },
+  "storageRetentionDays": {
+    "value": 365
+  },
   "metricsEnabled": {
     "value": "True"
   },

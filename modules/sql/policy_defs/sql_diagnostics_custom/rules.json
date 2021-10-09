@@ -46,6 +46,9 @@
                                 "type": "string"
                             },
                             "storageAccountId": {
+                                "type": "int"
+                            },
+                            "storageRetentionDays": {
                                 "type": "string"
                             },
                             "metricsEnabled": {
@@ -74,55 +77,99 @@
                                             "category": "AllMetrics",
                                             "enabled": "[parameters('metricsEnabled')]",
                                             "retentionPolicy": {
-                                                "enabled": false,
-                                                "days": 0
+                                                "enabled": true,
+                                                "days": "[parameters('storageRetentionDays')]"
                                             }
                                         }
                                     ],
                                     "logs": [
                                         {
                                             "category": "QueryStoreRuntimeStatistics",
-                                            "enabled": "[parameters('logsEnabled')]"
+                                            "enabled": "[parameters('logsEnabled')]",
+                                            "retentionPolicy": {
+                                                "enabled": true,
+                                                "days": "[parameters('storageRetentionDays')]"
+                                            }
                                         },
                                         {
                                             "category": "QueryStoreWaitStatistics",
-                                            "enabled": "[parameters('logsEnabled')]"
+                                            "enabled": "[parameters('logsEnabled')]",
+                                            "retentionPolicy": {
+                                                "enabled": true,
+                                                "days": "[parameters('storageRetentionDays')]"
+                                            }
                                         },
                                         {
                                             "category": "Errors",
-                                            "enabled": "[parameters('logsEnabled')]"
+                                            "enabled": "[parameters('logsEnabled')]",
+                                            "retentionPolicy": {
+                                                "enabled": true,
+                                                "days": "[parameters('storageRetentionDays')]"
+                                            }
                                         },
                                         {
                                             "category": "DatabaseWaitStatistics",
-                                            "enabled": "[parameters('logsEnabled')]"
+                                            "enabled": "[parameters('logsEnabled')]",
+                                            "retentionPolicy": {
+                                                "enabled": true,
+                                                "days": "[parameters('storageRetentionDays')]"
+                                            }
                                         },
                                         {
                                             "category": "Blocks",
-                                            "enabled": "[parameters('logsEnabled')]"
+                                            "enabled": "[parameters('logsEnabled')]",
+                                            "retentionPolicy": {
+                                                "enabled": true,
+                                                "days": "[parameters('storageRetentionDays')]"
+                                            }
                                         },
                                         {
                                             "category": "SQLInsights",
-                                            "enabled": "[parameters('logsEnabled')]"
+                                            "enabled": "[parameters('logsEnabled')]",
+                                            "retentionPolicy": {
+                                                "enabled": true,
+                                                "days": "[parameters('storageRetentionDays')]"
+                                            }
                                         },
                                         {
                                             "category": "SQLSecurityAuditEvents",
-                                            "enabled": "[parameters('logsEnabled')]"
+                                            "enabled": "[parameters('logsEnabled')]",
+                                            "retentionPolicy": {
+                                                "enabled": true,
+                                                "days": "[parameters('storageRetentionDays')]"
+                                            }
                                         },
                                         {
                                             "category": "Timeouts",
-                                            "enabled": "[parameters('logsEnabled')]"
+                                            "enabled": "[parameters('logsEnabled')]",
+                                            "retentionPolicy": {
+                                                "enabled": true,
+                                                "days": "[parameters('storageRetentionDays')]"
+                                            }
                                         },
                                         {
                                             "category": "AutomaticTuning",
-                                            "enabled": "[parameters('logsEnabled')]"
+                                            "enabled": "[parameters('logsEnabled')]",
+                                            "retentionPolicy": {
+                                                "enabled": true,
+                                                "days": "[parameters('storageRetentionDays')]"
+                                            }
                                         },
                                         {
                                             "category": "Deadlocks",
-                                            "enabled": "[parameters('logsEnabled')]"
+                                            "enabled": "[parameters('logsEnabled')]",
+                                            "retentionPolicy": {
+                                                "enabled": true,
+                                                "days": "[parameters('storageRetentionDays')]"
+                                            }
                                         },
                                         {
                                             "category": "DevOpsOperationsAudit",
-                                            "enabled": "[parameters('logsEnabled')]"
+                                            "enabled": "[parameters('logsEnabled')]",
+                                            "retentionPolicy": {
+                                                "enabled": true,
+                                                "days": "[parameters('storageRetentionDays')]"
+                                            }
                                         }
                                     ]
                                 }
@@ -153,6 +200,9 @@
                         },
                         "storageAccountId": {
                             "value": "[parameters('storageAccountId')]"
+                        },
+                        "storageRetentionDays": {
+                            "value": "[parameters('storageRetentionDays')]"
                         },
                         "metricsEnabled": {
                             "value": "[parameters('metricsEnabled')]"

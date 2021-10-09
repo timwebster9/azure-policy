@@ -32,6 +32,24 @@ resource "azurerm_management_group_policy_assignment" "sql_server_audit" {
 {
   "auditActionsAndGroups": {
     "value": ["BATCH_COMPLETED_GROUP","SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP","FAILED_DATABASE_AUTHENTICATION_GROUP"]
+  },
+  "eventHubRuleId": {
+    "value": "${azurerm_eventhub_namespace_authorization_rule.namespace_rule.id}"
+  },
+  "eventHubName": {
+    "value": "${azurerm_eventhub.logs.name}"
+  },
+  "logAnalyticsWorkspaceId": {
+    "value": "${azurerm_log_analytics_workspace.example.id}"
+  },
+  "storageAccountId": {
+    "value": "${azurerm_storage_account.example.id}"
+  },
+  "storageRetentionDays": {
+    "value": 365
+  },
+  "logsEnabled": {
+    "value": "True"
   }
 }
 PARAMETERS

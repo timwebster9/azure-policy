@@ -136,14 +136,6 @@
                                             }
                                         },
                                         {
-                                            "category": "SQLSecurityAuditEvents",
-                                            "enabled": "[parameters('logsEnabled')]",
-                                            "retentionPolicy": {
-                                                "enabled": true,
-                                                "days": "[parameters('storageRetentionDays')]"
-                                            }
-                                        },
-                                        {
                                             "category": "Timeouts",
                                             "enabled": "[parameters('logsEnabled')]",
                                             "retentionPolicy": {
@@ -161,14 +153,6 @@
                                         },
                                         {
                                             "category": "Deadlocks",
-                                            "enabled": "[parameters('logsEnabled')]",
-                                            "retentionPolicy": {
-                                                "enabled": true,
-                                                "days": "[parameters('storageRetentionDays')]"
-                                            }
-                                        },
-                                        {
-                                            "category": "DevOpsOperationsAudit",
                                             "enabled": "[parameters('logsEnabled')]",
                                             "retentionPolicy": {
                                                 "enabled": true,

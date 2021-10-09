@@ -1,56 +1,142 @@
 {
     "if": {
-        "field": "type",
-        "equals": "Microsoft.Sql/servers"
+        "allOf": [
+            {
+                "field": "type",
+                "equals": "Microsoft.Sql/servers"
+            },
+            {
+                "field": "location",
+                "equals": "[parameters('resourceLocation')]"
+            }
+        ]
     },
     "then": {
-        "effect": "DeployIfNotExists",
+        "effect": "deployIfNotExists",
         "details": {
             "type": "Microsoft.Sql/servers/auditingSettings",
-            "name": "Default",
-            "existenceCondition": {
-                "field": "Microsoft.Sql/auditingSettings.state",
-                "equals": "Enabled"
-            },
             "roleDefinitionIds": [
-                "/providers/microsoft.authorization/roleDefinitions/056cd41c-7e88-42e1-933e-88ba6a50c9c3"
+                "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
             ],
+            "existenceCondition": {
+                "allOf": [
+                    {
+                        "field": "Microsoft.Sql/servers/auditingSettings/state",
+                        "equals": "Enabled"
+                    },
+                    {
+                        "field": "Microsoft.Sql/servers/auditingSettings/isAzureMonitorTargetEnabled",
+                        "equals": "true"
+                    },
+                    {
+                        "field": "Microsoft.Insights/diagnosticSettings/eventHubAuthorizationRuleId",
+                        "matchInsensitively": "[parameters('eventHubAuthorizationRuleId')]"
+                    }
+                ]
+            },
             "deployment": {
                 "properties": {
                     "mode": "incremental",
                     "template": {
-                        "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                        "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
                         "contentVersion": "1.0.0.0",
                         "parameters": {
-                            "serverName": {
+                            "resourceName": {
                                 "type": "string"
                             },
-                            "auditActionsAndGroups": {
-                                "type": "array"
+                            "eventHubRuleId": {
+                                "type": "string"
+                            },
+                            "eventHubName": {
+                                "type": "string"
+                            },
+                            "logAnalyticsWorkspaceId": {
+                                "type": "string"
+                            },
+                            "storageAccountId": {
+                                "type": "string"
+                            },
+                            "storageRetentionDays": {
+                                "type": "int"
+                            },
+                            "logsEnabled": {
+                                "type": "string"
+                            },
+                            "location": {
+                                "type": "string"
                             }
                         },
-                        "variables": {},
                         "resources": [
                             {
-                                "name": "[concat(parameters('serverName'), '/setByPolicy')]",
-                                "type": "Microsoft.Sql/servers/auditingSettings",
-                                "apiVersion": "2021-02-01-preview",
+                                "type": "Microsoft.Sql/servers/databases/providers/diagnosticSettings",
+                                "apiVersion": "2021-05-01-preview",
+                                "name": "[concat(parameters('resourceName'), '/master/', 'Microsoft.Insights/', 'auditSetByPolicy')]",
+                                "location": "[parameters('location')]",
                                 "properties": {
-                                    "state": "Enabled",
-                                    "retentionDays": 180,
+                                    "eventHubAuthorizationRuleId": "[parameters('eventHubRuleId')]",
+                                    "eventHubName": "[parameters('eventHubName')]",
+                                    "workspaceId": "[parameters('logAnalyticsWorkspaceId')]",
+                                    "storageAccountId": "[parameters('storageAccountId')]",
+                                    "logs": [
+                                        {
+                                            "category": "SQLSecurityAuditEvents",
+                                            "enabled": "[parameters('logsEnabled')]",
+                                            "retentionPolicy": {
+                                                "enabled": true,
+                                                "days": "[parameters('storageRetentionDays')]"
+                                            }
+                                        },
+                                        {
+                                            "category": "DevOpsOperationsAudit",
+                                            "enabled": "[parameters('logsEnabled')]",
+                                            "retentionPolicy": {
+                                                "enabled": true,
+                                                "days": "[parameters('storageRetentionDays')]"
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "Microsoft.Sql/servers/databases/auditingSettings",
+                                "name": "[concat(parameters('resourceName'), '/Default')]",
+                                "apiVersion": "2017-03-01-preview",
+                                "properties": {
                                     "auditActionsAndGroups": "[parameters('auditActionsAndGroups')]",
-                                    "isDevopsAuditEnabled": true,
+                                    "State": "Enabled",
                                     "isAzureMonitorTargetEnabled": true
                                 }
                             }
-                        ]
+                        ],
+                        "outputs": {}
                     },
                     "parameters": {
-                        "serverName": {
-                            "value": "[field('fullName')]"
-                        },
                         "auditActionsAndGroups": {
                             "value": "[parameters('auditActionsAndGroups')]"
+                        },
+                        "eventHubRuleId": {
+                            "value": "[parameters('eventHubRuleId')]"
+                        },
+                        "eventHubName": {
+                            "value": "[parameters('eventHubName')]"
+                        },
+                        "logAnalyticsWorkspaceId": {
+                            "value": "[parameters('logAnalyticsWorkspaceId')]"
+                        },
+                        "storageAccountId": {
+                            "value": "[parameters('storageAccountId')]"
+                        },
+                        "storageRetentionDays": {
+                            "value": "[parameters('storageRetentionDays')]"
+                        },
+                        "logsEnabled": {
+                            "value": "[parameters('logsEnabled')]"
+                        },
+                        "location": {
+                            "value": "[field('location')]"
+                        },
+                        "resourceName": {
+                            "value": "[field('fullName')]"
                         }
                     }
                 }

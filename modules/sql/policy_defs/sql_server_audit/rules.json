@@ -32,7 +32,7 @@
                         "variables": {},
                         "resources": [
                             {
-                                "name": "[concat(parameters('serverName'), '/Default')]",
+                                "name": "[concat(parameters('serverName'), '/setByPolicy')]",
                                 "type": "Microsoft.Sql/servers/auditingSettings",
                                 "apiVersion": "2021-02-01-preview",
                                 "properties": {

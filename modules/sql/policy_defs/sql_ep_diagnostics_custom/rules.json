@@ -72,11 +72,19 @@
                                     "metrics": [
                                         {
                                             "category": "Basic",
-                                            "enabled": "[bool(parameters('metricsEnabled'))]"
+                                            "enabled": "[bool(parameters('metricsEnabled'))]",
+                                            "retentionPolicy": {
+                                                "enabled": true,
+                                                "days": "[parameters('storageRetentionDays')]"
+                                            }
                                         },
                                         {
                                             "category": "InstanceAndAppAdvanced",
-                                            "enabled": "[bool(parameters('metricsEnabled'))]"
+                                            "enabled": "[bool(parameters('metricsEnabled'))]",
+                                            "retentionPolicy": {
+                                                "enabled": true,
+                                                "days": "[parameters('storageRetentionDays')]"
+                                            }
                                         }
                                     ]
                                 }

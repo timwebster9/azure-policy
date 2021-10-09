@@ -34,7 +34,7 @@ resource "azurerm_management_group_policy_assignment" "sql_diagnostics_custom" {
     "value": "${azurerm_eventhub_authorization_rule.logs_rule.id}"
   },
   "eventHubName": {
-    "value": "${azurerm_eventhub.example.id}"
+    "value": "${azurerm_eventhub.logs.name}"
   },
   "workspaceId": {
     "value": "${azurerm_log_analytics_workspace.example.id}"

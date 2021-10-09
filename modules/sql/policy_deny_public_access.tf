@@ -8,7 +8,7 @@ resource "azurerm_management_group_policy_assignment" "deny_public_access" {
   parameters = <<PARAMETERS
 {
   "effect": {
-    "value": "Deny"
+    "value": "Audit"
   }
 }
 PARAMETERS

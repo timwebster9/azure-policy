@@ -46,10 +46,10 @@
                                 "type": "string"
                             },
                             "storageAccountId": {
-                                "type": "int"
+                                "type": "string"
                             },
                             "storageRetentionDays": {
-                                "type": "string"
+                                "type": "int"
                             },
                             "metricsEnabled": {
                                 "type": "string"
@@ -78,7 +78,7 @@
                                             "enabled": "[parameters('metricsEnabled')]",
                                             "retentionPolicy": {
                                                 "enabled": true,
-                                                "days": "[int(parameters('storageRetentionDays'))]"
+                                                "days": "[parameters('storageRetentionDays')]"
                                             }
                                         }
                                     ],
@@ -88,7 +88,7 @@
                                             "enabled": "[parameters('logsEnabled')]",
                                             "retentionPolicy": {
                                                 "enabled": true,
-                                                "days": "[int(parameters('storageRetentionDays'))]"
+                                                "days": "[parameters('storageRetentionDays')]"
                                             }
                                         },
                                         {
@@ -96,7 +96,7 @@
                                             "enabled": "[parameters('logsEnabled')]",
                                             "retentionPolicy": {
                                                 "enabled": true,
-                                                "days": "[int(parameters('storageRetentionDays'))]"
+                                                "days": "[parameters('storageRetentionDays')]"
                                             }
                                         },
                                         {
@@ -104,7 +104,7 @@
                                             "enabled": "[parameters('logsEnabled')]",
                                             "retentionPolicy": {
                                                 "enabled": true,
-                                                "days": "[int(parameters('storageRetentionDays'))]"
+                                                "days": "[parameters('storageRetentionDays')]"
                                             }
                                         },
                                         {
@@ -112,7 +112,7 @@
                                             "enabled": "[parameters('logsEnabled')]",
                                             "retentionPolicy": {
                                                 "enabled": true,
-                                                "days": "[int(parameters('storageRetentionDays'))]"
+                                                "days": "[parameters('storageRetentionDays')]"
                                             }
                                         },
                                         {
@@ -120,7 +120,7 @@
                                             "enabled": "[parameters('logsEnabled')]",
                                             "retentionPolicy": {
                                                 "enabled": true,
-                                                "days": "[int(parameters('storageRetentionDays'))]"
+                                                "days": "[parameters('storageRetentionDays')]"
                                             }
                                         },
                                         {
@@ -128,7 +128,7 @@
                                             "enabled": "[parameters('logsEnabled')]",
                                             "retentionPolicy": {
                                                 "enabled": true,
-                                                "days": "[int(parameters('storageRetentionDays'))]"
+                                                "days": "[parameters('storageRetentionDays')]"
                                             }
                                         },
                                         {
@@ -136,7 +136,7 @@
                                             "enabled": "[parameters('logsEnabled')]",
                                             "retentionPolicy": {
                                                 "enabled": true,
-                                                "days": "[int(parameters('storageRetentionDays'))]"
+                                                "days": "[parameters('storageRetentionDays')]"
                                             }
                                         },
                                         {
@@ -144,7 +144,7 @@
                                             "enabled": "[parameters('logsEnabled')]",
                                             "retentionPolicy": {
                                                 "enabled": true,
-                                                "days": "[int(parameters('storageRetentionDays'))]"
+                                                "days": "[parameters('storageRetentionDays')]"
                                             }
                                         },
                                         {
@@ -152,7 +152,7 @@
                                             "enabled": "[parameters('logsEnabled')]",
                                             "retentionPolicy": {
                                                 "enabled": true,
-                                                "days": "[int(parameters('storageRetentionDays'))]"
+                                                "days": "[parameters('storageRetentionDays')]"
                                             }
                                         },
                                         {
@@ -160,7 +160,7 @@
                                             "enabled": "[parameters('logsEnabled')]",
                                             "retentionPolicy": {
                                                 "enabled": true,
-                                                "days": "[int(parameters('storageRetentionDays'))]"
+                                                "days": "[parameters('storageRetentionDays')]"
                                             }
                                         },
                                         {
@@ -168,7 +168,7 @@
                                             "enabled": "[parameters('logsEnabled')]",
                                             "retentionPolicy": {
                                                 "enabled": true,
-                                                "days": "[int(parameters('storageRetentionDays'))]"
+                                                "days": "[parameters('storageRetentionDays')]"
                                             }
                                         }
                                     ]

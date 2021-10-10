@@ -18,6 +18,10 @@ data "azurerm_policy_definition" "sql_diagnostics_eventhub" {
   name = "9a7c7a7d-49e5-4213-bea8-6a502b6272e0"
 }
 
+data "azurerm_policy_definition" "aad_admin_audit" {
+  name = "1f314764-cb73-4fc9-b863-8eca98ac36e9"
+}
+
 data "azuread_user" "me" {
   user_principal_name = "admin@timwebster9outlookcom.onmicrosoft.com"
 }

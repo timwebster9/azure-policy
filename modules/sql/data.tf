@@ -17,3 +17,7 @@ data "azurerm_policy_definition" "sql_deny_public_access" {
 data "azurerm_policy_definition" "sql_diagnostics_eventhub" {
   name = "9a7c7a7d-49e5-4213-bea8-6a502b6272e0"
 }
+
+data "azuread_user" "me" {
+  user_principal_name = "admin@timwebster9outlookcom.onmicrosoft.com"
+}

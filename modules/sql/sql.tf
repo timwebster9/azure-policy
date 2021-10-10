@@ -26,10 +26,10 @@ resource "azurerm_mssql_server" "example" {
     type = "SystemAssigned"
   }
 
-  azuread_administrator {
-    login_username = azuread_group.example.display_name
-    object_id      = azuread_group.example.object_id
-  }
+  # azuread_administrator {
+  #   login_username = azuread_group.example.display_name
+  #   object_id      = azuread_group.example.object_id
+  # }
 
   depends_on = [
     azurerm_management_group_policy_assignment.deny_firewall_rules,

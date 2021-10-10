@@ -8,7 +8,7 @@ resource "azuread_group" "example" {
   security_enabled = true
 
   members = [
-    azuread_user.me.object_id
+    data.azuread_user.me.object_id
   ]
 }
 

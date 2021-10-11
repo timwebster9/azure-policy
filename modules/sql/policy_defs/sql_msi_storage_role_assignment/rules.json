@@ -1,0 +1,89 @@
+{
+    "if": {
+        "allOf": [
+            {
+                "field": "type",
+                "equals": "Microsoft.Sql/servers"
+            }
+        ]
+    },
+    "then": {
+        "effect": "deployIfNotExists",
+        "details": {
+            "type": "Microsoft.Authorization/roleAssignments",
+            "roleDefinitionIds": [
+                "/providers/Microsoft.Authorization/roleDefinitions/18d7d88d-d35e-4fb5-a5c3-7773c20a72d9"
+            ],
+            "existenceCondition": {}
+        },
+        "deployment": {
+            "properties": {
+                "mode": "incremental",
+                "template": {
+                    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {
+                        "roleNameGuid": {
+                            "type": "string",
+                            "defaultValue": "[newGuid()]",
+                            "metadata": {
+                                "description": "A new GUID used to identify the role assignment"
+                            }
+                        },
+                        "resourceName": {
+                            "type": "string"
+                        },
+                        "storageAccountName": {
+                            "type": "string"
+                        },
+                        "storageAccountSubscriptionId": {
+                            "type": "string"
+                        }
+                    },
+                    "resources": [
+                        {
+                            "type": "Microsoft.Resources/deployments",
+                            "apiVersion": "2021-04-01",
+                            "name": "[concat('NestedDeploymentName-', uniqueString(deployment().name))]",
+                            "subscriptionId": "[parameters('storageAccountSubscriptionId')]",
+                            "properties": {
+                                "mode": "Incremental",
+                                "template": {
+                                    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                                    "contentVersion": "1.0.0.0",
+                                    "parameters": {},
+                                    "variables": {},
+                                    "resources": [
+                                        {
+                                            "type": "Microsoft.Authorization/roleAssignments",
+                                            "apiVersion": "2020-04-01-preview",
+                                            "name": "[parameters('roleNameGuid')]",
+                                            "scope": "[concat('Microsoft.Storage/storageAccounts', '/', parameters('storageName'))]",
+                                            "properties": {
+                                                "roleDefinitionId": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')]",
+                                                "principalId": "[reference(resourceId('Microsoft.Sql/servers', parameters('resourceName')),'2021-02-01-preview','full').identity.principalId]"
+                                            }
+                                        }
+                                    ]
+                                },
+                                "parameters": {}
+                            }
+                        }
+                    ],
+                    "outputs": {}
+                },
+                "parameters": {
+                    "storageAccountName": {
+                        "value": "[parameters('storageAccountName')]"
+                    },
+                    "storageAccountSubscriptionId": {
+                        "value": "[parameters('storageAccountName')]"
+                    },
+                    "resourceName": {
+                        "value": "[field('name')]"
+                    }
+                }
+            }
+        }
+    }
+}

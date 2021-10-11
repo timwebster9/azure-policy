@@ -1,0 +1,12 @@
+{
+    "storageAccountName": {
+        "type": "string",
+        "metadata": {
+            "displayName": "Storage account name",
+            "description": "Storage account resource name"
+        }
+    },
+    "storageAccountSubscriptionId": {
+        "type": "string"
+    }
+}

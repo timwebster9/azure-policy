@@ -22,9 +22,9 @@ resource "azurerm_mssql_server" "example" {
   minimum_tls_version          = "1.2"
   public_network_access_enabled = true # testing diagnostics only
 
-  # identity {
-  #   type = "SystemAssigned"
-  # }
+  identity {
+    type = "SystemAssigned"
+  }
 
   # azuread_administrator {
   #   login_username = azuread_group.example.display_name
@@ -41,11 +41,11 @@ resource "azurerm_mssql_server" "example" {
   ]
 }
 
-# resource "azurerm_role_assignment" "sql_msi_storage" {
-#   scope                = azurerm_storage_account.example.id
-#   role_definition_name = "Storage Blob Data Contributor"
-#   principal_id         = azurerm_mssql_server.example.identity.0.principal_id
-# }
+resource "azurerm_role_assignment" "sql_msi_storage" {
+  scope                = azurerm_storage_account.example.id
+  role_definition_name = "Storage Blob Data Contributor"
+  principal_id         = azurerm_mssql_server.example.identity.0.principal_id
+}
 
 resource "azurerm_mssql_database" "test" {
   name           = "policytestdb"

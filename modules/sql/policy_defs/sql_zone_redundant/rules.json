@@ -10,6 +10,14 @@
                 "in": "[parameters('locations')]"
             },
             {
+                "field": "Microsoft.Sql/servers/databases/sku.tier",
+                "in": [
+                    "GeneralPurpose",
+                    "BusinessCritical",
+                    "Premium"
+                ]
+            },
+            {
                 "field": "Microsoft.Sql/servers/databases/zoneRedundant",
                 "notEquals": "true"
             }

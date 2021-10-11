@@ -47,8 +47,43 @@ resource "azurerm_role_assignment" "sql_msi_storage" {
   principal_id         = azurerm_mssql_server.example.identity.0.principal_id
 }
 
-resource "azurerm_mssql_database" "dtu" {
-  name           = "dtu-db"
+# should pass
+resource "azurerm_mssql_database" "dtu_zr_eligible" {
+  name           = "dtu-zr-db"
+  server_id      = azurerm_mssql_server.example.id
+  collation      = "SQL_Latin1_General_CP1_CI_AS"
+  #license_type   = "LicenseIncluded"
+  #max_size_gb    = 4
+  #read_scale     = true
+  sku_name       = "P1"
+  zone_redundant = true
+
+  depends_on = [
+    azurerm_management_group_policy_assignment.sql_db_diagnostics_custom,
+    azurerm_management_group_policy_assignment.sql_zone_redundant
+  ]
+}
+
+# should fail
+resource "azurerm_mssql_database" "dtu_zr_eligible_fail" {
+  name           = "dtu-zr-fail-db"
+  server_id      = azurerm_mssql_server.example.id
+  collation      = "SQL_Latin1_General_CP1_CI_AS"
+  #license_type   = "LicenseIncluded"
+  #max_size_gb    = 4
+  #read_scale     = true
+  sku_name       = "P1"
+  zone_redundant = false
+
+  depends_on = [
+    azurerm_management_group_policy_assignment.sql_db_diagnostics_custom,
+    azurerm_management_group_policy_assignment.sql_zone_redundant
+  ]
+}
+
+# should pass
+resource "azurerm_mssql_database" "dtu_zr_not_eligible" {
+  name           = "dtu-no-zr-db"
   server_id      = azurerm_mssql_server.example.id
   collation      = "SQL_Latin1_General_CP1_CI_AS"
   #license_type   = "LicenseIncluded"
@@ -61,18 +96,97 @@ resource "azurerm_mssql_database" "dtu" {
     azurerm_management_group_policy_assignment.sql_db_diagnostics_custom,
     azurerm_management_group_policy_assignment.sql_zone_redundant
   ]
-
-  # extended_auditing_policy {
-  #   storage_endpoint                        = azurerm_storage_account.example.primary_blob_endpoint
-  #   storage_account_access_key              = azurerm_storage_account.example.primary_access_key
-  #   storage_account_access_key_is_secondary = true
-  #   retention_in_days                       = 6
-  # }
-
 }
 
-resource "azurerm_mssql_database" "vcore" {
-  name           = "vcore-db"
+
+# should pass
+resource "azurerm_mssql_database" "vcore_zr_gp_eligible" {
+  name           = "vcore-gp-zr-db"
+  server_id      = azurerm_mssql_server.example.id
+  collation      = "SQL_Latin1_General_CP1_CI_AS"
+  license_type   = "LicenseIncluded"
+  #max_size_gb    = 4
+  #read_scale     = true
+  sku_name       = "GP_Gen5_2"
+  zone_redundant = true
+
+  depends_on = [
+    azurerm_management_group_policy_assignment.sql_db_diagnostics_custom,
+    azurerm_management_group_policy_assignment.sql_zone_redundant
+  ]
+}
+
+# should pass
+resource "azurerm_mssql_database" "vcore_zr_bc_eligible" {
+  name           = "vcore-bc-zr-db"
+  server_id      = azurerm_mssql_server.example.id
+  collation      = "SQL_Latin1_General_CP1_CI_AS"
+  license_type   = "LicenseIncluded"
+  #max_size_gb    = 4
+  #read_scale     = true
+  sku_name       = "BC_Gen5_2"
+  zone_redundant = true
+
+  depends_on = [
+    azurerm_management_group_policy_assignment.sql_db_diagnostics_custom,
+    azurerm_management_group_policy_assignment.sql_zone_redundant
+  ]
+}
+
+# should pass
+resource "azurerm_mssql_database" "vcore_zr_hs_eligible" {
+  name           = "vcore-hs-zr-db"
+  server_id      = azurerm_mssql_server.example.id
+  collation      = "SQL_Latin1_General_CP1_CI_AS"
+  license_type   = "LicenseIncluded"
+  #max_size_gb    = 4
+  #read_scale     = true
+  sku_name       = "HS_Gen5_2"
+  zone_redundant = true
+
+  depends_on = [
+    azurerm_management_group_policy_assignment.sql_db_diagnostics_custom,
+    azurerm_management_group_policy_assignment.sql_zone_redundant
+  ]
+}
+
+# should fail
+resource "azurerm_mssql_database" "vcore_zr_hs_eligible_fail" {
+  name           = "vcore-hs-zr-fail-db"
+  server_id      = azurerm_mssql_server.example.id
+  collation      = "SQL_Latin1_General_CP1_CI_AS"
+  license_type   = "LicenseIncluded"
+  #max_size_gb    = 4
+  #read_scale     = true
+  sku_name       = "HS_Gen5_2"
+  zone_redundant = false
+
+  depends_on = [
+    azurerm_management_group_policy_assignment.sql_db_diagnostics_custom,
+    azurerm_management_group_policy_assignment.sql_zone_redundant
+  ]
+}
+
+# should fail
+resource "azurerm_mssql_database" "vcore_zr_bc_eligible_fail" {
+  name           = "vcore-bc-zr-fail-db"
+  server_id      = azurerm_mssql_server.example.id
+  collation      = "SQL_Latin1_General_CP1_CI_AS"
+  license_type   = "LicenseIncluded"
+  #max_size_gb    = 4
+  #read_scale     = true
+  sku_name       = "BC_Gen5_2"
+  zone_redundant = false
+
+  depends_on = [
+    azurerm_management_group_policy_assignment.sql_db_diagnostics_custom,
+    azurerm_management_group_policy_assignment.sql_zone_redundant
+  ]
+}
+
+# should fail
+resource "azurerm_mssql_database" "vcore_zr_eligible_fail" {
+  name           = "vcore-zr-db"
   server_id      = azurerm_mssql_server.example.id
   collation      = "SQL_Latin1_General_CP1_CI_AS"
   license_type   = "LicenseIncluded"
@@ -85,14 +199,6 @@ resource "azurerm_mssql_database" "vcore" {
     azurerm_management_group_policy_assignment.sql_db_diagnostics_custom,
     azurerm_management_group_policy_assignment.sql_zone_redundant
   ]
-
-  # extended_auditing_policy {
-  #   storage_endpoint                        = azurerm_storage_account.example.primary_blob_endpoint
-  #   storage_account_access_key              = azurerm_storage_account.example.primary_access_key
-  #   storage_account_access_key_is_secondary = true
-  #   retention_in_days                       = 6
-  # }
-
 }
 
 resource "azurerm_mssql_elasticpool" "example" {

@@ -27,7 +27,7 @@ resource "azurerm_management_group_policy_assignment" "sql_zone_redundant" {
   parameters = <<PARAMETERS
 {
   "effect": {
-    "value": "Audit"
+    "value": "Deny"
   },
   "locations": {
     "value": ["uksouth"]

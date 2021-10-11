@@ -18,7 +18,7 @@ METADATA
 }
 
 resource "azurerm_management_group_policy_assignment" "sql_msi_storage_role_assignment" {
-  name                 = "sql_identity"
+  name                 = "sql_msi_ra"
   policy_definition_id = azurerm_policy_definition.sql_msi_storage_role_assignment.id
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"

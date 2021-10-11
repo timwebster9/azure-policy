@@ -22,9 +22,9 @@ resource "azurerm_mssql_server" "example" {
   minimum_tls_version          = "1.2"
   public_network_access_enabled = true # testing diagnostics only
 
-  identity {
-    type = "SystemAssigned"
-  }
+  # identity {
+  #   type = "SystemAssigned"
+  # }
 
   # azuread_administrator {
   #   login_username = azuread_group.example.display_name
@@ -36,7 +36,8 @@ resource "azurerm_mssql_server" "example" {
     azurerm_management_group_policy_assignment.deny_public_access,
     azurerm_management_group_policy_assignment.tls_version,
     azurerm_management_group_policy_assignment.sql_server_audit,
-    azurerm_management_group_policy_assignment.aad_admin_audit
+    azurerm_management_group_policy_assignment.aad_admin_audit,
+    azurerm_management_group_policy_assignment.sql_identity
   ]
 }
 

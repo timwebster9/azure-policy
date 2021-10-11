@@ -23,6 +23,11 @@ resource "azurerm_management_group_policy_assignment" "sql_msi_storage_role_assi
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"
   display_name         = azurerm_policy_definition.sql_msi_storage_role_assignment.display_name
+  location             = var.location
+  
+  identity {
+    type = "SystemAssigned"
+  }
 
   parameters = <<PARAMETERS
 {

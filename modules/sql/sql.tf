@@ -142,7 +142,7 @@ resource "azurerm_mssql_database" "vcore_zr_hs_eligible" {
   #max_size_gb    = 4
   #read_scale     = true
   sku_name       = "HS_Gen5_2"
-  zone_redundant = true
+  zone_redundant = false
 
   depends_on = [
     azurerm_management_group_policy_assignment.sql_db_diagnostics_custom,

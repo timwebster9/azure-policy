@@ -47,14 +47,38 @@ resource "azurerm_role_assignment" "sql_msi_storage" {
   principal_id         = azurerm_mssql_server.example.identity.0.principal_id
 }
 
-resource "azurerm_mssql_database" "test" {
-  name           = "policytestdb"
+resource "azurerm_mssql_database" "dtu" {
+  name           = "dtu-db"
   server_id      = azurerm_mssql_server.example.id
   collation      = "SQL_Latin1_General_CP1_CI_AS"
   license_type   = "LicenseIncluded"
   #max_size_gb    = 4
   #read_scale     = true
   sku_name       = "S0"
+  zone_redundant = false
+
+  depends_on = [
+    azurerm_management_group_policy_assignment.sql_db_diagnostics_custom,
+    azurerm_management_group_policy_assignment.sql_zone_redundant
+  ]
+
+  # extended_auditing_policy {
+  #   storage_endpoint                        = azurerm_storage_account.example.primary_blob_endpoint
+  #   storage_account_access_key              = azurerm_storage_account.example.primary_access_key
+  #   storage_account_access_key_is_secondary = true
+  #   retention_in_days                       = 6
+  # }
+
+}
+
+resource "azurerm_mssql_database" "vcore" {
+  name           = "vcore-db"
+  server_id      = azurerm_mssql_server.example.id
+  collation      = "SQL_Latin1_General_CP1_CI_AS"
+  license_type   = "LicenseIncluded"
+  #max_size_gb    = 4
+  #read_scale     = true
+  sku_name       = "GP_S_Gen5_2"
   zone_redundant = false
 
   depends_on = [

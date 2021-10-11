@@ -38,8 +38,7 @@ resource "azurerm_mssql_server" "example" {
     azurerm_management_group_policy_assignment.sql_server_audit,
     azurerm_management_group_policy_assignment.aad_admin_audit,
     azurerm_management_group_policy_assignment.sql_identity,
-    azurerm_policy_definition.sql_msi_storage_role_assignment,
-    azurerm_management_group_policy_assignment.sql_msi_storage_role_assignment
+    azurerm_policy_definition.sql_msi_storage_role_assignment
   ]
 }
 

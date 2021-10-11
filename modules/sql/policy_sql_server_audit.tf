@@ -45,6 +45,9 @@ resource "azurerm_management_group_policy_assignment" "sql_server_audit" {
   "storageAccountId": {
     "value": "${azurerm_storage_account.example.id}"
   },
+  "storageAccountSubscriptionId": {
+    "value": "2ca65474-3b7b-40f2-b242-0d2fba4bde6e"
+  },
   "storageEndpoint": {
     "value": "${azurerm_storage_account.example.primary_blob_endpoint}"
   },

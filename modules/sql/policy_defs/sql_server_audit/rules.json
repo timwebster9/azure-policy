@@ -55,6 +55,9 @@
                             "storageAccountId": {
                                 "type": "string"
                             },
+                            "storageAccountSubscriptionId": {
+                                "type": "string"
+                            },
                             "storageEndpoint": {
                                 "type": "string"
                             },
@@ -109,7 +112,9 @@
                                     "retentionDays": "[parameters('storageRetentionDays')]",
                                     "isAzureMonitorTargetEnabled": true,
                                     "isDevopsAuditEnabled": true,
-                                    "storageEndpoint": "[parameters('storageEndpoint')]"
+                                    "storageEndpoint": "[parameters('storageEndpoint')]",
+                                    "storageAccountSubscriptionId": "[parameters('storageAccountSubscriptionId')]",
+                                    "storageAccountAccessKey": "[listKeys(parameters('storageAccountId'), '2019-06-01').keys[0].value]"
                                 }
                             }
                         ],
@@ -130,6 +135,9 @@
                         },
                         "storageAccountId": {
                             "value": "[parameters('storageAccountId')]"
+                        },
+                        "storageAccountSubscriptionId": {
+                            "value": "[parameters('storageAccountSubscriptionId')]"
                         },
                         "storageEndpoint": {
                             "value": "[parameters('storageEndpoint')]"

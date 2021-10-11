@@ -10,16 +10,24 @@
                 "in": "[parameters('locations')]"
             },
             {
-                "field": "Microsoft.Sql/servers/databases/sku.tier",
-                "in": [
-                    "GeneralPurpose",
-                    "BusinessCritical",
-                    "Premium"
-                ]
-            },
-            {
                 "field": "Microsoft.Sql/servers/databases/zoneRedundant",
                 "notEquals": "true"
+            },
+            {
+                "anyOf": [
+                    {
+                        "field": "Microsoft.Sql/servers/databases/sku.name",
+                        "match": "P#"
+                    },
+                    {
+                        "field": "Microsoft.Sql/servers/databases/sku.name",
+                        "like": "GP_*"
+                    },
+                    {
+                        "field": "Microsoft.Sql/servers/databases/sku.name",
+                        "like": "BC_*"
+                    }
+                ]
             }
         ]
     },

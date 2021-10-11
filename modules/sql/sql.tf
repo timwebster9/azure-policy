@@ -41,11 +41,11 @@ resource "azurerm_mssql_server" "example" {
   ]
 }
 
-resource "azurerm_role_assignment" "sql_msi_storage" {
-  scope                = azurerm_storage_account.example.id
-  role_definition_name = "Storage Blob Data Contributor"
-  principal_id         = azurerm_mssql_server.example.identity.0.principal_id
-}
+# resource "azurerm_role_assignment" "sql_msi_storage" {
+#   scope                = azurerm_storage_account.example.id
+#   role_definition_name = "Storage Blob Data Contributor"
+#   principal_id         = azurerm_mssql_server.example.identity.0.principal_id
+# }
 
 resource "azurerm_mssql_database" "test" {
   name           = "policytestdb"

@@ -33,7 +33,7 @@ resource "azurerm_function_app" "example" {
   
   site_config {
     min_tls_version        = "1.2" # policy check
-    vnet_route_all_enabled = false # policy check
+    vnet_route_all_enabled = true  # policy check
   }
 
   depends_on = [

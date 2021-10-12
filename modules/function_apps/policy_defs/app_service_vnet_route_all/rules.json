@@ -6,7 +6,7 @@
                 "equals": "Microsoft.Web/sites"
             },
             {
-                "field": "Microsoft.Web/sites/config/vnetRouteAllEnabled",
+                "field": "Microsoft.Web/sites/siteConfig.vnetRouteAllEnabled",
                 "notEquals": "true"
             }
         ]

@@ -12,8 +12,8 @@ resource "azurerm_policy_definition" "app_service_tls_version" {
 
 METADATA
 
-  policy_rule = file("${path.module}/policy_defs/app_service_https_only/rules.json")
-  parameters = file("${path.module}/policy_defs/app_service_https_only/parameters.json")
+  policy_rule = file("${path.module}/policy_defs/app_service_tls_version/rules.json")
+  parameters = file("${path.module}/policy_defs/app_service_tls_version/parameters.json")
 }
 
 resource "azurerm_management_group_policy_assignment" "app_service_tls_version" {

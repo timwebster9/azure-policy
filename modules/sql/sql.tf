@@ -59,8 +59,8 @@ resource "azurerm_mssql_server" "example" {
 #   ]
 # }
 
-resource "azurerm_mssql_elasticpool" "example" {
-  name                = "test-epool"
+resource "azurerm_mssql_elasticpool" "premium" {
+  name                = "premium-epool"
   resource_group_name = azurerm_resource_group.example.name
   location            = azurerm_resource_group.example.location
   server_name         = azurerm_mssql_server.example.name
@@ -69,8 +69,8 @@ resource "azurerm_mssql_elasticpool" "example" {
   zone_redundant      = true
 
   sku {
-    name     = "BasicPool"
-    tier     = "basic"
+    name     = "PremiumPool"
+    tier     = "Premium"
     #family   = "Gen5"
     capacity = 50
   }
@@ -86,8 +86,35 @@ resource "azurerm_mssql_elasticpool" "example" {
   ]
 }
 
-# resource "azurerm_mssql_elasticpool" "example" {
-#   name                = "test-epool"
+# resource "azurerm_mssql_elasticpool" "basic" {
+#   name                = "basic-epool"
+#   resource_group_name = azurerm_resource_group.example.name
+#   location            = azurerm_resource_group.example.location
+#   server_name         = azurerm_mssql_server.example.name
+#   license_type        = "LicenseIncluded"
+#   max_size_gb         = 4.8828125
+#   zone_redundant      = true
+
+#   sku {
+#     name     = "BasicPool"
+#     tier     = "basic"
+#     #family   = "Gen5"
+#     capacity = 50
+#   }
+
+#   per_database_settings {
+#     min_capacity = 5
+#     max_capacity = 5
+#   }
+
+#   depends_on = [
+#     azurerm_management_group_policy_assignment.sql_ep_zone_redundant,
+#     azurerm_management_group_policy_assignment.sql_ep_diagnostics_custom
+#   ]
+# }
+
+# resource "azurerm_mssql_elasticpool" "standard" {
+#   name                = "std-epool"
 #   resource_group_name = azurerm_resource_group.example.name
 #   location            = azurerm_resource_group.example.location
 #   server_name         = azurerm_mssql_server.example.name

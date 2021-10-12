@@ -71,7 +71,7 @@ resource "azurerm_mssql_elasticpool" "example" {
   sku {
     name     = "StandardPool"
     tier     = "Standard"
-    family   = "Gen5"
+    #family   = "Gen5"
     capacity = 50
   }
 

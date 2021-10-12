@@ -65,7 +65,7 @@ resource "azurerm_mssql_elasticpool" "premium" {
   location            = azurerm_resource_group.example.location
   server_name         = azurerm_mssql_server.example.name
   license_type        = "LicenseIncluded"
-  max_size_gb         = 4.8828125
+  max_size_gb         = 50
   zone_redundant      = true
 
   sku {

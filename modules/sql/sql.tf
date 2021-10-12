@@ -76,7 +76,7 @@ resource "azurerm_mssql_elasticpool" "example" {
   }
 
   per_database_settings {
-    min_capacity = 0.25
+    min_capacity = 1
     max_capacity = 4
   }
 

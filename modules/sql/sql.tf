@@ -42,22 +42,22 @@ resource "azurerm_mssql_server" "example" {
 }
 
 # AZ not available with Standard DTU
-resource "azurerm_mssql_database" "dtu_zr_not_eligible" {
-  name           = "dtu-no-zr-db"
-  server_id      = azurerm_mssql_server.example.id
-  collation      = "SQL_Latin1_General_CP1_CI_AS"
-  #license_type   = "LicenseIncluded"
-  #max_size_gb    = 4
-  #read_scale     = true
-  sku_name       = "S0"
-  zone_redundant = true
+# resource "azurerm_mssql_database" "dtu_zr_not_eligible" {
+#   name           = "dtu-no-zr-db"
+#   server_id      = azurerm_mssql_server.example.id
+#   collation      = "SQL_Latin1_General_CP1_CI_AS"
+#   #license_type   = "LicenseIncluded"
+#   #max_size_gb    = 4
+#   #read_scale     = true
+#   sku_name       = "S0"
+#   zone_redundant = true
 
-  depends_on = [
-    azurerm_management_group_policy_assignment.sql_db_diagnostics_custom,
-    azurerm_policy_definition.sql_zone_redundant,
-    azurerm_management_group_policy_assignment.sql_zone_redundant
-  ]
-}
+#   depends_on = [
+#     azurerm_management_group_policy_assignment.sql_db_diagnostics_custom,
+#     azurerm_policy_definition.sql_zone_redundant,
+#     azurerm_management_group_policy_assignment.sql_zone_redundant
+#   ]
+# }
 
 resource "azurerm_mssql_elasticpool" "example" {
   name                = "test-epool"
@@ -77,7 +77,7 @@ resource "azurerm_mssql_elasticpool" "example" {
 
   per_database_settings {
     min_capacity = 1
-    max_capacity = 4
+    max_capacity = 10
   }
 
   depends_on = [

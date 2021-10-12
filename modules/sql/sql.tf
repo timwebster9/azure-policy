@@ -75,10 +75,10 @@ resource "azurerm_mssql_elasticpool" "example" {
     capacity = 50
   }
 
-  per_database_settings {
-    min_capacity = 1
-    max_capacity = 10
-  }
+  # per_database_settings {
+  #   min_capacity = 1
+  #   max_capacity = 10
+  # }
 
   depends_on = [
     azurerm_management_group_policy_assignment.sql_ep_zone_redundant,

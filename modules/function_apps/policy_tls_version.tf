@@ -27,6 +27,9 @@ resource "azurerm_management_group_policy_assignment" "app_service_tls_version" 
 {
   "effect": {
     "value": "Deny"
+  },
+  "effect": {
+    "value": "1.2"
   }
 }
 PARAMETERS

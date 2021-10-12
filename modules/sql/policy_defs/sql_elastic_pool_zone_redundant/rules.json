@@ -11,7 +11,11 @@
             },
             {
                 "field": "Microsoft.Sql/servers/elasticPools/sku.tier",
-                "equals": "BusinessCritical"
+                "in": [
+                    "BusinessCritical",
+                    "GeneralPurpose",
+                    "Premium"
+                ]
             },
             {
                 "field": "Microsoft.Sql/servers/elasticPools/zoneRedundant",

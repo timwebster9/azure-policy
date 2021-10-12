@@ -59,33 +59,36 @@ resource "azurerm_mssql_server" "example" {
 #   ]
 # }
 
-resource "azurerm_mssql_elasticpool" "premium" {
-  name                = "premium-epool"
-  resource_group_name = azurerm_resource_group.example.name
-  location            = azurerm_resource_group.example.location
-  server_name         = azurerm_mssql_server.example.name
-  license_type        = "LicenseIncluded"
-  max_size_gb         = 50
-  zone_redundant      = true
+# should fail - AZ available with Premium
+# resource "azurerm_mssql_elasticpool" "premium" {
+#   name                = "premium-epool"
+#   resource_group_name = azurerm_resource_group.example.name
+#   location            = azurerm_resource_group.example.location
+#   server_name         = azurerm_mssql_server.example.name
+#   license_type        = "LicenseIncluded"
+#   max_size_gb         = 50
+#   zone_redundant      = false
 
-  sku {
-    name     = "PremiumPool"
-    tier     = "Premium"
-    #family   = "Gen5"
-    capacity = 125
-  }
+#   sku {
+#     name     = "PremiumPool"
+#     tier     = "Premium"
+#     #family   = "Gen5"
+#     capacity = 125
+#   }
 
-  per_database_settings {
-    min_capacity = 25
-    max_capacity = 25
-  }
+#   per_database_settings {
+#     min_capacity = 25
+#     max_capacity = 25
+#   }
 
-  depends_on = [
-    azurerm_management_group_policy_assignment.sql_ep_zone_redundant,
-    azurerm_management_group_policy_assignment.sql_ep_diagnostics_custom
-  ]
-}
+#   depends_on = [
+#     azurerm_policy_definition.sql_ep_zone_redundant,
+#     azurerm_management_group_policy_assignment.sql_ep_zone_redundant,
+#     azurerm_management_group_policy_assignment.sql_ep_diagnostics_custom
+#   ]
+# }
 
+# should pass - AZ not available with BASIC
 # resource "azurerm_mssql_elasticpool" "basic" {
 #   name                = "basic-epool"
 #   resource_group_name = azurerm_resource_group.example.name
@@ -93,7 +96,7 @@ resource "azurerm_mssql_elasticpool" "premium" {
 #   server_name         = azurerm_mssql_server.example.name
 #   license_type        = "LicenseIncluded"
 #   max_size_gb         = 4.8828125
-#   zone_redundant      = true
+#   zone_redundant      = false
 
 #   sku {
 #     name     = "BasicPool"
@@ -108,11 +111,13 @@ resource "azurerm_mssql_elasticpool" "premium" {
 #   }
 
 #   depends_on = [
+#     azurerm_policy_definition.sql_ep_zone_redundant,
 #     azurerm_management_group_policy_assignment.sql_ep_zone_redundant,
 #     azurerm_management_group_policy_assignment.sql_ep_diagnostics_custom
 #   ]
 # }
 
+# should pass - AZ not available with STANDARD
 # resource "azurerm_mssql_elasticpool" "standard" {
 #   name                = "std-epool"
 #   resource_group_name = azurerm_resource_group.example.name
@@ -120,7 +125,7 @@ resource "azurerm_mssql_elasticpool" "premium" {
 #   server_name         = azurerm_mssql_server.example.name
 #   license_type        = "LicenseIncluded"
 #   max_size_gb         = 500
-#   zone_redundant      = true
+#   zone_redundant      = false
 
 #   sku {
 #     name     = "StandardPool"
@@ -135,19 +140,21 @@ resource "azurerm_mssql_elasticpool" "premium" {
 #   }
 
 #   depends_on = [
+#     azurerm_policy_definition.sql_ep_zone_redundant,
 #     azurerm_management_group_policy_assignment.sql_ep_zone_redundant,
 #     azurerm_management_group_policy_assignment.sql_ep_diagnostics_custom
 #   ]
 # }
 
-# resource "azurerm_mssql_elasticpool" "example" {
-#   name                = "test-epool"
+# should FAIL - AZ available with GP
+# resource "azurerm_mssql_elasticpool" "gp" {
+#   name                = "gp-epool"
 #   resource_group_name = azurerm_resource_group.example.name
 #   location            = azurerm_resource_group.example.location
 #   server_name         = azurerm_mssql_server.example.name
 #   license_type        = "LicenseIncluded"
 #   max_size_gb         = 756
-#   zone_redundant      = true
+#   zone_redundant      = false
 
 #   sku {
 #     name     = "GP_Gen5"
@@ -162,6 +169,7 @@ resource "azurerm_mssql_elasticpool" "premium" {
 #   }
 
 #   depends_on = [
+#     azurerm_policy_definition.sql_ep_zone_redundant,
 #     azurerm_management_group_policy_assignment.sql_ep_zone_redundant,
 #     azurerm_management_group_policy_assignment.sql_ep_diagnostics_custom
 #   ]

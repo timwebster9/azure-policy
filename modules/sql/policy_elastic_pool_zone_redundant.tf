@@ -3,7 +3,7 @@ resource "azurerm_policy_definition" "sql_ep_zone_redundant" {
   name                  = "sql_ep_zone_redundant"
   policy_type           = "Custom"
   mode                  = "Indexed"
-  display_name          = "SQL Databases should be zone redundant"
+  display_name          = "SQL Elastic Pools should be zone redundant"
   management_group_name = data.azurerm_management_group.policy_definition_mgmt_group.name
 
   metadata = <<METADATA
@@ -27,7 +27,7 @@ resource "azurerm_management_group_policy_assignment" "sql_ep_zone_redundant" {
   parameters = <<PARAMETERS
 {
   "effect": {
-    "value": "Audit"
+    "value": "Deny"
   },
   "locations": {
     "value": ["uksouth"]

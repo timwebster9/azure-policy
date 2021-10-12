@@ -72,12 +72,12 @@ resource "azurerm_mssql_elasticpool" "premium" {
     name     = "PremiumPool"
     tier     = "Premium"
     #family   = "Gen5"
-    capacity = 50
+    capacity = 125
   }
 
   per_database_settings {
-    min_capacity = 5
-    max_capacity = 5
+    min_capacity = 25
+    max_capacity = 25
   }
 
   depends_on = [

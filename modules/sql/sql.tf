@@ -69,15 +69,15 @@ resource "azurerm_mssql_elasticpool" "example" {
   zone_redundant      = true
 
   sku {
-    name     = "StandardPool"
-    tier     = "Standard"
+    name     = "BasicPool"
+    tier     = "basic"
     #family   = "Gen5"
     capacity = 50
   }
 
   per_database_settings {
-    min_capacity = 10
-    max_capacity = 10
+    min_capacity = 5
+    max_capacity = 5
   }
 
   depends_on = [
@@ -85,6 +85,33 @@ resource "azurerm_mssql_elasticpool" "example" {
     azurerm_management_group_policy_assignment.sql_ep_diagnostics_custom
   ]
 }
+
+# resource "azurerm_mssql_elasticpool" "example" {
+#   name                = "test-epool"
+#   resource_group_name = azurerm_resource_group.example.name
+#   location            = azurerm_resource_group.example.location
+#   server_name         = azurerm_mssql_server.example.name
+#   license_type        = "LicenseIncluded"
+#   max_size_gb         = 500
+#   zone_redundant      = true
+
+#   sku {
+#     name     = "StandardPool"
+#     tier     = "Standard"
+#     #family   = "Gen5"
+#     capacity = 50
+#   }
+
+#   per_database_settings {
+#     min_capacity = 10
+#     max_capacity = 10
+#   }
+
+#   depends_on = [
+#     azurerm_management_group_policy_assignment.sql_ep_zone_redundant,
+#     azurerm_management_group_policy_assignment.sql_ep_diagnostics_custom
+#   ]
+# }
 
 # resource "azurerm_mssql_elasticpool" "example" {
 #   name                = "test-epool"

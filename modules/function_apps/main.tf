@@ -32,7 +32,7 @@ resource "azurerm_function_app" "example" {
   https_only = true # policy check
 
   site_config {
-    min_tls_version = "1.1" # policy check
+    min_tls_version = "1.2" # policy check
   }
 
   depends_on = [

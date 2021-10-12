@@ -1,0 +1,47 @@
+{
+    "kind": "functionapp",
+    "location": "uksouth",
+    "properties": {
+        "clientAffinityEnabled": false,
+        "clientCertEnabled": false,
+        "dailyMemoryTimeQuota": 0,
+        "enabled": true,
+        "httpsOnly": true,
+        "serverFarmId": "/subscriptions/2ca65474-3b7b-40f2-b242-0d2fba4bde6e/resourceGroups/policy-rg/providers/Microsoft.Web/serverfarms/azure-functions-test-service-plan",
+        "siteConfig": {
+            "alwaysOn": false,
+            "appSettings": [
+                {
+                    "name": "AzureWebJobsStorage",
+                    "value": "DefaultEndpointsProtocol=https;AccountName=timwpolicysa9087sadfs;AccountKey=995kuXnJn/Dd+oBA2aFxxK3nZvCIs6pSgtYyUZWlx+Ugq6qsl+3ZwkitoIpel7oDuMSeTGhz+ebJ8rn7kIkTvg==;EndpointSuffix=core.windows.net"
+                },
+                {
+                    "name": "FUNCTIONS_EXTENSION_VERSION",
+                    "value": "~1"
+                },
+                {
+                    "name": "AzureWebJobsDashboard",
+                    "value": "DefaultEndpointsProtocol=https;AccountName=timwpolicysa9087sadfs;AccountKey=995kuXnJn/Dd+oBA2aFxxK3nZvCIs6pSgtYyUZWlx+Ugq6qsl+3ZwkitoIpel7oDuMSeTGhz+ebJ8rn7kIkTvg==;EndpointSuffix=core.windows.net"
+                }
+            ],
+            "autoSwapSlotName": "",
+            "cors": {},
+            "functionAppScaleLimit": 0,
+            "functionsRuntimeScaleMonitoringEnabled": false,
+            "healthCheckPath": "",
+            "http20Enabled": false,
+            "ipSecurityRestrictions": [],
+            "javaVersion": "",
+            "linuxFxVersion": "",
+            "minTlsVersion": "1.1",
+            "minimumElasticInstanceCount": 0,
+            "netFrameworkVersion": "v4.0",
+            "preWarmedInstanceCount": 0,
+            "scmIpSecurityRestrictions": [],
+            "scmIpSecurityRestrictionsUseMain": false,
+            "use32BitWorkerProcess": true,
+            "webSocketsEnabled": false
+        }
+    },
+    "tags": {}
+}

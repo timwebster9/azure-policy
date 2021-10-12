@@ -30,10 +30,10 @@ resource "azurerm_function_app" "example" {
   storage_account_name       = azurerm_storage_account.example.name
   storage_account_access_key = azurerm_storage_account.example.primary_access_key
   https_only                 = true  # policy check
-  vnet_route_all_enabled     = false # policy check
-
+  
   site_config {
-    min_tls_version = "1.2" # policy check
+    min_tls_version        = "1.2" # policy check
+    vnet_route_all_enabled = false # policy check
   }
 
   depends_on = [

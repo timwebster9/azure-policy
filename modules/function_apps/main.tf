@@ -37,8 +37,8 @@ resource "azurerm_function_app" "example" {
 
   depends_on = [
     azurerm_policy_definition.app_service_https_only,
-   # azurerm_policy_definition.app_service_tls_version,
+    azurerm_policy_definition.app_service_tls_version,
     azurerm_management_group_policy_assignment.app_service_https_only,
-    #azurerm_management_group_policy_assignment.app_service_tls_version
+    azurerm_management_group_policy_assignment.app_service_tls_version
   ]
 }

@@ -1,5 +1,5 @@
 resource "azurerm_policy_definition" "app_service_tls_version" {
-  name                  = "https_only"
+  name                  = "tls_version"
   policy_type           = "Custom"
   mode                  = "Indexed"
   display_name          = "Functon App should use the specified TLS version"

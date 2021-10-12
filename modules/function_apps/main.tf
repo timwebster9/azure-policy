@@ -29,4 +29,16 @@ resource "azurerm_function_app" "example" {
   app_service_plan_id        = azurerm_app_service_plan.example.id
   storage_account_name       = azurerm_storage_account.example.name
   storage_account_access_key = azurerm_storage_account.example.primary_access_key
+  https_only = false # policy check
+
+  site_config {
+    min_tls_version = "1.1" # policy check
+  }
+
+  depends_on = [
+    azurerm_policy_definition.app_service_https_only,
+    azurerm_policy_definition.app_service_tls_version,
+    azurerm_management_group_policy_assignment.app_service_https_only,
+    azurerm_management_group_policy_assignment.app_service_tls_version
+  ]
 }

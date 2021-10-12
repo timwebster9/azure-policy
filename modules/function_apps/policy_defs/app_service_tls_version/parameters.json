@@ -1,0 +1,27 @@
+{
+    "effect": {
+        "type": "String",
+        "defaultValue": "Deny",
+        "allowedValues": [
+            "Audit",
+            "Deny",
+            "Disabled"
+        ],
+        "metadata": {
+            "displayName": "Effect",
+            "description": "The effect determines what happens when the policy rule is evaluated to match"
+        }
+    },
+    "minTlsVersion": {
+        "type": "String",
+        "defaultValue": "1.2",
+        "allowedValues": [
+            "1.0",
+            "1.1",
+            "1.2"
+        ],
+        "metadata": {
+            "displayName": "Minimum TLS version"
+        }
+    }
+}

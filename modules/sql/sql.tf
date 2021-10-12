@@ -65,14 +65,14 @@ resource "azurerm_mssql_elasticpool" "example" {
   location            = azurerm_resource_group.example.location
   server_name         = azurerm_mssql_server.example.name
   license_type        = "LicenseIncluded"
-  max_size_gb         = 756
+  max_size_gb         = 500
   zone_redundant      = true
 
   sku {
-    name     = "GP_Gen5"
-    tier     = "GeneralPurpose"
+    name     = "StandardPool"
+    tier     = "Standard"
     family   = "Gen5"
-    capacity = 4
+    capacity = 50
   }
 
   per_database_settings {
@@ -85,6 +85,33 @@ resource "azurerm_mssql_elasticpool" "example" {
     azurerm_management_group_policy_assignment.sql_ep_diagnostics_custom
   ]
 }
+
+# resource "azurerm_mssql_elasticpool" "example" {
+#   name                = "test-epool"
+#   resource_group_name = azurerm_resource_group.example.name
+#   location            = azurerm_resource_group.example.location
+#   server_name         = azurerm_mssql_server.example.name
+#   license_type        = "LicenseIncluded"
+#   max_size_gb         = 756
+#   zone_redundant      = true
+
+#   sku {
+#     name     = "GP_Gen5"
+#     tier     = "GeneralPurpose"
+#     family   = "Gen5"
+#     capacity = 4
+#   }
+
+#   per_database_settings {
+#     min_capacity = 0.25
+#     max_capacity = 4
+#   }
+
+#   depends_on = [
+#     azurerm_management_group_policy_assignment.sql_ep_zone_redundant,
+#     azurerm_management_group_policy_assignment.sql_ep_diagnostics_custom
+#   ]
+# }
 
 # resource "azurerm_role_assignment" "sql_msi_storage" {
 #   scope                = azurerm_storage_account.example.id

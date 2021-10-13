@@ -8,6 +8,7 @@
         "details": {
             "type": "Microsoft.Insights/diagnosticSettings",
             "name": "[parameters('profileName')]",
+            "EvaluationDelay": "AfterProvisioning",
             "existenceCondition": {
                 "allOf": [
                     {
@@ -69,6 +70,7 @@
                                 "name": "[concat(parameters('resourceName'), '/', 'Microsoft.Insights/', parameters('profileName'))]",
                                 "location": "[parameters('location')]",
                                 "properties": {
+                                    "eventHubAuthorizationRuleId": "[parameters('eventHubRuleId')]",
                                     "eventHubName": "[parameters('eventHubName')]",
                                     "workspaceId": "[parameters('logAnalyticsWorkspaceId')]",
                                     "storageAccountId": "[parameters('storageAccountId')]",

@@ -1,9 +1,27 @@
+resource "azurerm_policy_definition" "function_runtime_version" {
+  name                  = "runtime_version"
+  policy_type           = "Custom"
+  mode                  = "Indexed"
+  display_name          = "Functions should use an approved runtime version"
+  management_group_name = data.azurerm_management_group.policy_definition_mgmt_group.name
+
+  metadata = <<METADATA
+    {
+    "category": "App Service"
+    }
+
+METADATA
+
+  policy_rule = file("${path.module}/policy_defs/function_runtime_version/rules.json")
+  parameters = file("${path.module}/policy_defs/function_runtime_version/parameters.json")
+}
+
 resource "azurerm_management_group_policy_assignment" "function_runtime_version" {
   name                 = "runtime_version"
-  policy_definition_id = data.azurerm_policy_definition.function_runtime_version.id
+  policy_definition_id = azurerm_policy_definition.function_runtime_version.id
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"
-  display_name         = "Functions should use an approved runtime version"
+  display_name         = azurerm_policy_definition.function_runtime_version.display_name
   location             = var.location
 
   identity {

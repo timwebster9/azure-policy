@@ -3,7 +3,7 @@ resource "azurerm_resource_group" "example" {
   location = var.location
 }
 
-resource "azurerm_storage_account" "example" {
+resource "azurerm_storage_account" "function" {
   name                     = "timwpolicysa9087sadfs"
   resource_group_name      = azurerm_resource_group.example.name
   location                 = azurerm_resource_group.example.location
@@ -27,8 +27,8 @@ resource "azurerm_function_app" "example" {
   location                   = azurerm_resource_group.example.location
   resource_group_name        = azurerm_resource_group.example.name
   app_service_plan_id        = azurerm_app_service_plan.example.id
-  storage_account_name       = azurerm_storage_account.example.name
-  storage_account_access_key = azurerm_storage_account.example.primary_access_key
+  storage_account_name       = azurerm_storage_account.function.name
+  storage_account_access_key = azurerm_storage_account.function.primary_access_key
   https_only                 = true  # policy check
   version                    = "~3"  # policy check
   

@@ -32,7 +32,7 @@ resource "azurerm_management_group_policy_assignment" "function_runtime_version"
 {
   "effect": {
     "value": "Deny"
-  }
+  },
   "allowedRuntimeVersions": {
     "value": ["~3"]
   }

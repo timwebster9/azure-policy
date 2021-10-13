@@ -1,0 +1,35 @@
+{
+    "if": {
+        "allOf": [
+            {
+                "field": "type",
+                "equals": "Microsoft.Web/sites"
+            },
+            {
+                "field": "kind",
+                "like": "functionapp*"
+            },
+            {
+                "count": {
+                    "field": "Microsoft.Web/sites/siteConfig.appSettings[*]",
+                    "where": {
+                        "allOf": [
+                            {
+                                "field": "Microsoft.Web/sites/siteConfig.appSettings[*].name",
+                                "equals": "FUNCTIONS_EXTENSION_VERSION"
+                            },
+                            {
+                                "field": "Microsoft.Web/sites/siteConfig.appSettings[*].value",
+                                "in": "[parameters('allowedRuntimeVersions')]"
+                            }
+                        ]
+                    }
+                },
+                "less": 1
+            }
+        ]
+    },
+    "then": {
+        "effect": "[parameters('effect')]"
+    }
+}

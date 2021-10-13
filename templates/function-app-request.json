@@ -13,15 +13,15 @@
             "appSettings": [
                 {
                     "name": "AzureWebJobsStorage",
-                    "value": "DefaultEndpointsProtocol=https;AccountName=timwpolicysa9087sadfs;AccountKey=995kuXnJn/Dd+oBA2aFxxK3nZvCIs6pSgtYyUZWlx+Ugq6qsl+3ZwkitoIpel7oDuMSeTGhz+ebJ8rn7kIkTvg==;EndpointSuffix=core.windows.net"
+                    "value": "DefaultEndpointsProtocol=https;AccountName=timwpolicysa9087sadfs;AccountKey=Eiyu1BeFuDCz6xrfzjHTVW/PtRi7ES5db58JbTGCyx8AlmAVHG2R5BjGeIZbBsxWoVdqPTTx3a4WwdI5rOb3kg==;EndpointSuffix=core.windows.net"
                 },
                 {
                     "name": "FUNCTIONS_EXTENSION_VERSION",
-                    "value": "~1"
+                    "value": "~3"
                 },
                 {
                     "name": "AzureWebJobsDashboard",
-                    "value": "DefaultEndpointsProtocol=https;AccountName=timwpolicysa9087sadfs;AccountKey=995kuXnJn/Dd+oBA2aFxxK3nZvCIs6pSgtYyUZWlx+Ugq6qsl+3ZwkitoIpel7oDuMSeTGhz+ebJ8rn7kIkTvg==;EndpointSuffix=core.windows.net"
+                    "value": "DefaultEndpointsProtocol=https;AccountName=timwpolicysa9087sadfs;AccountKey=Eiyu1BeFuDCz6xrfzjHTVW/PtRi7ES5db58JbTGCyx8AlmAVHG2R5BjGeIZbBsxWoVdqPTTx3a4WwdI5rOb3kg==;EndpointSuffix=core.windows.net"
                 }
             ],
             "autoSwapSlotName": "",
@@ -33,13 +33,14 @@
             "ipSecurityRestrictions": [],
             "javaVersion": "",
             "linuxFxVersion": "",
-            "minTlsVersion": "1.1",
+            "minTlsVersion": "1.2",
             "minimumElasticInstanceCount": 0,
             "netFrameworkVersion": "v4.0",
             "preWarmedInstanceCount": 0,
             "scmIpSecurityRestrictions": [],
             "scmIpSecurityRestrictionsUseMain": false,
             "use32BitWorkerProcess": true,
+            "vnetRouteAllEnabled": true,
             "webSocketsEnabled": false
         }
     },

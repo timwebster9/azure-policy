@@ -1,0 +1,22 @@
+{
+    "effect": {
+        "type": "String",
+        "defaultValue": "Deny",
+        "allowedValues": [
+            "Audit",
+            "Deny",
+            "Disabled"
+        ],
+        "metadata": {
+            "displayName": "Effect",
+            "description": "The effect determines what happens when the policy rule is evaluated to match"
+        }
+    },
+    "allowedRuntimeVersions": {
+        "type": "Array",
+        "defaultValue": ["~3"],
+        "metadata": {
+            "displayName": "Allowed Function runtime versions"
+        }
+    }
+}

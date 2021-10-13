@@ -30,7 +30,7 @@ resource "azurerm_function_app" "example" {
   storage_account_name       = azurerm_storage_account.example.name
   storage_account_access_key = azurerm_storage_account.example.primary_access_key
   https_only                 = true  # policy check
-  version                    = "~3"
+  version                    = "~1"  # policy check
   
   site_config {
     min_tls_version        = "1.2" # policy check
@@ -41,9 +41,11 @@ resource "azurerm_function_app" "example" {
     azurerm_policy_definition.app_service_https_only,
     azurerm_policy_definition.app_service_tls_version,
     azurerm_policy_definition.app_service_vnet_route_all,
+    azurerm_management_group_policy_assignment.function_runtime_version,
     azurerm_management_group_policy_assignment.app_service_https_only,
     azurerm_management_group_policy_assignment.app_service_tls_version,
     azurerm_management_group_policy_assignment.app_service_vnet_route_all,
-    azurerm_management_group_policy_assignment.disable_public_network_access
+    azurerm_management_group_policy_assignment.disable_public_network_access,
+    azurerm_management_group_policy_assignment.function_runtime_version
   ]
 }

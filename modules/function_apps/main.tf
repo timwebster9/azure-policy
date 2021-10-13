@@ -41,11 +41,13 @@ resource "azurerm_function_app" "example" {
     azurerm_policy_definition.app_service_https_only,
     azurerm_policy_definition.app_service_tls_version,
     azurerm_policy_definition.app_service_vnet_route_all,
+    azurerm_policy_definition.function_diagnostics,
     azurerm_management_group_policy_assignment.function_runtime_version,
     azurerm_management_group_policy_assignment.app_service_https_only,
     azurerm_management_group_policy_assignment.app_service_tls_version,
     azurerm_management_group_policy_assignment.app_service_vnet_route_all,
     azurerm_management_group_policy_assignment.disable_public_network_access,
-    azurerm_management_group_policy_assignment.function_runtime_version
+    azurerm_management_group_policy_assignment.function_runtime_version,
+    azurerm_management_group_policy_assignment.function_diagnostics
   ]
 }

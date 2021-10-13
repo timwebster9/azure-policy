@@ -15,12 +15,19 @@ resource "azurerm_app_service_plan" "example" {
   name                = "azure-functions-test-service-plan"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
-  zone_redundant      = true
+  zone_redundant      = false
 
   sku {
     tier = "PremiumV2"
     size = "P1v2"
   }
+
+  depends_on = [
+    azurerm_policy_definition.app_service_plan_diagnostics,
+    azurerm_policy_definition.app_service_plan_zone_redundant,
+    azurerm_management_group_policy_assignment.app_service_plan_diagnostics,
+    azurerm_management_group_policy_assignment.app_service_plan_zone_redundant
+  ]
 }
 
 resource "azurerm_function_app" "example" {
@@ -43,14 +50,12 @@ resource "azurerm_function_app" "example" {
     azurerm_policy_definition.app_service_tls_version,
     azurerm_policy_definition.app_service_vnet_route_all,
     azurerm_policy_definition.function_diagnostics,
-    azurerm_policy_definition.app_service_plan_diagnostics,
     azurerm_management_group_policy_assignment.function_runtime_version,
     azurerm_management_group_policy_assignment.app_service_https_only,
     azurerm_management_group_policy_assignment.app_service_tls_version,
     azurerm_management_group_policy_assignment.app_service_vnet_route_all,
     azurerm_management_group_policy_assignment.disable_public_network_access,
     azurerm_management_group_policy_assignment.function_runtime_version,
-    azurerm_management_group_policy_assignment.function_diagnostics,
-    azurerm_management_group_policy_assignment.app_service_plan_diagnostics
+    azurerm_management_group_policy_assignment.function_diagnostics
   ]
 }

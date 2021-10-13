@@ -1,0 +1,22 @@
+{
+    "effect": {
+        "type": "String",
+        "defaultValue": "Deny",
+        "allowedValues": [
+            "Deny",
+            "Audit",
+            "Disabled"
+        ],
+        "metadata": {
+            "displayName": "Effect",
+            "description": "Enable or disable the execution of the policy"
+        }
+    },
+    "locations": {
+        "type": "Array",
+        "metadata": {
+            "displayName": "Locations",
+            "description": "A list of locations where this policy is applicable"
+        }
+    }
+}

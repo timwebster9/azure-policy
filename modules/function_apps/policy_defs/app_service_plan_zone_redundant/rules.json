@@ -1,0 +1,28 @@
+{
+    "if": {
+        "allOf": [
+            {
+                "field": "type",
+                "equals": "Microsoft.Web/serverfarms"
+            },
+            {
+                "field": "location",
+                "in": "[parameters('locations')]"
+            },
+            {
+                "field": "Microsoft.Web/serverfarms/sku.tier",
+                "in": [
+                    "PremiumV2",
+                    "PremiumV3"
+                ]
+            },
+            {
+                "field": "Microsoft.Web/serverfarms/zoneRedundant",
+                "notEquals": "true"
+            }
+        ]
+    },
+    "then": {
+        "effect": "[parameters('effect')]"
+    }
+}

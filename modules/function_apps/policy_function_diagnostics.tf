@@ -30,6 +30,9 @@ resource "azurerm_management_group_policy_assignment" "function_diagnostics" {
 
   parameters = <<PARAMETERS
 {
+  "effect": {
+    "value": "DeployIfNotExists"
+  },
   "eventHubRuleId": {
     "value": "${azurerm_eventhub_namespace_authorization_rule.namespace_rule.id}"
   },

@@ -16,7 +16,7 @@
                     },
                     {
                         "field": "Microsoft.Insights/diagnosticSettings/workspaceId",
-                        "equals": "[parameters('logAnalytics')]"
+                        "equals": "[parameters('logAnalyticsWorkspaceId')]"
                     }
                 ]
             },

@@ -15,7 +15,7 @@ resource "azurerm_app_service_plan" "example" {
   name                = "azure-functions-test-service-plan"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
-  zone_redundant      = false
+  zone_redundant      = true
 
   sku {
     tier = "PremiumV2"

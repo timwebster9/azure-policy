@@ -36,7 +36,7 @@ jobs:
       # - name: Terrafrom plan
       #   run: terraform plan
 
-      - name: Terrafrom apply
+      - name: Terraform apply
         if: ${{ success() }}
         run: terraform apply -auto-approve
 

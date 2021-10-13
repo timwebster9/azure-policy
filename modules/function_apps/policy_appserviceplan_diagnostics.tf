@@ -1,8 +1,8 @@
-resource "azurerm_policy_definition" "function_diagnostics" {
-  name                  = "function_diagnostics"
+resource "azurerm_policy_definition" "app_service_plan_diagnostics" {
+  name                  = "asp_diagnostics"
   policy_type           = "Custom"
   mode                  = "Indexed"
-  display_name          = "Deploy Diagnostic Settings for Function Apps"
+  display_name          = "Deploy Diagnostic Settings for App Service Plans"
   management_group_name = data.azurerm_management_group.policy_definition_mgmt_group.name
 
   metadata = <<METADATA
@@ -12,16 +12,16 @@ resource "azurerm_policy_definition" "function_diagnostics" {
 
 METADATA
 
-  policy_rule = file("${path.module}/policy_defs/function_diagnostics/rules.json")
-  parameters = file("${path.module}/policy_defs/function_diagnostics/parameters.json")
+  policy_rule = file("${path.module}/policy_defs/app_service_plan_diagnostics/rules.json")
+  parameters = file("${path.module}/policy_defs/app_service_plan_diagnostics/parameters.json")
 }
 
-resource "azurerm_management_group_policy_assignment" "function_diagnostics" {
-  name                 = "function_diagnostics"
-  policy_definition_id = azurerm_policy_definition.function_diagnostics.id
+resource "azurerm_management_group_policy_assignment" "app_service_plan_diagnostics" {
+  name                 = "asp_diagnostics"
+  policy_definition_id = azurerm_policy_definition.app_service_plan_diagnostics.id
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"
-  display_name         = azurerm_policy_definition.function_diagnostics.display_name
+  display_name         = azurerm_policy_definition.app_service_plan_diagnostics.display_name
   location             = var.location
 
   identity {
@@ -58,9 +58,9 @@ resource "azurerm_management_group_policy_assignment" "function_diagnostics" {
 PARAMETERS
 }
 
-resource "azurerm_role_assignment" "function_diagnostics" {
+resource "azurerm_role_assignment" "app_service_plan_diagnostics" {
   scope                = data.azurerm_subscription.current.id
   role_definition_name = "Contributor"
-  principal_id         = azurerm_management_group_policy_assignment.function_diagnostics.identity[0].principal_id
+  principal_id         = azurerm_management_group_policy_assignment.app_service_plan_diagnostics.identity[0].principal_id
 }
 

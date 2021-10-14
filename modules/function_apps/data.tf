@@ -14,3 +14,7 @@ data "azurerm_policy_definition" "disable_public_network_access" {
   name = "81dff7c0-4020-4b58-955d-c076a2136b56"
 }
 
+data "azurerm_policy_definition" "vnet_injection" {
+  name = "72d04c29-f87d-4575-9731-419ff16a2757"
+}
+

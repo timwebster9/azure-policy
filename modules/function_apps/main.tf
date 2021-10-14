@@ -73,6 +73,8 @@ resource "azurerm_function_app" "example" {
         ip_address = "212.159.71.60"
         name = "test"
         priority = 100
+        headers = null
+        service_tag = null
       }
     ]
   }

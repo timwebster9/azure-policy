@@ -75,6 +75,7 @@ resource "azurerm_function_app" "example" {
         priority = 100
         headers = null
         service_tag = null
+        virtual_network_subnet_id = null
       }
     ]
   }

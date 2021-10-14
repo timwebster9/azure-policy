@@ -67,12 +67,14 @@ resource "azurerm_function_app" "example" {
     min_tls_version        = "1.2" # policy check
     vnet_route_all_enabled = true  # policy check
 
-    ip_restriction =  {
+    ip_restriction =  [
+      {
         action = "Allow"
         ip_address = "212.159.71.60"
         name = "test"
         priority = 100
       }
+    ]
   }
 
   depends_on = [

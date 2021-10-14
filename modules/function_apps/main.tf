@@ -24,14 +24,14 @@ resource "azurerm_subnet" "example" {
   virtual_network_name = azurerm_virtual_network.example.name
   address_prefixes     = ["10.0.1.0/24"]
 
-  # delegation {
-  #   name = "example-delegation"
+  delegation {
+    name = "example-delegation"
 
-  #   service_delegation {
-  #     name    = "Microsoft.Web/serverFarms"
-  #     actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
-  #   }
-  # }
+    service_delegation {
+      name    = "Microsoft.Web/serverFarms"
+      actions = ["Microsoft.Network/virtualNetworks/subnets/action"]
+    }
+  }
 }
 
 resource "azurerm_app_service_plan" "example" {

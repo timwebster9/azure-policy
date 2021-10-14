@@ -70,7 +70,7 @@ resource "azurerm_function_app" "example" {
     ip_restriction =  [
       {
         action = "Allow"
-        ip_address = "212.159.71.60"
+        ip_address = "212.159.71.60/32"
         name = "test"
         priority = 100
         headers = null

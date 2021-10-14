@@ -13,7 +13,7 @@
             "appSettings": [
                 {
                     "name": "AzureWebJobsStorage",
-                    "value": "DefaultEndpointsProtocol=https;AccountName=timwpolicysa9087sadfs;AccountKey=Eiyu1BeFuDCz6xrfzjHTVW/PtRi7ES5db58JbTGCyx8AlmAVHG2R5BjGeIZbBsxWoVdqPTTx3a4WwdI5rOb3kg==;EndpointSuffix=core.windows.net"
+                    "value": "DefaultEndpointsProtocol=https;AccountName=timwpolicysa9087sadfs;AccountKey=VXbzNMwXcjW1FuhT/DqP3jNEDexf8NGztQCDvluYR7rGZhWASBAvJ2hqbUompspjbHNl3ohP/SkKlqJocrG3qw==;EndpointSuffix=core.windows.net"
                 },
                 {
                     "name": "FUNCTIONS_EXTENSION_VERSION",
@@ -21,24 +21,37 @@
                 },
                 {
                     "name": "AzureWebJobsDashboard",
-                    "value": "DefaultEndpointsProtocol=https;AccountName=timwpolicysa9087sadfs;AccountKey=Eiyu1BeFuDCz6xrfzjHTVW/PtRi7ES5db58JbTGCyx8AlmAVHG2R5BjGeIZbBsxWoVdqPTTx3a4WwdI5rOb3kg==;EndpointSuffix=core.windows.net"
+                    "value": "DefaultEndpointsProtocol=https;AccountName=timwpolicysa9087sadfs;AccountKey=VXbzNMwXcjW1FuhT/DqP3jNEDexf8NGztQCDvluYR7rGZhWASBAvJ2hqbUompspjbHNl3ohP/SkKlqJocrG3qw==;EndpointSuffix=core.windows.net"
                 }
             ],
             "autoSwapSlotName": "",
-            "cors": {},
+            "cors": {
+                "allowedOrigins": [],
+                "supportCredentials": false
+            },
+            "ftpsState": "AllAllowed",
             "functionAppScaleLimit": 0,
             "functionsRuntimeScaleMonitoringEnabled": false,
             "healthCheckPath": "",
             "http20Enabled": false,
-            "ipSecurityRestrictions": [],
+            "ipSecurityRestrictions": [
+                {
+                    "action": "Allow",
+                    "headers": {},
+                    "ipAddress": "212.159.71.60/32",
+                    "name": "test",
+                    "priority": 100
+                }
+            ],
             "javaVersion": "",
             "linuxFxVersion": "",
             "minTlsVersion": "1.2",
-            "minimumElasticInstanceCount": 0,
+            "minimumElasticInstanceCount": 1,
             "netFrameworkVersion": "v4.0",
             "preWarmedInstanceCount": 0,
             "scmIpSecurityRestrictions": [],
             "scmIpSecurityRestrictionsUseMain": false,
+            "scmType": "None",
             "use32BitWorkerProcess": true,
             "vnetRouteAllEnabled": true,
             "webSocketsEnabled": false
@@ -46,3 +59,8 @@
     },
     "tags": {}
 }
+
+Microsoft.Web/sites/config/ipSecurityRestrictions
+Microsoft.Web/sites/config/web.ipSecurityRestrictions
+Microsoft.Web/sites/config/web.ipSecurityRestrictions[*]
+Microsoft.Web/sites/config/ipSecurityRestrictions[*]

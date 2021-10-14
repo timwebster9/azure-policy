@@ -1,0 +1,19 @@
+{
+    "if": {
+        "allOf": [
+            {
+                "field": "type",
+                "equals": "Microsoft.Web/sites"
+            },
+            {
+                "count": {
+                    "field": "Microsoft.Web/sites/config/ipSecurityRestrictions[*]"
+                },
+                "greater": 0
+            }
+        ]
+    },
+    "then": {
+        "effect": "[parameters('effect')]"
+    }
+}

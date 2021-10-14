@@ -83,7 +83,7 @@ resource "azurerm_function_app" "example" {
   ]
 }
 
-resource "azurerm_app_service_slot_virtual_network_swift_connection" "example" {
+resource "azurerm_app_service_virtual_network_swift_connection" "example" {
   app_service_id = azurerm_function_app.example.id
   subnet_id      = azurerm_subnet.example.id
 }

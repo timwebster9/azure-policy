@@ -34,7 +34,7 @@ resource "azurerm_subnet" "example" {
   }
 }
 
-resource "azurerm_app_service_plan" "example" {
+resource "azurerm_app_service_plan" "ep" {
   name                = "azure-functions-test-service-plan"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
@@ -57,6 +57,99 @@ resource "azurerm_app_service_plan" "example" {
   ]
 }
 
+resource "azurerm_app_service_plan" "premiumv2" {
+  name                = "azure-functions-test-service-plan"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  zone_redundant      = true
+  maximum_elastic_worker_count = 3
+
+  sku {
+    tier = "PremiumV2"
+    size = "P1v2"
+    capacity = 1
+  }
+
+  depends_on = [
+    azurerm_policy_definition.app_service_plan_diagnostics,
+    azurerm_policy_definition.app_service_plan_zone_redundant,
+    azurerm_policy_definition.private_link_sku,
+    azurerm_management_group_policy_assignment.app_service_plan_diagnostics,
+    azurerm_management_group_policy_assignment.app_service_plan_zone_redundant,
+    azurerm_management_group_policy_assignment.private_link_sku
+  ]
+}
+
+resource "azurerm_app_service_plan" "premiumv3" {
+  name                = "azure-functions-test-service-plan"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  zone_redundant      = true
+  maximum_elastic_worker_count = 3
+
+  sku {
+    tier = "PremiumV3"
+    size = "P1v3"
+    capacity = 1
+  }
+
+  depends_on = [
+    azurerm_policy_definition.app_service_plan_diagnostics,
+    azurerm_policy_definition.app_service_plan_zone_redundant,
+    azurerm_policy_definition.private_link_sku,
+    azurerm_management_group_policy_assignment.app_service_plan_diagnostics,
+    azurerm_management_group_policy_assignment.app_service_plan_zone_redundant,
+    azurerm_management_group_policy_assignment.private_link_sku
+  ]
+}
+
+# should fail
+resource "azurerm_app_service_plan" "basic" {
+  name                = "basic-plan"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  zone_redundant      = true
+  maximum_elastic_worker_count = 3
+
+  sku {
+    tier = "Basic"
+    size = "B1"
+  }
+
+  depends_on = [
+    azurerm_policy_definition.app_service_plan_diagnostics,
+    azurerm_policy_definition.app_service_plan_zone_redundant,
+    azurerm_policy_definition.private_link_sku,
+    azurerm_management_group_policy_assignment.app_service_plan_diagnostics,
+    azurerm_management_group_policy_assignment.app_service_plan_zone_redundant,
+    azurerm_management_group_policy_assignment.private_link_sku
+  ]
+}
+
+# should fail
+resource "azurerm_app_service_plan" "standard" {
+  name                = "standard-plan"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  zone_redundant      = true
+  maximum_elastic_worker_count = 3
+
+  sku {
+    tier = "Basic"
+    size = "B1"
+  }
+
+  depends_on = [
+    azurerm_policy_definition.app_service_plan_diagnostics,
+    azurerm_policy_definition.app_service_plan_zone_redundant,
+    azurerm_policy_definition.private_link_sku,
+    azurerm_management_group_policy_assignment.app_service_plan_diagnostics,
+    azurerm_management_group_policy_assignment.app_service_plan_zone_redundant,
+    azurerm_management_group_policy_assignment.private_link_sku
+  ]
+}
+
+
 resource "azurerm_function_app" "example" {
   name                       = "timwpolicyfunction908sfsd"
   location                   = azurerm_resource_group.example.location
@@ -70,7 +163,7 @@ resource "azurerm_function_app" "example" {
   site_config {
     min_tls_version        = "1.2" # policy check
     vnet_route_all_enabled = true  # policy check
-    elastic_instance_minimum = 1
+    elastic_instance_minimum = 3
 
     # ip_restriction =  [
     #   {

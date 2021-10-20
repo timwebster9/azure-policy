@@ -18,7 +18,8 @@ data "azurerm_policy_definition" "vnet_injection" {
   name = "72d04c29-f87d-4575-9731-419ff16a2757"
 }
 
-data "azurerm_policy_definition" "private_link_sku" {
-  name = "546fe8d2-368d-4029-a418-6af48a7f61e5"
-}
+# doesn't work
+# data "azurerm_policy_definition" "private_link_sku" {
+#   name = "546fe8d2-368d-4029-a418-6af48a7f61e5"
+# }
 

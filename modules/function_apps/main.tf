@@ -50,6 +50,7 @@ resource "azurerm_app_service_plan" "example" {
   depends_on = [
     azurerm_policy_definition.app_service_plan_diagnostics,
     azurerm_policy_definition.app_service_plan_zone_redundant,
+    azurerm_policy_definition.private_link_sku,
     azurerm_management_group_policy_assignment.app_service_plan_diagnostics,
     azurerm_management_group_policy_assignment.app_service_plan_zone_redundant,
     azurerm_management_group_policy_assignment.private_link_sku

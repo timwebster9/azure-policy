@@ -51,7 +51,8 @@ resource "azurerm_app_service_plan" "example" {
     azurerm_policy_definition.app_service_plan_diagnostics,
     azurerm_policy_definition.app_service_plan_zone_redundant,
     azurerm_management_group_policy_assignment.app_service_plan_diagnostics,
-    azurerm_management_group_policy_assignment.app_service_plan_zone_redundant
+    azurerm_management_group_policy_assignment.app_service_plan_zone_redundant,
+    azurerm_management_group_policy_assignment.private_link_sku
   ]
 }
 
@@ -68,6 +69,7 @@ resource "azurerm_function_app" "example" {
   site_config {
     min_tls_version        = "1.2" # policy check
     vnet_route_all_enabled = true  # policy check
+    elastic_instance_minimum = 1
 
     # ip_restriction =  [
     #   {

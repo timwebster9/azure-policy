@@ -35,7 +35,7 @@ resource "azurerm_subnet" "example" {
 }
 
 resource "azurerm_app_service_plan" "ep" {
-  name                = "azure-functions-test-service-plan"
+  name                = "ep-plan"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   zone_redundant      = true
@@ -58,7 +58,7 @@ resource "azurerm_app_service_plan" "ep" {
 }
 
 resource "azurerm_app_service_plan" "premiumv2" {
-  name                = "azure-functions-test-service-plan"
+  name                = "v2-plan"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   zone_redundant      = true
@@ -81,7 +81,7 @@ resource "azurerm_app_service_plan" "premiumv2" {
 }
 
 resource "azurerm_app_service_plan" "premiumv3" {
-  name                = "azure-functions-test-service-plan"
+  name                = "v3-plan"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   zone_redundant      = true

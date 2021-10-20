@@ -39,7 +39,7 @@ resource "azurerm_app_service_plan" "example" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   zone_redundant      = true
-  maximum_elastic_worker_count = 1
+  maximum_elastic_worker_count = 3
 
   sku {
     tier = "ElasticPremium"

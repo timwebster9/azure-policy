@@ -62,7 +62,7 @@ PARAMETERS
 }
 
 resource "azurerm_role_assignment" "sql_server_audit" {
-  scope                = data.azurerm_subscription.current.id
-  role_definition_name = "SQL Security Manager"
+  scope                = data.azurerm_management_group.policy_assignment_mgmt_group.id
+  role_definition_name = "Contributor"
   principal_id         = azurerm_management_group_policy_assignment.sql_server_audit.identity[0].principal_id
 }

@@ -41,8 +41,8 @@ resource "azurerm_app_service_plan" "example" {
   zone_redundant      = true
 
   sku {
-    tier = "PremiumV2"
-    size = "P1v2"
+    tier = "ElasticPremium"
+    size = "EP1"
   }
 
   depends_on = [

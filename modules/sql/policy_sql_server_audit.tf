@@ -43,13 +43,13 @@ resource "azurerm_management_group_policy_assignment" "sql_server_audit" {
     "value": "${azurerm_log_analytics_workspace.example.id}"
   },
   "storageAccountId": {
-    "value": "${azurerm_storage_account.example.id}"
+    "value": "${data.azurerm_storage_account.secondary.id}"
   },
   "storageAccountSubscriptionId": {
-    "value": "2ca65474-3b7b-40f2-b242-0d2fba4bde6e"
+    "value": "5b3b6b87-0c84-4cc0-ac99-75797863d447"
   },
   "storageEndpoint": {
-    "value": "${azurerm_storage_account.example.primary_blob_endpoint}"
+    "value": "${data.azurerm_storage_account.secondary.primary_blob_endpoint}"
   },
   "storageRetentionDays": {
     "value": 365

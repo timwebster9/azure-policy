@@ -25,3 +25,9 @@ data "azurerm_policy_definition" "aad_admin_audit" {
 data "azuread_user" "me" {
   user_principal_name = "admin@timwebster9outlookcom.onmicrosoft.com"
 }
+
+data "azurerm_storage_account" "secondary" {
+  provider = azurerm.secondary
+  name                = "tfstatetimw"
+  resource_group_name = "mgmt-rg"
+}

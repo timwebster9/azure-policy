@@ -17,3 +17,7 @@ data "azurerm_policy_definition" "disable_public_network_access" {
 data "azurerm_policy_definition" "configure_disable_access_keys" {
   name = "72bc14af-4ab8-43af-b4e4-38e7983f9a1f"
 }
+
+data "azurerm_policy_definition" "private_link_sku" {
+  name = "89c8a434-18f0-402c-8147-630a8dea54e0"
+}

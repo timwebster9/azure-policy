@@ -10,6 +10,6 @@ resource "azurerm_app_configuration" "appconf" {
 
   depends_on = [
     azurerm_management_group_policy_assignment.disable_public_network_access,
-    azurerm_management_group_policy_assignment.configure_disable_access_keys
+    azurerm_management_group_policy_assignment.disable_access_keys
   ]
 }

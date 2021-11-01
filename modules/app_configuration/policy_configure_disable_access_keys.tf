@@ -19,7 +19,7 @@ resource "azurerm_management_group_policy_assignment" "disable_access_keys" {
 PARAMETERS
 }
 
-resource "azurerm_role_assignment" "contributor" {
+resource "azurerm_role_assignment" "access_keys_contributor" {
   scope                = azurerm_app_configuration.appconf.id
   role_definition_name = "Contributor"
   principal_id         = azurerm_management_group_policy_assignment.disable_access_keys.identity.0.principal_id

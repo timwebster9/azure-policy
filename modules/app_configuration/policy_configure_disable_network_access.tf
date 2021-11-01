@@ -19,7 +19,7 @@ resource "azurerm_management_group_policy_assignment" "disable_public_network_ac
 PARAMETERS
 }
 
-resource "azurerm_role_assignment" "contributor" {
+resource "azurerm_role_assignment" "disable_network_contributor" {
   scope                = azurerm_app_configuration.appconf.id
   role_definition_name = "Contributor"
   principal_id         = azurerm_management_group_policy_assignment.disable_public_network_access.identity.0.principal_id

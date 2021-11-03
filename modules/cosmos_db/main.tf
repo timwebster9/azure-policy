@@ -9,7 +9,7 @@ resource "azurerm_cosmosdb_account" "db" {
   resource_group_name = azurerm_resource_group.example.name
   offer_type          = "Standard"
   kind                = "GlobalDocumentDB"
-  public_network_access_enabled = false
+  public_network_access_enabled = true
 
   #enable_automatic_failover = true
 
@@ -25,6 +25,15 @@ resource "azurerm_cosmosdb_account" "db" {
   }
 
   depends_on = [
-    azurerm_management_group_policy_assignment.disable_public_network_access
+    azurerm_management_group_policy_assignment.disable_public_network_access,
+    azurerm_policy_definition.disallow_ip_filters,
+    azurerm_management_group_policy_assignment.disallow_ip_filters
   ]
+}
+
+resource "azurerm_cosmosdb_sql_database" "example" {
+  name                = "cosmos-db"
+  resource_group_name = azurerm_resource_group.example.name
+  account_name        = azurerm_cosmosdb_account.db.name
+  throughput          = 400
 }

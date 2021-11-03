@@ -1,0 +1,27 @@
+{
+    "if": {
+        "allOf": [
+            {
+                "field": "type",
+                "equals": "Microsoft.DocumentDB/databaseAccounts"
+            },
+            {
+                "anyOf": [
+                    {
+                        "field": "Microsoft.DocumentDB/databaseAccounts/ipRules",
+                        "exists": "true"
+                    },
+                    {
+                        "count": {
+                            "field": "Microsoft.DocumentDB/databaseAccounts/ipRules[*]"
+                        },
+                        "greater": 0
+                    }
+                ]
+            }
+        ]
+    },
+    "then": {
+        "effect": "[parameters('effect')]"
+    }
+}

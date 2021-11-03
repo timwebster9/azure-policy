@@ -26,8 +26,8 @@ resource "azurerm_cosmosdb_account" "db" {
 
   depends_on = [
     azurerm_management_group_policy_assignment.disable_public_network_access,
-    azurerm_policy_definition.disallow_ip_filters,
-    azurerm_management_group_policy_assignment.disallow_ip_filters
+    #azurerm_policy_definition.disallow_ip_filters,
+    #azurerm_management_group_policy_assignment.disallow_ip_filters
   ]
 }
 

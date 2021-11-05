@@ -1,0 +1,31 @@
+{
+    "if": {
+        "allOf": [
+            {
+                "field": "type",
+                "equals": "Microsoft.Network/firewallPolicies/ruleCollectionGroups"
+            },
+            {
+                "count": {
+                    "field": "Microsoft.Network/firewallPolicies/ruleCollectionGroups/ruleCollections[*]",
+                    "where": {
+                        "allOf": [
+                            {
+                                "field": "Microsoft.Network/firewallPolicies/ruleCollectionGroups/ruleCollections[*].FirewallPolicyFilterRuleCollection.rules[*].ruleType",
+                                "equals": "ApplicationRule"
+                            },
+                            {
+                                "field": "Microsoft.Network/firewallPolicies/ruleCollectionGroups/ruleCollections[*].FirewallPolicyFilterRuleCollection.rules[*].ApplicationRule.terminateTLS",
+                                "notEquals": "true"
+                            }
+                        ]
+                    }
+                },
+                "greater": 1
+            }
+        ]
+    },
+    "then": {
+        "effect": "[parameters('effect')]"
+    }
+}

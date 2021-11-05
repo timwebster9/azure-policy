@@ -32,7 +32,12 @@ resource "azurerm_firewall_policy_rule_collection_group" "example" {
       }
       source_addresses  = ["10.0.0.1"]
       destination_fqdns = ["*.microsoft.com"]
-      terminate_tls     = true
+      terminate_tls     = false
     }
   }
+
+  depends_on = [
+    azurerm_policy_definition.application_rules_tls,
+    azurerm_management_group_policy_assignment.application_rules_tls
+  ]
 }

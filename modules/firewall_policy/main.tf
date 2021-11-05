@@ -15,7 +15,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "example" {
   name               = "example-fwpolicy-rcg"
   firewall_policy_id = azurerm_firewall_policy.example.id
   priority           = 500
-  
+
   application_rule_collection {
     name     = "app_rule_collection1"
     priority = 500
@@ -31,7 +31,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "example" {
         port = 443
       }
       source_addresses  = ["10.0.0.1"]
-      destination_fqdns = [".microsoft.com"]
+      destination_fqdns = ["*.microsoft.com"]
     }
   }
 }

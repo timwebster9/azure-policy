@@ -12,6 +12,7 @@ resource "azurerm_policy_definition" "subnet_naming_convention" {
 
 METADATA
 
+  # policy adapted from https://github.com/Azure/Community-Policy/tree/master/Policies/Network/deny-subnets-missing-suffix
   policy_rule = file("${path.module}/policy_defs/subnet_naming_convention/rules.json")
   parameters = file("${path.module}/policy_defs/subnet_naming_convention/parameters.json")
 }

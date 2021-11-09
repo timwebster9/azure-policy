@@ -7,7 +7,7 @@
             },
             {
                 "field": "name",
-                "notLike": "*-pre"
+                "notLike": "*-prs"
             }
         ]
     },

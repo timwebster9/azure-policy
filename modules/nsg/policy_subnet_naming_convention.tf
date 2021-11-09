@@ -1,5 +1,5 @@
 resource "azurerm_policy_definition" "subnet_naming_convention" {
-  name                  = "nsg_naming"
+  name                  = "subnet_naming"
   policy_type           = "Custom"
   mode                  = "Indexed"
   display_name          = "Subnet names must end with -pre, -app or -dat."
@@ -17,7 +17,7 @@ METADATA
 }
 
 resource "azurerm_management_group_policy_assignment" "subnet_naming_convention" {
-  name                 = "nsg_naming"
+  name                 = "subnet_naming"
   policy_definition_id = azurerm_policy_definition.subnet_naming_convention.id
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"

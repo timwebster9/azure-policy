@@ -50,6 +50,32 @@ resource "azurerm_network_security_group" "dat" {
   ]
 }
 
+resource "azurerm_network_security_group" "app" {
+  name                = "nsg-app"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+
+  depends_on = [
+    azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
+    azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
+    azurerm_policy_definition.naming_convention,
+    azurerm_management_group_policy_assignment.naming_convention
+  ]
+}
+
+resource "azurerm_network_security_group" "fail" {
+  name                = "nsgfail"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+
+  depends_on = [
+    azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
+    azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
+    azurerm_policy_definition.naming_convention,
+    azurerm_management_group_policy_assignment.naming_convention
+  ]
+}
+
 resource "azurerm_subnet_network_security_group_association" "prs_assoc" {
   subnet_id                 = azurerm_subnet.prs.id
   network_security_group_id = azurerm_network_security_group.prs.id

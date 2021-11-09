@@ -8,6 +8,14 @@
             {
                 "field": "name",
                 "notLike": "*-prs"
+            },
+            {
+                "field": "name",
+                "notLike": "*-dat"
+            },
+            {
+                "field": "name",
+                "notLike": "*-app"
             }
         ]
     },

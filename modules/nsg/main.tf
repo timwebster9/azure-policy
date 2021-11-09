@@ -31,7 +31,9 @@ resource "azurerm_network_security_group" "prs" {
 
   depends_on = [
     azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
-    azurerm_management_group_policy_assignment.deny_inbound_udp_pres
+    azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
+    azurerm_policy_definition.naming_convention,
+    azurerm_management_group_policy_assignment.naming_convention
   ]
 }
 
@@ -42,7 +44,9 @@ resource "azurerm_network_security_group" "dat" {
 
   depends_on = [
     azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
-    azurerm_management_group_policy_assignment.deny_inbound_udp_pres
+    azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
+    azurerm_policy_definition.naming_convention,
+    azurerm_management_group_policy_assignment.naming_convention
   ]
 }
 

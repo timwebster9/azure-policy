@@ -27,6 +27,9 @@ resource "azurerm_management_group_policy_assignment" "subnet_naming_convention"
 {
   "effect": {
     "value": "Deny"
+  },
+  "allowedSuffixes": {
+    "value": ["prs","app","dat"]
   }
 }
 PARAMETERS

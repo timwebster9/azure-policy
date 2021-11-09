@@ -11,5 +11,12 @@
             "displayName": "Effect",
             "description": "The effect determines what happens when the policy rule is evaluated to match"
         }
+    },
+    "allowedSuffixes": {
+        "type": "Array",
+        "metadata": {
+            "displayName": "Allowed Suffixes",
+            "description": "Assessment is performed as such: 'example-subnet-suffix', would be split by '-' and the last value would be returned."
+        }
     }
 }

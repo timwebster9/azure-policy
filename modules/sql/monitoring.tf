@@ -7,11 +7,18 @@ resource "azurerm_log_analytics_workspace" "example" {
 }
 
 resource "azurerm_storage_account" "example" {
-  name                     = "timwpolicydiags908745"
-  resource_group_name      = azurerm_resource_group.example.name
-  location                 = azurerm_resource_group.example.location
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
+  name                      = "timwpolicydiags908745"
+  resource_group_name       = azurerm_resource_group.example.name
+  location                  = azurerm_resource_group.example.location
+  account_tier              = "Standard"
+  account_replication_type  = "LRS"
+  enable_https_traffic_only = true
+  min_tls_version           = "1.2"
+
+  network_rules {
+    default_action = "Deny"
+    bypass = [ "AzureServices" ]
+  }
 }
 
 resource "azurerm_eventhub_namespace" "example" {

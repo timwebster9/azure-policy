@@ -13,7 +13,7 @@ resource "azurerm_storage_account" "example" {
   account_tier              = "Standard"
   account_replication_type  = "LRS"
   enable_https_traffic_only = true
-  min_tls_version           = "1.2"
+  min_tls_version           = "TLS1_2"
 
   network_rules {
     default_action = "Deny"

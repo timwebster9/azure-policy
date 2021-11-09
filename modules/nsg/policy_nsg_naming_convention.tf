@@ -1,4 +1,4 @@
-resource "azurerm_policy_definition" "naming_convention" {
+resource "azurerm_policy_definition" "nsg_naming_convention" {
   name                  = "nsg_naming"
   policy_type           = "Custom"
   mode                  = "Indexed"
@@ -12,16 +12,16 @@ resource "azurerm_policy_definition" "naming_convention" {
 
 METADATA
 
-  policy_rule = file("${path.module}/policy_defs/naming_convention/rules.json")
-  parameters = file("${path.module}/policy_defs/naming_convention/parameters.json")
+  policy_rule = file("${path.module}/policy_defs/nsg_naming_convention/rules.json")
+  parameters = file("${path.module}/policy_defs/nsg_naming_convention/parameters.json")
 }
 
-resource "azurerm_management_group_policy_assignment" "naming_convention" {
-  name                 = "naming_convention"
-  policy_definition_id = azurerm_policy_definition.naming_convention.id
+resource "azurerm_management_group_policy_assignment" "nsg_naming_convention" {
+  name                 = "nsg_naming"
+  policy_definition_id = azurerm_policy_definition.nsg_naming_convention.id
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"
-  display_name         = azurerm_policy_definition.naming_convention.display_name
+  display_name         = azurerm_policy_definition.nsg_naming_convention.display_name
 
   parameters = <<PARAMETERS
 {

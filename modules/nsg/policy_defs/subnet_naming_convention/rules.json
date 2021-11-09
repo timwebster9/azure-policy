@@ -1,0 +1,25 @@
+{
+    "if": {
+        "allOf": [
+            {
+                "field": "type",
+                "equals": "Microsoft.Network/virtualNetworks/subnets"
+            },
+            {
+                "field": "name",
+                "notLike": "*-prs"
+            },
+            {
+                "field": "name",
+                "notLike": "*-dat"
+            },
+            {
+                "field": "name",
+                "notLike": "*-app"
+            }
+        ]
+    },
+    "then": {
+        "effect": "[parameters('effect')]"
+    }
+}

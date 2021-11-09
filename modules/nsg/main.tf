@@ -15,6 +15,11 @@ resource "azurerm_subnet" "prs" {
   resource_group_name  = azurerm_resource_group.example.name
   virtual_network_name = azurerm_virtual_network.example.name
   address_prefixes     = ["10.0.1.0/24"]
+
+  depends_on = [
+    azurerm_policy_definition.subnet_naming_convention,
+    azurerm_management_group_policy_assignment.subnet_naming_convention
+  ]
 }
 
 resource "azurerm_subnet" "dat" {
@@ -22,6 +27,35 @@ resource "azurerm_subnet" "dat" {
   resource_group_name  = azurerm_resource_group.example.name
   virtual_network_name = azurerm_virtual_network.example.name
   address_prefixes     = ["10.0.2.0/24"]
+
+  depends_on = [
+    azurerm_policy_definition.subnet_naming_convention,
+    azurerm_management_group_policy_assignment.subnet_naming_convention
+  ]
+}
+
+resource "azurerm_subnet" "app" {
+  name                 = "subnet-app"
+  resource_group_name  = azurerm_resource_group.example.name
+  virtual_network_name = azurerm_virtual_network.example.name
+  address_prefixes     = ["10.0.3.0/24"]
+
+  depends_on = [
+    azurerm_policy_definition.subnet_naming_convention,
+    azurerm_management_group_policy_assignment.subnet_naming_convention
+  ]
+}
+
+resource "azurerm_subnet" "fail" {
+  name                 = "subnet-fail"
+  resource_group_name  = azurerm_resource_group.example.name
+  virtual_network_name = azurerm_virtual_network.example.name
+  address_prefixes     = ["10.0.4.0/24"]
+
+  depends_on = [
+    azurerm_policy_definition.subnet_naming_convention,
+    azurerm_management_group_policy_assignment.subnet_naming_convention
+  ]
 }
 
 resource "azurerm_network_security_group" "prs" {
@@ -32,8 +66,8 @@ resource "azurerm_network_security_group" "prs" {
   depends_on = [
     azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
     azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
-    azurerm_policy_definition.naming_convention,
-    azurerm_management_group_policy_assignment.naming_convention
+    azurerm_policy_definition.nsg_naming_convention,
+    azurerm_management_group_policy_assignment.nsg_naming_convention
   ]
 }
 
@@ -45,8 +79,8 @@ resource "azurerm_network_security_group" "dat" {
   depends_on = [
     azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
     azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
-    azurerm_policy_definition.naming_convention,
-    azurerm_management_group_policy_assignment.naming_convention
+    azurerm_policy_definition.nsg_naming_convention,
+    azurerm_management_group_policy_assignment.nsg_naming_convention
   ]
 }
 
@@ -58,8 +92,8 @@ resource "azurerm_network_security_group" "app" {
   depends_on = [
     azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
     azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
-    azurerm_policy_definition.naming_convention,
-    azurerm_management_group_policy_assignment.naming_convention
+    azurerm_policy_definition.nsg_naming_convention,
+    azurerm_management_group_policy_assignment.nsg_naming_convention
   ]
 }
 
@@ -71,8 +105,8 @@ resource "azurerm_network_security_group" "fail" {
   depends_on = [
     azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
     azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
-    azurerm_policy_definition.naming_convention,
-    azurerm_management_group_policy_assignment.naming_convention
+    azurerm_policy_definition.nsg_naming_convention,
+    azurerm_management_group_policy_assignment.nsg_naming_convention
   ]
 }
 

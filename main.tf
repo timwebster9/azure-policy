@@ -156,18 +156,8 @@
 #     policy_assignment_mgmt_group_name = "parent-mgmt-group"
 # }
 
-# module "firewall_policy" {
-#     source = "./modules/firewall_policy"
-
-#     location                          = var.location
-#     resource_group_name               = "policy-rg"
-
-#     policy_definition_mgmt_group_name = "parent-mgmt-group"
-#     policy_assignment_mgmt_group_name = "parent-mgmt-group"
-# }
-
-module "routes" {
-    source = "./modules/routes"
+module "firewall_policy" {
+    source = "./modules/firewall_policy"
 
     location                          = var.location
     resource_group_name               = "policy-rg"
@@ -175,3 +165,13 @@ module "routes" {
     policy_definition_mgmt_group_name = "parent-mgmt-group"
     policy_assignment_mgmt_group_name = "parent-mgmt-group"
 }
+
+# module "routes" {
+#     source = "./modules/routes"
+
+#     location                          = var.location
+#     resource_group_name               = "policy-rg"
+
+#     policy_definition_mgmt_group_name = "parent-mgmt-group"
+#     policy_assignment_mgmt_group_name = "parent-mgmt-group"
+# }

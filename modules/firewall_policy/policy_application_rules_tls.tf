@@ -1,7 +1,7 @@
 resource "azurerm_policy_definition" "application_rules_tls" {
   name                  = "application_rules_tls"
   policy_type           = "Custom"
-  mode                  = "Indexed"
+  mode                  = "All"
   display_name          = "Firewall application rules should have TLS inspection enabled"
   management_group_name = data.azurerm_management_group.policy_definition_mgmt_group.name
 

@@ -4,16 +4,6 @@
             {
                 "field": "type",
                 "equals": "Microsoft.Network/firewallPolicies/ruleCollectionGroups"
-            },
-            {
-                "count": {
-                    "field": "Microsoft.Network/firewallPolicies/ruleCollectionGroups/ruleCollections[*].FirewallPolicyFilterRuleCollection.rules[*]",
-                    "where": {
-                        "field": "Microsoft.Network/firewallPolicies/ruleCollectionGroups/ruleCollections[*].FirewallPolicyFilterRuleCollection.rules[*].ruleType",
-                        "equals": "ApplicationRule"
-                    }
-                },
-                "greater": 0
             }
         ]
     },

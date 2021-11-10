@@ -1,0 +1,44 @@
+{
+    "properties": {
+        "priority": 500,
+        "ruleCollections": [
+            {
+                "action": {
+                    "type": "Deny"
+                },
+                "name": "app_rule_collection1",
+                "priority": 500,
+                "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
+                "rules": [
+                    {
+                        "description": "",
+                        "destinationAddresses": [],
+                        "fqdnTags": [],
+                        "name": "app_rule_collection1_rule1",
+                        "protocols": [
+                            {
+                                "protocolType": "Http",
+                                "port": 80
+                            },
+                            {
+                                "protocolType": "Https",
+                                "port": 443
+                            }
+                        ],
+                        "ruleType": "ApplicationRule",
+                        "sourceAddresses": [
+                            "10.0.0.1"
+                        ],
+                        "sourceIpGroups": [],
+                        "targetFqdns": [
+                            "*.microsoft.com"
+                        ],
+                        "targetUrls": [],
+                        "terminateTLS": false,
+                        "webCategories": []
+                    }
+                ]
+            }
+        ]
+    }
+}

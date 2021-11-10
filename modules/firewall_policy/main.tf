@@ -38,8 +38,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "example" {
 
   depends_on = [
     azurerm_policy_definition.application_rules_tls,
-    azurerm_management_group_policy_assignment.application_rules_tls,
-    azurerm_template_deployment.policy_exemptions
+    azurerm_management_group_policy_assignment.application_rules_tls
   ]
 }
 

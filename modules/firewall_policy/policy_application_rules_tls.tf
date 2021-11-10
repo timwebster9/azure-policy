@@ -26,7 +26,7 @@ resource "azurerm_management_group_policy_assignment" "application_rules_tls" {
   parameters = <<PARAMETERS
 {
   "effect": {
-    "value": "Deny"
+    "value": "Audit"
   }
 }
 PARAMETERS

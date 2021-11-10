@@ -1,5 +1,5 @@
 resource "azurerm_template_deployment" "policy_exemptions" {
-  name                = "TLS exemptions"
+  name                = "tls-exemptions"
   resource_group_name = azurerm_resource_group.example.name
   parameters = {
     "exemption_name"         = "TLS exemption"

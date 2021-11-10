@@ -11,7 +11,7 @@
                     "where": {
                         "allOf": [
                             {
-                                "field": "Microsoft.Network/firewallPolicies/ruleCollectionGroups/ruleCollections[*].FirewallPolicyFilterRuleCollection.rules[*].ruleType",
+                                "field": "Microsoft.Network/firewallPolicies/ruleCollectionGroups/ruleCollections[*].FirewallPolicyFilterRuleCollection.rules[].ruleType",
                                 "equals": "ApplicationRule"
                             }
                         ]

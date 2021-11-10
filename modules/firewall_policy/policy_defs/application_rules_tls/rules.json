@@ -3,7 +3,25 @@
         "allOf": [
             {
                 "field": "type",
-                "equals": "Microsoft.Network/FirewallPolicies/RuleCollectionGroups"
+                "equals": "Microsoft.Network/firewallPolicies/ruleCollectionGroups"
+            },
+            {
+                "count": {
+                    "field": "Microsoft.Network/firewallPolicies/ruleCollectionGroups/ruleCollections[*].FirewallPolicyFilterRuleCollection.rules[*]",
+                    "where": {
+                        "allOf": [
+                            {
+                                "field": "Microsoft.Network/firewallPolicies/ruleCollectionGroups/ruleCollections[*].FirewallPolicyFilterRuleCollection.rules[*].ruleType",
+                                "equals": "ApplicationRule"
+                            },
+                            {
+                                "field": "Microsoft.Network/firewallPolicies/ruleCollectionGroups/ruleCollections[*].FirewallPolicyFilterRuleCollection.rules[*].ApplicationRule.terminateTLS",
+                                "notEquals": "true"
+                            }
+                        ]
+                    }
+                },
+                "greater": 0
             }
         ]
     },

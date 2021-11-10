@@ -12,6 +12,7 @@ resource "azurerm_policy_definition" "enforce_routes" {
 
 METADATA
 
+  # from https://github.com/Azure/Community-Policy/tree/master/Policies/Network/Prevent%20subnets%20without%20Route%20Table
   policy_rule = file("${path.module}/policy_defs/enforce_routes/rules.json")
   parameters = file("${path.module}/policy_defs/enforce_routes/parameters.json")
 }

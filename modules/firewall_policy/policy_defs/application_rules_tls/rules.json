@@ -3,7 +3,7 @@
         "allOf": [
             {
                 "field": "type",
-                "equals": "Microsoft.Network/firewallPolicies/ruleCollectionGroups"
+                "equals": "Microsoft.Network/FirewallPolicies/RuleCollectionGroups"
             }
         ]
     },

@@ -22,3 +22,17 @@ resource "azurerm_subnet" "example" {
     azurerm_management_group_policy_assignment.route_firewall
   ]
 }
+
+resource "azurerm_route_table" "example" {
+  name                          = "acceptanceTestSecurityGroup1"
+  location                      = azurerm_resource_group.example.location
+  resource_group_name           = azurerm_resource_group.example.name
+  disable_bgp_route_propagation = false
+
+  route {
+    name           = "route1"
+    address_prefix = "10.1.0.0/16"
+    next_hop_type  = "vnetlocal"
+  }
+
+}

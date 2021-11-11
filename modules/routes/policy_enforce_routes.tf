@@ -27,7 +27,7 @@ resource "azurerm_management_group_policy_assignment" "enforce_routes" {
   parameters = <<PARAMETERS
 {
   "effect": {
-    "value": "Deny"
+    "value": "Audit"
   }
 }
 PARAMETERS

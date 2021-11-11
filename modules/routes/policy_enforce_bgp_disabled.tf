@@ -18,10 +18,10 @@ METADATA
 
 resource "azurerm_management_group_policy_assignment" "enforce_bgp_disabled" {
   name                 = "enforce_bgp_disabled"
-  policy_definition_id = azurerm_policy_definition.enforce_routes.id
+  policy_definition_id = azurerm_policy_definition.enforce_bgp_disabled.id
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"
-  display_name         = azurerm_policy_definition.enforce_routes.display_name
+  display_name         = azurerm_policy_definition.enforce_bgp_disabled.display_name
   location             = var.location
 
   parameters = <<PARAMETERS

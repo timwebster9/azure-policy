@@ -23,8 +23,9 @@ resource "azurerm_subnet" "example" {
   ]
 }
 
-resource "azurerm_route_table" "example" {
-  name                          = "acceptanceTestSecurityGroup1"
+# should pass
+resource "azurerm_route_table" "bgp_enabled" {
+  name                          = "bgp-enabled"
   location                      = azurerm_resource_group.example.location
   resource_group_name           = azurerm_resource_group.example.name
   disable_bgp_route_propagation = false
@@ -34,5 +35,29 @@ resource "azurerm_route_table" "example" {
     address_prefix = "10.1.0.0/16"
     next_hop_type  = "vnetlocal"
   }
+
+  depends_on = [
+    azurerm_policy_definition.enforce_bgp_disabled,
+    azurerm_management_group_policy_assignment.enforce_bgp_disabled
+  ]
+}
+
+# should fail
+resource "azurerm_route_table" "bgp_disabled" {
+  name                          = "bgp-disabled"
+  location                      = azurerm_resource_group.example.location
+  resource_group_name           = azurerm_resource_group.example.name
+  disable_bgp_route_propagation = true
+
+  route {
+    name           = "route1"
+    address_prefix = "10.1.0.0/16"
+    next_hop_type  = "vnetlocal"
+  }
+
+  depends_on = [
+    azurerm_policy_definition.enforce_bgp_disabled,
+    azurerm_management_group_policy_assignment.enforce_bgp_disabled
+  ]
 
 }

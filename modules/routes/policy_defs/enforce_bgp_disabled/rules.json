@@ -1,0 +1,17 @@
+{
+    "if": {
+        "allOf": [
+            {
+                "field": "type",
+                "equals": "Microsoft.Network/routeTables"
+            },
+            {
+                "field": "Microsoft.Network/routeTables/disableBgpRoutePropagation",
+                "equals": "false"
+            }
+        ]
+    },
+    "then": {
+        "effect": "[parameters('effect')]"
+    }
+}

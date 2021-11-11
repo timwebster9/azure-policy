@@ -11,7 +11,7 @@ resource "azurerm_firewall_policy" "example" {
   sku                 = "Premium"
 }
 
-# exempt
+# allowed: HTTPS rule with no TLS inspecetion, but has an exemption created
 resource "azurerm_firewall_policy_rule_collection_group" "example" {
   name               = "example-fwpolicy-rcg"
   firewall_policy_id = azurerm_firewall_policy.example.id
@@ -43,7 +43,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "example" {
   ]
 }
 
-# should be denied
+# should be denied: HTTPS rule with no TLS inspection
 resource "azurerm_firewall_policy_rule_collection_group" "example2" {
   name               = "example-fwpolicy-rcg2"
   firewall_policy_id = azurerm_firewall_policy.example.id
@@ -65,7 +65,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "example2" {
       }
       source_addresses  = ["10.0.0.1"]
       destination_fqdns = ["*.microsoft.com"]
-      terminate_tls     = true
+      terminate_tls     = false
     }
   }
 

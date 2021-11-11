@@ -24,9 +24,9 @@
                                     "where": {
                                         "field": "Microsoft.Network/firewallPolicies/ruleCollectionGroups/ruleCollections[*].FirewallPolicyFilterRuleCollection.rules[*].ApplicationRule.protocols[*].protocolType",
                                         "equals": "Https"
-                                    },
-                                    "greater": 0
-                                }
+                                    }
+                                },
+                                "greater": 0
                             }
                         ]
                     }

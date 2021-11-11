@@ -1,7 +1,7 @@
 resource "azurerm_policy_definition" "enforce_routes" {
   name                  = "enforce_routes"
   policy_type           = "Custom"
-  mode                  = "Indexed"
+  mode                  = "All"
   display_name          = "Subnets should have a default route"
   management_group_name = data.azurerm_management_group.policy_definition_mgmt_group.name
 

@@ -7,7 +7,7 @@ data "azurerm_management_group" "policy_definition_mgmt_group" {
 }
 
 data "azurerm_management_group" "policy_assignment_mgmt_group" {
-  name = var.policy_assignment_mgmt_group_name
+  name = "customer-management-group"
 }
 
 # [Preview]: All Internet traffic should be routed via your deployed Azure Firewall

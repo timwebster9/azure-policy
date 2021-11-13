@@ -166,8 +166,18 @@
 #     policy_assignment_mgmt_group_name = "parent-mgmt-group"
 # }
 
-module "routes" {
-    source = "./modules/routes"
+# module "routes" {
+#     source = "./modules/routes"
+
+#     location                          = var.location
+#     resource_group_name               = "policy-rg"
+
+#     policy_definition_mgmt_group_name = "parent-mgmt-group"
+#     policy_assignment_mgmt_group_name = "parent-mgmt-group"
+# }
+
+module "authorization" {
+    source = "./modules/authorization"
 
     location                          = var.location
     resource_group_name               = "policy-rg"

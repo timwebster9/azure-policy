@@ -98,12 +98,12 @@ resource "azurerm_network_security_group" "app" {
   ]
 }
 
-resource "azurerm_network_security_group" "app" {
+resource "azurerm_network_security_group" "test_app" {
   name                = "nsg-test-app"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
 
-    security_rule {
+  security_rule {
     name                       = "test123"
     priority                   = 100
     direction                  = "Inbound"

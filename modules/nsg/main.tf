@@ -106,7 +106,7 @@ resource "azurerm_network_security_group" "test_app" {
   security_rule {
     name                       = "test123"
     priority                   = 100
-    direction                  = "Inbound"
+    direction                  = "Outbound"
     access                     = "Allow"
     protocol                   = "Tcp"
     source_port_range          = "*"
@@ -116,10 +116,8 @@ resource "azurerm_network_security_group" "test_app" {
   }
 
   depends_on = [
-    azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
-    azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
-    azurerm_policy_definition.nsg_naming_convention,
-    azurerm_management_group_policy_assignment.nsg_naming_convention
+    azurerm_policy_definition.deny_nsg_all_ports,
+    azurerm_management_group_policy_assignment.deny_nsg_all_ports
   ]
 }
 

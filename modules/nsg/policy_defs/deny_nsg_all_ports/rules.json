@@ -11,7 +11,7 @@
                     "where": {
                         "allOf": [
                             {
-                                "field": "Microsoft.Network/networkSecurityGroups/securityRules[*].sourceAddressPrefix",
+                                "field": "Microsoft.Network/networkSecurityGroups/securityRules[*].destinationPortRange",
                                 "equals": "*"
                             }
                         ]

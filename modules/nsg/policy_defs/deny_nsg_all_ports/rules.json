@@ -1,23 +1,47 @@
 {
     "if": {
-        "allOf": [
+        "anyOf": [
             {
-                "field": "type",
-                "equals": "Microsoft.Network/networkSecurityGroups"
+                "allOf": [
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Network/networkSecurityGroups"
+                    },
+                    {
+                        "count": {
+                            "field": "Microsoft.Network/networkSecurityGroups/securityRules[*]",
+                            "where": {
+                                "allOf": [
+                                    {
+                                        "field": "Microsoft.Network/networkSecurityGroups/securityRules[*].destinationPortRange",
+                                        "equals": "*"
+                                    },
+                                    {
+                                        "field": "Microsoft.Network/networkSecurityGroups/securityRules[*].access",
+                                        "equals": "Allow"
+                                    }
+                                ]
+                            }
+                        },
+                        "greater": 0
+                    }
+                ]
             },
             {
-                "count": {
-                    "field": "Microsoft.Network/networkSecurityGroups/securityRules[*]",
-                    "where": {
-                        "allOf": [
-                            {
-                                "field": "Microsoft.Network/networkSecurityGroups/securityRules[*].destinationPortRange",
-                                "equals": "*"
-                            }
-                        ]
+                "allOf": [
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Network/networkSecurityGroups/securityRules"
+                    },
+                    {
+                        "field": "Microsoft.Network/networkSecurityGroups/securityRules/destinationPortRange",
+                        "equals": "*"
+                    },
+                    {
+                        "field": "Microsoft.Network/networkSecurityGroups/securityRules/access",
+                        "equals": "Allow"
                     }
-                },
-                "greater": 0
+                ]
             }
         ]
     },

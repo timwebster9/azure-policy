@@ -98,8 +98,9 @@ resource "azurerm_network_security_group" "app" {
   ]
 }
 
-resource "azurerm_network_security_rule" "example" {
-  name                        = "test123"
+# should fail - contains a rule with '*' in destination ports
+resource "azurerm_network_security_rule" "fail_rule" {
+  name                        = "fail-rule"
   priority                    = 100
   direction                   = "Outbound"
   access                      = "Allow"
@@ -136,19 +137,19 @@ resource "azurerm_network_security_group" "test_app" {
   ]
 }
 
-#
-# resource "azurerm_network_security_group" "fail" {
-#   name                = "nsgfail"
-#   location            = azurerm_resource_group.example.location
-#   resource_group_name = azurerm_resource_group.example.name
+# should fail - doesn't follow naming convention
+resource "azurerm_network_security_group" "fail" {
+  name                = "nsgfail"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
 
-#   depends_on = [
-#     azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
-#     azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
-#     azurerm_policy_definition.nsg_naming_convention,
-#     azurerm_management_group_policy_assignment.nsg_naming_convention
-#   ]
-# }
+  depends_on = [
+    azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
+    azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
+    azurerm_policy_definition.nsg_naming_convention,
+    azurerm_management_group_policy_assignment.nsg_naming_convention
+  ]
+}
 
 resource "azurerm_subnet_network_security_group_association" "prs_assoc" {
   subnet_id                 = azurerm_subnet.prs.id
@@ -158,23 +159,4 @@ resource "azurerm_subnet_network_security_group_association" "prs_assoc" {
 resource "azurerm_subnet_network_security_group_association" "dat_assoc" {
   subnet_id                 = azurerm_subnet.dat.id
   network_security_group_id = azurerm_network_security_group.dat.id
-}
-
-# Policy Def
-resource "azurerm_policy_definition" "default_nsg_rule" {
-  name                  = "default_nsg_rule"
-  policy_type           = "Custom"
-  mode                  = "Indexed"
-  display_name          = "Append default NSG rules"
-  management_group_name = data.azurerm_management_group.policy_definition_mgmt_group.name
-
-  metadata = <<METADATA
-    {
-    "category": "Network"
-    }
-
-METADATA
-
-  policy_rule = file("${path.module}/policy_defs/default_nsg_rule/rules.json")
-  parameters = file("${path.module}/policy_defs/default_nsg_rule/parameters.json")
 }

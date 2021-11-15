@@ -98,6 +98,21 @@ resource "azurerm_network_security_group" "app" {
   ]
 }
 
+resource "azurerm_network_security_rule" "example" {
+  name                        = "test123"
+  priority                    = 100
+  direction                   = "Outbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "*"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.example.name
+  network_security_group_name = azurerm_network_security_group.app.name
+}
+
+# should fail - contains a rule with '*' in destination ports
 resource "azurerm_network_security_group" "test_app" {
   name                = "nsg-test-app"
   location            = azurerm_resource_group.example.location

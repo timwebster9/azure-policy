@@ -46,6 +46,7 @@ resource "azurerm_subnet" "app" {
   ]
 }
 
+# should fail - doesn't meet naming convention
 resource "azurerm_subnet" "fail" {
   name                 = "subnet-fail"
   resource_group_name  = azurerm_resource_group.example.name
@@ -97,10 +98,22 @@ resource "azurerm_network_security_group" "app" {
   ]
 }
 
-resource "azurerm_network_security_group" "fail" {
-  name                = "nsgfail"
+resource "azurerm_network_security_group" "app" {
+  name                = "nsg-test-app"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
+
+    security_rule {
+    name                       = "test123"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
 
   depends_on = [
     azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
@@ -109,6 +122,20 @@ resource "azurerm_network_security_group" "fail" {
     azurerm_management_group_policy_assignment.nsg_naming_convention
   ]
 }
+
+#
+# resource "azurerm_network_security_group" "fail" {
+#   name                = "nsgfail"
+#   location            = azurerm_resource_group.example.location
+#   resource_group_name = azurerm_resource_group.example.name
+
+#   depends_on = [
+#     azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
+#     azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
+#     azurerm_policy_definition.nsg_naming_convention,
+#     azurerm_management_group_policy_assignment.nsg_naming_convention
+#   ]
+# }
 
 resource "azurerm_subnet_network_security_group_association" "prs_assoc" {
   subnet_id                 = azurerm_subnet.prs.id

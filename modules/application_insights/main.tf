@@ -18,7 +18,7 @@ resource "azurerm_application_insights" "example" {
   resource_group_name = azurerm_resource_group.example.name
   application_type    = "web"
 
-  depends_on [
+  depends_on = [
     azurerm_policy_definition.workspace_based,
     azurerm_management_group_policy_assignment.workspace_based
   ]
@@ -31,7 +31,7 @@ resource "azurerm_application_insights" "example" {
   workspace_id        = azurerm_log_analytics_workspace.example.id
   application_type    = "web"
 
-  depends_on [
+  depends_on = [
     azurerm_policy_definition.workspace_based,
     azurerm_management_group_policy_assignment.workspace_based
   ]

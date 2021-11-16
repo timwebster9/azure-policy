@@ -1,0 +1,17 @@
+{
+	"if": {
+		"allOf": [
+			{
+				"field": "type",
+				"equals": "Microsoft.Insights/components"
+			},
+            {
+                "field": "Microsoft.Insights/components/WorkspaceResourceId",
+                "exists": "false"
+            }
+		]
+	},
+	"then": {
+		"effect": "[parameters('effect')]"
+	}
+}

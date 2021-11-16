@@ -12,8 +12,8 @@ resource "azurerm_log_analytics_workspace" "example" {
 }
 
 # should fail
-resource "azurerm_application_insights" "example" {
-  name                = "tf-test-appinsights"
+resource "azurerm_application_insights" "fail" {
+  name                = "tf-appinsights-fail"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   application_type    = "web"

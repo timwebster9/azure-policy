@@ -14,7 +14,6 @@
             "roleDefinitionIds": [
                 "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
             ],
-            "EvaluationDelay": "AfterProvisioning",
             "existenceCondition": {
                 "allOf": [
                     {
@@ -26,8 +25,20 @@
                         "equals": "true"
                     },
                     {
-                        "field": "Microsoft.Insights/diagnosticSettings/eventHubAuthorizationRuleId",
-                        "matchInsensitively": "[parameters('eventHubRuleId')]"
+                        "field": "Microsoft.Sql/servers/auditingSettings/storageEndpoint",
+                        "equals": "[parameters('storageEndpoint')]"
+                    },
+                    {
+                        "field": "Microsoft.Sql/servers/devOpsAuditingSettings/state",
+                        "equals": "Enabled"
+                    },
+                    {
+                        "field": "Microsoft.Sql/servers/devOpsAuditingSettings/isAzureMonitorTargetEnabled",
+                        "equals": "true"
+                    },
+                    {
+                        "field": "Microsoft.Sql/servers/devOpsAuditingSettings/storageEndpoint",
+                        "equals": "[parameters('storageEndpoint')]"
                     }
                 ]
             },
@@ -44,14 +55,8 @@
                             "sqlServerId": {
                                 "type": "string"
                             },
-                            "eventHubRuleId": {
-                                "type": "string"
-                            },
                             "auditActionsAndGroups": {
                                 "type": "array"
-                            },
-                            "eventHubName": {
-                                "type": "string"
                             },
                             "logAnalyticsWorkspaceId": {
                                 "type": "string"
@@ -96,7 +101,7 @@
                             },
                             {
                                 "type": "Microsoft.Sql/servers/auditingSettings",
-                                "name": "[concat(parameters('resourceName'), '/setByPolicy')]",
+                                "name": "[concat(parameters('resourceName'), '/sqlAuditSetByPolicy')]",
                                 "apiVersion": "2021-02-01-preview",
                                 "properties": {
                                     "auditActionsAndGroups": "[parameters('auditActionsAndGroups')]",
@@ -107,6 +112,19 @@
                                     "storageEndpoint": "[parameters('storageEndpoint')]",
                                     "storageAccountSubscriptionId": "[parameters('storageAccountSubscriptionId')]"
                                 }
+                            },
+                            {
+                                "type": "Microsoft.Sql/servers/devOpsAuditingSettings",
+                                "name": "[concat(parameters('resourceName'), '/devopsSqlAuditSetByPolicy')]",
+                                "apiVersion": "2021-02-01-preview",
+                                "properties": {
+                                    "auditActionsAndGroups": "[parameters('auditActionsAndGroups')]",
+                                    "state": "Enabled",
+                                    "retentionDays": "[parameters('storageRetentionDays')]",
+                                    "isAzureMonitorTargetEnabled": true,
+                                    "storageEndpoint": "[parameters('storageEndpoint')]",
+                                    "storageAccountSubscriptionId": "[parameters('storageAccountSubscriptionId')]"
+                                }
                             }
                         ],
                         "outputs": {}
@@ -114,12 +132,6 @@
                     "parameters": {
                         "auditActionsAndGroups": {
                             "value": "[parameters('auditActionsAndGroups')]"
-                        },
-                        "eventHubRuleId": {
-                            "value": "[parameters('eventHubRuleId')]"
-                        },
-                        "eventHubName": {
-                            "value": "[parameters('eventHubName')]"
                         },
                         "logAnalyticsWorkspaceId": {
                             "value": "[parameters('logAnalyticsWorkspaceId')]"

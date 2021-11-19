@@ -158,6 +158,22 @@
                                                 "enabled": true,
                                                 "days": "[parameters('storageRetentionDays')]"
                                             }
+                                        },
+                                        {
+                                            "category": "SQLSecurityAuditEvents",
+                                            "enabled": "[parameters('logsEnabled')]",
+                                            "retentionPolicy": {
+                                                "enabled": true,
+                                                "days": "[parameters('storageRetentionDays')]"
+                                            }
+                                        },
+                                        {
+                                            "category": "DevOpsOperationsAudit",
+                                            "enabled": "[parameters('logsEnabled')]",
+                                            "retentionPolicy": {
+                                                "enabled": true,
+                                                "days": "[parameters('storageRetentionDays')]"
+                                            }
                                         }
                                     ]
                                 }

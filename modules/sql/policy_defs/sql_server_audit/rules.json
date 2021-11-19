@@ -84,36 +84,6 @@
                         },
                         "resources": [
                             {
-                                "type": "Microsoft.Sql/servers/databases/providers/diagnosticSettings",
-                                "apiVersion": "2021-05-01-preview",
-                                "name": "[concat(parameters('resourceName'), '/master/', 'Microsoft.Insights/', 'auditSetByPolicy')]",
-                                "location": "[parameters('location')]",
-                                "properties": {
-                                    "eventHubAuthorizationRuleId": "[parameters('eventHubRuleId')]",
-                                    "eventHubName": "[parameters('eventHubName')]",
-                                    "workspaceId": "[parameters('logAnalyticsWorkspaceId')]",
-                                    "storageAccountId": "[parameters('storageAccountId')]",
-                                    "logs": [
-                                        {
-                                            "category": "SQLSecurityAuditEvents",
-                                            "enabled": "[parameters('logsEnabled')]",
-                                            "retentionPolicy": {
-                                                "enabled": true,
-                                                "days": "[parameters('storageRetentionDays')]"
-                                            }
-                                        },
-                                        {
-                                            "category": "DevOpsOperationsAudit",
-                                            "enabled": "[parameters('logsEnabled')]",
-                                            "retentionPolicy": {
-                                                "enabled": true,
-                                                "days": "[parameters('storageRetentionDays')]"
-                                            }
-                                        }
-                                    ]
-                                }
-                            },
-                            {
                                 "type": "Microsoft.Storage/storageAccounts/providers/roleAssignments",
                                 "apiVersion": "2020-03-01-preview",
                                 "name": "[concat(parameters('storageAccountName'), '/Microsoft.Authorization/', variables('uniqueRoleGuid'))]",

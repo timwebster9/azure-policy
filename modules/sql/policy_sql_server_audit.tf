@@ -64,8 +64,14 @@ resource "azurerm_management_group_policy_assignment" "sql_server_audit" {
 PARAMETERS
 }
 
-resource "azurerm_role_assignment" "sql_server_audit" {
+resource "azurerm_role_assignment" "sql_server_audit_contrib" {
   scope                = data.azurerm_management_group.policy_assignment_mgmt_group.id
   role_definition_name = "Contributor"
+  principal_id         = azurerm_management_group_policy_assignment.sql_server_audit.identity[0].principal_id
+}
+
+resource "azurerm_role_assignment" "sql_server_audit_uaa" {
+  scope                = data.azurerm_management_group.policy_assignment_mgmt_group.id
+  role_definition_name = "User Access Administrator"
   principal_id         = azurerm_management_group_policy_assignment.sql_server_audit.identity[0].principal_id
 }

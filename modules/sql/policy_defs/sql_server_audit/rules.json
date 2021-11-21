@@ -115,7 +115,7 @@
                             },
                             {
                                 "type": "Microsoft.Sql/servers/devOpsAuditingSettings",
-                                "name": "[concat(parameters('resourceName'), '/devopsSqlAuditSetByPolicy')]",
+                                "name": "[concat(parameters('resourceName'), '/default')]",
                                 "apiVersion": "2021-02-01-preview",
                                 "properties": {
                                     "auditActionsAndGroups": "[parameters('auditActionsAndGroups')]",

@@ -9,7 +9,7 @@ resource "azurerm_log_analytics_workspace" "example" {
 resource "azurerm_resource_group" "secondary_rg" {
   provider                  = azurerm.secondary
 
-  name     = var.resource_group_name
+  name     = "secondary-sa-rg"
   location = var.location
 }
 

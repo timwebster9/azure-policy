@@ -40,7 +40,9 @@ resource "azurerm_mssql_server" "example" {
     azurerm_management_group_policy_assignment.sql_identity,
     azurerm_policy_definition.sql_server_audit,
     azurerm_role_assignment.sql_server_audit_contrib,
-    azurerm_role_assignment.sql_server_audit_uaa
+    azurerm_role_assignment.sql_server_audit_uaa,
+    azurerm_policy_definition.whitelist_regions,
+    azurerm_management_group_policy_assignment.whitelist_regions
   ]
 }
 

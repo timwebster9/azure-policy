@@ -40,7 +40,7 @@ resource "azurerm_management_group_policy_assignment" "sql_ep_diagnostics_custom
     "value": "${azurerm_log_analytics_workspace.example.id}"
   },
   "storageAccountId": {
-    "value": "${azurerm_storage_account.example.id}"
+    "value": "${azurerm_storage_account.secondary_sa.id}"
   },
   "storageRetentionDays": {
     "value": 365

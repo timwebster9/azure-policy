@@ -126,7 +126,6 @@
                                 "type": "Microsoft.Sql/servers/auditingSettings",
                                 "name": "[concat(parameters('resourceName'), '/sqlAuditSetByPolicy')]",
                                 "apiVersion": "2021-02-01-preview",
-                                "location": "[parameters('location')]",
                                 "properties": {
                                     "auditActionsAndGroups": "[parameters('auditActionsAndGroups')]",
                                     "state": "Enabled",
@@ -141,7 +140,6 @@
                                 "type": "Microsoft.Sql/servers/devOpsAuditingSettings",
                                 "name": "[concat(parameters('resourceName'), '/default')]",
                                 "apiVersion": "2021-02-01-preview",
-                                "location": "[parameters('location')]",
                                 "properties": {
                                     "auditActionsAndGroups": "[parameters('auditActionsAndGroups')]",
                                     "state": "Enabled",

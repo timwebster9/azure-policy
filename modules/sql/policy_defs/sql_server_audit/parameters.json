@@ -33,6 +33,13 @@
             "description": "Storage account resource name"
         }
     },
+    "storageAccountResourceGroup": {
+        "type": "string",
+        "metadata": {
+            "displayName": "Storage account resource group",
+            "description": "Storage account resource group name"
+        }
+    },
     "storageAccountSubscriptionId": {
         "type": "string",
         "metadata": {

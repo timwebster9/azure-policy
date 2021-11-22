@@ -67,6 +67,9 @@
                             "storageAccountName": {
                                 "type": "string"
                             },
+                            "storageAccountResourceGroup": {
+                                "type": "string"
+                            },
                             "storageAccountSubscriptionId": {
                                 "type": "string"
                             },
@@ -89,15 +92,34 @@
                         },
                         "resources": [
                             {
-                                "type": "Microsoft.Storage/storageAccounts/providers/roleAssignments",
-                                "apiVersion": "2020-03-01-preview",
-                                "name": "[concat(parameters('storageAccountName'), '/Microsoft.Authorization/', variables('uniqueRoleGuid'))]",
-                                "location": "[parameters('location')]",
+                                "type": "Microsoft.Resources/deployments",
+                                "apiVersion": "2021-04-01",
+                                "name": "nestedTemplate",
+                                "resourceGroup": "[parameters('secondResourceGroup')]",
+                                "subscriptionId": "[parameters('storageAccountSubscriptionId')]",
                                 "properties": {
-                                    "roleDefinitionId": "[variables('StorageBlobContributor')]",
-                                    "principalId": "[reference(parameters('sqlServerId'), '2020-08-01-preview', 'Full').identity.principalId]",
-                                    "scope": "[parameters('storageAccountId')]",
-                                    "principalType": "ServicePrincipal"
+                                    "mode": "Incremental",
+                                    "template": {
+                                        "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                                        "contentVersion": "1.0.0.0",
+                                        "parameters": {},
+                                        "variables": {},
+                                        "resources": [
+                                            {
+                                                "type": "Microsoft.Storage/storageAccounts/providers/roleAssignments",
+                                                "apiVersion": "2020-03-01-preview",
+                                                "name": "[concat(parameters('storageAccountName'), '/Microsoft.Authorization/', variables('uniqueRoleGuid'))]",
+                                                "location": "[parameters('location')]",
+                                                "properties": {
+                                                    "roleDefinitionId": "[variables('StorageBlobContributor')]",
+                                                    "principalId": "[reference(parameters('sqlServerId'), '2020-08-01-preview', 'Full').identity.principalId]",
+                                                    "scope": "[parameters('storageAccountId')]",
+                                                    "principalType": "ServicePrincipal"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    "parameters": {}
                                 }
                             },
                             {
@@ -144,6 +166,9 @@
                         },
                         "storageAccountName": {
                             "value": "[parameters('storageAccountName')]"
+                        },
+                        "storageAccountResourceGroup": {
+                            "value": "[parameters('storageAccountResourceGroup')]"
                         },
                         "storageAccountSubscriptionId": {
                             "value": "[parameters('storageAccountSubscriptionId')]"

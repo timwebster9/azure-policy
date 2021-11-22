@@ -6,10 +6,19 @@ resource "azurerm_log_analytics_workspace" "example" {
   retention_in_days   = 30
 }
 
-resource "azurerm_storage_account" "example" {
+resource "azurerm_resource_group" "secondary_rg" {
+  provider                  = azurerm.secondary
+
+  name     = var.resource_group_name
+  location = var.location
+}
+
+resource "azurerm_storage_account" "secondary_sa" {
+  provider                  = azurerm.secondary
+
   name                      = "timwpolicydiags908745"
-  resource_group_name       = azurerm_resource_group.example.name
-  location                  = azurerm_resource_group.example.location
+  resource_group_name       = azurerm_resource_group.secondary_rg.name
+  location                  = azurerm_resource_group.secondary_rg.location
   account_tier              = "Standard"
   account_replication_type  = "LRS"
   enable_https_traffic_only = true

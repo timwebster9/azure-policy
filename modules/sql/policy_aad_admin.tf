@@ -5,7 +5,7 @@
 resource "azurerm_policy_definition" "aad_admin" {
   name                  = "aad_admin"
   policy_type           = "Custom"
-  mode                  = "Indexed"
+  mode                  = "All"
   display_name          = "SQL Servers should have an Azure Active Directory administrator"
   management_group_name = data.azurerm_management_group.policy_definition_mgmt_group.name
 
@@ -30,7 +30,7 @@ resource "azurerm_management_group_policy_assignment" "aad_admin" {
   parameters = <<PARAMETERS
 {
   "effect": {
-    "value": "Audit"
+    "value": "Deny"
   }
 }
 PARAMETERS

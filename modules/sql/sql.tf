@@ -51,7 +51,7 @@ resource "azurerm_mssql_server" "aad_admin" {
 
 #should fail
 resource "azurerm_mssql_server" "no_aad_admin" {
-  name                         = "timwnoaadadmin"
+  name                         = "timwtestnoaadadmin"
   resource_group_name          = azurerm_resource_group.example.name
   location                     = azurerm_resource_group.example.location
   version                      = "12.0"

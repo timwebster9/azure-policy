@@ -14,7 +14,7 @@ resource "azuread_group" "example" {
 
 # should pass (has AAD Admin)
 resource "azurerm_mssql_server" "aad_admin" {
-  name                         = "timwnoaadadmin"
+  name                         = "timwaadadmin"
   resource_group_name          = azurerm_resource_group.example.name
   location                     = azurerm_resource_group.example.location
   version                      = "12.0"

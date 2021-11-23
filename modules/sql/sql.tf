@@ -28,8 +28,9 @@ resource "azurerm_mssql_server" "aad_admin" {
   }
 
   azuread_administrator {
-    login_username = azuread_group.example.display_name
-    object_id      = azuread_group.example.object_id
+    login_username              = azuread_group.example.display_name
+    object_id                   = azuread_group.example.object_id
+    azuread_authentication_only = true
   }
 
   depends_on = [

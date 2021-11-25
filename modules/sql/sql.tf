@@ -12,9 +12,9 @@ resource "azuread_group" "example" {
   ]
 }
 
-# should pass (has AAD Admin)
-resource "azurerm_mssql_server" "aad_admin" {
-  name                         = "timwaadadmin"
+# should pass (has AAD Admin ONLY)
+resource "azurerm_mssql_server" "aad_admin_only" {
+  name                         = "timwaadadminonly"
   resource_group_name          = azurerm_resource_group.example.name
   location                     = azurerm_resource_group.example.location
   version                      = "12.0"
@@ -46,7 +46,48 @@ resource "azurerm_mssql_server" "aad_admin" {
     azurerm_role_assignment.sql_server_audit_contrib,
     azurerm_role_assignment.sql_server_audit_uaa,
     azurerm_policy_definition.whitelist_regions,
-    azurerm_management_group_policy_assignment.whitelist_regions
+    azurerm_management_group_policy_assignment.whitelist_regions,
+    #azurerm_management_group_policy_assignment.aad_admin_only
+  ]
+}
+
+/*
+# should fail (has AAD Admin, but not AAD-only admin)
+resource "azurerm_mssql_server" "aad_admin" {
+  name                         = "timwaadadmin"
+  resource_group_name          = azurerm_resource_group.example.name
+  location                     = azurerm_resource_group.example.location
+  version                      = "12.0"
+  administrator_login          = "missadministrator"
+  administrator_login_password = "thisIsKat11"
+  minimum_tls_version          = "1.2"
+  public_network_access_enabled = true # testing diagnostics only
+
+  identity {
+    type = "SystemAssigned"
+  }
+
+  azuread_administrator {
+    login_username              = azuread_group.example.display_name
+    object_id                   = azuread_group.example.object_id
+    azuread_authentication_only = false
+  }
+
+  depends_on = [
+    azurerm_management_group_policy_assignment.deny_firewall_rules,
+    azurerm_management_group_policy_assignment.deny_public_access,
+    azurerm_management_group_policy_assignment.tls_version,
+    azurerm_management_group_policy_assignment.sql_server_audit,
+    azurerm_management_group_policy_assignment.aad_admin_audit,
+    azurerm_management_group_policy_assignment.sql_identity,
+    azurerm_policy_definition.aad_admin,
+    azurerm_management_group_policy_assignment.aad_admin,
+    azurerm_policy_definition.sql_server_audit,
+    azurerm_role_assignment.sql_server_audit_contrib,
+    azurerm_role_assignment.sql_server_audit_uaa,
+    azurerm_policy_definition.whitelist_regions,
+    azurerm_management_group_policy_assignment.whitelist_regions,
+    azurerm_management_group_policy_assignment.aad_admin_only
   ]
 }
 
@@ -83,27 +124,29 @@ resource "azurerm_mssql_server" "no_aad_admin" {
     azurerm_role_assignment.sql_server_audit_contrib,
     azurerm_role_assignment.sql_server_audit_uaa,
     azurerm_policy_definition.whitelist_regions,
-    azurerm_management_group_policy_assignment.whitelist_regions
+    azurerm_management_group_policy_assignment.whitelist_regions,
+    azurerm_management_group_policy_assignment.aad_admin_only
   ]
 }
+*/
 
 #AZ not available with Standard DTU
-# resource "azurerm_mssql_database" "dtu_zr_not_eligible" {
-#   name           = "dtu-no-zr-db"
-#   server_id      = azurerm_mssql_server.example.id
-#   collation      = "SQL_Latin1_General_CP1_CI_AS"
-#   #license_type   = "LicenseIncluded"
-#   #max_size_gb    = 4
-#   #read_scale     = true
-#   sku_name       = "S0"
-#   zone_redundant = false
+resource "azurerm_mssql_database" "dtu_zr_not_eligible" {
+  name           = "dtu-no-zr-db"
+  server_id      = azurerm_mssql_server.aad_admin_only.id
+  collation      = "SQL_Latin1_General_CP1_CI_AS"
+  #license_type   = "LicenseIncluded"
+  #max_size_gb    = 4
+  #read_scale     = true
+  sku_name       = "S0"
+  zone_redundant = false
 
-#   depends_on = [
-#     azurerm_management_group_policy_assignment.sql_db_diagnostics_custom,
-#     azurerm_policy_definition.sql_zone_redundant,
-#     azurerm_management_group_policy_assignment.sql_zone_redundant
-#   ]
-# }
+  depends_on = [
+    azurerm_management_group_policy_assignment.sql_db_diagnostics_custom,
+    azurerm_policy_definition.sql_zone_redundant,
+    azurerm_management_group_policy_assignment.sql_zone_redundant
+  ]
+}
 
 # should fail - AZ available with Premium
 # resource "azurerm_mssql_elasticpool" "premium" {

@@ -22,6 +22,10 @@ data "azurerm_policy_definition" "aad_admin_audit" {
   name = "1f314764-cb73-4fc9-b863-8eca98ac36e9"
 }
 
+data "azurerm_policy_definition" "aad_admin_only" {
+  name = "abda6d70-9778-44e7-84a8-06713e6db027"
+}
+
 data "azuread_user" "me" {
   user_principal_name = "admin@timwebster9outlookcom.onmicrosoft.com"
 }

@@ -111,7 +111,7 @@
                                                 "location": "[parameters('location')]",
                                                 "properties": {
                                                     "roleDefinitionId": "[variables('StorageBlobContributor')]",
-                                                    "principalId": "[variables('sqlServerPrincipalId')]",
+                                                    "principalId": "[reference(parameters('sqlServerId'), '2020-08-01-preview', 'Full').identity.principalId]",
                                                     "scope": "[parameters('storageAccountId')]",
                                                     "principalType": "ServicePrincipal"
                                                 }

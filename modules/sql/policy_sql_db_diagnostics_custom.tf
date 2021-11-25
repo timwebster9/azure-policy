@@ -61,3 +61,9 @@ resource "azurerm_role_assignment" "sql_db_diagnostics_custom" {
   principal_id         = azurerm_management_group_policy_assignment.sql_db_diagnostics_custom.identity[0].principal_id
 }
 
+resource "azurerm_role_assignment" "sql_db_diagnostics_custom_sa" {
+  scope                = azurerm_storage_account.secondary_sa.id
+  role_definition_name = "Contributor"
+  principal_id         = azurerm_management_group_policy_assignment.sql_db_diagnostics_custom.identity[0].principal_id
+}
+

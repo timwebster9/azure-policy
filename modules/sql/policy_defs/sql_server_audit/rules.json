@@ -87,6 +87,7 @@
                             }
                         },
                         "variables": {
+                            "roleAssignmentTemplateName": "roleAssignment",
                             "sqlServerPrincipalId": "[reference(parameters('sqlServerId'), '2020-08-01-preview', 'Full').identity.principalId]",
                             "StorageBlobContributor": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')]",
                             "uniqueRoleGuid": "[guid(parameters('storageAccountId'), variables('storageBlobContributor'), variables('sqlServerPrincipalId') resourceId('Microsoft.Sql/servers', parameters('resourceName')))]"
@@ -95,7 +96,7 @@
                             {
                                 "type": "Microsoft.Resources/deployments",
                                 "apiVersion": "2021-04-01",
-                                "name": "nestedTemplate",
+                                "name": "[variables('roleAssignmentTemplateName')]",
                                 "resourceGroup": "[parameters('storageAccountResourceGroup')]",
                                 "subscriptionId": "[parameters('storageAccountSubscriptionId')]",
                                 "properties": {
@@ -127,6 +128,9 @@
                                 "type": "Microsoft.Sql/servers/auditingSettings",
                                 "name": "[concat(parameters('resourceName'), '/sqlAuditSetByPolicy')]",
                                 "apiVersion": "2021-02-01-preview",
+                                "dependsOn": [
+                                    "[resourceId('Microsoft.Resources/deployments/', variables('roleAssignmentTemplateName'))]"
+                                ],
                                 "properties": {
                                     "auditActionsAndGroups": "[parameters('auditActionsAndGroups')]",
                                     "state": "Enabled",
@@ -141,6 +145,9 @@
                                 "type": "Microsoft.Sql/servers/devOpsAuditingSettings",
                                 "name": "[concat(parameters('resourceName'), '/default')]",
                                 "apiVersion": "2021-02-01-preview",
+                                "dependsOn": [
+                                    "[resourceId('Microsoft.Resources/deployments/', variables('roleAssignmentTemplateName'))]"
+                                ],
                                 "properties": {
                                     "auditActionsAndGroups": "[parameters('auditActionsAndGroups')]",
                                     "state": "Enabled",

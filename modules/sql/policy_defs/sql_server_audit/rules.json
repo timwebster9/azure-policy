@@ -88,9 +88,7 @@
                         },
                         "variables": {
                             "roleAssignmentTemplateName": "roleAssignment",
-                            "sqlServerPrincipalId": "[reference(parameters('sqlServerId'), '2020-08-01-preview', 'Full').identity.principalId]",
-                            "StorageBlobContributor": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')]",
-                            "uniqueRoleGuid": "[guid(parameters('storageAccountId'), variables('storageBlobContributor'), variables('sqlServerPrincipalId'), resourceId('Microsoft.Sql/servers', parameters('resourceName')))]"
+                            "StorageBlobContributor": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')]"
                         },
                         "resources": [
                             {
@@ -110,7 +108,7 @@
                                             {
                                                 "type": "Microsoft.Storage/storageAccounts/providers/roleAssignments",
                                                 "apiVersion": "2020-03-01-preview",
-                                                "name": "[concat(parameters('storageAccountName'), '/Microsoft.Authorization/', variables('uniqueRoleGuid'))]",
+                                                "name": "[concat(parameters('storageAccountName'), '/Microsoft.Authorization/', guid(parameters('storageAccountId'), variables('storageBlobContributor'), reference(parameters('sqlServerId'), '2020-08-01-preview', 'Full').identity.principalId, resourceId('Microsoft.Sql/servers', parameters('resourceName'))))]",
                                                 "location": "[parameters('location')]",
                                                 "properties": {
                                                     "roleDefinitionId": "[variables('StorageBlobContributor')]",

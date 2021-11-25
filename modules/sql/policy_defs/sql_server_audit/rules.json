@@ -90,7 +90,7 @@
                             "roleAssignmentTemplateName": "roleAssignment",
                             "sqlServerPrincipalId": "[reference(parameters('sqlServerId'), '2020-08-01-preview', 'Full').identity.principalId]",
                             "StorageBlobContributor": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')]",
-                            "uniqueRoleGuid": "[guid(parameters('storageAccountId'), variables('storageBlobContributor'), variables('sqlServerPrincipalId') resourceId('Microsoft.Sql/servers', parameters('resourceName')))]"
+                            "uniqueRoleGuid": "[guid(parameters('storageAccountId'), variables('storageBlobContributor'), variables('sqlServerPrincipalId'), resourceId('Microsoft.Sql/servers', parameters('resourceName')))]"
                         },
                         "resources": [
                             {

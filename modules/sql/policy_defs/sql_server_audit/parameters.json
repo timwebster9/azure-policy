@@ -1,4 +1,16 @@
 {
+    "effect": {
+        "type": "String",
+        "defaultValue": "DeployIfNotExists",
+        "allowedValues": [
+            "DeployIfNotExists",
+            "Disabled"
+        ],
+        "metadata": {
+            "displayName": "Effect",
+            "description": "The effect determines what happens when the policy rule is evaluated to match"
+        }
+    },
     "auditActionsAndGroups": {
         "type": "array",
         "metadata": {

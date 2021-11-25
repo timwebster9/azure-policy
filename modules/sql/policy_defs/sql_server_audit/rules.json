@@ -8,7 +8,7 @@
         ]
     },
     "then": {
-        "effect": "deployIfNotExists",
+        "effect": "[parameters('effect')]",
         "details": {
             "type": "Microsoft.Sql/servers/auditingSettings",
             "roleDefinitionIds": [

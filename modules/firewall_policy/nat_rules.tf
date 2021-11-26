@@ -7,7 +7,7 @@ resource "azurerm_firewall_policy_rule_collection_group" "nat_rule_group" {
     name     = "nat_rule_collection1"
     priority = 300
     action   = "Dnat"
-    
+
     rule {
       name                = "nat_rule_collection1_rule1"
       protocols           = ["TCP"]
@@ -18,4 +18,9 @@ resource "azurerm_firewall_policy_rule_collection_group" "nat_rule_group" {
       translated_port     = "443"
     }
   }
+
+  depends_on = [
+    azurerm_policy_definition.deny_nat_rules,
+    azurerm_management_group_policy_assignment.deny_nat_rules
+  ]
 }

@@ -12,21 +12,7 @@
                         "allOf": [
                             {
                                 "field": "Microsoft.Network/firewallPolicies/ruleCollectionGroups/ruleCollections[*].FirewallPolicyFilterRuleCollection.rules[*].ruleType",
-                                "equals": "ApplicationRule"
-                            },
-                            {
-                                "field": "Microsoft.Network/firewallPolicies/ruleCollectionGroups/ruleCollections[*].FirewallPolicyFilterRuleCollection.rules[*].ApplicationRule.terminateTLS",
-                                "notEquals": "true"
-                            },
-                            {
-                                "count": {
-                                    "field": "Microsoft.Network/firewallPolicies/ruleCollectionGroups/ruleCollections[*].FirewallPolicyFilterRuleCollection.rules[*].ApplicationRule.protocols[*]",
-                                    "where": {
-                                        "field": "Microsoft.Network/firewallPolicies/ruleCollectionGroups/ruleCollections[*].FirewallPolicyFilterRuleCollection.rules[*].ApplicationRule.protocols[*].protocolType",
-                                        "equals": "Https"
-                                    }
-                                },
-                                "greater": 0
+                                "equals": "NatRule"
                             }
                         ]
                     }

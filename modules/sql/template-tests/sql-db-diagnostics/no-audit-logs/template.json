@@ -1,0 +1,140 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "fullName": {
+            "type": "string"
+        },
+        "location": {
+            "type": "string"
+        },
+        "eventHubRuleId": {
+            "type": "string"
+        },
+        "eventHubName": {
+            "type": "string"
+        },
+        "logAnalyticsWorkspaceId": {
+            "type": "string"
+        },
+        "storageAccountId": {
+            "type": "string"
+        },
+        "storageRetentionDays": {
+            "type": "int"
+        },
+        "metricsEnabled": {
+            "type": "string"
+        },
+        "logsEnabled": {
+            "type": "string"
+        },
+        "profileName": {
+            "type": "string"
+        }
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Sql/servers/databases/providers/diagnosticSettings",
+            "apiVersion": "2021-05-01-preview",
+            "name": "[concat(parameters('fullName'), '/', 'Microsoft.Insights/', parameters('profileName'))]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "eventHubAuthorizationRuleId": "[parameters('eventHubRuleId')]",
+                "eventHubName": "[parameters('eventHubName')]",
+                "workspaceId": "[parameters('logAnalyticsWorkspaceId')]",
+                "storageAccountId": "[parameters('storageAccountId')]",
+                "metrics": [
+                    {
+                        "category": "AllMetrics",
+                        "enabled": "[parameters('metricsEnabled')]",
+                        "retentionPolicy": {
+                            "enabled": true,
+                            "days": "[parameters('storageRetentionDays')]"
+                        }
+                    }
+                ],
+                "logs": [
+                    {
+                        "category": "QueryStoreRuntimeStatistics",
+                        "enabled": "[parameters('logsEnabled')]",
+                        "retentionPolicy": {
+                            "enabled": true,
+                            "days": "[parameters('storageRetentionDays')]"
+                        }
+                    },
+                    {
+                        "category": "QueryStoreWaitStatistics",
+                        "enabled": "[parameters('logsEnabled')]",
+                        "retentionPolicy": {
+                            "enabled": true,
+                            "days": "[parameters('storageRetentionDays')]"
+                        }
+                    },
+                    {
+                        "category": "Errors",
+                        "enabled": "[parameters('logsEnabled')]",
+                        "retentionPolicy": {
+                            "enabled": true,
+                            "days": "[parameters('storageRetentionDays')]"
+                        }
+                    },
+                    {
+                        "category": "DatabaseWaitStatistics",
+                        "enabled": "[parameters('logsEnabled')]",
+                        "retentionPolicy": {
+                            "enabled": true,
+                            "days": "[parameters('storageRetentionDays')]"
+                        }
+                    },
+                    {
+                        "category": "Blocks",
+                        "enabled": "[parameters('logsEnabled')]",
+                        "retentionPolicy": {
+                            "enabled": true,
+                            "days": "[parameters('storageRetentionDays')]"
+                        }
+                    },
+                    {
+                        "category": "SQLInsights",
+                        "enabled": "[parameters('logsEnabled')]",
+                        "retentionPolicy": {
+                            "enabled": true,
+                            "days": "[parameters('storageRetentionDays')]"
+                        }
+                    },
+                    {
+                        "category": "Timeouts",
+                        "enabled": "[parameters('logsEnabled')]",
+                        "retentionPolicy": {
+                            "enabled": true,
+                            "days": "[parameters('storageRetentionDays')]"
+                        }
+                    },
+                    {
+                        "category": "AutomaticTuning",
+                        "enabled": "[parameters('logsEnabled')]",
+                        "retentionPolicy": {
+                            "enabled": true,
+                            "days": "[parameters('storageRetentionDays')]"
+                        }
+                    },
+                    {
+                        "category": "Deadlocks",
+                        "enabled": "[parameters('logsEnabled')]",
+                        "retentionPolicy": {
+                            "enabled": true,
+                            "days": "[parameters('storageRetentionDays')]"
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "outputs": {
+        "policy": {
+            "type": "string",
+            "value": "[concat('Enabled diagnostic settings for ', parameters('fullName'))]"
+        }
+    }
+}

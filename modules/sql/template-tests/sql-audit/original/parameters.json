@@ -1,0 +1,40 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "auditActionsAndGroups": {
+            "value": [
+                "BATCH_COMPLETED_GROUP",
+                "SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP",
+                "FAILED_DATABASE_AUTHENTICATION_GROUP"
+            ]
+        },
+        "storageAccountId": {
+            "value": "/subscriptions/5b3b6b87-0c84-4cc0-ac99-75797863d447/resourceGroups/secondary-sa-rg/providers/Microsoft.Storage/storageAccounts/timwsecdiags2535"
+        },
+        "storageAccountName": {
+            "value": "timwsecdiags2535"
+        },
+        "storageAccountResourceGroup": {
+            "value": "secondary-sa-rg"
+        },
+        "storageAccountSubscriptionId": {
+            "value": "5b3b6b87-0c84-4cc0-ac99-75797863d447"
+        },
+        "storageEndpoint": {
+            "value": "https://timwsecdiags2535.blob.core.windows.net/"
+        },
+        "storageRetentionDays": {
+            "value": 365
+        },
+        "location": {
+            "value": "uksouth"
+        },
+        "resourceName": {
+            "value": "timwaadadminonly"
+        },
+        "sqlServerId": {
+            "value": "/subscriptions/2ca65474-3b7b-40f2-b242-0d2fba4bde6e/resourceGroups/policy-rg/providers/Microsoft.Sql/servers/timwaadadminonly"
+        }
+    }
+}

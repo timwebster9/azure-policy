@@ -1,0 +1,1 @@
+az deployment group create -g policy-rg --template-file template.json --parameters=@parameters.json

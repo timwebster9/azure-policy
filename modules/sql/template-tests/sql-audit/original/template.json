@@ -1,0 +1,101 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "resourceName": {
+            "type": "string"
+        },
+        "sqlServerId": {
+            "type": "string"
+        },
+        "auditActionsAndGroups": {
+            "type": "array"
+        },
+        "storageAccountId": {
+            "type": "string"
+        },
+        "storageAccountName": {
+            "type": "string"
+        },
+        "storageAccountResourceGroup": {
+            "type": "string"
+        },
+        "storageAccountSubscriptionId": {
+            "type": "string"
+        },
+        "storageEndpoint": {
+            "type": "string"
+        },
+        "storageRetentionDays": {
+            "type": "int"
+        },
+        "location": {
+            "type": "string"
+        }
+    },
+    "variables": {
+        "StorageBlobContributor": "[subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Resources/deployments",
+            "apiVersion": "2021-04-01",
+            "name": "roleAssignment",
+            "resourceGroup": "[parameters('storageAccountResourceGroup')]",
+            "subscriptionId": "[parameters('storageAccountSubscriptionId')]",
+            "properties": {
+                "mode": "Incremental",
+                "template": {
+                    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {},
+                    "variables": {},
+                    "resources": [
+                        {
+                            "type": "Microsoft.Storage/storageAccounts/providers/roleAssignments",
+                            "apiVersion": "2020-03-01-preview",
+                            "name": "[concat(parameters('storageAccountName'), '/Microsoft.Authorization/', guid(parameters('storageAccountId'), variables('storageBlobContributor'), reference(parameters('sqlServerId'), '2020-08-01-preview', 'Full').identity.principalId, resourceId('Microsoft.Sql/servers', parameters('resourceName'))))]",
+                            "location": "[parameters('location')]",
+                            "properties": {
+                                "roleDefinitionId": "[variables('StorageBlobContributor')]",
+                                "principalId": "[reference(parameters('sqlServerId'), '2020-08-01-preview', 'Full').identity.principalId]",
+                                "scope": "[parameters('storageAccountId')]",
+                                "principalType": "ServicePrincipal"
+                            }
+                        }
+                    ]
+                },
+                "parameters": {}
+            }
+        },
+        {
+            "type": "Microsoft.Sql/servers/auditingSettings",
+            "name": "[concat(parameters('resourceName'), '/sqlAuditSetByPolicy')]",
+            "apiVersion": "2021-02-01-preview",
+            "properties": {
+                "auditActionsAndGroups": "[parameters('auditActionsAndGroups')]",
+                "state": "Enabled",
+                "retentionDays": "[parameters('storageRetentionDays')]",
+                "isAzureMonitorTargetEnabled": true,
+                "isDevopsAuditEnabled": true,
+                "storageEndpoint": "[parameters('storageEndpoint')]",
+                "storageAccountSubscriptionId": "[parameters('storageAccountSubscriptionId')]"
+            }
+        },
+        {
+            "type": "Microsoft.Sql/servers/devOpsAuditingSettings",
+            "name": "[concat(parameters('resourceName'), '/default')]",
+            "apiVersion": "2021-02-01-preview",
+            "properties": {
+                "auditActionsAndGroups": "[parameters('auditActionsAndGroups')]",
+                "state": "Enabled",
+                "retentionDays": "[parameters('storageRetentionDays')]",
+                "isAzureMonitorTargetEnabled": true,
+                "storageEndpoint": "[parameters('storageEndpoint')]",
+                "storageAccountSubscriptionId": "[parameters('storageAccountSubscriptionId')]"
+            }
+        }
+    ],
+    "outputs": {}
+}
+

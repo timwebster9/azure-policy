@@ -16,7 +16,7 @@
                         "notEquals": "[parameters('minTlsVersion')]"
                     },
                     {
-                        "field": "Microsoft.Web/sites/config.minTlsVersion",
+                        "field": "Microsoft.Web/sites/config/minTlsVersion",
                         "notEquals": "[parameters('minTlsVersion')]"
                     }
                 ]

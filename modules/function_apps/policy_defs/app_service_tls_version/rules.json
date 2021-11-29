@@ -10,16 +10,8 @@
                 "like": "functionapp*"
             },
             {
-                "anyOf": [
-                    {
-                        "field": "Microsoft.Web/sites/siteConfig.minTlsVersion",
-                        "notEquals": "[parameters('minTlsVersion')]"
-                    },
-                    {
-                        "field": "Microsoft.Web/sites/config/minTlsVersion",
-                        "notEquals": "[parameters('minTlsVersion')]"
-                    }
-                ]
+                "field": "Microsoft.Web/sites/config/minTlsVersion",
+                "notEquals": "[parameters('minTlsVersion')]"
             }
         ]
     },

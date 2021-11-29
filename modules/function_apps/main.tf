@@ -57,6 +57,29 @@ resource "azurerm_app_service_plan" "ep" {
   ]
 }
 
+resource "azurerm_app_service_plan" "eptls11" {
+  name                = "ep-plan-tls11"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  zone_redundant      = true
+  maximum_elastic_worker_count = 3
+
+  sku {
+    tier = "ElasticPremium"
+    size = "EP1"
+    capacity = 1
+  }
+
+  depends_on = [
+    azurerm_policy_definition.app_service_plan_diagnostics,
+    azurerm_policy_definition.app_service_plan_zone_redundant,
+    azurerm_policy_definition.private_link_sku,
+    azurerm_management_group_policy_assignment.app_service_plan_diagnostics,
+    azurerm_management_group_policy_assignment.app_service_plan_zone_redundant,
+    azurerm_management_group_policy_assignment.private_link_sku
+  ]
+}
+
 resource "azurerm_app_service_plan" "premiumv2" {
   name                = "v2-plan"
   location            = azurerm_resource_group.example.location
@@ -205,7 +228,7 @@ resource "azurerm_function_app" "tls_11" {
   name                       = "timwpolicyfunctionTLS11"
   location                   = azurerm_resource_group.example.location
   resource_group_name        = azurerm_resource_group.example.name
-  app_service_plan_id        = azurerm_app_service_plan.ep.id
+  app_service_plan_id        = azurerm_app_service_plan.eptls11.id
   storage_account_name       = azurerm_storage_account.function.name
   storage_account_access_key = azurerm_storage_account.function.primary_access_key
   https_only                 = true  # policy check

@@ -206,13 +206,13 @@ resource "azurerm_function_app" "example" {
   depends_on = [
     azurerm_policy_definition.app_service_https_only,
     azurerm_policy_definition.dine_tls_version,
-    azurerm_policy_definition.app_service_vnet_route_all,
+    azurerm_policy_definition.dine_vnet_route_all,
     azurerm_policy_definition.function_diagnostics,
     azurerm_policy_definition.app_service_ip_restrictions,
     azurerm_management_group_policy_assignment.function_runtime_version,
     azurerm_management_group_policy_assignment.app_service_https_only,
     azurerm_management_group_policy_assignment.dine_tls_version,
-    azurerm_management_group_policy_assignment.app_service_vnet_route_all,
+    azurerm_management_group_policy_assignment.dine_vnet_route_all,
     azurerm_management_group_policy_assignment.disable_public_network_access,
     azurerm_management_group_policy_assignment.function_runtime_version,
     azurerm_management_group_policy_assignment.function_diagnostics,
@@ -237,8 +237,8 @@ resource "azurerm_function_app" "tls_11" {
   version                    = "~3"  # policy check
   
   site_config {
-    min_tls_version        = "1.0" # policy check
-    vnet_route_all_enabled = true  # policy check
+    min_tls_version        = "1.0" # policy check: DINE
+    vnet_route_all_enabled = false  # policy check: DINE
     elastic_instance_minimum = 3
 
     # ip_restriction =  [
@@ -257,13 +257,13 @@ resource "azurerm_function_app" "tls_11" {
   depends_on = [
     azurerm_policy_definition.app_service_https_only,
     azurerm_policy_definition.dine_tls_version,
-    azurerm_policy_definition.app_service_vnet_route_all,
+    azurerm_policy_definition.dine_vnet_route_all,
     azurerm_policy_definition.function_diagnostics,
     azurerm_policy_definition.app_service_ip_restrictions,
     azurerm_management_group_policy_assignment.function_runtime_version,
     azurerm_management_group_policy_assignment.app_service_https_only,
     azurerm_management_group_policy_assignment.dine_tls_version,
-    azurerm_management_group_policy_assignment.app_service_vnet_route_all,
+    azurerm_management_group_policy_assignment.dine_vnet_route_all,
     azurerm_management_group_policy_assignment.disable_public_network_access,
     azurerm_management_group_policy_assignment.function_runtime_version,
     azurerm_management_group_policy_assignment.function_diagnostics,

@@ -23,6 +23,10 @@ resource "azurerm_management_group_policy_assignment" "dine_tls_version" {
   description          = "Policy Assignment test"
   display_name         = azurerm_policy_definition.dine_tls_version.display_name
 
+  identity {
+    type = "SystemAssigned"
+  }
+
   parameters = <<PARAMETERS
 {
   "effect": {
@@ -33,4 +37,10 @@ resource "azurerm_management_group_policy_assignment" "dine_tls_version" {
   }
 }
 PARAMETERS
+}
+
+resource "azurerm_role_assignment" "dine_tls_version" {
+  scope                = data.azurerm_subscription.current.id
+  role_definition_name = "Contributor"
+  principal_id         = azurerm_management_group_policy_assignment.dine_tls_version.identity[0].principal_id
 }

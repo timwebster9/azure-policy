@@ -16,8 +16,16 @@
         "details": {
             "type": "Microsoft.Web/sites/config",
             "existenceCondition": {
-                "field": "Microsoft.Web/sites/config/minTlsVersion",
-                "equals": "[parameters('minTlsVersion')]"
+                "allOf": [
+                    {
+                        "field": "Microsoft.Web/sites/config/minTlsVersion",
+                        "equals": "[parameters('minTlsVersion')]"
+                    },
+                    {
+                        "field": "Microsoft.Web/sites/config/scmMinTlsVersion",
+                        "equals": "[parameters('minTlsVersion')]"
+                    }
+                ]
             },
             "roleDefinitionIds": [
                 "/providers/microsoft.authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
@@ -43,7 +51,8 @@
                                 "apiVersion": "2020-09-01",
                                 "name": "[concat(parameters('webAppName'), '/web')]",
                                 "properties": {
-                                    "minTlsVersion": "[parameters('minTlsVersion')]"
+                                    "minTlsVersion": "[parameters('minTlsVersion')]",
+                                    "scmMinTlsVersion": "[parameters('minTlsVersion')]"
                                 }
                             }
                         ],

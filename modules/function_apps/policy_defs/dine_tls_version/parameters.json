@@ -1,0 +1,25 @@
+{
+    "effect": {
+        "type": "String",
+        "metadata": {
+            "description": "The list of allowed effects for this policy.",
+            "displayName": "Allowed Policy Effects"
+        },
+        "allowedValues": [
+            "disabled",
+            "deployIfNotExists"
+        ]
+    },
+    "minTlsVersion": {
+        "type": "String",
+        "defaultValue": "1.2",
+        "allowedValues": [
+            "1.0",
+            "1.1",
+            "1.2"
+        ],
+        "metadata": {
+            "displayName": "Minimum TLS version"
+        }
+    }
+}

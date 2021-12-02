@@ -1,7 +1,7 @@
 {
     "effect": {
         "type": "String",
-        "defaultValue": "Deny",
+        "defaultValue": "DeployIfNotExists",
         "allowedValues": [
             "DeployIfNotExists",
             "Disabled"

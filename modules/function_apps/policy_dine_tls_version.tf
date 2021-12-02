@@ -22,7 +22,8 @@ resource "azurerm_management_group_policy_assignment" "dine_tls_version" {
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"
   display_name         = azurerm_policy_definition.dine_tls_version.display_name
-
+  location             = var.location
+  
   identity {
     type = "SystemAssigned"
   }

@@ -27,11 +27,11 @@ resource "azurerm_management_group_policy_assignment" "dine_vnet_route_all" {
   identity {
     type = "SystemAssigned"
   }
-  
+
   parameters = <<PARAMETERS
 {
   "effect": {
-    "value": "deployIfNotExists"
+    "value": "DeployIfNotExists"
   }
 }
 PARAMETERS

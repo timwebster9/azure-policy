@@ -3,8 +3,7 @@
         "type": "String",
         "defaultValue": "Deny",
         "allowedValues": [
-            "Audit",
-            "Deny",
+            "DeployIfNotExists",
             "Disabled"
         ],
         "metadata": {

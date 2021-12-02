@@ -9,7 +9,7 @@ resource "azurerm_policy_definition" "dine_vnet_route_all" {
   identity {
     type = "SystemAssigned"
   }
-  
+
   metadata = <<METADATA
     {
     "category": "App Service"
@@ -37,7 +37,7 @@ resource "azurerm_management_group_policy_assignment" "dine_vnet_route_all" {
 PARAMETERS
 }
 
-resource "azurerm_role_assignment" "dine_tls_version" {
+resource "azurerm_role_assignment" "dine_vnet_route_all" {
   scope                = data.azurerm_subscription.current.id
   role_definition_name = "Contributor"
   principal_id         = azurerm_management_group_policy_assignment.dine_vnet_route_all.identity[0].principal_id

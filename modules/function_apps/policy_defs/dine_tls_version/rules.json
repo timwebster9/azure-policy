@@ -31,6 +31,9 @@
                         "parameters": {
                             "webAppName": {
                                 "type": "String"
+                            },
+                            "minTlsVersion": {
+                                "type": "String"
                             }
                         },
                         "variables": {},
@@ -49,6 +52,9 @@
                     "parameters": {
                         "webAppName": {
                             "value": "[field('name')]"
+                        },
+                        "minTlsVersion": {
+                            "value": "[parameters('minTlsVersion')]"
                         }
                     }
                 }

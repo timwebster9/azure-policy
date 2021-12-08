@@ -86,15 +86,15 @@
 #     policy_assignment_mgmt_group_name = "parent-mgmt-group"
 # }
 
-# module "app_gateway" {
-#     source = "./modules/app_gateway"
+module "app_gateway" {
+    source = "./modules/app_gateway"
 
-#     location                          = var.location
-#     resource_group_name               = "policy-rg"
+    location                          = var.location
+    resource_group_name               = "policy-rg"
 
-#     policy_definition_mgmt_group_name = "parent-mgmt-group"
-#     policy_assignment_mgmt_group_name = "parent-mgmt-group"
-# }
+    policy_definition_mgmt_group_name = "parent-mgmt-group"
+    policy_assignment_mgmt_group_name = "parent-mgmt-group"
+}
 
 # module "apim" {
 #     source = "./modules/apim"
@@ -126,15 +126,15 @@
 #     policy_assignment_mgmt_group_name = "parent-mgmt-group"
 # }
 
-module "functions" {
-    source = "./modules/function_apps"
+# module "functions" {
+#     source = "./modules/function_apps"
 
-    location                          = var.location
-    resource_group_name               = "policy-rg"
+#     location                          = var.location
+#     resource_group_name               = "policy-rg"
 
-    policy_definition_mgmt_group_name = "parent-mgmt-group"
-    policy_assignment_mgmt_group_name = "parent-mgmt-group"
-}
+#     policy_definition_mgmt_group_name = "parent-mgmt-group"
+#     policy_assignment_mgmt_group_name = "parent-mgmt-group"
+# }
 
 # module "app_config" {
 #     source = "./modules/app_configuration"

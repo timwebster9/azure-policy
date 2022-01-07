@@ -51,7 +51,7 @@ resource "azurerm_machine_learning_workspace" "example" {
   application_insights_id = azurerm_application_insights.example.id
   key_vault_id            = azurerm_key_vault.example.id
   storage_account_id      = azurerm_storage_account.example.id
-  public_network_access_enabled = false
+  public_network_access_enabled = true
 
   identity {
     type = "SystemAssigned"

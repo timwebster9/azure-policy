@@ -27,7 +27,7 @@ resource "azurerm_storage_account" "example" {
 }
 
 resource "azurerm_machine_learning_workspace" "example" {
-  name                    = "example-workspace"
+  name                    = "mlworkspace234235245"
   location                = azurerm_resource_group.example.location
   resource_group_name     = azurerm_resource_group.example.name
   application_insights_id = azurerm_application_insights.example.id
@@ -37,7 +37,7 @@ resource "azurerm_machine_learning_workspace" "example" {
   identity {
     type = "SystemAssigned"
   }
-  
+
   depends_on = [
     azurerm_management_group_policy_assignment.disable_public_network_access
   ]

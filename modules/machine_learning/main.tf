@@ -42,7 +42,9 @@ resource "azurerm_machine_learning_workspace" "examplepass" {
 
   depends_on = [
     azurerm_policy_definition.public_network_access,
-    azurerm_management_group_policy_assignment.public_network_access
+    azurerm_policy_definition.diagnostics,
+    azurerm_management_group_policy_assignment.public_network_access,
+    azurerm_management_group_policy_assignment.diagnostics
   ]
 }
 
@@ -62,6 +64,8 @@ resource "azurerm_machine_learning_workspace" "examplefail" {
 
   depends_on = [
     azurerm_policy_definition.public_network_access,
-    azurerm_management_group_policy_assignment.public_network_access
+    azurerm_policy_definition.diagnostics,
+    azurerm_management_group_policy_assignment.public_network_access,
+    azurerm_management_group_policy_assignment.diagnostics
   ]
 }

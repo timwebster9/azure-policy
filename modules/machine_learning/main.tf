@@ -23,28 +23,31 @@ resource "azurerm_storage_account" "example" {
   location                 = azurerm_resource_group.example.location
   resource_group_name      = azurerm_resource_group.example.name
   account_tier             = "Standard"
-  account_replication_type = "GRS"
+  account_replication_type = "LRS"
 }
 
-# resource "azurerm_machine_learning_workspace" "example" {
-#   name                    = "mlworkspace234235245"
-#   location                = azurerm_resource_group.example.location
-#   resource_group_name     = azurerm_resource_group.example.name
-#   application_insights_id = azurerm_application_insights.example.id
-#   key_vault_id            = azurerm_key_vault.example.id
-#   storage_account_id      = azurerm_storage_account.example.id
-#   public_network_access_enabled = true
-  
-#   identity {
-#     type = "SystemAssigned"
-#   }
+# should pass
+resource "azurerm_machine_learning_workspace" "examplepass" {
+  name                    = "mlworkspace678733567"
+  location                = azurerm_resource_group.example.location
+  resource_group_name     = azurerm_resource_group.example.name
+  application_insights_id = azurerm_application_insights.example.id
+  key_vault_id            = azurerm_key_vault.example.id
+  storage_account_id      = azurerm_storage_account.example.id
+  public_network_access_enabled = false
 
-#   depends_on = [
-#     azurerm_management_group_policy_assignment.disable_public_network_access
-#   ]
-# }
+  identity {
+    type = "SystemAssigned"
+  }
 
-resource "azurerm_machine_learning_workspace" "example" {
+  depends_on = [
+    azurerm_policy_definition.public_network_access,
+    azurerm_management_group_policy_assignment.public_network_access
+  ]
+}
+
+# should fail
+resource "azurerm_machine_learning_workspace" "examplefail" {
   name                    = "mlworkspace234235245"
   location                = azurerm_resource_group.example.location
   resource_group_name     = azurerm_resource_group.example.name
@@ -58,6 +61,7 @@ resource "azurerm_machine_learning_workspace" "example" {
   }
 
   depends_on = [
-    azurerm_management_group_policy_assignment.disable_public_network_access
+    azurerm_policy_definition.public_network_access,
+    azurerm_management_group_policy_assignment.public_network_access
   ]
 }

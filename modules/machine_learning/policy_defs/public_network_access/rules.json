@@ -1,0 +1,17 @@
+{
+    "if": {
+        "allOf": [
+            {
+                "field": "type",
+                "equals": "Microsoft.MachineLearningServices/workspaces"
+            },
+            {
+                "field": "Microsoft.MachineLearningServices/workspaces/AllowPublicAccessWhenBehindVnet",
+                "notEquals": "falseregard"
+            }
+        ]
+    },
+    "then": {
+        "effect": "[parameters('effect')]"
+    }
+}

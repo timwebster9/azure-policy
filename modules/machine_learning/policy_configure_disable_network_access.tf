@@ -9,7 +9,7 @@ resource "azurerm_management_group_policy_assignment" "disable_public_network_ac
   parameters = <<PARAMETERS
 {
   "effect": {
-    "value": "Deny"
+    "value": "Audit"
   }
 }
 PARAMETERS

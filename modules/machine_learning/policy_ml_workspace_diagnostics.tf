@@ -24,6 +24,10 @@ resource "azurerm_management_group_policy_assignment" "diagnostics" {
   display_name         = azurerm_policy_definition.diagnostics.display_name
   location             = var.location
 
+  identity {
+    type = "SystemAssigned"
+  }
+  
   parameters = <<PARAMETERS
 {
   "effect": {

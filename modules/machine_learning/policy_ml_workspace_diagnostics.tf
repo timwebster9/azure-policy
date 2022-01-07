@@ -27,7 +27,7 @@ resource "azurerm_management_group_policy_assignment" "diagnostics" {
   identity {
     type = "SystemAssigned"
   }
-  
+
   parameters = <<PARAMETERS
 {
   "effect": {
@@ -56,4 +56,10 @@ resource "azurerm_management_group_policy_assignment" "diagnostics" {
   }
 }
 PARAMETERS
+}
+
+resource "azurerm_role_assignment" "ml_diagnostics" {
+  scope                = data.azurerm_subscription.current.id
+  role_definition_name = "Contributor"
+  principal_id         = azurerm_management_group_policy_assignment.diagnostics.identity[0].principal_id
 }

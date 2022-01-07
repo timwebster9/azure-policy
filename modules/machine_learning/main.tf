@@ -4,14 +4,14 @@ resource "azurerm_resource_group" "example" {
 }
 
 resource "azurerm_application_insights" "example" {
-  name                = "workspace-example-ai"
+  name                = "ml-ai-566456"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   application_type    = "web"
 }
 
 resource "azurerm_key_vault" "example" {
-  name                = "workspaceexamplekeyvault"
+  name                = "mlkeyvault3453455"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   tenant_id           = data.azurerm_client_config.current.tenant_id
@@ -19,7 +19,7 @@ resource "azurerm_key_vault" "example" {
 }
 
 resource "azurerm_storage_account" "example" {
-  name                     = "workspacestorageaccount"
+  name                     = "mlstorage34566456"
   location                 = azurerm_resource_group.example.location
   resource_group_name      = azurerm_resource_group.example.name
   account_tier             = "Standard"

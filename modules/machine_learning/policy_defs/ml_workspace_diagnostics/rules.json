@@ -90,7 +90,7 @@
                                     ],
                                     "logs": [
                                         {
-                                            "category": "allLogs",
+                                            "categoryGroup": "allLogs",
                                             "enabled": "[parameters('logsEnabled')]",
                                             "retentionPolicy": {
                                                 "enabled": true,

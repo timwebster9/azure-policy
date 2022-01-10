@@ -43,7 +43,7 @@ resource "azurerm_management_group_policy_assignment" "topic_diagnostics" {
     "value": "${azurerm_log_analytics_workspace.example.id}"
   },
   "storageAccountId": {
-    "value": "${azurerm_storage_account.example.id}"
+    "value": "${azurerm_storage_account.diagsstorageaccount.id}"
   },
   "storageRetentionDays": {
     "value": 365
@@ -61,5 +61,5 @@ PARAMETERS
 resource "azurerm_role_assignment" "topic_diagnostics" {
   scope                = data.azurerm_subscription.current.id
   role_definition_name = "Contributor"
-  principal_id         = azurerm_management_group_policy_assignment.diagnostics.identity[0].principal_id
+  principal_id         = azurerm_management_group_policy_assignment.topic_diagnostics.identity[0].principal_id
 }

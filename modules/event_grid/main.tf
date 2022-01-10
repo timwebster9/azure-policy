@@ -3,8 +3,9 @@ resource "azurerm_resource_group" "example" {
   location = var.location
 }
 
-resource "azurerm_eventgrid_domain" "example" {
-  name                = "eg345354h53hj5"
+# should fail
+resource "azurerm_eventgrid_domain" "examplefail" {
+  name                = "eg345354h53hj5fail"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
 
@@ -13,9 +14,21 @@ resource "azurerm_eventgrid_domain" "example" {
   ]
 }
 
+# should pass
+resource "azurerm_eventgrid_domain" "examplefpass" {
+  name                = "eg345354h53hj5"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  public_network_access_enabled = false
+
+  depends_on = [
+    azurerm_management_group_policy_assignment.domain_disable_public_network_access
+  ]
+}
+
 resource "azurerm_eventgrid_domain_topic" "example" {
   name                = "topic897fgsdgfdg"
-  domain_name         = azurerm_eventgrid_domain.example.name
+  domain_name         = azurerm_eventgrid_domain.examplefpass.name
   resource_group_name = azurerm_resource_group.example.name
 
   depends_on = [

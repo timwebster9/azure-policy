@@ -10,6 +10,8 @@ resource "azurerm_eventgrid_domain" "examplefail" {
   resource_group_name = azurerm_resource_group.example.name
 
   depends_on = [
+    azurerm_policy_definition.domain_diagnostics,
+    azurerm_management_group_policy_assignment.domain_diagnostics,
     azurerm_management_group_policy_assignment.domain_disable_public_network_access
   ]
 }
@@ -21,7 +23,11 @@ resource "azurerm_eventgrid_domain" "examplefpass" {
   resource_group_name = azurerm_resource_group.example.name
   public_network_access_enabled = false
 
-
+  depends_on = [
+    azurerm_policy_definition.domain_diagnostics,
+    azurerm_management_group_policy_assignment.domain_diagnostics,
+    azurerm_management_group_policy_assignment.domain_disable_public_network_access
+  ]
 }
 
 resource "azurerm_eventgrid_domain_topic" "example" {
@@ -37,9 +43,10 @@ resource "azurerm_eventgrid_topic" "examplefail" {
   resource_group_name = azurerm_resource_group.example.name
 
   depends_on = [
+    azurerm_policy_definition.topic_diagnostics,
+    azurerm_management_group_policy_assignment.topic_diagnostics,
     azurerm_management_group_policy_assignment.topic_disable_public_network_access
   ]
-
 }
 
 # should pass
@@ -50,7 +57,8 @@ resource "azurerm_eventgrid_topic" "examplepass" {
   public_network_access_enabled = false
 
   depends_on = [
+    azurerm_policy_definition.topic_diagnostics,
+    azurerm_management_group_policy_assignment.topic_diagnostics,
     azurerm_management_group_policy_assignment.topic_disable_public_network_access
   ]
-
 }

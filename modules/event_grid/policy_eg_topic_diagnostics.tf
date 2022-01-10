@@ -17,7 +17,7 @@ METADATA
 }
 
 resource "azurerm_management_group_policy_assignment" "topic_diagnostics" {
-  name                 = "diagnostics"
+  name                 = "topic_diagnostics"
   policy_definition_id = azurerm_policy_definition.topic_diagnostics.id
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"

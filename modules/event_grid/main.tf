@@ -21,28 +21,36 @@ resource "azurerm_eventgrid_domain" "examplefpass" {
   resource_group_name = azurerm_resource_group.example.name
   public_network_access_enabled = false
 
-  depends_on = [
-    azurerm_management_group_policy_assignment.domain_disable_public_network_access
-  ]
+
 }
 
 resource "azurerm_eventgrid_domain_topic" "example" {
   name                = "topic897fgsdgfdg"
   domain_name         = azurerm_eventgrid_domain.examplefpass.name
   resource_group_name = azurerm_resource_group.example.name
-
-  depends_on = [
-    azurerm_management_group_policy_assignment.topic_disable_public_network_access
-  ]
 }
 
 # should fail (public network access)
-resource "azurerm_eventgrid_topic" "example" {
+resource "azurerm_eventgrid_topic" "examplefail" {
   name                = "topicfail3454jkn34jk5"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
 
-  tags = {
-    environment = "Production"
-  }
+  depends_on = [
+    azurerm_management_group_policy_assignment.topic_disable_public_network_access
+  ]
+
+}
+
+# should pass
+resource "azurerm_eventgrid_topic" "examplefail" {
+  name                = "topicpass3454jkn34jk5"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  public_network_access_enabled = false
+
+  depends_on = [
+    azurerm_management_group_policy_assignment.topic_disable_public_network_access
+  ]
+  
 }

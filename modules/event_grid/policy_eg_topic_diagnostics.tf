@@ -12,8 +12,8 @@ resource "azurerm_policy_definition" "topic_diagnostics" {
 
 METADATA
 
-  policy_rule = file("${path.module}/policy_defs/eg_domain_diagnostics/rules.json")
-  parameters = file("${path.module}/policy_defs/eg_domain_diagnostics/parameters.json")
+  policy_rule = file("${path.module}/policy_defs/eg_topic_diagnostics/rules.json")
+  parameters = file("${path.module}/policy_defs/eg_topic_diagnostics/parameters.json")
 }
 
 resource "azurerm_management_group_policy_assignment" "topic_diagnostics" {

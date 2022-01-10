@@ -207,7 +207,7 @@
 # }
 
 module "event_grid" {
-    source = "./modules/machine_learning"
+    source = "./modules/event_grid"
 
     location                          = var.location
     resource_group_name               = "policy-rg"

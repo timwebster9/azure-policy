@@ -43,7 +43,7 @@ resource "azurerm_eventgrid_topic" "examplefail" {
 }
 
 # should pass
-resource "azurerm_eventgrid_topic" "examplefail" {
+resource "azurerm_eventgrid_topic" "examplepass" {
   name                = "topicpass3454jkn34jk5"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
@@ -52,5 +52,5 @@ resource "azurerm_eventgrid_topic" "examplefail" {
   depends_on = [
     azurerm_management_group_policy_assignment.topic_disable_public_network_access
   ]
-  
+
 }

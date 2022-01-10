@@ -196,7 +196,17 @@
 #     policy_assignment_mgmt_group_name = "parent-mgmt-group"
 # }
 
-module "machine_learning" {
+# module "machine_learning" {
+#     source = "./modules/machine_learning"
+
+#     location                          = var.location
+#     resource_group_name               = "policy-rg"
+
+#     policy_definition_mgmt_group_name = "parent-mgmt-group"
+#     policy_assignment_mgmt_group_name = "parent-mgmt-group"
+# }
+
+module "event_grid" {
     source = "./modules/machine_learning"
 
     location                          = var.location

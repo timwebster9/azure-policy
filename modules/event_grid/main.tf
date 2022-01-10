@@ -35,3 +35,14 @@ resource "azurerm_eventgrid_domain_topic" "example" {
     azurerm_management_group_policy_assignment.topic_disable_public_network_access
   ]
 }
+
+# should fail (public network access)
+resource "azurerm_eventgrid_topic" "example" {
+  name                = "topicfail3454jkn34jk5"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+
+  tags = {
+    environment = "Production"
+  }
+}

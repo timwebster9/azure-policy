@@ -12,7 +12,8 @@ resource "azurerm_eventgrid_domain" "examplefail" {
   depends_on = [
     azurerm_policy_definition.domain_diagnostics,
     azurerm_management_group_policy_assignment.domain_diagnostics,
-    azurerm_management_group_policy_assignment.domain_disable_public_network_access
+    azurerm_management_group_policy_assignment.domain_disable_public_network_access,
+    azurerm_management_group_policy_assignment.domain_disable_local_auth
   ]
 }
 
@@ -26,7 +27,8 @@ resource "azurerm_eventgrid_domain" "examplefpass" {
   depends_on = [
     azurerm_policy_definition.domain_diagnostics,
     azurerm_management_group_policy_assignment.domain_diagnostics,
-    azurerm_management_group_policy_assignment.domain_disable_public_network_access
+    azurerm_management_group_policy_assignment.domain_disable_public_network_access,
+    azurerm_management_group_policy_assignment.domain_disable_local_auth
   ]
 }
 
@@ -45,7 +47,8 @@ resource "azurerm_eventgrid_topic" "examplefail" {
   depends_on = [
     azurerm_policy_definition.topic_diagnostics,
     azurerm_management_group_policy_assignment.topic_diagnostics,
-    azurerm_management_group_policy_assignment.topic_disable_public_network_access
+    azurerm_management_group_policy_assignment.topic_disable_public_network_access,
+    azurerm_management_group_policy_assignment.topic_disable_local_auth
   ]
 }
 
@@ -59,6 +62,7 @@ resource "azurerm_eventgrid_topic" "examplepass" {
   depends_on = [
     azurerm_policy_definition.topic_diagnostics,
     azurerm_management_group_policy_assignment.topic_diagnostics,
-    azurerm_management_group_policy_assignment.topic_disable_public_network_access
+    azurerm_management_group_policy_assignment.topic_disable_public_network_access,
+    azurerm_management_group_policy_assignment.topic_disable_local_auth
   ]
 }

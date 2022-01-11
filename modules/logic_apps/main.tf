@@ -4,7 +4,7 @@ resource "azurerm_resource_group" "example" {
 }
 
 resource "azurerm_storage_account" "example" {
-  name                     = "functionsapptestsa"
+  name                     = "logicapp45345635k34hk"
   resource_group_name      = azurerm_resource_group.example.name
   location                 = azurerm_resource_group.example.location
   account_tier             = "Standard"
@@ -12,7 +12,7 @@ resource "azurerm_storage_account" "example" {
 }
 
 resource "azurerm_app_service_plan" "example" {
-  name                = "azure-functions-test-service-plan"
+  name                = "logicapp-asp-4535345"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
 
@@ -23,7 +23,7 @@ resource "azurerm_app_service_plan" "example" {
 }
 
 resource "azurerm_logic_app_standard" "example" {
-  name                       = "test-azure-functions"
+  name                       = "logic-app-fn-3453245"
   location                   = azurerm_resource_group.example.location
   resource_group_name        = azurerm_resource_group.example.name
   app_service_plan_id        = azurerm_app_service_plan.example.id

@@ -19,6 +19,12 @@ resource "azurerm_management_group_policy_assignment" "domain_disable_local_auth
 PARAMETERS
 }
 
+resource "azurerm_role_assignment" "domain_auth" {
+  scope                = data.azurerm_subscription.current.id
+  role_definition_name = "Contributor"
+  principal_id         = azurerm_management_group_policy_assignment.domain_disable_local_auth.identity[0].principal_id
+}
+
 resource "azurerm_management_group_policy_assignment" "topic_disable_local_auth" {
   name                 = "topic_disable_auth"
   policy_definition_id = data.azurerm_policy_definition.topic_disable_local_auth.id
@@ -30,7 +36,7 @@ resource "azurerm_management_group_policy_assignment" "topic_disable_local_auth"
   identity {
     type = "SystemAssigned"
   }
-  
+
   parameters = <<PARAMETERS
 {
   "effect": {
@@ -38,4 +44,10 @@ resource "azurerm_management_group_policy_assignment" "topic_disable_local_auth"
   }
 }
 PARAMETERS
+}
+
+resource "azurerm_role_assignment" "topic_auth" {
+  scope                = data.azurerm_subscription.current.id
+  role_definition_name = "Contributor"
+  principal_id         = azurerm_management_group_policy_assignment.topic_disable_local_auth.identity[0].principal_id
 }

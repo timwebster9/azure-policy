@@ -28,7 +28,8 @@ resource "azurerm_synapse_workspace" "examplepass" {
   
   public_network_access_enabled        = false
   managed_virtual_network_enabled      = true
-  linking_allowed_for_aad_tenant_ids   = ["62cd0b38-5f22-428a-abe2-da06bb835f43"]
+  data_exfiltration_protection_enabled = true
+  #linking_allowed_for_aad_tenant_ids   = ["62cd0b38-5f22-428a-abe2-da06bb835f43"]
 
   # aad_admin {
   #   login     = "AzureAD Admin"

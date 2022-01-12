@@ -26,9 +26,9 @@ resource "azurerm_synapse_workspace" "examplepass" {
   sql_administrator_login              = "sqladminuser"
   sql_administrator_login_password     = "897safdD£09sdfs*"
   
-  public_network_access_enabled        = false
+  #public_network_access_enabled        = false
   managed_virtual_network_enabled      = false
-  linking_allowed_for_aad_tenant_ids   = ["d8d82719-a4e3-4922-8d10-be2b4a616bcd"]
+  #linking_allowed_for_aad_tenant_ids   = ["d8d82719-a4e3-4922-8d10-be2b4a616bcd"]
 
   # aad_admin {
   #   login     = "AzureAD Admin"

@@ -216,8 +216,18 @@
 #     policy_assignment_mgmt_group_name = "parent-mgmt-group"
 # }
 
-module "logic_apps" {
-    source = "./modules/logic_apps"
+# module "logic_apps" {
+#     source = "./modules/logic_apps"
+
+#     location                          = var.location
+#     resource_group_name               = "policy-rg"
+
+#     policy_definition_mgmt_group_name = "parent-mgmt-group"
+#     policy_assignment_mgmt_group_name = "parent-mgmt-group"
+# }
+
+module "synapse" {
+    source = "./modules/synapse"
 
     location                          = var.location
     resource_group_name               = "policy-rg"

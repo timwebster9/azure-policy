@@ -7,7 +7,7 @@
             },
             {
                 "field": "kind",
-                "equals": "functionapp,workflowapp"
+                "contains": "functionapp"
             }
         ]
     },

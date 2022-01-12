@@ -18,7 +18,29 @@ resource "azurerm_storage_data_lake_gen2_filesystem" "example" {
   storage_account_id = azurerm_storage_account.example.id
 }
 
-resource "azurerm_synapse_workspace" "example" {
+resource "azurerm_synapse_workspace" "examplepass" {
+  name                                 = "synapse89798gdfg"
+  resource_group_name                  = azurerm_resource_group.example.name
+  location                             = azurerm_resource_group.example.location
+  storage_data_lake_gen2_filesystem_id = azurerm_storage_data_lake_gen2_filesystem.example.id
+  sql_administrator_login              = "sqladminuser"
+  sql_administrator_login_password     = "897safdD£09sdfs*"
+  
+  public_network_access_enabled = false  # fail
+
+  # aad_admin {
+  #   login     = "AzureAD Admin"
+  #   object_id = "00000000-0000-0000-0000-000000000000"
+  #   tenant_id = "00000000-0000-0000-0000-000000000000"
+  # }
+
+  depends_on = [
+    azurerm_management_group_policy_assignment.synapse_disable_public_network_access
+  ]
+}
+
+# should fail
+resource "azurerm_synapse_workspace" "examplefail" {
   name                                 = "example"
   resource_group_name                  = azurerm_resource_group.example.name
   location                             = azurerm_resource_group.example.location
@@ -26,7 +48,7 @@ resource "azurerm_synapse_workspace" "example" {
   sql_administrator_login              = "sqladminuser"
   sql_administrator_login_password     = "897safdD£09sdfs*"
   
-  public_network_access_enabled = true
+  public_network_access_enabled = true  # fail
 
   # aad_admin {
   #   login     = "AzureAD Admin"

@@ -26,8 +26,8 @@ resource "azurerm_synapse_workspace" "examplepass" {
   sql_administrator_login              = "sqladminuser"
   sql_administrator_login_password     = "897safdD£09sdfs*"
   
-  #public_network_access_enabled        = false
-  managed_virtual_network_enabled      = false
+  public_network_access_enabled        = false
+  managed_virtual_network_enabled      = true
   linking_allowed_for_aad_tenant_ids   = ["62cd0b38-5f22-428a-abe2-da06bb835f43"]
 
   # aad_admin {

@@ -1,5 +1,5 @@
 resource "azurerm_policy_definition" "diagnostics" {
-  name                  = "diagnostics"
+  name                  = "la_diagnostics"
   policy_type           = "Custom"
   mode                  = "Indexed"
   display_name          = "Deploy Diagnostic Settings for Function Apps"
@@ -17,7 +17,7 @@ METADATA
 }
 
 resource "azurerm_management_group_policy_assignment" "diagnostics" {
-  name                 = "diagnostics"
+  name                 = "la_diagnostics"
   policy_definition_id = azurerm_policy_definition.diagnostics.id
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"

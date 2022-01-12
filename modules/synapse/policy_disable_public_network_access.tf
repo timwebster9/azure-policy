@@ -9,7 +9,7 @@ resource "azurerm_management_group_policy_assignment" "synapse_disable_public_ne
   parameters = <<PARAMETERS
 {
   "effect": {
-    "value": "Deny"
+    "value": "Audit"
   }
 }
 PARAMETERS

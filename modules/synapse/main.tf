@@ -28,7 +28,8 @@ resource "azurerm_synapse_workspace" "examplepass" {
   
   public_network_access_enabled        = false  # fail
   managed_virtual_network_enabled      = true
-
+  linking_allowed_for_aad_tenant_ids   = false
+  
   # aad_admin {
   #   login     = "AzureAD Admin"
   #   object_id = "00000000-0000-0000-0000-000000000000"

@@ -1,0 +1,181 @@
+{
+    "if": {
+        "allOf": [
+            {
+                "field": "type",
+                "equals": "Microsoft.Synapse/workspaces/sqlPools"
+            }
+        ]
+    },
+    "then": {
+        "effect": "[parameters('effect')]",
+        "details": {
+            "type": "Microsoft.Insights/diagnosticSettings",
+            "name": "[parameters('profileName')]",
+            "EvaluationDelay": "AfterProvisioning",
+            "existenceCondition": {
+                "allOf": [
+                    {
+                        "field": "Microsoft.Insights/diagnosticSettings/workspaceId",
+                        "equals": "[parameters('logAnalyticsWorkspaceId')]"
+                    },
+                    {
+                        "field": "Microsoft.Insights/diagnosticSettings/eventHubAuthorizationRuleId",
+                        "equals": "[parameters('eventHubRuleId')]"
+                    },
+                    {
+                        "field": "Microsoft.Insights/diagnosticSettings/eventHubName",
+                        "equals": "[parameters('eventHubName')]"
+                    },
+                    {
+                        "field": "Microsoft.Insights/diagnosticSettings/storageAccountId",
+                        "equals": "[parameters('storageAccountId')]"
+                    }
+                ]
+            },
+            "roleDefinitionIds": [
+                "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
+            ],
+            "deployment": {
+                "properties": {
+                    "mode": "incremental",
+                    "template": {
+                        "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+                        "contentVersion": "1.0.0.0",
+                        "parameters": {
+                            "fullName": {
+                                "type": "string"
+                            },
+                            "profileName": {
+                                "type": "string"
+                            },
+                            "eventHubRuleId": {
+                                "type": "string"
+                            },
+                            "eventHubName": {
+                                "type": "string"
+                            },
+                            "logAnalyticsWorkspaceId": {
+                                "type": "string"
+                            },
+                            "storageAccountId": {
+                                "type": "string"
+                            },
+                            "storageRetentionDays": {
+                                "type": "int"
+                            },
+                            "logsEnabled": {
+                                "type": "string"
+                            },
+                            "metricsEnabled": {
+                                "type": "string"
+                            },
+                            "location": {
+                                "type": "string"
+                            }
+                        },
+                        "variables": {},
+                        "resources": [
+                            {
+                                "type": "Microsoft.Synapse/workspaces/sqlPools/providers/diagnosticSettings",
+                                "apiVersion": "2021-05-01-preview",
+                                "name": "[concat(parameters('fullName'), '/', 'Microsoft.Insights/', parameters('profileName'))]",
+                                "location": "[parameters('location')]",
+                                "properties": {
+                                    "eventHubAuthorizationRuleId": "[parameters('eventHubRuleId')]",
+                                    "eventHubName": "[parameters('eventHubName')]",
+                                    "workspaceId": "[parameters('logAnalyticsWorkspaceId')]",
+                                    "storageAccountId": "[parameters('storageAccountId')]",
+                                    "metrics": [
+                                        {
+                                            "category": "AllMetrics",
+                                            "enabled": "[parameters('metricsEnabled')]",
+                                            "retentionPolicy": {
+                                                "enabled": true,
+                                                "days": "[parameters('storageRetentionDays')]"
+                                            }
+                                        }
+                                    ],
+                                    "logs": [
+                                        {
+                                            "category": "SqlRequests",
+                                            "enabled": "[parameters('logsEnabled')]",
+                                            "retentionPolicy": {
+                                                "enabled": true,
+                                                "days": "[parameters('storageRetentionDays')]"
+                                            }
+                                        },
+                                        {
+                                            "category": "RequestSteps",
+                                            "enabled": "[parameters('logsEnabled')]",
+                                            "retentionPolicy": {
+                                                "enabled": true,
+                                                "days": "[parameters('storageRetentionDays')]"
+                                            }
+                                        },
+                                        {
+                                            "category": "ExecRequests",
+                                            "enabled": "[parameters('logsEnabled')]",
+                                            "retentionPolicy": {
+                                                "enabled": true,
+                                                "days": "[parameters('storageRetentionDays')]"
+                                            }
+                                        },
+                                        {
+                                            "category": "DmsWorkers",
+                                            "enabled": "[parameters('logsEnabled')]",
+                                            "retentionPolicy": {
+                                                "enabled": true,
+                                                "days": "[parameters('storageRetentionDays')]"
+                                            }
+                                        },
+                                        {
+                                            "category": "Waits",
+                                            "enabled": "[parameters('logsEnabled')]",
+                                            "retentionPolicy": {
+                                                "enabled": true,
+                                                "days": "[parameters('storageRetentionDays')]"
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    "parameters": {
+                        "profileName": {
+                            "value": "[parameters('profileName')]"
+                        },
+                        "eventHubRuleId": {
+                            "value": "[parameters('eventHubRuleId')]"
+                        },
+                        "eventHubName": {
+                            "value": "[parameters('eventHubName')]"
+                        },
+                        "logAnalyticsWorkspaceId": {
+                            "value": "[parameters('logAnalyticsWorkspaceId')]"
+                        },
+                        "storageAccountId": {
+                            "value": "[parameters('storageAccountId')]"
+                        },
+                        "storageRetentionDays": {
+                            "value": "[parameters('storageRetentionDays')]"
+                        },
+                        "location": {
+                            "value": "[field('location')]"
+                        },
+                        "fullName": {
+                            "value": "[field('fullName')]"
+                        },
+                        "metricsEnabled": {
+                            "value": "[parameters('metricsEnabled')]"
+                        },
+                        "logsEnabled": {
+                            "value": "[parameters('logsEnabled')]"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

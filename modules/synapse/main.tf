@@ -46,11 +46,16 @@ resource "azurerm_synapse_workspace" "examplepass" {
   ]
 }
 
-resource "azurerm_synapse_firewall_rule" "examplefail" {
-  name                 = "AllowAll"
+resource "azurerm_synapse_sql_pool" "example" {
+  name                 = "sqlpool"
   synapse_workspace_id = azurerm_synapse_workspace.examplepass.id
-  start_ip_address     = "0.0.0.0"
-  end_ip_address       = "255.255.255.255"
+  sku_name             = "DW100c"
+  create_mode          = "Default"
+
+  depends_on = [
+    azurerm_policy_definition.sqlpool_diagnostics,
+    azurerm_management_group_policy_assignment.sqlpool_diagnostics
+  ]
 }
 
 # Policy Voilations - should all fail

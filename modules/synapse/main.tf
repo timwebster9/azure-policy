@@ -46,6 +46,15 @@ resource "azurerm_synapse_workspace" "examplepass" {
   ]
 }
 
+resource "azurerm_synapse_firewall_rule" "examplefail" {
+  name                 = "AllowAll"
+  synapse_workspace_id = azurerm_synapse_workspace.examplepass.id
+  start_ip_address     = "0.0.0.0"
+  end_ip_address       = "255.255.255.255"
+}
+
+# Policy Voilations - should all fail
+
 # should fail -  no managed vnet
 resource "azurerm_synapse_workspace" "example_no_managed_vnet" {
   name                                 = "example"

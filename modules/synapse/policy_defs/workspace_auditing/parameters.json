@@ -39,16 +39,16 @@
             "description": "Number of days to retain diagnostics logs"
         }
     },
-    "logsEnabled": {
+    "state": {
         "type": "String",
         "metadata": {
-            "displayName": "Enable logs",
-            "description": "Whether to enable logs stream to the Event Hub  - True or False"
+            "displayName": "Enable auditing",
+            "description": "Whether to enable auditing"
         },
         "allowedValues": [
-            "True",
-            "False"
+            "Enabled",
+            "Disabled"
         ],
-        "defaultValue": "True"
+        "defaultValue": "Enabled"
     }
 }

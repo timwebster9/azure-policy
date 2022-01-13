@@ -17,7 +17,7 @@
                 "allOf": [
                     {
                         "field": "Microsoft.Synapse/workspaces/auditingSettings/state",
-                        "equals": "Enabled"
+                        "equals": "[parameters('state')]"
                     },
                     {
                         "field": "Microsoft.Synapse/workspaces/auditingSettings/storageEndpoint",
@@ -58,7 +58,7 @@
                             "storageAccountSubscriptionId": {
                                 "type": "string"
                             },
-                            "logsEnabled": {
+                            "state": {
                                 "type": "string"
                             }
                         },
@@ -69,7 +69,7 @@
                                 "type": "Microsoft.Synapse/workspaces/auditingSettings",
                                 "apiVersion": "2021-06-01",
                                 "properties": {
-                                    "state": "[parameters('logsEnabled')]",
+                                    "state": "[parameters('state')]",
                                     "storageEndpoint": "[parameters('storageEndpoint')]",
                                     "storageAccountAccessKey": "[parameters('storageAccountAccessKey')]",
                                     "retentionDays": "[parameters('storageRetentionDays')]",
@@ -95,8 +95,8 @@
                         "resourceName": {
                             "value": "[field('name')]"
                         },
-                        "logsEnabled": {
-                            "value": "[parameters('logsEnabled')]"
+                        "state": {
+                            "value": "[parameters('state')]"
                         }
                     }
                 }

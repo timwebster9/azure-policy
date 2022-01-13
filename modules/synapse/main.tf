@@ -58,6 +58,29 @@ resource "azurerm_synapse_sql_pool" "example" {
   ]
 }
 
+resource "azurerm_synapse_spark_pool" "example" {
+  name                 = "sparkpool"
+  synapse_workspace_id = azurerm_synapse_workspace.examplepass.id
+  node_size_family     = "MemoryOptimized"
+  node_size            = "Small"
+  cache_size           = 100
+
+  auto_scale {
+    max_node_count = 3
+    min_node_count = 3
+  }
+
+  auto_pause {
+    delay_in_minutes = 15
+  }
+
+  depends_on = [
+    azurerm_policy_definition.sparkpool_diagnostics,
+    azurerm_management_group_policy_assignment.sparkpool_diagnostics
+  ]
+
+}
+
 # Policy Voilations - should all fail
 
 # should fail -  no managed vnet

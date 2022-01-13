@@ -45,8 +45,8 @@ resource "azurerm_management_group_policy_assignment" "workspace_auditing" {
   "storageRetentionDays": {
     "value": 365
   },
-  "logsEnabled": {
-    "value": "True"
+  "state": {
+    "value": "Enabled"
   }
 }
 PARAMETERS

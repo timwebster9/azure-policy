@@ -2,7 +2,7 @@ resource "azurerm_policy_definition" "workspace_auditing" {
   name                  = "workspace_auditing"
   policy_type           = "Custom"
   mode                  = "All"
-  display_name          = "Deploy Azure Synapse Diagnostics"
+  display_name          = "Configure Azure Synapse Workspace Auditing"
   management_group_name = data.azurerm_management_group.policy_definition_mgmt_group.name
 
   metadata = <<METADATA

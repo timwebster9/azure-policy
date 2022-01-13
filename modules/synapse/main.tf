@@ -39,6 +39,8 @@ resource "azurerm_synapse_workspace" "examplepass" {
 
   depends_on = [
     azurerm_policy_definition.synapse_diagnostics,
+    azurerm_policy_definition.workspace_auditing,
+    azurerm_management_group_policy_assignment.workspace_auditing,
     azurerm_management_group_policy_assignment.synapse_diagnostics,
     azurerm_management_group_policy_assignment.synapse_managed_vnet,
     azurerm_management_group_policy_assignment.synapse_disable_public_network_access,

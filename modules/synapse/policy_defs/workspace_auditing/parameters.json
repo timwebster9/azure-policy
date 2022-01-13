@@ -1,0 +1,54 @@
+{
+    "effect": {
+        "type": "String",
+        "defaultValue": "DeployIfNotExists",
+        "allowedValues": [
+            "DeployIfNotExists",
+            "Disabled"
+        ],
+        "metadata": {
+            "displayName": "Effect",
+            "description": "The effect determines what happens when the policy rule is evaluated to match"
+        }
+    },
+    "storageEndpoint": {
+        "type": "string",
+        "metadata": {
+            "displayName": "Storage account storageEndpoint",
+            "description": "Blob endpoint. e.g. https://mystorage.blob.windows.net"
+        }
+    },
+    "storageAccountAccessKey": {
+        "type": "string",
+        "metadata": {
+            "displayName": "Storage account access key",
+            "description": "Storage account access key"
+        }
+    },
+    "storageAccountSubscriptionId": {
+        "type": "string",
+        "metadata": {
+            "displayName": "Storage account subscription ID",
+            "description": "Storage account subscription ID"
+        }
+    },
+    "storageRetentionDays": {
+        "type": "Integer",
+        "metadata": {
+            "displayName": "Storage account retention policy",
+            "description": "Number of days to retain diagnostics logs"
+        }
+    },
+    "logsEnabled": {
+        "type": "String",
+        "metadata": {
+            "displayName": "Enable logs",
+            "description": "Whether to enable logs stream to the Event Hub  - True or False"
+        },
+        "allowedValues": [
+            "True",
+            "False"
+        ],
+        "defaultValue": "True"
+    }
+}

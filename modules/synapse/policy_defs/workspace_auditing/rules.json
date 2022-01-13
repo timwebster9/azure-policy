@@ -10,26 +10,26 @@
     "then": {
         "effect": "[parameters('effect')]",
         "details": {
-            "type": "Microsoft.Insights/diagnosticSettings",
-            "name": "[parameters('profileName')]",
+            "type": "Microsoft.Synapse/workspaces/auditingSettings",
+            "name": "Default",
             "EvaluationDelay": "AfterProvisioning",
             "existenceCondition": {
                 "allOf": [
                     {
-                        "field": "Microsoft.Insights/diagnosticSettings/workspaceId",
-                        "equals": "[parameters('logAnalyticsWorkspaceId')]"
+                        "field": "Microsoft.Synapse/workspaces/auditingSettings/state",
+                        "equals": "Enabled"
                     },
                     {
-                        "field": "Microsoft.Insights/diagnosticSettings/eventHubAuthorizationRuleId",
-                        "equals": "[parameters('eventHubRuleId')]"
+                        "field": "Microsoft.Synapse/workspaces/auditingSettings/storageEndpoint",
+                        "equals": "[parameters('storageEndpoint')]"
                     },
                     {
-                        "field": "Microsoft.Insights/diagnosticSettings/eventHubName",
-                        "equals": "[parameters('eventHubName')]"
+                        "field": "Microsoft.Synapse/workspaces/auditingSettings/storageAccountAccessKey",
+                        "equals": "[parameters('storageAccountAccessKey')]"
                     },
                     {
-                        "field": "Microsoft.Insights/diagnosticSettings/storageAccountId",
-                        "equals": "[parameters('storageAccountId')]"
+                        "field": "Microsoft.Synapse/workspaces/auditingSettings/storageAccountSubscriptionId",
+                        "equals": "[parameters('storageAccountSubscriptionId')]"
                     }
                 ]
             },

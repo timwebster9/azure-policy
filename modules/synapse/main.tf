@@ -53,7 +53,9 @@ resource "azurerm_synapse_workspace" "example_no_managed_vnet" {
   sql_administrator_login              = "sqladminuser"
   sql_administrator_login_password     = "897safdD£09sdfs*"
   
-  managed_virtual_network_enabled = false  # fail
+  managed_virtual_network_enabled      = false  # fail
+  public_network_access_enabled        = false  # not available without managed vnet
+  data_exfiltration_protection_enabled = true
 
   depends_on = [
     azurerm_management_group_policy_assignment.synapse_managed_vnet,
@@ -73,6 +75,7 @@ resource "azurerm_synapse_workspace" "example_public_network_enabled" {
   
   managed_virtual_network_enabled      = true
   public_network_access_enabled        = true # fail
+  data_exfiltration_protection_enabled = true
 
   depends_on = [
     azurerm_management_group_policy_assignment.synapse_managed_vnet,
@@ -90,8 +93,8 @@ resource "azurerm_synapse_workspace" "example_data_exfiltration_disabled" {
   sql_administrator_login              = "sqladminuser"
   sql_administrator_login_password     = "897safdD£09sdfs*"
   
-  public_network_access_enabled        = true
   managed_virtual_network_enabled      = true
+  public_network_access_enabled        = false
   data_exfiltration_protection_enabled = false # fail
 
   depends_on = [

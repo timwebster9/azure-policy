@@ -98,39 +98,7 @@
                                     ],
                                     "logs": [
                                         {
-                                            "category": "SqlRequests",
-                                            "enabled": "[parameters('logsEnabled')]",
-                                            "retentionPolicy": {
-                                                "enabled": true,
-                                                "days": "[parameters('storageRetentionDays')]"
-                                            }
-                                        },
-                                        {
-                                            "category": "RequestSteps",
-                                            "enabled": "[parameters('logsEnabled')]",
-                                            "retentionPolicy": {
-                                                "enabled": true,
-                                                "days": "[parameters('storageRetentionDays')]"
-                                            }
-                                        },
-                                        {
-                                            "category": "ExecRequests",
-                                            "enabled": "[parameters('logsEnabled')]",
-                                            "retentionPolicy": {
-                                                "enabled": true,
-                                                "days": "[parameters('storageRetentionDays')]"
-                                            }
-                                        },
-                                        {
-                                            "category": "DmsWorkers",
-                                            "enabled": "[parameters('logsEnabled')]",
-                                            "retentionPolicy": {
-                                                "enabled": true,
-                                                "days": "[parameters('storageRetentionDays')]"
-                                            }
-                                        },
-                                        {
-                                            "category": "Waits",
+                                            "category": "BigDataPoolAppsEnded",
                                             "enabled": "[parameters('logsEnabled')]",
                                             "retentionPolicy": {
                                                 "enabled": true,

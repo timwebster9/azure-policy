@@ -1,5 +1,5 @@
-resource "azurerm_policy_definition" "sqarkpool_diagnostics" {
-  name                  = "sqarkpool_diagnostics"
+resource "azurerm_policy_definition" "sparkpool_diagnostics" {
+  name                  = "sparkpool_diagnostics"
   policy_type           = "Custom"
   mode                  = "All"
   display_name          = "Deploy Azure Synapse Spark Pool Diagnostics"
@@ -12,16 +12,16 @@ resource "azurerm_policy_definition" "sqarkpool_diagnostics" {
 
 METADATA
 
-  policy_rule = file("${path.module}/policy_defs/sqarkpool_diagnostics/rules.json")
-  parameters = file("${path.module}/policy_defs/sqarkpool_diagnostics/parameters.json")
+  policy_rule = file("${path.module}/policy_defs/sparkpool_diagnostics/rules.json")
+  parameters = file("${path.module}/policy_defs/sparkpool_diagnostics/parameters.json")
 }
 
-resource "azurerm_management_group_policy_assignment" "sqarkpool_diagnostics" {
-  name                 = "sqarkpool_diagnostics"
-  policy_definition_id = azurerm_policy_definition.sqarkpool_diagnostics.id
+resource "azurerm_management_group_policy_assignment" "sparkpool_diagnostics" {
+  name                 = "sparkpool_diagnostics"
+  policy_definition_id = azurerm_policy_definition.sparkpool_diagnostics.id
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"
-  display_name         = azurerm_policy_definition.sqarkpool_diagnostics.display_name
+  display_name         = azurerm_policy_definition.sparkpool_diagnostics.display_name
   location             = var.location
 
   identity {
@@ -58,8 +58,8 @@ resource "azurerm_management_group_policy_assignment" "sqarkpool_diagnostics" {
 PARAMETERS
 }
 
-resource "azurerm_role_assignment" "sqarkpool_diagnostics" {
+resource "azurerm_role_assignment" "sparkpool_diagnostics" {
   scope                = data.azurerm_subscription.current.id
   role_definition_name = "Contributor"
-  principal_id         = azurerm_management_group_policy_assignment.sqarkpool_diagnostics.identity[0].principal_id
+  principal_id         = azurerm_management_group_policy_assignment.sparkpool_diagnostics.identity[0].principal_id
 }

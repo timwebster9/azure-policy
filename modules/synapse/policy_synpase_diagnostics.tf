@@ -17,7 +17,7 @@ METADATA
 }
 
 resource "azurerm_management_group_policy_assignment" "synapse_diagnostics" {
-  name                 = "domain_diagnsynapse_diagnosticsostics"
+  name                 = "synapse_diagnostics"
   policy_definition_id = azurerm_policy_definition.synapse_diagnostics.id
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"

@@ -18,6 +18,7 @@ resource "azurerm_storage_data_lake_gen2_filesystem" "example" {
   storage_account_id = azurerm_storage_account.example.id
 }
 
+# should pass
 resource "azurerm_synapse_workspace" "examplepass" {
   name                                 = "synapse89798gdfg"
   resource_group_name                  = azurerm_resource_group.example.name
@@ -26,10 +27,9 @@ resource "azurerm_synapse_workspace" "examplepass" {
   sql_administrator_login              = "sqladminuser"
   sql_administrator_login_password     = "897safdD£09sdfs*"
   
-  public_network_access_enabled        = false
-  managed_virtual_network_enabled      = true
-  data_exfiltration_protection_enabled = true
-  #linking_allowed_for_aad_tenant_ids   = ["62cd0b38-5f22-428a-abe2-da06bb835f43"]
+  managed_virtual_network_enabled      = true  # enforced by policy
+  public_network_access_enabled        = false # enforced by policy
+  data_exfiltration_protection_enabled = true  # enforced by policy
 
   # aad_admin {
   #   login     = "AzureAD Admin"
@@ -38,6 +38,8 @@ resource "azurerm_synapse_workspace" "examplepass" {
   # }
 
   depends_on = [
+    azurerm_policy_definition.synapse_diagnostics,
+    azurerm_management_group_policy_assignment.synapse_diagnostics,
     azurerm_management_group_policy_assignment.synapse_managed_vnet,
     azurerm_management_group_policy_assignment.synapse_disable_public_network_access,
     azurerm_management_group_policy_assignment.data_exfiltration

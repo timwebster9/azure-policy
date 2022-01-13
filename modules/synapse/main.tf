@@ -38,12 +38,14 @@ resource "azurerm_synapse_workspace" "examplepass" {
   # }
 
   depends_on = [
-    azurerm_management_group_policy_assignment.synapse_disable_public_network_access
+    azurerm_management_group_policy_assignment.synapse_managed_vnet,
+    azurerm_management_group_policy_assignment.synapse_disable_public_network_access,
+    azurerm_management_group_policy_assignment.data_exfiltration
   ]
 }
 
-# should fail
-resource "azurerm_synapse_workspace" "examplefail" {
+# should fail -  no managed vnet
+resource "azurerm_synapse_workspace" "example_no_managed_vnet" {
   name                                 = "example"
   resource_group_name                  = azurerm_resource_group.example.name
   location                             = azurerm_resource_group.example.location
@@ -51,15 +53,50 @@ resource "azurerm_synapse_workspace" "examplefail" {
   sql_administrator_login              = "sqladminuser"
   sql_administrator_login_password     = "897safdD£09sdfs*"
   
-  public_network_access_enabled = true  # fail
-
-  # aad_admin {
-  #   login     = "AzureAD Admin"
-  #   object_id = "00000000-0000-0000-0000-000000000000"
-  #   tenant_id = "00000000-0000-0000-0000-000000000000"
-  # }
+  managed_virtual_network_enabled = false  # fail
 
   depends_on = [
-    azurerm_management_group_policy_assignment.synapse_disable_public_network_access
+    azurerm_management_group_policy_assignment.synapse_managed_vnet,
+    azurerm_management_group_policy_assignment.synapse_disable_public_network_access,
+    azurerm_management_group_policy_assignment.data_exfiltration
+  ]
+}
+
+# should fail - public network access enabled
+resource "azurerm_synapse_workspace" "example_public_network_enabled" {
+  name                                 = "synapsepublicnetwork345325"
+  resource_group_name                  = azurerm_resource_group.example.name
+  location                             = azurerm_resource_group.example.location
+  storage_data_lake_gen2_filesystem_id = azurerm_storage_data_lake_gen2_filesystem.example.id
+  sql_administrator_login              = "sqladminuser"
+  sql_administrator_login_password     = "897safdD£09sdfs*"
+  
+  managed_virtual_network_enabled      = true
+  public_network_access_enabled        = true # fail
+
+  depends_on = [
+    azurerm_management_group_policy_assignment.synapse_managed_vnet,
+    azurerm_management_group_policy_assignment.synapse_disable_public_network_access,
+    azurerm_management_group_policy_assignment.data_exfiltration
+  ]
+}
+
+# should fail - data exfiltration protection not enabled
+resource "azurerm_synapse_workspace" "example_data_exfiltration_disabled" {
+  name                                 = "synapsenodataexfil345325"
+  resource_group_name                  = azurerm_resource_group.example.name
+  location                             = azurerm_resource_group.example.location
+  storage_data_lake_gen2_filesystem_id = azurerm_storage_data_lake_gen2_filesystem.example.id
+  sql_administrator_login              = "sqladminuser"
+  sql_administrator_login_password     = "897safdD£09sdfs*"
+  
+  public_network_access_enabled        = true
+  managed_virtual_network_enabled      = true
+  data_exfiltration_protection_enabled = false # fail
+
+  depends_on = [
+    azurerm_management_group_policy_assignment.synapse_managed_vnet,
+    azurerm_management_group_policy_assignment.synapse_disable_public_network_access,
+    azurerm_management_group_policy_assignment.data_exfiltration
   ]
 }

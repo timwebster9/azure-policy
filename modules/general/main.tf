@@ -60,6 +60,11 @@ resource "azurerm_data_factory_dataset_azure_blob" "example" {
 data "azurerm_cosmosdb_account" "example" {
   name                = "adfcosmos098098098"
   resource_group_name = azurerm_resource_group.example.name
+
+  depends_on = [
+    azurerm_policy_definition.whitelist_regions,
+    azurerm_management_group_policy_assignment.whitelist_regions,
+  ]
 }
 
 resource "azurerm_data_factory_linked_service_cosmosdb" "example" {
@@ -69,6 +74,12 @@ resource "azurerm_data_factory_linked_service_cosmosdb" "example" {
   account_endpoint    = azurerm_cosmosdb_account.example.endpoint
   account_key         = data.azurerm_cosmosdb_account.example.primary_access_key
   database            = "foo"
+
+  depends_on = [
+    azurerm_policy_definition.whitelist_regions,
+    azurerm_management_group_policy_assignment.whitelist_regions,
+  ]
+
 }
 
 resource "azurerm_data_factory_dataset_cosmosdb_sqlapi" "example" {
@@ -78,4 +89,10 @@ resource "azurerm_data_factory_dataset_cosmosdb_sqlapi" "example" {
   linked_service_name = azurerm_data_factory_linked_service_cosmosdb.example.name
 
   collection_name = "bar"
+
+  depends_on = [
+    azurerm_policy_definition.whitelist_regions,
+    azurerm_management_group_policy_assignment.whitelist_regions,
+  ]
+
 }

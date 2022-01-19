@@ -71,15 +71,15 @@ resource "azurerm_cosmosdb_account" "example" {
   }
   
   geo_location {
-    location          = azurerm_resource_group.rg.location
+    location          = azurerm_resource_group.example.location
     failover_priority = 0
   }
 }
 
 resource "azurerm_cosmosdb_sql_database" "example" {
   name                = "bar"
-  resource_group_name = data.azurerm_cosmosdb_account.example.resource_group_name
-  account_name        = data.azurerm_cosmosdb_account.example.name
+  resource_group_name = azurerm_resource_group.example.name
+  account_name        = azurerm_cosmosdb_account.example.name
   throughput          = 400
 }
 

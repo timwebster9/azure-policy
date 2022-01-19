@@ -57,14 +57,12 @@ resource "azurerm_data_factory_dataset_azure_blob" "example" {
 
 }
 
-data "azurerm_cosmosdb_account" "example" {
-  name                = "adfcosmos098098098"
+resource "azurerm_cosmosdb_account" "db" {
+  name                = "adfcosmos987sf89s7978"
+  location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
-
-  depends_on = [
-    azurerm_policy_definition.whitelist_regions,
-    azurerm_management_group_policy_assignment.whitelist_regions,
-  ]
+  offer_type          = "Standard"
+  kind                = "GlobalDocumentDB"
 }
 
 resource "azurerm_data_factory_linked_service_cosmosdb" "example" {

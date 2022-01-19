@@ -57,7 +57,7 @@ resource "azurerm_data_factory_dataset_azure_blob" "example" {
 
 }
 
-resource "azurerm_cosmosdb_account" "db" {
+resource "azurerm_cosmosdb_account" "example" {
   name                = "adfcosmos987sf89s7978"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
@@ -71,7 +71,18 @@ resource "azurerm_data_factory_linked_service_cosmosdb" "example" {
   data_factory_id     = azurerm_data_factory.example.id
   account_endpoint    = azurerm_cosmosdb_account.example.endpoint
   account_key         = data.azurerm_cosmosdb_account.example.primary_access_key
-  database            = "foo"
+  database            = "bar"
+
+  consistency_policy {
+    consistency_level       = "BoundedStaleness"
+    max_interval_in_seconds = 300
+    max_staleness_prefix    = 100000
+  }
+  
+  geo_location {
+    location          = azurerm_resource_group.rg.location
+    failover_priority = 0
+  }
 
   depends_on = [
     azurerm_policy_definition.whitelist_regions,

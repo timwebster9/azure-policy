@@ -29,7 +29,7 @@ resource "azurerm_management_group_policy_assignment" "whitelist_regions" {
     "value": "Deny"
   },
   "listOfRegionsAllowed": {
-    "value": ["OK South"]
+    "value": ["UK South"]
   }
 }
 PARAMETERS

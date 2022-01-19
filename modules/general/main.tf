@@ -4,7 +4,7 @@ resource "azurerm_resource_group" "example" {
 }
 
 resource "azurerm_data_factory" "example" {
-  name                = "example"
+  name                = "adf987897979"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
 
@@ -12,7 +12,7 @@ resource "azurerm_data_factory" "example" {
     azurerm_policy_definition.whitelist_regions,
     azurerm_management_group_policy_assignment.whitelist_regions,
   ]
-  
+
 }
 
 data "azurerm_storage_account" "example" {

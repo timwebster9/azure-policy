@@ -63,15 +63,6 @@ resource "azurerm_cosmosdb_account" "example" {
   resource_group_name = azurerm_resource_group.example.name
   offer_type          = "Standard"
   kind                = "GlobalDocumentDB"
-}
-
-resource "azurerm_data_factory_linked_service_cosmosdb" "example" {
-  name                = "example"
-  resource_group_name = azurerm_resource_group.example.name
-  data_factory_id     = azurerm_data_factory.example.id
-  account_endpoint    = azurerm_cosmosdb_account.example.endpoint
-  account_key         = data.azurerm_cosmosdb_account.example.primary_access_key
-  database            = "bar"
 
   consistency_policy {
     consistency_level       = "BoundedStaleness"
@@ -83,6 +74,22 @@ resource "azurerm_data_factory_linked_service_cosmosdb" "example" {
     location          = azurerm_resource_group.rg.location
     failover_priority = 0
   }
+}
+
+resource "azurerm_cosmosdb_sql_database" "example" {
+  name                = "bar"
+  resource_group_name = data.azurerm_cosmosdb_account.example.resource_group_name
+  account_name        = data.azurerm_cosmosdb_account.example.name
+  throughput          = 400
+}
+
+resource "azurerm_data_factory_linked_service_cosmosdb" "example" {
+  name                = "example"
+  resource_group_name = azurerm_resource_group.example.name
+  data_factory_id     = azurerm_data_factory.example.id
+  account_endpoint    = azurerm_cosmosdb_account.example.endpoint
+  account_key         = data.azurerm_cosmosdb_account.example.primary_access_key
+  database            = "bar"
 
   depends_on = [
     azurerm_policy_definition.whitelist_regions,

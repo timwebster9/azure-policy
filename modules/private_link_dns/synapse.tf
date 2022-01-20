@@ -1,4 +1,4 @@
-resource "azurerm_storage_account" "example" {
+resource "azurerm_storage_account" "synapse_sa" {
   name                     = "synapsesa3457345894"
   resource_group_name      = azurerm_resource_group.example.name
   location                 = azurerm_resource_group.example.location
@@ -10,7 +10,7 @@ resource "azurerm_storage_account" "example" {
 
 resource "azurerm_storage_data_lake_gen2_filesystem" "example" {
   name               = "example"
-  storage_account_id = azurerm_storage_account.example.id
+  storage_account_id = azurerm_storage_account.synapse_sa.id
 }
 
 # should pass

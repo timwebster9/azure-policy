@@ -28,7 +28,7 @@ resource "azurerm_synapse_workspace" "example" {
 }
 
 resource "azurerm_synapse_private_link_hub" "example" {
-  name                = "synapse-pe-hub"
+  name                = "synapsepehub"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
 }

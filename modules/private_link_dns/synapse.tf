@@ -27,6 +27,12 @@ resource "azurerm_synapse_workspace" "example" {
   data_exfiltration_protection_enabled = true  # enforced by policy
 }
 
+resource "azurerm_synapse_private_link_hub" "example" {
+  name                = "synapse-pe-hub"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+}
+
 resource "azurerm_private_endpoint" "synapse_web" {
   name                = "synapse-web-endpoint"
   location            = azurerm_resource_group.example.location
@@ -35,7 +41,7 @@ resource "azurerm_private_endpoint" "synapse_web" {
 
   private_service_connection {
     name                           = "synapse-web-pe"
-    private_connection_resource_id = azurerm_synapse_workspace.example.id
+    private_connection_resource_id = azurerm_synapse_private_link_hub.example.id
     is_manual_connection           = false
     subresource_names              = ["web"]
   }

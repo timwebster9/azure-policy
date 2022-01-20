@@ -21,6 +21,7 @@
         "effect": "[parameters('effect')]",
         "details": {
             "type": "Microsoft.Network/privateEndpoints/privateDnsZoneGroups",
+            "evaluationDelay": "AfterProvisioning",
             "roleDefinitionIds": [
                 "/providers/Microsoft.Authorization/roleDefinitions/b24988ac-6180-42a0-ab88-20f7382dd24c"
             ],

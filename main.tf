@@ -236,8 +236,18 @@
 #     policy_assignment_mgmt_group_name = "parent-mgmt-group"
 # }
 
-module "general" {
-    source = "./modules/general"
+# module "general" {
+#     source = "./modules/general"
+
+#     location                          = var.location
+#     resource_group_name               = "policy-rg"
+
+#     policy_definition_mgmt_group_name = "parent-mgmt-group"
+#     policy_assignment_mgmt_group_name = "parent-mgmt-group"
+# }
+
+module "private_link_dns" {
+    source = "./modules/private_link_dns"
 
     location                          = var.location
     resource_group_name               = "policy-rg"

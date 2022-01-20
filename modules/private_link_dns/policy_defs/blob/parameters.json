@@ -1,0 +1,50 @@
+{
+    "effect": {
+        "type": "String",
+        "metadata": {
+            "displayName": "Effect",
+            "description": "Enable or disable the execution of the policy"
+        },
+        "allowedValues": [
+            "DeployIfNotExists",
+            "Disabled"
+        ],
+        "defaultValue": "DeployIfNotExists"
+    },
+    "privateDnsZoneId": {
+        "type": "String",
+        "metadata": {
+            "displayName": "privateDnsZoneId",
+            "description": "The ID of the private DNS zone corresponding to the resource type",
+            "strongType": "Microsoft.Network/privateDnsZones"
+        }
+    },
+    "privateDnsZoneGroupId": {
+        "type": "String",
+        "metadata": {
+            "displayName": "privateDnsZoneGroupId",
+            "description": "Private DNS Zone Group ID for specified resource"
+        },
+        "allowedValues": [
+            "blob",
+            "table",
+            "vault",
+            "file",
+            "dfs",
+            "web",
+            "SqlServer",
+            "Sql",
+            "namespace",
+            "registry",
+            "dataFactory",
+            "portal",
+            "sites",
+            "configurationStores",
+            "SqlOnDemand",
+            "Dev",
+            "Web",
+            "domain",
+            "topic"
+        ]
+    }
+}

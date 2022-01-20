@@ -12,8 +12,8 @@ resource "azurerm_policy_definition" "pl_dns" {
 
 METADATA
 
-  policy_rule = file("${path.module}/policy_defs/private_link_dns/rules.json")
-  parameters = file("${path.module}/policy_defs/private_link_dns/parameters.json")
+  policy_rule = file("${path.module}/policy_defs/generic/rules.json")
+  parameters = file("${path.module}/policy_defs/generic/parameters.json")
 }
 
 resource "azurerm_management_group_policy_assignment" "pl_dns_storage_blob" {

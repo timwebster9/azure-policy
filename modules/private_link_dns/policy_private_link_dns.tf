@@ -41,7 +41,7 @@ resource "azurerm_management_group_policy_assignment" "pl_dns_storage_blob" {
     "value": "${azurerm_private_dns_zone.dns_storage_blob.id}"
   },
   "privateDnsZoneGroupIds": {
-    "value": "blob"
+    "value": ["blob"]
   }
 }
 PARAMETERS
@@ -79,7 +79,7 @@ resource "azurerm_management_group_policy_assignment" "pl_dns_storage_web" {
     "value": "${azurerm_private_dns_zone.dns_storage_web.id}"
   },
   "privateDnsZoneGroupIds": {
-    "value": "web"
+    "value": ["web"]
   }
 }
 PARAMETERS
@@ -116,7 +116,7 @@ resource "azurerm_management_group_policy_assignment" "pl_dns_synapse_web" {
     "value": "${azurerm_private_dns_zone.dns_synapse_web.id}"
   },
   "privateDnsZoneGroupIds": {
-    "value": "web"
+    "value": ["web"]
   }
 }
 PARAMETERS

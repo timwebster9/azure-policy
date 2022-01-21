@@ -55,7 +55,7 @@
                                 "type": "string"
                             },
                             "privateDnsZoneGroupIds": {
-                                "type": "string"
+                                "type": "array"
                             },
                             "privateEndpointName": {
                                 "type": "string"

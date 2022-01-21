@@ -48,7 +48,7 @@
             "configurationStores",
             "SqlOnDemand",
             "Dev",
-            "Web",
+            "web",
             "domain",
             "topic"
         ]

@@ -71,6 +71,29 @@ resource "azurerm_private_endpoint" "storage_web_pe" {
   ]
 }
 
+resource "azurerm_private_endpoint" "storage_blob_pe_grs" {
+  name                = "sa-blob-grs-endpoint"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  subnet_id           = azurerm_subnet.example.id
+
+  private_service_connection {
+    name                           = "storage-blob-grs-pe"
+    private_connection_resource_id = azurerm_storage_account.example_grs.id
+    is_manual_connection           = false
+    subresource_names              = ["blob", "blob_secondary"]
+  }
+
+  lifecycle {
+    ignore_changes = [private_dns_zone_group]
+  }
+
+  depends_on = [
+    azurerm_policy_definition.pl_dns,
+    azurerm_management_group_policy_assignment.pl_dns_storage_blob
+  ]
+}
+
 # Synapse
 
 resource "azurerm_private_endpoint" "synapse_sql" {

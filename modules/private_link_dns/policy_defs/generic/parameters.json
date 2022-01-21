@@ -34,6 +34,7 @@
         },
         "allowedValues": [
             "blob",
+            "blob_secondary",
             "table",
             "vault",
             "file",

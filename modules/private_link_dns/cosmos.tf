@@ -26,26 +26,3 @@ resource "azurerm_cosmosdb_sql_database" "example" {
   account_name        = azurerm_cosmosdb_account.example.name
   throughput          = 400
 }
-
-resource "azurerm_private_endpoint" "cosmos_sql" {
-  name                = "cosmos-sql-endpoint"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
-  subnet_id           = azurerm_subnet.example.id
-
-  private_service_connection {
-    name                           = "cosmos-sql-pe"
-    private_connection_resource_id = azurerm_cosmosdb_account.example.id
-    is_manual_connection           = false
-    subresource_names              = ["sql"]
-  }
-
-  lifecycle {
-    ignore_changes = [private_dns_zone_group]
-  }
-
-  depends_on = [
-    azurerm_policy_definition.pl_dns,
-    azurerm_management_group_policy_assignment.pl_dns_cosmos_sql
-  ]
-}

@@ -97,7 +97,7 @@ resource "azurerm_management_group_policy_assignment" "pl_dns_synapse_web" {
   policy_definition_id = azurerm_policy_definition.pl_dns.id
   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
   description          = "Policy Assignment test"
-  display_name         = "Deploy Private Link A Record: Synapse Workspaces"
+  display_name         = "Deploy Private Link A Record: Synapse Private Link Hubs"
   location             = var.location
 
   identity {
@@ -184,7 +184,7 @@ resource "azurerm_management_group_policy_assignment" "pl_dns_cosmos_sql" {
     "value": "DeployIfNotExists"
   },
   "resourceType": {
-    "value": "Microsoft.AzureCosmosDB/databaseAccounts"
+    "value": "Microsoft.DocumentDB/databaseAccounts"
   },
   "privateDnsZoneId": {
     "value": "${azurerm_private_dns_zone.dns_cosmos_sql.id}"

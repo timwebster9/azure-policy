@@ -55,26 +55,3 @@ resource "azurerm_private_endpoint" "synapse_web" {
     azurerm_management_group_policy_assignment.pl_dns_synapse_web
   ]
 }
-
-resource "azurerm_private_endpoint" "synapse_sql" {
-  name                = "synapse-sql-endpoint"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
-  subnet_id           = azurerm_subnet.example.id
-
-  private_service_connection {
-    name                           = "synapse-sql-pe"
-    private_connection_resource_id = azurerm_synapse_workspace.example.id
-    is_manual_connection           = false
-    subresource_names              = ["sql"]
-  }
-
-  lifecycle {
-    ignore_changes = [private_dns_zone_group]
-  }
-
-  depends_on = [
-    azurerm_policy_definition.pl_dns,
-    azurerm_management_group_policy_assignment.pl_dns_synapse_sql
-  ]
-}

@@ -33,25 +33,3 @@ resource "azurerm_synapse_private_link_hub" "example" {
   resource_group_name = azurerm_resource_group.example.name
 }
 
-resource "azurerm_private_endpoint" "synapse_web" {
-  name                = "synapse-web-endpoint"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
-  subnet_id           = azurerm_subnet.example.id
-
-  private_service_connection {
-    name                           = "synapse-web-pe"
-    private_connection_resource_id = azurerm_synapse_private_link_hub.example.id
-    is_manual_connection           = false
-    subresource_names              = ["web"]
-  }
-
-  lifecycle {
-    ignore_changes = [private_dns_zone_group]
-  }
-
-  depends_on = [
-    azurerm_policy_definition.pl_dns,
-    azurerm_management_group_policy_assignment.pl_dns_synapse_web
-  ]
-}

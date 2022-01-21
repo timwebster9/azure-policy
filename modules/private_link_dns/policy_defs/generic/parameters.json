@@ -19,11 +19,18 @@
             "strongType": "Microsoft.Network/privateDnsZones"
         }
     },
-    "privateDnsZoneGroupId": {
+    "resourceType": {
         "type": "String",
         "metadata": {
-            "displayName": "privateDnsZoneGroupId",
-            "description": "Private DNS Zone Group ID for specified resource"
+            "displayName": "Resource type",
+            "description": "The type of the resource the private endpoint is connected to. e.g. 'Microsoft.Sql/servers'"
+        }
+    },
+    "privateDnsZoneGroupIds": {
+        "type": "Array",
+        "metadata": {
+            "displayName": "privateDnsZoneGroupIds",
+            "description": "List of Private DNS Zone Group IDs for specified resource. Also known as the 'sub-resource'"
         },
         "allowedValues": [
             "blob",
@@ -31,7 +38,6 @@
             "vault",
             "file",
             "dfs",
-            "web",
             "SqlServer",
             "Sql",
             "namespace",

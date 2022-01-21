@@ -9,8 +9,16 @@
                 "count": {
                     "field": "Microsoft.Network/privateEndpoints/privateLinkServiceConnections[*].groupIds[*]",
                     "where": {
-                        "field": "Microsoft.Network/privateEndpoints/privateLinkServiceConnections[*].groupIds[*]",
-                        "equals": "[parameters('privateDnsZoneGroupId')]"
+                        "allOf": [
+                            {
+                                "field": "Microsoft.Network/privateEndpoints/privateLinkServiceConnections[*].privateLinkServiceId",
+                                "contains": "[parameters('resourceType')]"
+                            },
+                            {
+                                "field": "Microsoft.Network/privateEndpoints/privateLinkServiceConnections[*].groupIds[*]",
+                                "in": "[parameters('privateDnsZoneGroupIds')]"
+                            }
+                        ]
                     }
                 },
                 "greaterOrEquals": 1
@@ -40,10 +48,13 @@
                         "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
                         "contentVersion": "1.0.0.0",
                         "parameters": {
+                            "resourceType": {
+                                "type": "string"
+                            },
                             "privateDnsZoneId": {
                                 "type": "string"
                             },
-                            "privateDnsZoneGroupId": {
+                            "privateDnsZoneGroupIds": {
                                 "type": "string"
                             },
                             "privateEndpointName": {
@@ -73,11 +84,14 @@
                         ]
                     },
                     "parameters": {
+                        "resourceType": {
+                            "value": "[parameters('resourceType')]"
+                        },
                         "privateDnsZoneId": {
                             "value": "[parameters('privateDnsZoneId')]"
                         },
-                        "privateDnsZoneGroupId": {
-                            "value": "[parameters('privateDnsZoneGroupId')]"
+                        "privateDnsZoneGroupIds": {
+                            "value": "[parameters('privateDnsZoneGroupIds')]"
                         },
                         "privateEndpointName": {
                             "value": "[field('name')]"

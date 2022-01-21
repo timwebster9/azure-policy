@@ -34,10 +34,13 @@ resource "azurerm_management_group_policy_assignment" "pl_dns_storage_blob" {
   "effect": {
     "value": "DeployIfNotExists"
   },
+  "resourceType": {
+    "value": "Microsoft.Storage/storageAccounts"
+  },
   "privateDnsZoneId": {
     "value": "${azurerm_private_dns_zone.dns_storage_blob.id}"
   },
-  "privateDnsZoneGroupId": {
+  "privateDnsZoneGroupIds": {
     "value": "blob"
   }
 }
@@ -69,10 +72,13 @@ resource "azurerm_management_group_policy_assignment" "pl_dns_storage_web" {
   "effect": {
     "value": "DeployIfNotExists"
   },
+  "resourceType": {
+    "value": "Microsoft.Storage/storageAccounts"
+  },
   "privateDnsZoneId": {
     "value": "${azurerm_private_dns_zone.dns_storage_web.id}"
   },
-  "privateDnsZoneGroupId": {
+  "privateDnsZoneGroupIds": {
     "value": "web"
   }
 }
@@ -103,10 +109,13 @@ resource "azurerm_management_group_policy_assignment" "pl_dns_synapse_web" {
   "effect": {
     "value": "DeployIfNotExists"
   },
+  "resourceType": {
+    "value": "Microsoft.Synapse/privateLinkHubs"
+  },
   "privateDnsZoneId": {
     "value": "${azurerm_private_dns_zone.dns_synapse_web.id}"
   },
-  "privateDnsZoneGroupId": {
+  "privateDnsZoneGroupIds": {
     "value": "web"
   }
 }

@@ -17,6 +17,15 @@ resource "azurerm_private_dns_zone" "dns_synapse_web" {
   name                = "privatelink.azuresynapse.net"
   resource_group_name = azurerm_resource_group.example.name
 }
+resource "azurerm_private_dns_zone" "dns_cosmos_sql" {
+  name                = "privatelink.documents.azure.com"
+  resource_group_name = azurerm_resource_group.example.name
+}
+
+resource "azurerm_private_dns_zone" "dns_synapse_sql" {
+  name                = "privatelink.sql.azuresynapse.net"
+  resource_group_name = azurerm_resource_group.example.name
+}
 
 resource "azurerm_virtual_network" "example" {
   name                = "virtualNetwork1"

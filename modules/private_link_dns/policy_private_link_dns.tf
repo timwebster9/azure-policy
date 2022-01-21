@@ -127,3 +127,77 @@ resource "azurerm_role_assignment" "pl_dns_synapse_web" {
   role_definition_name = "Contributor"
   principal_id         = azurerm_management_group_policy_assignment.pl_dns_synapse_web.identity[0].principal_id
 }
+
+# Synapse SQL
+resource "azurerm_management_group_policy_assignment" "pl_dns_synapse_sql" {
+  name                 = "pl_dns_synapse_sql"
+  policy_definition_id = azurerm_policy_definition.pl_dns.id
+  management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
+  description          = "Policy Assignment test"
+  display_name         = "Deploy Private Link A Record: Synapse SQL"
+  location             = var.location
+
+  identity {
+    type = "SystemAssigned"
+  }
+
+  parameters = <<PARAMETERS
+{
+  "effect": {
+    "value": "DeployIfNotExists"
+  },
+  "resourceType": {
+    "value": "Microsoft.Synapse/workspaces"
+  },
+  "privateDnsZoneId": {
+    "value": "${azurerm_private_dns_zone.dns_synapse_sql.id}"
+  },
+  "privateDnsZoneGroupIds": {
+    "value": ["sql"]
+  }
+}
+PARAMETERS
+}
+
+resource "azurerm_role_assignment" "pl_dns_synapse_sql" {
+  scope                = data.azurerm_subscription.current.id
+  role_definition_name = "Contributor"
+  principal_id         = azurerm_management_group_policy_assignment.pl_dns_synapse_sql.identity[0].principal_id
+}
+
+# Cosmos SQL
+resource "azurerm_management_group_policy_assignment" "pl_dns_cosmos_sql" {
+  name                 = "pl_dns_cosmos_sql"
+  policy_definition_id = azurerm_policy_definition.pl_dns.id
+  management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
+  description          = "Policy Assignment test"
+  display_name         = "Deploy Private Link A Record: Cosmos SQL"
+  location             = var.location
+
+  identity {
+    type = "SystemAssigned"
+  }
+
+  parameters = <<PARAMETERS
+{
+  "effect": {
+    "value": "DeployIfNotExists"
+  },
+  "resourceType": {
+    "value": "Microsoft.AzureCosmosDB/databaseAccounts"
+  },
+  "privateDnsZoneId": {
+    "value": "${azurerm_private_dns_zone.dns_cosmos_sql.id}"
+  },
+  "privateDnsZoneGroupIds": {
+    "value": ["sql"]
+  }
+}
+PARAMETERS
+}
+
+resource "azurerm_role_assignment" "pl_dns_cosmos_sql" {
+  scope                = data.azurerm_subscription.current.id
+  role_definition_name = "Contributor"
+  principal_id         = azurerm_management_group_policy_assignment.pl_dns_cosmos_sql.identity[0].principal_id
+}

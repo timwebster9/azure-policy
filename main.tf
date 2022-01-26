@@ -116,15 +116,15 @@
 #     policy_assignment_mgmt_group_name = "parent-mgmt-group"
 # }
 
-# module "sql" {
-#     source = "./modules/sql"
+module "sql" {
+    source = "./modules/sql"
 
-#     location                          = var.location
-#     resource_group_name               = "policy-rg"
+    location                          = var.location
+    resource_group_name               = "policy-rg"
 
-#     policy_definition_mgmt_group_name = "parent-mgmt-group"
-#     policy_assignment_mgmt_group_name = "parent-mgmt-group"
-# }
+    policy_definition_mgmt_group_name = "parent-mgmt-group"
+    policy_assignment_mgmt_group_name = "parent-mgmt-group"
+}
 
 # module "functions" {
 #     source = "./modules/function_apps"
@@ -246,12 +246,12 @@
 #     policy_assignment_mgmt_group_name = "parent-mgmt-group"
 # }
 
-module "private_link_dns" {
-    source = "./modules/private_link_dns"
+# module "private_link_dns" {
+#     source = "./modules/private_link_dns"
 
-    location                          = var.location
-    resource_group_name               = "policy-rg"
+#     location                          = var.location
+#     resource_group_name               = "policy-rg"
 
-    policy_definition_mgmt_group_name = "parent-mgmt-group"
-    policy_assignment_mgmt_group_name = "parent-mgmt-group"
-}
+#     policy_definition_mgmt_group_name = "parent-mgmt-group"
+#     policy_assignment_mgmt_group_name = "parent-mgmt-group"
+# }

@@ -116,15 +116,15 @@
 #     policy_assignment_mgmt_group_name = "parent-mgmt-group"
 # }
 
-module "sql" {
-    source = "./modules/sql"
+# module "sql" {
+#     source = "./modules/sql"
 
-    location                          = var.location
-    resource_group_name               = "policy-rg"
+#     location                          = var.location
+#     resource_group_name               = "policy-rg"
 
-    policy_definition_mgmt_group_name = "parent-mgmt-group"
-    policy_assignment_mgmt_group_name = "parent-mgmt-group"
-}
+#     policy_definition_mgmt_group_name = "parent-mgmt-group"
+#     policy_assignment_mgmt_group_name = "parent-mgmt-group"
+# }
 
 # module "functions" {
 #     source = "./modules/function_apps"
@@ -146,15 +146,15 @@ module "sql" {
 #     policy_assignment_mgmt_group_name = "parent-mgmt-group"
 # }
 
-# module "cosmos_db" {
-#     source = "./modules/cosmos_db"
+module "cosmos_db" {
+    source = "./modules/cosmos_db"
 
-#     location                          = var.location
-#     resource_group_name               = "policy-rg"
+    location                          = var.location
+    resource_group_name               = "policy-rg"
 
-#     policy_definition_mgmt_group_name = "parent-mgmt-group"
-#     policy_assignment_mgmt_group_name = "parent-mgmt-group"
-# }
+    policy_definition_mgmt_group_name = "parent-mgmt-group"
+    policy_assignment_mgmt_group_name = "parent-mgmt-group"
+}
 
 # module "firewall_policy" {
 #     source = "./modules/firewall_policy"

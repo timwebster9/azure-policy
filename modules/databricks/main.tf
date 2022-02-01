@@ -4,20 +4,20 @@ resource "azurerm_resource_group" "example" {
 }
 
 resource "azurerm_virtual_network" "example" {
-  name                = "databricks-network"
+  name                = "${var.prefix}-databricks-vnet"
+  address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
-  address_space       = ["10.0.0.0/16"]
 }
 
 resource "azurerm_subnet" "public" {
-  name                 = "public-subnet"
+  name                 = "${var.prefix}-public-subnet"
   resource_group_name  = azurerm_resource_group.example.name
   virtual_network_name = azurerm_virtual_network.example.name
   address_prefixes     = ["10.0.1.0/24"]
 
   delegation {
-    name = "databricks-del"
+    name = "${var.prefix}-databricks-del"
 
     service_delegation {
       actions = [
@@ -31,13 +31,13 @@ resource "azurerm_subnet" "public" {
 }
 
 resource "azurerm_subnet" "private" {
-  name                 = "private-subnet"
+  name                 = "${var.prefix}-private-subnet"
   resource_group_name  = azurerm_resource_group.example.name
   virtual_network_name = azurerm_virtual_network.example.name
   address_prefixes     = ["10.0.2.0/24"]
 
   delegation {
-    name = "databricks-del"
+    name = "${var.prefix}-databricks-del"
 
     service_delegation {
       actions = [
@@ -50,12 +50,6 @@ resource "azurerm_subnet" "private" {
   }
 }
 
-resource "azurerm_network_security_group" "example" {
-  name                = "databricks-nsg"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
-}
-
 resource "azurerm_subnet_network_security_group_association" "private" {
   subnet_id                 = azurerm_subnet.private.id
   network_security_group_id = azurerm_network_security_group.example.id
@@ -66,22 +60,33 @@ resource "azurerm_subnet_network_security_group_association" "public" {
   network_security_group_id = azurerm_network_security_group.example.id
 }
 
-resource "azurerm_databricks_workspace" "example" {
-  name                = "timwtest987908908"
-  resource_group_name = azurerm_resource_group.example.name
+resource "azurerm_network_security_group" "example" {
+  name                = "${var.prefix}-databricks-nsg"
   location            = azurerm_resource_group.example.location
-  sku                 = "standard"
-  public_network_access_enabled         = true
-  network_security_group_rules_required = "NoAzureServiceRules"
+  resource_group_name = azurerm_resource_group.example.name
+}
+
+resource "azurerm_databricks_workspace" "example" {
+  name                        = "DBW-${var.prefix}"
+  resource_group_name         = azurerm_resource_group.example.name
+  location                    = azurerm_resource_group.example.location
+  sku                         = "premium"
+  managed_resource_group_name = "${var.prefix}-DBW-managed-without-lb"
+
+  public_network_access_enabled = true
 
   custom_parameters {
-    virtual_network_id  = azurerm_virtual_network.example.id
+    no_public_ip        = true
     public_subnet_name  = azurerm_subnet.public.name
     private_subnet_name = azurerm_subnet.private.name
-    no_public_ip = true
+    virtual_network_id  = azurerm_virtual_network.example.id
 
     public_subnet_network_security_group_association_id  = azurerm_subnet_network_security_group_association.public.id
     private_subnet_network_security_group_association_id = azurerm_subnet_network_security_group_association.private.id
   }
 
+  tags = {
+    Environment = "Production"
+    Pricing     = "Standard"
+  }
 }

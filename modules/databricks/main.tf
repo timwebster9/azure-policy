@@ -73,7 +73,7 @@ resource "azurerm_databricks_workspace" "example" {
   sku                         = "premium"
   managed_resource_group_name = "${var.prefix}-DBW-managed-without-lb"
 
-  public_network_access_enabled = true
+  public_network_access_enabled = false
 
   custom_parameters {
     no_public_ip        = true
@@ -83,10 +83,5 @@ resource "azurerm_databricks_workspace" "example" {
 
     public_subnet_network_security_group_association_id  = azurerm_subnet_network_security_group_association.public.id
     private_subnet_network_security_group_association_id = azurerm_subnet_network_security_group_association.private.id
-  }
-
-  tags = {
-    Environment = "Production"
-    Pricing     = "Standard"
   }
 }

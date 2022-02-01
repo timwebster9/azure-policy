@@ -9,7 +9,7 @@ resource "azurerm_databricks_workspace" "example" {
   location            = azurerm_resource_group.example.location
   sku                 = "standard"
   public_network_access_enabled         = false
-  network_security_group_rules_required = "AllRules"
+  network_security_group_rules_required = "NoAzureServiceRules"
 
   custom_parameters {
     no_public_ip = true

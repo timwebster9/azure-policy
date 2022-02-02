@@ -113,7 +113,7 @@ resource "azurerm_databricks_workspace" "fail_no_vnet_injection" {
   }
 
   depends_on = [
-    azurerm_policy_definition.scc,
+    #azurerm_policy_definition.scc,
     azurerm_policy_definition.vnet_injection,
     #azurerm_management_group_policy_assignment.scc,
     azurerm_management_group_policy_assignment.vnet_injection
@@ -121,27 +121,27 @@ resource "azurerm_databricks_workspace" "fail_no_vnet_injection" {
 }
 
 # should pass - uses SCC
-resource "azurerm_databricks_workspace" "pass_scc" {
-  name                        = "scc-${var.prefix}"
-  resource_group_name         = azurerm_resource_group.example.name
-  location                    = azurerm_resource_group.example.location
-  sku                         = "standard"
-  managed_resource_group_name = "${var.prefix}-DBW-managed-without-lb"
+# resource "azurerm_databricks_workspace" "pass_scc" {
+#   name                        = "scc-${var.prefix}"
+#   resource_group_name         = azurerm_resource_group.example.name
+#   location                    = azurerm_resource_group.example.location
+#   sku                         = "standard"
+#   managed_resource_group_name = "${var.prefix}-DBW-managed-without-lb"
 
-  public_network_access_enabled = true
+#   public_network_access_enabled = true
 
-  custom_parameters {
-    no_public_ip        = true
-    public_subnet_name  = azurerm_subnet.public.name
-    private_subnet_name = azurerm_subnet.private.name
-    virtual_network_id  = azurerm_virtual_network.example.id
+#   custom_parameters {
+#     no_public_ip        = true
+#     public_subnet_name  = azurerm_subnet.public.name
+#     private_subnet_name = azurerm_subnet.private.name
+#     virtual_network_id  = azurerm_virtual_network.example.id
 
-    public_subnet_network_security_group_association_id  = azurerm_subnet_network_security_group_association.public.id
-    private_subnet_network_security_group_association_id = azurerm_subnet_network_security_group_association.private.id
-  }
+#     public_subnet_network_security_group_association_id  = azurerm_subnet_network_security_group_association.public.id
+#     private_subnet_network_security_group_association_id = azurerm_subnet_network_security_group_association.private.id
+#   }
 
-  depends_on = [
-    azurerm_policy_definition.scc,
-    #azurerm_management_group_policy_assignment.scc
-  ]
-}
+#   depends_on = [
+#     azurerm_policy_definition.scc,
+#     #azurerm_management_group_policy_assignment.scc
+#   ]
+# }

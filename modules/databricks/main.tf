@@ -70,10 +70,10 @@ resource "azurerm_databricks_workspace" "example" {
   name                        = "DBW-${var.prefix}"
   resource_group_name         = azurerm_resource_group.example.name
   location                    = azurerm_resource_group.example.location
-  sku                         = "premium"
+  sku                         = "standard"
   managed_resource_group_name = "${var.prefix}-DBW-managed-without-lb"
 
-  public_network_access_enabled = false
+  public_network_access_enabled = true
 
   custom_parameters {
     no_public_ip        = true

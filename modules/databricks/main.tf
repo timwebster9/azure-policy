@@ -67,8 +67,34 @@ resource "azurerm_network_security_group" "example" {
 }
 
 #should fail - not using SCC
-resource "azurerm_databricks_workspace" "fail_no_scc" {
-  name                        = "DBW-${var.prefix}"
+# resource "azurerm_databricks_workspace" "fail_no_scc" {
+#   name                        = "DBW-${var.prefix}"
+#   resource_group_name         = azurerm_resource_group.example.name
+#   location                    = azurerm_resource_group.example.location
+#   sku                         = "standard"
+#   managed_resource_group_name = "${var.prefix}-DBW-managed-without-lb"
+
+#   public_network_access_enabled = true
+
+#   custom_parameters {
+#     no_public_ip        = false
+#     public_subnet_name  = azurerm_subnet.public.name
+#     private_subnet_name = azurerm_subnet.private.name
+#     virtual_network_id  = azurerm_virtual_network.example.id
+
+#     public_subnet_network_security_group_association_id  = azurerm_subnet_network_security_group_association.public.id
+#     private_subnet_network_security_group_association_id = azurerm_subnet_network_security_group_association.private.id
+#   }
+
+#   depends_on = [
+#     azurerm_policy_definition.scc,
+#     azurerm_management_group_policy_assignment.scc
+#   ]
+# }
+
+# should fail - no vnet injection
+resource "azurerm_databricks_workspace" "fail_no_vnet_injection" {
+  name                        = "failnovnet-${var.prefix}"
   resource_group_name         = azurerm_resource_group.example.name
   location                    = azurerm_resource_group.example.location
   sku                         = "standard"
@@ -78,17 +104,19 @@ resource "azurerm_databricks_workspace" "fail_no_scc" {
 
   custom_parameters {
     no_public_ip        = false
-    public_subnet_name  = azurerm_subnet.public.name
-    private_subnet_name = azurerm_subnet.private.name
-    virtual_network_id  = azurerm_virtual_network.example.id
+    # public_subnet_name  = azurerm_subnet.public.name
+    # private_subnet_name = azurerm_subnet.private.name
+    # virtual_network_id  = azurerm_virtual_network.example.id
 
-    public_subnet_network_security_group_association_id  = azurerm_subnet_network_security_group_association.public.id
-    private_subnet_network_security_group_association_id = azurerm_subnet_network_security_group_association.private.id
+    # public_subnet_network_security_group_association_id  = azurerm_subnet_network_security_group_association.public.id
+    # private_subnet_network_security_group_association_id = azurerm_subnet_network_security_group_association.private.id
   }
 
   depends_on = [
     azurerm_policy_definition.scc,
-    azurerm_management_group_policy_assignment.scc
+    azurerm_policy_definition.vnet_injection,
+    azurerm_management_group_policy_assignment.scc,
+    azurerm_management_group_policy_assignment.vnet_injection
   ]
 }
 

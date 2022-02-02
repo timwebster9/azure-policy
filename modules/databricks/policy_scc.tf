@@ -16,19 +16,19 @@ METADATA
   parameters = file("${path.module}/policy_defs/secure_cluster_connectivity/parameters.json")
 }
 
-resource "azurerm_management_group_policy_assignment" "scc" {
-  name                 = "scc"
-  policy_definition_id = azurerm_policy_definition.scc.id
-  management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
-  description          = "Policy Assignment test"
-  display_name         = azurerm_policy_definition.scc.display_name
-  location             = var.location
+# resource "azurerm_management_group_policy_assignment" "scc" {
+#   name                 = "scc"
+#   policy_definition_id = azurerm_policy_definition.scc.id
+#   management_group_id  = data.azurerm_management_group.policy_assignment_mgmt_group.id
+#   description          = "Policy Assignment test"
+#   display_name         = azurerm_policy_definition.scc.display_name
+#   location             = var.location
 
-  parameters = <<PARAMETERS
-{
-  "effect": {
-    "value": "Deny"
-  }
-}
-PARAMETERS
-}
+#   parameters = <<PARAMETERS
+# {
+#   "effect": {
+#     "value": "Deny"
+#   }
+# }
+# PARAMETERS
+# }

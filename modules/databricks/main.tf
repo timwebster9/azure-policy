@@ -114,11 +114,11 @@ resource "azurerm_databricks_workspace" "fail_no_vnet_injection" {
 
   depends_on = [
     #azurerm_policy_definition.scc,
-    azurerm_policy_definition.require_encryption,
+    azurerm_policy_definition.encryption,
     azurerm_policy_definition.vnet_injection,
     #azurerm_management_group_policy_assignment.scc,
     azurerm_management_group_policy_assignment.vnet_injection,
-    azurerm_management_group_policy_assignment.require_encryption
+    azurerm_management_group_policy_assignment.encryption
   ]
 }
 
@@ -145,11 +145,11 @@ resource "azurerm_databricks_workspace" "fail_no_encryption" {
 
   depends_on = [
     #azurerm_policy_definition.scc,
-    azurerm_policy_definition.require_encryption,
+    azurerm_policy_definition.encryption,
     azurerm_policy_definition.vnet_injection,
     #azurerm_management_group_policy_assignment.scc,
     azurerm_management_group_policy_assignment.vnet_injection,
-    azurerm_management_group_policy_assignment.require_encryption
+    azurerm_management_group_policy_assignment.encryption
   ]
 }
 
@@ -176,10 +176,10 @@ resource "azurerm_databricks_workspace" "pass_scc" {
 
   depends_on = [
     #azurerm_policy_definition.scc,
-    azurerm_policy_definition.require_encryption,
+    azurerm_policy_definition.encryption,
     azurerm_policy_definition.vnet_injection,
     #azurerm_management_group_policy_assignment.scc,
     azurerm_management_group_policy_assignment.vnet_injection,
-    azurerm_management_group_policy_assignment.require_encryption
+    azurerm_management_group_policy_assignment.encryption
   ]
 }

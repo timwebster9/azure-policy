@@ -114,19 +114,22 @@ resource "azurerm_databricks_workspace" "fail_no_vnet_injection" {
 
   depends_on = [
     #azurerm_policy_definition.scc,
+    azurerm_policy_definition.require_encryption,
     azurerm_policy_definition.vnet_injection,
     #azurerm_management_group_policy_assignment.scc,
-    azurerm_management_group_policy_assignment.vnet_injection
+    azurerm_management_group_policy_assignment.vnet_injection,
+    azurerm_management_group_policy_assignment.require_encryption
   ]
 }
 
-# should pass - uses SCC and vnet injection
-resource "azurerm_databricks_workspace" "pass_scc" {
-  name                        = "scc-${var.prefix}"
+# should fail - no encryption
+resource "azurerm_databricks_workspace" "fail_no_encryption" {
+  name                        = "noenc-${var.prefix}"
   resource_group_name         = azurerm_resource_group.example.name
   location                    = azurerm_resource_group.example.location
-  sku                         = "standard"
+  sku                         = "premium"
   managed_resource_group_name = "${var.prefix}-DBW-managed-without-lb"
+  infrastructure_encryption_enabled = false
 
   public_network_access_enabled = true
 
@@ -142,8 +145,41 @@ resource "azurerm_databricks_workspace" "pass_scc" {
 
   depends_on = [
     #azurerm_policy_definition.scc,
+    azurerm_policy_definition.require_encryption,
     azurerm_policy_definition.vnet_injection,
     #azurerm_management_group_policy_assignment.scc,
-    azurerm_management_group_policy_assignment.vnet_injection
+    azurerm_management_group_policy_assignment.vnet_injection,
+    azurerm_management_group_policy_assignment.require_encryption
+  ]
+}
+
+# should pass - uses SCC, vnet injection and encryption
+resource "azurerm_databricks_workspace" "pass_scc" {
+  name                        = "scc-${var.prefix}"
+  resource_group_name         = azurerm_resource_group.example.name
+  location                    = azurerm_resource_group.example.location
+  sku                         = "premium"
+  managed_resource_group_name = "${var.prefix}-DBW-managed-without-lb"
+  infrastructure_encryption_enabled = true
+
+  public_network_access_enabled = true
+
+  custom_parameters {
+    no_public_ip        = true
+    public_subnet_name  = azurerm_subnet.public.name
+    private_subnet_name = azurerm_subnet.private.name
+    virtual_network_id  = azurerm_virtual_network.example.id
+
+    public_subnet_network_security_group_association_id  = azurerm_subnet_network_security_group_association.public.id
+    private_subnet_network_security_group_association_id = azurerm_subnet_network_security_group_association.private.id
+  }
+
+  depends_on = [
+    #azurerm_policy_definition.scc,
+    azurerm_policy_definition.require_encryption,
+    azurerm_policy_definition.vnet_injection,
+    #azurerm_management_group_policy_assignment.scc,
+    azurerm_management_group_policy_assignment.vnet_injection,
+    azurerm_management_group_policy_assignment.require_encryption
   ]
 }

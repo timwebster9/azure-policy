@@ -2,7 +2,7 @@ resource "azurerm_policy_definition" "encryption" {
   name                  = "encryption"
   policy_type           = "Custom"
   mode                  = "All"
-  display_name          = "Azure Dataabricks Workspaces should have Secure Cluster Connectivity enabled"
+  display_name          = "Azure Dataabricks Workspaces should have infrastructure encryption enabled"
   management_group_name = data.azurerm_management_group.policy_definition_mgmt_group.name
 
   metadata = <<METADATA

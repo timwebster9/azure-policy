@@ -6,7 +6,7 @@
                 "equals": "Microsoft.Databricks/workspaces"
             },
             {
-                "field": "Microsoft.DataBricks/workspaces/parameters.enableNoPublicIp",
+                "field": "Microsoft.DataBricks/workspaces/parameters.enableNoPublicIp.value",
                 "notEquals": "true"
             }
         ]

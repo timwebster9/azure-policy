@@ -90,16 +90,6 @@
                                     "eventHubName": "[parameters('eventHubName')]",
                                     "workspaceId": "[parameters('logAnalyticsWorkspaceId')]",
                                     "storageAccountId": "[parameters('storageAccountId')]",
-                                    "metrics": [
-                                        {
-                                            "category": "AllMetrics",
-                                            "enabled": "[parameters('metricsEnabled')]",
-                                            "retentionPolicy": {
-                                                "enabled": true,
-                                                "days": "[parameters('storageRetentionDays')]"
-                                            }
-                                        }
-                                    ],
                                     "logs": [
                                         {
                                             "categoryGroup": "allLogs",

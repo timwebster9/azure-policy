@@ -74,7 +74,8 @@ resource "azurerm_databricks_workspace" "fail_no_scc" {
   sku                         = "standard"
   managed_resource_group_name = "${var.prefix}-noscc"
 
-  public_network_access_enabled = true
+  infrastructure_encryption_enabled = true
+  public_network_access_enabled     = true
 
   custom_parameters {
     no_public_ip        = false
@@ -88,7 +89,13 @@ resource "azurerm_databricks_workspace" "fail_no_scc" {
 
   depends_on = [
     azurerm_policy_definition.scc,
-    azurerm_management_group_policy_assignment.scc
+    azurerm_policy_definition.encryption,
+    azurerm_policy_definition.vnet_injection,
+    azurerm_policy_definition.disable_egress,
+    azurerm_management_group_policy_assignment.scc,
+    azurerm_management_group_policy_assignment.vnet_injection,
+    azurerm_management_group_policy_assignment.encryption,
+    azurerm_management_group_policy_assignment.disable_egress
   ]
 }
 

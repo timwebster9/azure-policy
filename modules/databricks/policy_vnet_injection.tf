@@ -2,7 +2,7 @@ resource "azurerm_policy_definition" "vnet_injection" {
   name                  = "vnet_injection"
   policy_type           = "Custom"
   mode                  = "All"
-  display_name          = "Azure Dataabricks Workspaces should use VNet injection"
+  display_name          = "Azure Databricks Workspaces should use VNet injection"
   management_group_name = data.azurerm_management_group.policy_definition_mgmt_group.name
 
   metadata = <<METADATA

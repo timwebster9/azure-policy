@@ -71,7 +71,7 @@ resource "azurerm_databricks_workspace" "fail_no_scc" {
   name                        = "noscc-${var.prefix}"
   resource_group_name         = azurerm_resource_group.example.name
   location                    = azurerm_resource_group.example.location
-  sku                         = "standard"
+  sku                         = "premium"
   managed_resource_group_name = "${var.prefix}-noscc"
 
   infrastructure_encryption_enabled = true

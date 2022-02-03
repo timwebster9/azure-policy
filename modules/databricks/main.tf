@@ -99,6 +99,7 @@ resource "azurerm_databricks_workspace" "fail_no_vnet_injection" {
   location                    = azurerm_resource_group.example.location
   sku                         = "standard"
   managed_resource_group_name = "${var.prefix}-failnovnet"
+  infrastructure_encryption_enabled = true
 
   public_network_access_enabled = true
 
@@ -163,7 +164,7 @@ resource "azurerm_databricks_workspace" "fail_uses_natgateway" {
   location                    = azurerm_resource_group.example.location
   sku                         = "premium"
   managed_resource_group_name = "${var.prefix}-fail-nat"
-  infrastructure_encryption_enabled = false
+  infrastructure_encryption_enabled = true
 
   public_network_access_enabled = true
 

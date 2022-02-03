@@ -98,7 +98,7 @@ resource "azurerm_databricks_workspace" "fail_no_vnet_injection" {
   resource_group_name         = azurerm_resource_group.example.name
   location                    = azurerm_resource_group.example.location
   sku                         = "standard"
-  managed_resource_group_name = "${var.prefix}-DBW-managed-without-lb"
+  managed_resource_group_name = "${var.prefix}-failnovnet"
 
   public_network_access_enabled = true
 
@@ -130,7 +130,7 @@ resource "azurerm_databricks_workspace" "fail_no_encryption" {
   resource_group_name         = azurerm_resource_group.example.name
   location                    = azurerm_resource_group.example.location
   sku                         = "premium"
-  managed_resource_group_name = "${var.prefix}-DBW-managed-without-lb"
+  managed_resource_group_name = "${var.prefix}-fail-noenc"
   infrastructure_encryption_enabled = false
 
   public_network_access_enabled = true
@@ -162,7 +162,7 @@ resource "azurerm_databricks_workspace" "fail_uses_natgateway" {
   resource_group_name         = azurerm_resource_group.example.name
   location                    = azurerm_resource_group.example.location
   sku                         = "premium"
-  managed_resource_group_name = "${var.prefix}-DBW-managed-without-lb"
+  managed_resource_group_name = "${var.prefix}-fail-nat"
   infrastructure_encryption_enabled = false
 
   public_network_access_enabled = true
@@ -196,7 +196,7 @@ resource "azurerm_databricks_workspace" "pass_scc" {
   resource_group_name         = azurerm_resource_group.example.name
   location                    = azurerm_resource_group.example.location
   sku                         = "premium"
-  managed_resource_group_name = "${var.prefix}-DBW-managed-without-lb"
+  managed_resource_group_name = "${var.prefix}-pass"
   infrastructure_encryption_enabled = true
 
   public_network_access_enabled = true

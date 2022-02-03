@@ -6,7 +6,7 @@
                 "equals": "Microsoft.Databricks/workspaces"
             },
             {
-                "field": "Microsoft.Databricks/workspaces/parameters.requireInfrastructureEncryption",
+                "field": "Microsoft.Databricks/workspaces/parameters.requireInfrastructureEncryption.value",
                 "notEquals": "true"
             }
         ]

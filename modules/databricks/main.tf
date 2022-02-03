@@ -191,39 +191,6 @@ resource "azurerm_databricks_workspace" "fail_uses_natgateway" {
   ]
 }
 
-resource "azurerm_databricks_workspace" "fail_uses_lb" {
-  name                        = "lb-${var.prefix}"
-  resource_group_name         = azurerm_resource_group.example.name
-  location                    = azurerm_resource_group.example.location
-  sku                         = "premium"
-  managed_resource_group_name = "${var.prefix}-fail-lb"
-  infrastructure_encryption_enabled = true
-  load_balancer_backend_address_pool_id = "some-lb-id"
-
-  public_network_access_enabled = true
-
-  custom_parameters {
-    no_public_ip        = true
-    public_subnet_name  = azurerm_subnet.public.name
-    private_subnet_name = azurerm_subnet.private.name
-    virtual_network_id  = azurerm_virtual_network.example.id
-
-    public_subnet_network_security_group_association_id  = azurerm_subnet_network_security_group_association.public.id
-    private_subnet_network_security_group_association_id = azurerm_subnet_network_security_group_association.private.id
-  }
-
-  depends_on = [
-    azurerm_policy_definition.scc,
-    azurerm_policy_definition.encryption,
-    azurerm_policy_definition.vnet_injection,
-    azurerm_policy_definition.disable_egress,
-    azurerm_management_group_policy_assignment.scc,
-    azurerm_management_group_policy_assignment.vnet_injection,
-    azurerm_management_group_policy_assignment.encryption,
-    azurerm_management_group_policy_assignment.disable_egress
-  ]
-}
-
 # should pass - uses SCC, vnet injection and encryption
 resource "azurerm_databricks_workspace" "pass_scc" {
   name                        = "scc-${var.prefix}"

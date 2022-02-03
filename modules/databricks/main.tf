@@ -92,10 +92,12 @@ resource "azurerm_databricks_workspace" "fail_no_scc" {
     azurerm_policy_definition.encryption,
     azurerm_policy_definition.vnet_injection,
     azurerm_policy_definition.disable_egress,
+    azurerm_policy_definition.databricks_diagnostics,
     azurerm_management_group_policy_assignment.scc,
     azurerm_management_group_policy_assignment.vnet_injection,
     azurerm_management_group_policy_assignment.encryption,
-    azurerm_management_group_policy_assignment.disable_egress
+    azurerm_management_group_policy_assignment.disable_egress,
+    azurerm_management_group_policy_assignment.databricks_diagnostics
   ]
 }
 
@@ -125,10 +127,12 @@ resource "azurerm_databricks_workspace" "fail_no_vnet_injection" {
     azurerm_policy_definition.encryption,
     azurerm_policy_definition.vnet_injection,
     azurerm_policy_definition.disable_egress,
+    azurerm_policy_definition.databricks_diagnostics,
     azurerm_management_group_policy_assignment.scc,
     azurerm_management_group_policy_assignment.vnet_injection,
     azurerm_management_group_policy_assignment.encryption,
-    azurerm_management_group_policy_assignment.disable_egress
+    azurerm_management_group_policy_assignment.disable_egress,
+    azurerm_management_group_policy_assignment.databricks_diagnostics
   ]
 }
 
@@ -158,10 +162,12 @@ resource "azurerm_databricks_workspace" "fail_no_encryption" {
     azurerm_policy_definition.encryption,
     azurerm_policy_definition.vnet_injection,
     azurerm_policy_definition.disable_egress,
+    azurerm_policy_definition.databricks_diagnostics,
     azurerm_management_group_policy_assignment.scc,
     azurerm_management_group_policy_assignment.vnet_injection,
     azurerm_management_group_policy_assignment.encryption,
-    azurerm_management_group_policy_assignment.disable_egress
+    azurerm_management_group_policy_assignment.disable_egress,
+    azurerm_management_group_policy_assignment.databricks_diagnostics
   ]
 }
 # should fail - uses NAT gateway
@@ -191,10 +197,12 @@ resource "azurerm_databricks_workspace" "fail_uses_natgateway" {
     azurerm_policy_definition.encryption,
     azurerm_policy_definition.vnet_injection,
     azurerm_policy_definition.disable_egress,
+    azurerm_policy_definition.databricks_diagnostics,
     azurerm_management_group_policy_assignment.scc,
     azurerm_management_group_policy_assignment.vnet_injection,
     azurerm_management_group_policy_assignment.encryption,
-    azurerm_management_group_policy_assignment.disable_egress
+    azurerm_management_group_policy_assignment.disable_egress,
+    azurerm_management_group_policy_assignment.databricks_diagnostics
   ]
 }
 
@@ -220,13 +228,15 @@ resource "azurerm_databricks_workspace" "pass_scc" {
   }
 
   depends_on = [
-    #azurerm_policy_definition.scc,
+    azurerm_policy_definition.scc,
     azurerm_policy_definition.encryption,
     azurerm_policy_definition.vnet_injection,
     azurerm_policy_definition.disable_egress,
-    #azurerm_management_group_policy_assignment.scc,
+    azurerm_policy_definition.databricks_diagnostics,
+    azurerm_management_group_policy_assignment.scc,
     azurerm_management_group_policy_assignment.vnet_injection,
     azurerm_management_group_policy_assignment.encryption,
-    azurerm_management_group_policy_assignment.disable_egress
+    azurerm_management_group_policy_assignment.disable_egress,
+    azurerm_management_group_policy_assignment.databricks_diagnostics
   ]
 }

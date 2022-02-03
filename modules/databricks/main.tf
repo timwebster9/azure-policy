@@ -116,9 +116,11 @@ resource "azurerm_databricks_workspace" "fail_no_vnet_injection" {
     #azurerm_policy_definition.scc,
     azurerm_policy_definition.encryption,
     azurerm_policy_definition.vnet_injection,
+    azurerm_policy_definition.disable_egress,
     #azurerm_management_group_policy_assignment.scc,
     azurerm_management_group_policy_assignment.vnet_injection,
-    azurerm_management_group_policy_assignment.encryption
+    azurerm_management_group_policy_assignment.encryption,
+    azurerm_management_group_policy_assignment.disable_egress
   ]
 }
 
@@ -147,9 +149,44 @@ resource "azurerm_databricks_workspace" "fail_no_encryption" {
     #azurerm_policy_definition.scc,
     azurerm_policy_definition.encryption,
     azurerm_policy_definition.vnet_injection,
+    azurerm_policy_definition.disable_egress,
     #azurerm_management_group_policy_assignment.scc,
     azurerm_management_group_policy_assignment.vnet_injection,
-    azurerm_management_group_policy_assignment.encryption
+    azurerm_management_group_policy_assignment.encryption,
+    azurerm_management_group_policy_assignment.disable_egress
+  ]
+}
+# should fail - uses NAT gateway
+resource "azurerm_databricks_workspace" "fail_uses_natgateway" {
+  name                        = "nat-${var.prefix}"
+  resource_group_name         = azurerm_resource_group.example.name
+  location                    = azurerm_resource_group.example.location
+  sku                         = "premium"
+  managed_resource_group_name = "${var.prefix}-DBW-managed-without-lb"
+  infrastructure_encryption_enabled = false
+
+  public_network_access_enabled = true
+
+  custom_parameters {
+    no_public_ip        = true
+    public_subnet_name  = azurerm_subnet.public.name
+    private_subnet_name = azurerm_subnet.private.name
+    virtual_network_id  = azurerm_virtual_network.example.id
+    nat_gateway_name    =  "nat-gateway"
+
+    public_subnet_network_security_group_association_id  = azurerm_subnet_network_security_group_association.public.id
+    private_subnet_network_security_group_association_id = azurerm_subnet_network_security_group_association.private.id
+  }
+
+  depends_on = [
+    #azurerm_policy_definition.scc,
+    azurerm_policy_definition.encryption,
+    azurerm_policy_definition.vnet_injection,
+    azurerm_policy_definition.disable_egress,
+    #azurerm_management_group_policy_assignment.scc,
+    azurerm_management_group_policy_assignment.vnet_injection,
+    azurerm_management_group_policy_assignment.encryption,
+    azurerm_management_group_policy_assignment.disable_egress
   ]
 }
 
@@ -178,8 +215,10 @@ resource "azurerm_databricks_workspace" "pass_scc" {
     #azurerm_policy_definition.scc,
     azurerm_policy_definition.encryption,
     azurerm_policy_definition.vnet_injection,
+    azurerm_policy_definition.disable_egress,
     #azurerm_management_group_policy_assignment.scc,
     azurerm_management_group_policy_assignment.vnet_injection,
-    azurerm_management_group_policy_assignment.encryption
+    azurerm_management_group_policy_assignment.encryption,
+    azurerm_management_group_policy_assignment.disable_egress
   ]
 }

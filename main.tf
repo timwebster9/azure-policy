@@ -256,8 +256,18 @@
 #     policy_assignment_mgmt_group_name = "parent-mgmt-group"
 # }
 
-module "databricks" {
-    source = "./modules/databricks"
+# module "databricks" {
+#     source = "./modules/databricks"
+
+#     location                          = var.location
+#     resource_group_name               = "policy-rg"
+
+#     policy_definition_mgmt_group_name = "parent-mgmt-group"
+#     policy_assignment_mgmt_group_name = "parent-mgmt-group"
+# }
+
+module "data_factory" {
+    source = "./modules/data_factory"
 
     location                          = var.location
     resource_group_name               = "policy-rg"

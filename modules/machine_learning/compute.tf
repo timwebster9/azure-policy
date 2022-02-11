@@ -36,7 +36,7 @@ resource "azurerm_kubernetes_cluster" "example" {
 }
 
 resource "azurerm_machine_learning_inference_cluster" "exampleaks" {
-  name                  = "example"
+  name                  = "exampleaks"
   location              = azurerm_resource_group.example.location
   cluster_purpose       = "FastProd"
   kubernetes_cluster_id = azurerm_kubernetes_cluster.example.id

@@ -40,6 +40,13 @@ resource "azurerm_subnet" "example" {
   address_prefixes     = ["10.1.0.0/24"]
 }
 
+resource "azurerm_subnet" "aks" {
+  name                 = "example-subnet"
+  resource_group_name  = azurerm_resource_group.example.name
+  virtual_network_name = azurerm_virtual_network.example.name
+  address_prefixes     = ["10.2.0.0/24"]
+}
+
 # should pass
 resource "azurerm_machine_learning_workspace" "examplepass" {
   name                    = "mlworkspace678733567"
@@ -78,6 +85,37 @@ resource "azurerm_machine_learning_compute_cluster" "test" {
 
   identity {
     type = "SystemAssigned"
+  }
+}
+
+resource "azurerm_kubernetes_cluster" "example" {
+  name                = "timwmlaks98798g7"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+
+  default_node_pool {
+    name           = "default"
+    node_count     = 3
+    vm_size        = "Standard_D3_v2"
+    vnet_subnet_id = azurerm_subnet.aks.id
+  }
+
+  identity {
+    type = "SystemAssigned"
+  }
+}
+
+resource "azurerm_machine_learning_inference_cluster" "example" {
+  name                  = "example"
+  location              = azurerm_resource_group.example.location
+  cluster_purpose       = "FastProd"
+  kubernetes_cluster_id = azurerm_kubernetes_cluster.example.id
+  description           = "This is an example cluster used with Terraform"
+
+  machine_learning_workspace_id = azurerm_machine_learning_workspace.example.id
+
+  tags = {
+    "stage" = "example"
   }
 }
 

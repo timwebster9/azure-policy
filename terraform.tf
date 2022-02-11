@@ -6,12 +6,15 @@ terraform {
     }
     azurerm = {
       source = "azurerm"
-      version = "2.92.0"
+      version = "2.96.0"
     }
   }
   backend "azurerm" {
     resource_group_name  = "mgmt-rg"
-    storage_account_name = "mgmtstorage3445354"
+
+    storage_account_name = "tfstatetimw"        # secondary
+    #storage_account_name = "mgmtstorage3445354" # primary
+    
     container_name       = "tfstate"
     key                  = "policy.tfstate"
     #subscription_id      = "2ca65474-3b7b-40f2-b242-0d2fba4bde6e"

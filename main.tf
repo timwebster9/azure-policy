@@ -126,15 +126,15 @@
 #     policy_assignment_mgmt_group_name = "parent-mgmt-group"
 # }
 
-# module "functions" {
-#     source = "./modules/function_apps"
+module "app_services" {
+    source = "./modules/app_services"
 
-#     location                          = var.location
-#     resource_group_name               = "policy-rg"
+    location                          = var.location
+    resource_group_name               = "policy-rg"
 
-#     policy_definition_mgmt_group_name = "parent-mgmt-group"
-#     policy_assignment_mgmt_group_name = "parent-mgmt-group"
-# }
+    policy_definition_mgmt_group_name = "parent-mgmt-group"
+    policy_assignment_mgmt_group_name = "parent-mgmt-group"
+}
 
 # module "app_config" {
 #     source = "./modules/app_configuration"
@@ -226,15 +226,15 @@
 #     policy_assignment_mgmt_group_name = "parent-mgmt-group"
 # }
 
-module "synapse" {
-    source = "./modules/synapse"
+# module "synapse" {
+#     source = "./modules/synapse"
 
-    location                          = var.location
-    resource_group_name               = "policy-rg"
+#     location                          = var.location
+#     resource_group_name               = "policy-rg"
 
-    policy_definition_mgmt_group_name = "parent-mgmt-group"
-    policy_assignment_mgmt_group_name = "parent-mgmt-group"
-}
+#     policy_definition_mgmt_group_name = "parent-mgmt-group"
+#     policy_assignment_mgmt_group_name = "parent-mgmt-group"
+# }
 
 # module "general" {
 #     source = "./modules/general"

@@ -2,7 +2,7 @@ resource "azurerm_machine_learning_compute_cluster" "test" {
   name                          = "example"
   location                      = azurerm_resource_group.example.location
   vm_priority                   = "LowPriority"
-  vm_size                       = "Standard_DS2_v2"
+  vm_size                       = "STANDARD_DS2_V2"
   machine_learning_workspace_id = azurerm_machine_learning_workspace.examplepass.id
   subnet_resource_id            = azurerm_subnet.example.id
 
@@ -26,7 +26,7 @@ resource "azurerm_kubernetes_cluster" "example" {
   default_node_pool {
     name           = "default"
     node_count     = 1
-    vm_size        = "Standard_D3_v2"
+    vm_size        = "Standard_B1ms"
     vnet_subnet_id = azurerm_subnet.aks.id
   }
 

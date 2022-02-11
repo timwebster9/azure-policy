@@ -110,10 +110,10 @@ resource "azurerm_machine_learning_inference_cluster" "example" {
   name                  = "example"
   location              = azurerm_resource_group.example.location
   cluster_purpose       = "FastProd"
-  kubernetes_cluster_id = azurerm_kubernetes_cluster.examplepass.id
+  kubernetes_cluster_id = azurerm_kubernetes_cluster.example.id
   description           = "This is an example cluster used with Terraform"
 
-  machine_learning_workspace_id = azurerm_machine_learning_workspace.example.id
+  machine_learning_workspace_id = azurerm_machine_learning_workspace.examplepass.id
 
   tags = {
     "stage" = "example"

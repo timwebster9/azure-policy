@@ -38,6 +38,8 @@ jobs:
 
       - name: Terraform apply
         if: ${{ success() }}
-        run: terraform apply -auto-approve
+        run: |
+          export TF_LOG=TRACE
+          terraform apply -auto-approve
 
         

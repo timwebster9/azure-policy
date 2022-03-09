@@ -72,7 +72,7 @@
                                     "state": "[parameters('state')]",
                                     "isAzureMonitorTargetEnabled": "true",
                                     "isDevopsAuditEnabled": "true",
-                                    "auditActionsAndGroups": ["BATCH_COMPLETED_GROUP,SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP,FAILED_DATABASE_AUTHENTICATION_GROUP"]
+                                    "auditActionsAndGroups": ["BATCH_COMPLETED_GROUP","SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP","FAILED_DATABASE_AUTHENTICATION_GROUP"]
                                 }
                             }
                         ]

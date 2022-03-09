@@ -12,8 +12,8 @@ terraform {
   backend "azurerm" {
     resource_group_name  = "mgmt-rg"
 
-    storage_account_name = "tfstatetimw"        # secondary
-    #storage_account_name = "mgmtstorage3445354" # primary
+    #storage_account_name = "tfstatetimw"        # secondary
+    storage_account_name = "mgmtstorage3445354" # primary
     
     container_name       = "tfstate"
     key                  = "policy.tfstate"

@@ -70,11 +70,9 @@
                                 "apiVersion": "2021-06-01",
                                 "properties": {
                                     "state": "[parameters('state')]",
-                                    "storageEndpoint": "[parameters('storageEndpoint')]",
-                                    "storageAccountAccessKey": "[parameters('storageAccountAccessKey')]",
-                                    "retentionDays": "[parameters('storageRetentionDays')]",
-                                    "storageAccountSubscriptionId": "[parameters('storageAccountSubscriptionId')]",
-                                    "isStorageSecondaryKeyInUse": false
+                                    "isAzureMonitorTargetEnabled": "true",
+                                    "isDevopsAuditEnabled": "true",
+                                    "auditActionsAndGroups": ["BATCH_COMPLETED_GROUP,SUCCESSFUL_DATABASE_AUTHENTICATION_GROUP,FAILED_DATABASE_AUTHENTICATION_GROUP"]
                                 }
                             }
                         ]

@@ -3,7 +3,7 @@ resource "azurerm_policy_definition" "app_service_https_only" {
   policy_type           = "Custom"
   mode                  = "Indexed"
   display_name          = "Function App should only be accessible over HTTPS (custom)"
-  management_group_id   = data.azurerm_management_group.policy_definition_mgmt_group.name
+  management_group_id   = data.azurerm_management_group.policy_definition_mgmt_group.id
 
   metadata = <<METADATA
     {

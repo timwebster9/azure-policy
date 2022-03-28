@@ -3,7 +3,7 @@ resource "azurerm_policy_definition" "function_runtime_version" {
   policy_type           = "Custom"
   mode                  = "Indexed"
   display_name          = "Functions should use an approved runtime version"
-  management_group_id   = data.azurerm_management_group.policy_definition_mgmt_group.name
+  management_group_id   = data.azurerm_management_group.policy_definition_mgmt_group.id
 
   metadata = <<METADATA
     {

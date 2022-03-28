@@ -3,7 +3,7 @@ resource "azurerm_policy_definition" "app_service_ip_restrictions" {
   policy_type           = "Custom"
   mode                  = "Indexed"
   display_name          = "IP restrictions for App Services are not allowed"
-  management_group_id   = data.azurerm_management_group.policy_definition_mgmt_group.name
+  management_group_id   = data.azurerm_management_group.policy_definition_mgmt_group.id
 
   metadata = <<METADATA
     {

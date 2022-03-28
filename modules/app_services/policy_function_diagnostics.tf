@@ -3,7 +3,7 @@ resource "azurerm_policy_definition" "function_diagnostics" {
   policy_type           = "Custom"
   mode                  = "Indexed"
   display_name          = "Deploy Diagnostic Settings for Function Apps"
-  management_group_id   = data.azurerm_management_group.policy_definition_mgmt_group.name
+  management_group_id   = data.azurerm_management_group.policy_definition_mgmt_group.id
 
   metadata = <<METADATA
     {

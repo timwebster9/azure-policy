@@ -3,7 +3,7 @@ resource "azurerm_policy_definition" "dine_tls_version" {
   policy_type           = "Custom"
   mode                  = "Indexed"
   display_name          = "Configure Functon App to use the specified TLS version"
-  management_group_id   = data.azurerm_management_group.policy_definition_mgmt_group.name
+  management_group_id   = data.azurerm_management_group.policy_definition_mgmt_group.id
 
   metadata = <<METADATA
     {

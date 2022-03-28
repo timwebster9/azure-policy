@@ -37,9 +37,9 @@ resource "azurerm_service_plan" "example" {
   name                = "example"
   resource_group_name = azurerm_resource_group.example.name
   location            = "West Europe"
-  sku_name            = "P1V2"
+  sku_name            = "P1v2"
   os_type             = "Linux"
-  
+
   depends_on = [
     azurerm_policy_definition.app_service_plan_diagnostics,
     azurerm_policy_definition.app_service_plan_zone_redundant,

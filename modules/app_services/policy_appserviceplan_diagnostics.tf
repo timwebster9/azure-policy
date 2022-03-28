@@ -3,7 +3,7 @@ resource "azurerm_policy_definition" "app_service_plan_diagnostics" {
   policy_type           = "Custom"
   mode                  = "Indexed"
   display_name          = "Deploy Diagnostic Settings for App Service Plans"
-  management_group_name = data.azurerm_management_group.policy_definition_mgmt_group.name
+  management_group_id   = data.azurerm_management_group.policy_definition_mgmt_group.name
 
   metadata = <<METADATA
     {

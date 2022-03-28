@@ -28,7 +28,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          terraform_version: 1.0.11
+          terraform_version: 1.1.7
 
       - name: Terraform init
         run: terraform init
@@ -39,7 +39,7 @@ jobs:
       - name: Terraform apply
         if: ${{ success() }}
         run: |
-          export TF_LOG=TRACE
+          #export TF_LOG=TRACE
           terraform apply -auto-approve
 
         

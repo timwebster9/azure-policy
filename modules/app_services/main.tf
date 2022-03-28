@@ -39,6 +39,15 @@ resource "azurerm_service_plan" "example" {
   location            = "West Europe"
   sku_name            = "P1V2"
   os_type             = "Linux"
+  
+  depends_on = [
+    azurerm_policy_definition.app_service_plan_diagnostics,
+    azurerm_policy_definition.app_service_plan_zone_redundant,
+    azurerm_policy_definition.private_link_sku,
+    azurerm_management_group_policy_assignment.app_service_plan_diagnostics,
+    azurerm_management_group_policy_assignment.app_service_plan_zone_redundant,
+    azurerm_management_group_policy_assignment.private_link_sku
+  ]
 }
 
 resource "azurerm_app_service_plan" "ep" {

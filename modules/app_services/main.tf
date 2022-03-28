@@ -33,6 +33,12 @@ resource "azurerm_subnet" "example" {
     }
   }
 }
+resource "azurerm_service_plan" "example" {
+  name                = "example"
+  resource_group_name = azurerm_resource_group.example.name
+  location            = "West Europe"
+  sku_name            = "P1V2"
+}
 
 resource "azurerm_app_service_plan" "ep" {
   name                = "ep-plan"

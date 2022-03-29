@@ -195,12 +195,12 @@ resource "azurerm_subnet" "fail" {
 #   ]
 # }
 
-resource "azurerm_subnet_network_security_group_association" "prs_assoc" {
-  subnet_id                 = azurerm_subnet.prs.id
-  network_security_group_id = azurerm_network_security_group.prs.id
-}
+# resource "azurerm_subnet_network_security_group_association" "prs_assoc" {
+#   subnet_id                 = azurerm_subnet.prs.id
+#   network_security_group_id = azurerm_network_security_group.prs.id
+# }
 
-resource "azurerm_subnet_network_security_group_association" "dat_assoc" {
-  subnet_id                 = azurerm_subnet.dat.id
-  network_security_group_id = azurerm_network_security_group.dat.id
-}
+# resource "azurerm_subnet_network_security_group_association" "dat_assoc" {
+#   subnet_id                 = azurerm_subnet.dat.id
+#   network_security_group_id = azurerm_network_security_group.dat.id
+# }

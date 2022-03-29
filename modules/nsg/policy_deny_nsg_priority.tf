@@ -27,6 +27,9 @@ resource "azurerm_management_group_policy_assignment" "deny_nsg_priority" {
 {
   "effect": {
     "value": "Deny"
+  },
+  "priorityThreshold": {
+    "value": 200
   }
 }
 PARAMETERS

@@ -13,7 +13,7 @@
         }
     },
     "priorityThreshold": {
-        "type": "Int",
+        "type": "Integer",
         "defaultValue": 200,
         "metadata": {
             "displayName": "Priority Threshold",

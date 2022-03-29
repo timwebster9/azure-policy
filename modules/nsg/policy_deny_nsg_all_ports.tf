@@ -3,7 +3,7 @@ resource "azurerm_policy_definition" "deny_nsg_all_ports" {
   policy_type           = "Custom"
   mode                  = "All"
   display_name          = "Network Security Group rules should not use '*' for destination port ranges"
-  management_group_name = data.azurerm_management_group.policy_definition_mgmt_group.name
+  management_group_id = data.azurerm_management_group.policy_definition_mgmt_group.id
 
   metadata = <<METADATA
     {

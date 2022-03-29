@@ -4,7 +4,7 @@ resource "azurerm_policy_definition" "default_nsg_rule" {
   policy_type           = "Custom"
   mode                  = "Indexed"
   display_name          = "Append default NSG rules"
-  management_group_name = data.azurerm_management_group.policy_definition_mgmt_group.name
+  management_group_id = data.azurerm_management_group.policy_definition_mgmt_group.id
 
   metadata = <<METADATA
     {

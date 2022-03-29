@@ -22,7 +22,7 @@
         ]
     },
     "priority": {
-        "type": "String"
+        "type": "Integer"
     },
     "direction": {
         "type": "String",

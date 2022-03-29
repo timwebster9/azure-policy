@@ -20,7 +20,7 @@ resource "azurerm_management_group_policy_assignment" "deny_inbound_udp_pres" {
     "value": "Deny"
   },
   "priority": {
-    "value": "205"
+    "value": 205
   },
   "direction": {
     "value": "Inbound"

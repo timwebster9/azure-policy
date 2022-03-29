@@ -20,7 +20,7 @@ resource "azurerm_management_group_policy_assignment" "deny_inbound_tcp_pres" {
     "value": "Deny"
   },
   "priority": {
-    "value": "204"
+    "value": 204
   },
   "direction": {
     "value": "Inbound"

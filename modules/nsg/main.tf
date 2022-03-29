@@ -65,9 +65,11 @@ resource "azurerm_network_security_group" "prs" {
   resource_group_name = azurerm_resource_group.example.name
 
   depends_on = [
+    azurerm_policy_definition.nsg_naming_convention,
+    azurerm_policy_definition.deny_nsg_priority,
+    azurerm_management_group_policy_assignment.deny_nsg_priority,
     azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
     azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
-    azurerm_policy_definition.nsg_naming_convention,
     azurerm_management_group_policy_assignment.nsg_naming_convention
   ]
 }
@@ -78,6 +80,8 @@ resource "azurerm_network_security_group" "dat" {
   resource_group_name = azurerm_resource_group.example.name
 
   depends_on = [
+    azurerm_policy_definition.deny_nsg_priority,
+    azurerm_management_group_policy_assignment.deny_nsg_priority,
     azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
     azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
     azurerm_policy_definition.nsg_naming_convention,
@@ -91,6 +95,8 @@ resource "azurerm_network_security_group" "app" {
   resource_group_name = azurerm_resource_group.example.name
 
   depends_on = [
+    azurerm_policy_definition.deny_nsg_priority,
+    azurerm_management_group_policy_assignment.deny_nsg_priority,
     azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
     azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
     azurerm_policy_definition.nsg_naming_convention,
@@ -111,6 +117,15 @@ resource "azurerm_network_security_rule" "fail_rule" {
   destination_address_prefix  = "*"
   resource_group_name         = azurerm_resource_group.example.name
   network_security_group_name = azurerm_network_security_group.app.name
+
+  depends_on = [
+    azurerm_policy_definition.deny_nsg_priority,
+    azurerm_management_group_policy_assignment.deny_nsg_priority,
+    azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
+    azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
+    azurerm_policy_definition.nsg_naming_convention,
+    azurerm_management_group_policy_assignment.nsg_naming_convention
+  ]
 }
 
 # should fail - contains a rule with '*' in destination ports
@@ -132,8 +147,12 @@ resource "azurerm_network_security_group" "test_app" {
   }
 
   depends_on = [
-    azurerm_policy_definition.deny_nsg_all_ports,
-    azurerm_management_group_policy_assignment.deny_nsg_all_ports
+    azurerm_policy_definition.deny_nsg_priority,
+    azurerm_management_group_policy_assignment.deny_nsg_priority,
+    azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
+    azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
+    azurerm_policy_definition.nsg_naming_convention,
+    azurerm_management_group_policy_assignment.nsg_naming_convention
   ]
 }
 
@@ -144,6 +163,8 @@ resource "azurerm_network_security_group" "fail" {
   resource_group_name = azurerm_resource_group.example.name
 
   depends_on = [
+    azurerm_policy_definition.deny_nsg_priority,
+    azurerm_management_group_policy_assignment.deny_nsg_priority,
     azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
     azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
     azurerm_policy_definition.nsg_naming_convention,

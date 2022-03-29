@@ -1,0 +1,27 @@
+{
+    "if": {
+      "allOf": [
+        {
+          "field": "type",
+          "equals": "Microsoft.Network/networkSecurityGroups"
+        },
+        {
+          "count": {
+            "field": "Microsoft.Network/networkSecurityGroups/securityRules[*]",
+            "where": {
+              "allOf": [
+                {
+                  "field": "Microsoft.Network/networkSecurityGroups/securityRules[*].priority",
+                  "less": "[parameters('priorityThreshold')]"
+                }
+              ]
+            }
+          },
+          "greater": 0
+        }
+      ]
+    },
+    "then": {
+      "effect": "[parameters('effect')]"
+    }
+  }

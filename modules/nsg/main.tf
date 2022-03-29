@@ -74,6 +74,21 @@ resource "azurerm_network_security_group" "prs" {
   ]
 }
 
+# fail
+resource "azurerm_network_security_rule" "fail_low_priority" {
+  name                        = "faillowpriority"
+  priority                    = 100
+  direction                   = "Outbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "443"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "10.0.0.0/24"
+  resource_group_name         = azurerm_resource_group.example.name
+  network_security_group_name = azurerm_network_security_group.prs.name
+}
+
 # resource "azurerm_network_security_rule" "fail_rule_priority" {
 #   name                        = "fail-rule-priority"
 #   priority                    = 100
@@ -122,21 +137,6 @@ resource "azurerm_network_security_group" "dat" {
     azurerm_policy_definition.nsg_naming_convention,
     azurerm_management_group_policy_assignment.nsg_naming_convention
   ]
-}
-
-# fail
-resource "azurerm_network_security_rule" "fail_low_priority" {
-  name                        = "faillowpriority"
-  priority                    = 100
-  direction                   = "Outbound"
-  access                      = "Allow"
-  protocol                    = "Tcp"
-  source_port_range           = "*"
-  destination_port_range      = "443"
-  source_address_prefix       = "*"
-  destination_address_prefix  = "10.0.0.0/24"
-  resource_group_name         = azurerm_resource_group.example.name
-  network_security_group_name = azurerm_network_security_group.dat.name
 }
 
 # resource "azurerm_network_security_group" "app" {

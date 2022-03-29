@@ -1,27 +1,43 @@
 {
-    "if": {
-      "allOf": [
-        {
-          "field": "type",
-          "equals": "Microsoft.Network/networkSecurityGroups"
-        },
-        {
-          "count": {
-            "field": "Microsoft.Network/networkSecurityGroups/securityRules[*]",
-            "where": {
-              "allOf": [
-                {
-                  "field": "Microsoft.Network/networkSecurityGroups/securityRules[*].priority",
-                  "less": "[parameters('priorityThreshold')]"
-                }
-              ]
-            }
+  "if": {
+    "anyOf": [
+      {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Network/networkSecurityGroups"
           },
-          "greater": 0
-        }
-      ]
-    },
-    "then": {
-      "effect": "[parameters('effect')]"
-    }
+          {
+            "count": {
+              "field": "Microsoft.Network/networkSecurityGroups/securityRules[*]",
+              "where": {
+                "allOf": [
+                  {
+                    "field": "Microsoft.Network/networkSecurityGroups/securityRules[*].priority",
+                    "less": "[parameters('priorityThreshold')]"
+                  }
+                ]
+              }
+            },
+            "greater": 0
+          }
+        ]
+      },
+      {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "Microsoft.Network/networkSecurityGroups/securityRules"
+          },
+          {
+            "field": "Microsoft.Network/networkSecurityGroups/securityRules/priority",
+            "less": "[parameters('priorityThreshold')]"
+          }
+        ]
+      }
+    ]
+  },
+  "then": {
+    "effect": "[parameters('effect')]"
   }
+}

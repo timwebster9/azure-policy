@@ -97,7 +97,7 @@ resource "azurerm_network_security_group" "prs" {
 #   ]
 # }
 
-resource "azurerm_network_security_group" "c" {
+resource "azurerm_network_security_group" "dat" {
   name                = "nsg-dat"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name

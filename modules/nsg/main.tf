@@ -59,73 +59,73 @@ resource "azurerm_subnet" "fail" {
   ]
 }
 
-resource "azurerm_network_security_group" "prs" {
-  name                = "nsg-prs"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+# resource "azurerm_network_security_group" "prs" {
+#   name                = "nsg-prs"
+#   location            = azurerm_resource_group.example.location
+#   resource_group_name = azurerm_resource_group.example.name
 
-  depends_on = [
-    azurerm_policy_definition.nsg_naming_convention,
-    azurerm_policy_definition.deny_nsg_priority,
-    azurerm_management_group_policy_assignment.deny_nsg_priority,
-    azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
-    azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
-    azurerm_management_group_policy_assignment.nsg_naming_convention
-  ]
-}
+#   depends_on = [
+#     azurerm_policy_definition.nsg_naming_convention,
+#     azurerm_policy_definition.deny_nsg_priority,
+#     azurerm_management_group_policy_assignment.deny_nsg_priority,
+#     azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
+#     azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
+#     azurerm_management_group_policy_assignment.nsg_naming_convention
+#   ]
+# }
 
-resource "azurerm_network_security_rule" "fail_rule_priority" {
-  name                        = "fail-rule-priority"
-  priority                    = 100
-  direction                   = "Outbound"
-  access                      = "Allow"
-  protocol                    = "Tcp"
-  source_port_range           = "*"
-  destination_port_range      = "*"
-  source_address_prefix       = "*"
-  destination_address_prefix  = "*"
-  resource_group_name         = azurerm_resource_group.example.name
-  network_security_group_name = azurerm_network_security_group.prs.name
+# resource "azurerm_network_security_rule" "fail_rule_priority" {
+#   name                        = "fail-rule-priority"
+#   priority                    = 100
+#   direction                   = "Outbound"
+#   access                      = "Allow"
+#   protocol                    = "Tcp"
+#   source_port_range           = "*"
+#   destination_port_range      = "*"
+#   source_address_prefix       = "*"
+#   destination_address_prefix  = "*"
+#   resource_group_name         = azurerm_resource_group.example.name
+#   network_security_group_name = azurerm_network_security_group.prs.name
 
-  depends_on = [
-    azurerm_policy_definition.deny_nsg_priority,
-    azurerm_management_group_policy_assignment.deny_nsg_priority,
-    azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
-    azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
-    azurerm_policy_definition.nsg_naming_convention,
-    azurerm_management_group_policy_assignment.nsg_naming_convention
-  ]
-}
+#   depends_on = [
+#     azurerm_policy_definition.deny_nsg_priority,
+#     azurerm_management_group_policy_assignment.deny_nsg_priority,
+#     azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
+#     azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
+#     azurerm_policy_definition.nsg_naming_convention,
+#     azurerm_management_group_policy_assignment.nsg_naming_convention
+#   ]
+# }
 
-resource "azurerm_network_security_group" "dat" {
-  name                = "nsg-dat"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+# resource "azurerm_network_security_group" "dat" {
+#   name                = "nsg-dat"
+#   location            = azurerm_resource_group.example.location
+#   resource_group_name = azurerm_resource_group.example.name
 
-  depends_on = [
-    azurerm_policy_definition.deny_nsg_priority,
-    azurerm_management_group_policy_assignment.deny_nsg_priority,
-    azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
-    azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
-    azurerm_policy_definition.nsg_naming_convention,
-    azurerm_management_group_policy_assignment.nsg_naming_convention
-  ]
-}
+#   depends_on = [
+#     azurerm_policy_definition.deny_nsg_priority,
+#     azurerm_management_group_policy_assignment.deny_nsg_priority,
+#     azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
+#     azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
+#     azurerm_policy_definition.nsg_naming_convention,
+#     azurerm_management_group_policy_assignment.nsg_naming_convention
+#   ]
+# }
 
-resource "azurerm_network_security_group" "app" {
-  name                = "nsg-app"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+# resource "azurerm_network_security_group" "app" {
+#   name                = "nsg-app"
+#   location            = azurerm_resource_group.example.location
+#   resource_group_name = azurerm_resource_group.example.name
 
-  depends_on = [
-    azurerm_policy_definition.deny_nsg_priority,
-    azurerm_management_group_policy_assignment.deny_nsg_priority,
-    azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
-    azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
-    azurerm_policy_definition.nsg_naming_convention,
-    azurerm_management_group_policy_assignment.nsg_naming_convention
-  ]
-}
+#   depends_on = [
+#     azurerm_policy_definition.deny_nsg_priority,
+#     azurerm_management_group_policy_assignment.deny_nsg_priority,
+#     azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
+#     azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
+#     azurerm_policy_definition.nsg_naming_convention,
+#     azurerm_management_group_policy_assignment.nsg_naming_convention
+#   ]
+# }
 
 # should fail - contains a rule with '*' in destination ports
 # resource "azurerm_network_security_rule" "fail_rule" {

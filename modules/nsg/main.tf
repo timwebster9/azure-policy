@@ -97,20 +97,20 @@ resource "azurerm_subnet" "fail" {
 #   ]
 # }
 
-# resource "azurerm_network_security_group" "dat" {
-#   name                = "nsg-dat"
-#   location            = azurerm_resource_group.example.location
-#   resource_group_name = azurerm_resource_group.example.name
+resource "azurerm_network_security_group" "dat" {
+  name                = "nsg-dat"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
 
-#   depends_on = [
-#     azurerm_policy_definition.deny_nsg_priority,
-#     azurerm_management_group_policy_assignment.deny_nsg_priority,
-#     azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
-#     azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
-#     azurerm_policy_definition.nsg_naming_convention,
-#     azurerm_management_group_policy_assignment.nsg_naming_convention
-#   ]
-# }
+  depends_on = [
+    azurerm_policy_definition.deny_nsg_priority,
+    azurerm_management_group_policy_assignment.deny_nsg_priority,
+    azurerm_management_group_policy_assignment.deny_inbound_tcp_pres,
+    azurerm_management_group_policy_assignment.deny_inbound_udp_pres,
+    azurerm_policy_definition.nsg_naming_convention,
+    azurerm_management_group_policy_assignment.nsg_naming_convention
+  ]
+}
 
 # resource "azurerm_network_security_group" "app" {
 #   name                = "nsg-app"

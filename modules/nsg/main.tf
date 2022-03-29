@@ -102,6 +102,18 @@ resource "azurerm_network_security_group" "dat" {
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
 
+  security_rule {
+    name                       = "fail100priority"
+    priority                   = 100
+    direction                  = "Outbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
   depends_on = [
     azurerm_policy_definition.deny_nsg_priority,
     azurerm_management_group_policy_assignment.deny_nsg_priority,
@@ -195,10 +207,10 @@ resource "azurerm_network_security_group" "dat" {
 #   ]
 # }
 
-# resource "azurerm_subnet_network_security_group_association" "prs_assoc" {
-#   subnet_id                 = azurerm_subnet.prs.id
-#   network_security_group_id = azurerm_network_security_group.prs.id
-# }
+resource "azurerm_subnet_network_security_group_association" "prs_assoc" {
+  subnet_id                 = azurerm_subnet.prs.id
+  network_security_group_id = azurerm_network_security_group.prs.id
+}
 
 # resource "azurerm_subnet_network_security_group_association" "dat_assoc" {
 #   subnet_id                 = azurerm_subnet.dat.id

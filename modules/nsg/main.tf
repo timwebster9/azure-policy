@@ -97,14 +97,14 @@ resource "azurerm_network_security_group" "prs" {
 #   ]
 # }
 
-resource "azurerm_network_security_group" "dat" {
+resource "azurerm_network_security_group" "c" {
   name                = "nsg-dat"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
 
   security_rule {
     name                       = "fail100priority"
-    priority                   = 100
+    priority                   = 100  # this will cause it to fail because it is < 200
     direction                  = "Outbound"
     access                     = "Allow"
     protocol                   = "Tcp"
@@ -122,6 +122,21 @@ resource "azurerm_network_security_group" "dat" {
     azurerm_policy_definition.nsg_naming_convention,
     azurerm_management_group_policy_assignment.nsg_naming_convention
   ]
+}
+
+# fail
+resource "azurerm_network_security_rule" "fail_low_priority" {
+  name                        = "faillowpriority"
+  priority                    = 100
+  direction                   = "Outbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "443"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "10.0.0.0/24"
+  resource_group_name         = azurerm_resource_group.example.name
+  network_security_group_name = azurerm_network_security_group.dat.name
 }
 
 # resource "azurerm_network_security_group" "app" {

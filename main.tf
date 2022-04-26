@@ -206,15 +206,15 @@
 #     policy_assignment_mgmt_group_name = "parent-mgmt-group"
 # }
 
-module "event_grid" {
-    source = "./modules/event_grid"
+# module "event_grid" {
+#     source = "./modules/event_grid"
 
-    location                          = var.location
-    resource_group_name               = "policy-rg"
+#     location                          = var.location
+#     resource_group_name               = "policy-rg"
 
-    policy_definition_mgmt_group_name = "parent-mgmt-group"
-    policy_assignment_mgmt_group_name = "parent-mgmt-group"
-}
+#     policy_definition_mgmt_group_name = "parent-mgmt-group"
+#     policy_assignment_mgmt_group_name = "parent-mgmt-group"
+# }
 
 # module "logic_apps" {
 #     source = "./modules/logic_apps"
@@ -275,3 +275,13 @@ module "event_grid" {
 #     policy_definition_mgmt_group_name = "parent-mgmt-group"
 #     policy_assignment_mgmt_group_name = "parent-mgmt-group"
 # }
+
+module "automation" {
+    source = "./modules/automation"
+
+    location                          = var.location
+    resource_group_name               = "policy-rg"
+
+    policy_definition_mgmt_group_name = "parent-mgmt-group"
+    policy_assignment_mgmt_group_name = "parent-mgmt-group"
+}

@@ -3,7 +3,7 @@ resource "azurerm_policy_definition" "system_topic_diagnostics" {
   policy_type           = "Custom"
   mode                  = "All"
   display_name          = "Deploy Event Grid System Topic Diagnostics"
-  management_group_name = data.azurerm_management_group.policy_definition_mgmt_group.name
+  management_group_id   = data.azurerm_management_group.policy_definition_mgmt_group.id
 
   metadata = <<METADATA
     {

@@ -69,7 +69,7 @@ resource "azurerm_eventgrid_topic" "examplepass" {
 
 # System topic
 resource "azurerm_storage_account" "example" {
-  name                     = "examplestoracct"
+  name                     = "testsas0987908098"
   resource_group_name      = azurerm_resource_group.example.name
   location                 = azurerm_resource_group.example.location
   account_tier             = "Standard"

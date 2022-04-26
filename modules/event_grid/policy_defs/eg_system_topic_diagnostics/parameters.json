@@ -1,0 +1,84 @@
+{
+    "effect": {
+        "type": "String",
+        "defaultValue": "DeployIfNotExists",
+        "allowedValues": [
+            "DeployIfNotExists",
+            "Disabled"
+        ],
+        "metadata": {
+            "displayName": "Effect",
+            "description": "The effect determines what happens when the policy rule is evaluated to match"
+        }
+    },
+    "profileName": {
+        "type": "String",
+        "defaultValue": "setByPolicy",
+        "metadata": {
+            "displayName": "Profile name",
+            "description": "The diagnostic settings profile name"
+        }
+    },
+    "eventHubRuleId": {
+        "type": "String",
+        "metadata": {
+            "displayName": "Event Hub Authorization Rule Id",
+            "description": "The Event Hub authorization rule Id for Azure Diagnostics. The authorization rule needs to be at Event Hub namespace level. e.g. /subscriptions/{subscription Id}/resourceGroups/{resource group}/providers/Microsoft.EventHub/namespaces/{Event Hub namespace}/authorizationrules/{authorization rule}",
+            "strongType": "Microsoft.EventHub/Namespaces/AuthorizationRules",
+            "assignPermissions": true
+        }
+    },
+    "eventHubName": {
+        "type": "string",
+        "defaultValue": "eventhub",
+        "metadata": {
+            "description": "The name of the event hub."
+        }
+    },
+    "logAnalyticsWorkspaceId": {
+        "type": "string",
+        "metadata": {
+            "displayName": "Log Analytics workspace",
+            "description": "Log Analytics workspace resource ID",
+            "strongType": "omsWorkspace"
+        }
+    },
+    "storageAccountId": {
+        "type": "string",
+        "metadata": {
+            "displayName": "Storage account ID",
+            "description": "Storage account resource ID"
+        }
+    },
+    "storageRetentionDays": {
+        "type": "Integer",
+        "metadata": {
+            "displayName": "Storage account retention policy",
+            "description": "Number of days to retain diagnostics logs"
+        }
+    },
+    "metricsEnabled": {
+        "type": "String",
+        "metadata": {
+            "displayName": "Enable metrics",
+            "description": "Whether to enable metrics stream to the Event Hub - True or False"
+        },
+        "allowedValues": [
+            "True",
+            "False"
+        ],
+        "defaultValue": "False"
+    },
+    "logsEnabled": {
+        "type": "String",
+        "metadata": {
+            "displayName": "Enable logs",
+            "description": "Whether to enable logs stream to the Event Hub  - True or False"
+        },
+        "allowedValues": [
+            "True",
+            "False"
+        ],
+        "defaultValue": "True"
+    }
+}

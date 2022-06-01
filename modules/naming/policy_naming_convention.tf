@@ -3,7 +3,7 @@ resource "azurerm_policy_definition" "naming_convention" {
   policy_type           = "Custom"
   mode                  = "Indexed"
   display_name          = "Resources should use the provided naming convention"
-  management_group_name = data.azurerm_management_group.policy_definition_mgmt_group.name
+  management_group_id   = data.azurerm_management_group.policy_definition_mgmt_group.id
 
   metadata = <<METADATA
     {

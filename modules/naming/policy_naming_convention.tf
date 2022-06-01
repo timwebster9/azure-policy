@@ -28,6 +28,9 @@ resource "azurerm_management_group_policy_assignment" "naming_convention" {
 {
   "effect": {
     "value": "Deny"
+  },
+  "resourceTypes: {
+    "value": ["Microsoft.Network/virtualNetworks"]
   }
 }
 PARAMETERS

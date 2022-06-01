@@ -14,3 +14,13 @@ resource "azurerm_virtual_network" "example" {
     azurerm_management_group_policy_assignment.naming_convention
   ]
 }
+
+resource "azurerm_resource_group" "testrg" {
+  name     = "testrg"
+  location = var.location
+  
+  depends_on = [
+    azurerm_policy_definition.naming_convention,
+    azurerm_management_group_policy_assignment.naming_convention
+  ]
+}

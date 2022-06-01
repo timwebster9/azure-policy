@@ -3,7 +3,7 @@
     "allOf": [
       {
         "field": "type",
-        "equals": "Microsoft.Network/virtualNetworks"
+        "in": "[parameters('resourceTypes')]"
       },
       {
         "anyOf": [

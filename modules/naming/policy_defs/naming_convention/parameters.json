@@ -11,5 +11,12 @@
             "Disabled"
         ],
         "defaultValue": "Audit"
+    },
+    "resourceTypes": {
+        "type": "Array",
+        "metadata": {
+            "displayName": "Resource Types",
+            "description": "List of resource types to which the policy applies"
+        }
     }
 }

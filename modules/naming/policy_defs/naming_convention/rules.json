@@ -44,7 +44,8 @@
             "value": "[split(field('name'), '-')[2]]",
             "like": "[current('pattern')]"
           }
-        }
+        },
+        "notEquals": 1
       },
       {
         "count": {

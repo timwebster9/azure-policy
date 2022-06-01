@@ -28,6 +28,7 @@ resource "azurerm_virtual_network" "examplefail" {
   ]
 }
 
+# excluded by resource type, should pass
 resource "azurerm_resource_group" "testrg" {
   name     = "testrg"
   location = var.location

@@ -1,90 +1,98 @@
 {
   "if": {
-    "anyOf": [
+    "allOf": [
       {
-        "count": {
-          "value": [
-            "rlg",
-            "rlm"
-          ],
-          "name": "pattern",
-          "where": {
-            "value": "[split(field('name'), '-')[0]]",
-            "like": "[current('pattern')]"
-          }
-        },
-        "notEquals": 1
+        "field": "type",
+        "equals": "Microsoft.Network/virtualNetworks"
       },
       {
-        "count": {
-          "value": [
-            "dev",
-            "tst",
-            "uat",
-            "sit",
-            "npd",
-            "pre",
-            "prd"
-          ],
-          "name": "pattern",
-          "where": {
-            "value": "[split(field('name'), '-')[1]]",
-            "like": "[current('pattern')]"
+        "anyOf": [
+          {
+            "count": {
+              "value": [
+                "rlg",
+                "rlm"
+              ],
+              "name": "pattern",
+              "where": {
+                "value": "[split(field('name'), '-')[0]]",
+                "like": "[current('pattern')]"
+              }
+            },
+            "notEquals": 1
+          },
+          {
+            "count": {
+              "value": [
+                "dev",
+                "tst",
+                "uat",
+                "sit",
+                "npd",
+                "pre",
+                "prd"
+              ],
+              "name": "pattern",
+              "where": {
+                "value": "[split(field('name'), '-')[1]]",
+                "like": "[current('pattern')]"
+              }
+            },
+            "notEquals": 1
+          },
+          {
+            "count": {
+              "value": [
+                "*"
+              ],
+              "name": "pattern",
+              "where": {
+                "value": "[split(field('name'), '-')[2]]",
+                "like": "[current('pattern')]"
+              }
+            },
+            "notEquals": 1
+          },
+          {
+            "count": {
+              "value": [
+                "uks"
+              ],
+              "name": "pattern",
+              "where": {
+                "value": "[split(field('name'), '-')[3]]",
+                "like": "[current('pattern')]"
+              }
+            },
+            "notEquals": 1
+          },
+          {
+            "count": {
+              "value": [
+                "vnet"
+              ],
+              "name": "pattern",
+              "where": {
+                "value": "[split(field('name'), '-')[4]]",
+                "like": "[current('pattern')]"
+              }
+            },
+            "notEquals": 1
+          },
+          {
+            "count": {
+              "value": [
+                "*"
+              ],
+              "name": "pattern",
+              "where": {
+                "value": "[split(field('name'), '-')[5]]",
+                "like": "[current('pattern')]"
+              }
+            },
+            "notEquals": 1
           }
-        },
-        "notEquals": 1
-      },
-      {
-        "count": {
-          "value": [
-            "*"
-          ],
-          "name": "pattern",
-          "where": {
-            "value": "[split(field('name'), '-')[2]]",
-            "like": "[current('pattern')]"
-          }
-        },
-        "notEquals": 1
-      },
-      {
-        "count": {
-          "value": [
-            "uks"
-          ],
-          "name": "pattern",
-          "where": {
-            "value": "[split(field('name'), '-')[3]]",
-            "like": "[current('pattern')]"
-          }
-        },
-        "notEquals": 1
-      },
-      {
-        "count": {
-          "value": [
-            "vnet"
-          ],
-          "name": "pattern",
-          "where": {
-            "value": "[split(field('name'), '-')[4]]",
-            "like": "[current('pattern')]"
-          }
-        },
-        "notEquals": 1
-      },
-      {
-        "count": {
-          "value": [
-            "*"
-          ],
-          "name": "pattern",
-          "where": {
-            "value": "[split(field('name'), '-')[5]]",
-            "like": "[current('pattern')]"
-          }
-        },
-        "notEquals": 1
+        ]
       }
     ]
   },

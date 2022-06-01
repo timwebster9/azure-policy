@@ -72,7 +72,20 @@
           }
         },
         "notEquals": 1
-      }
+      },
+      {
+        "count": {
+          "value": [
+            "*"
+          ],
+          "name": "pattern",
+          "where": {
+            "value": "[split(field('name'), '-')[5]]",
+            "like": "[current('pattern')]"
+          }
+        },
+        "notEquals": 1
+      },
     ]
   },
   "then": {

@@ -1,77 +1,72 @@
 {
-    "if": {
-      "anyOf": [
-        {
-          "count": {
-            "value": [
-              "rlg",
-              "rlm"
-            ],
-            "name": "pattern",
-            "where": {
-              "value": "[split(field('name'), '-')[0]]",
-              "like": "[current('pattern')]"
-            }
-          },
-          "notEquals": 1
+  "if": {
+    "anyOf": [
+      {
+        "count": {
+          "value": [
+            "rlg",
+            "rlm"
+          ],
+          "name": "pattern",
+          "where": {
+            "value": "[split(field('name'), '-')[0]]",
+            "like": "[current('pattern')]"
+          }
         },
-        {
-          "count": {
-            "value": [
-              "dev",
-              "tst",
-              "uat",
-              "sit",
-              "npd",
-              "pre",
-              "prd"
-            ],
-            "name": "pattern",
-            "where": {
-              "value": "[split(field('name'), '-')[1]]",
-              "like": "[current('pattern')]"
-            }
-          },
-          "notEquals": 1
+        "notEquals": 1
+      },
+      {
+        "count": {
+          "value": [
+            "dev",
+            "tst",
+            "uat",
+            "sit",
+            "npd",
+            "pre",
+            "prd"
+          ],
+          "name": "pattern",
+          "where": {
+            "value": "[split(field('name'), '-')[1]]",
+            "like": "[current('pattern')]"
+          }
         },
-        {
-          "count": {
-            "where": {
-              "value": "[split(field('name'), '-')[2]]",
-              "like": "*"
-            }
-          },
-          "notEquals": 1
+        "notEquals": 1
+      },
+      {
+        "value": "[split(field('name'), '-')[2]]",
+        "like": "*"
+      },
+      {
+        "count": {
+          "value": [
+            "uks"
+          ],
+          "name": "pattern",
+          "where": {
+            "value": "[split(field('name'), '-')[3]]",
+            "like": "[current('pattern')]"
+          }
         },
-        {
-          "count": {
-            "value": [
-              "uks"
-            ],
-            "name": "pattern",
-            "where": {
-              "value": "[split(field('name'), '-')[3]]",
-              "like": "[current('pattern')]"
-            }
-          },
-          "notEquals": 1
+        "notEquals": 1
+      },
+      {
+        "count": {
+          "value": [
+            "vnet"
+          ],
+          "name": "pattern",
+          "where": {
+            "value": "[split(field('name'), '-')[4]]",
+            "like": "[current('pattern')]"
+          }
         },
-        {
-          "count": {
-            "value": [
-              "vnet"
-            ],
-            "name": "pattern",
-            "where": {
-              "value": "[split(field('name'), '-')[4]]",
-              "like": "[current('pattern')]"
-            }
-          },
-          "notEquals": 1
-        }
-      ]
-    },
-    "then": {
-      "effect": "[parameters('effect')]"
-    }
+        "notEquals": 1
+      }
+    ]
+  },
+  "then": {
+    "effect": "[parameters('effect')]"
   }
+}

@@ -35,8 +35,16 @@
         "notEquals": 1
       },
       {
-        "value": "[split(field('name'), '-')[2]]",
-        "like": "*"
+        "count": {
+          "value": [
+            "*"
+          ],
+          "name": "pattern",
+          "where": {
+            "value": "[split(field('name'), '-')[2]]",
+            "like": "[current('pattern')]"
+          }
+        }
       },
       {
         "count": {

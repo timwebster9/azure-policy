@@ -4,10 +4,8 @@
         {
           "count": {
             "value": [
-              "vm",
-              "vnet",
-              "kv",
-              "sql"
+              "rlg",
+              "rlm"
             ],
             "name": "pattern",
             "where": {
@@ -21,8 +19,12 @@
           "count": {
             "value": [
               "dev",
-              "test",
-              "prod"
+              "tst",
+              "uat",
+              "sit",
+              "npd",
+              "pre",
+              "prd"
             ],
             "name": "pattern",
             "where": {
@@ -34,14 +36,34 @@
         },
         {
           "count": {
+            "where": {
+              "value": "[split(field('name'), '-')[2]]",
+              "like": "*"
+            }
+          },
+          "notEquals": 1
+        },
+        {
+          "count": {
             "value": [
-              "centralus",
-              "eastus",
-              "westus"
+              "uks"
             ],
             "name": "pattern",
             "where": {
-              "value": "[split(field('name'), '-')[2]]",
+              "value": "[split(field('name'), '-')[3]]",
+              "like": "[current('pattern')]"
+            }
+          },
+          "notEquals": 1
+        },
+        {
+          "count": {
+            "value": [
+              "vnet"
+            ],
+            "name": "pattern",
+            "where": {
+              "value": "[split(field('name'), '-')[4]]",
               "like": "[current('pattern')]"
             }
           },
@@ -50,6 +72,6 @@
       ]
     },
     "then": {
-      "effect": "deny"
+      "effect": "[parameters('effect')]"
     }
   }

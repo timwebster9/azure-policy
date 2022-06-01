@@ -276,8 +276,19 @@
 #     policy_assignment_mgmt_group_name = "parent-mgmt-group"
 # }
 
-module "automation" {
-    source = "./modules/automation"
+# module "automation" {
+#     source = "./modules/automation"
+
+#     location                          = var.location
+#     resource_group_name               = "policy-rg"
+
+#     policy_definition_mgmt_group_name = "parent-mgmt-group"
+#     policy_assignment_mgmt_group_name = "parent-mgmt-group"
+# }
+
+
+module "naming" {
+    source = "./modules/naming"
 
     location                          = var.location
     resource_group_name               = "policy-rg"

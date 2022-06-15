@@ -50,7 +50,7 @@ resource "azurerm_service_plan" "example" {
   ]
 }
 
-resource "azurerm_app_service_plan" "ep" {
+resource "azurerm_service_plan" "ep" {
   name                = "ep-plan"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
@@ -73,7 +73,7 @@ resource "azurerm_app_service_plan" "ep" {
   ]
 }
 
-resource "azurerm_app_service_plan" "eptls11" {
+resource "azurerm_service_plan" "eptls11" {
   name                = "ep-plan-tls11"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name

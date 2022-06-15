@@ -56,6 +56,7 @@ resource "azurerm_service_plan" "ep" {
   resource_group_name = azurerm_resource_group.example.name
   maximum_elastic_worker_count = 3
   sku_name            = "EP1"
+  os_type             = "Linux"
 
   depends_on = [
     azurerm_policy_definition.app_service_plan_diagnostics,
@@ -74,6 +75,7 @@ resource "azurerm_service_plan" "eptls11" {
   zone_redundant      = true
   maximum_elastic_worker_count = 3
   sku_name            = "EP1"
+  os_type             = "Linux"
 
   depends_on = [
     azurerm_policy_definition.app_service_plan_diagnostics,
@@ -138,9 +140,9 @@ resource "azurerm_service_plan" "basic" {
   name                = "basic-plan"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
-  zone_redundant      = true
   maximum_elastic_worker_count = 3
   sku_name            = "B1"
+  os_type             = "Linux"
 
   depends_on = [
     azurerm_policy_definition.app_service_plan_diagnostics,
@@ -157,9 +159,9 @@ resource "azurerm_service_plan" "standard" {
   name                = "standard-plan"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
-  zone_redundant      = true
   maximum_elastic_worker_count = 3
   sku_name            = "S1"
+  os_type             = "Linux"
 
   depends_on = [
     azurerm_policy_definition.app_service_plan_diagnostics,

@@ -145,50 +145,50 @@ resource "azurerm_app_service_plan" "eptls11" {
 # }
 
 # should fail
-# resource "azurerm_app_service_plan" "basic" {
-#   name                = "basic-plan"
-#   location            = azurerm_resource_group.example.location
-#   resource_group_name = azurerm_resource_group.example.name
-#   zone_redundant      = true
-#   maximum_elastic_worker_count = 3
+resource "azurerm_app_service_plan" "basic" {
+  name                = "basic-plan"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  zone_redundant      = true
+  maximum_elastic_worker_count = 3
 
-#   sku {
-#     tier = "Basic"
-#     size = "B1"
-#   }
+  sku {
+    tier = "Basic"
+    size = "B1"
+  }
 
-#   depends_on = [
-#     azurerm_policy_definition.app_service_plan_diagnostics,
-#     azurerm_policy_definition.app_service_plan_zone_redundant,
-#     azurerm_policy_definition.private_link_sku,
-#     azurerm_management_group_policy_assignment.app_service_plan_diagnostics,
-#     azurerm_management_group_policy_assignment.app_service_plan_zone_redundant,
-#     azurerm_management_group_policy_assignment.private_link_sku
-#   ]
-# }
+  depends_on = [
+    azurerm_policy_definition.app_service_plan_diagnostics,
+    azurerm_policy_definition.app_service_plan_zone_redundant,
+    azurerm_policy_definition.private_link_sku,
+    azurerm_management_group_policy_assignment.app_service_plan_diagnostics,
+    azurerm_management_group_policy_assignment.app_service_plan_zone_redundant,
+    azurerm_management_group_policy_assignment.private_link_sku
+  ]
+}
 
-# should fail
-# resource "azurerm_app_service_plan" "standard" {
-#   name                = "standard-plan"
-#   location            = azurerm_resource_group.example.location
-#   resource_group_name = azurerm_resource_group.example.name
-#   zone_redundant      = true
-#   maximum_elastic_worker_count = 3
+#should fail
+resource "azurerm_app_service_plan" "standard" {
+  name                = "standard-plan"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  zone_redundant      = true
+  maximum_elastic_worker_count = 3
 
-#   sku {
-#     tier = "Basic"
-#     size = "B1"
-#   }
+  sku {
+    tier = "Basic"
+    size = "B1"
+  }
 
-#   depends_on = [
-#     azurerm_policy_definition.app_service_plan_diagnostics,
-#     azurerm_policy_definition.app_service_plan_zone_redundant,
-#     azurerm_policy_definition.private_link_sku,
-#     azurerm_management_group_policy_assignment.app_service_plan_diagnostics,
-#     azurerm_management_group_policy_assignment.app_service_plan_zone_redundant,
-#     azurerm_management_group_policy_assignment.private_link_sku
-#   ]
-# }
+  depends_on = [
+    azurerm_policy_definition.app_service_plan_diagnostics,
+    azurerm_policy_definition.app_service_plan_zone_redundant,
+    azurerm_policy_definition.private_link_sku,
+    azurerm_management_group_policy_assignment.app_service_plan_diagnostics,
+    azurerm_management_group_policy_assignment.app_service_plan_zone_redundant,
+    azurerm_management_group_policy_assignment.private_link_sku
+  ]
+}
 
 
 resource "azurerm_function_app" "example" {

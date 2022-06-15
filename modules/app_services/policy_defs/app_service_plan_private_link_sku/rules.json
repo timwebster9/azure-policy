@@ -6,11 +6,20 @@
                 "equals": "Microsoft.Web/serverFarms"
             },
             {
-                "field": "Microsoft.Web/serverFarms/sku.tier",
+                "field": "Microsoft.Web/serverFarms/sku.name",
                 "notIn": [
-                    "PremiumV2",
-                    "PremiumV3",
-                    "ElasticPremium"
+                    "P1v2",
+                    "P2v2",
+                    "P3v2",
+                    "P1v3",
+                    "P2v3",
+                    "P3v3",
+                    "EP1",
+                    "EP2",
+                    "EP3",
+                    "WS1",
+                    "WS2",
+                    "WS3"
                 ]
             }
         ]

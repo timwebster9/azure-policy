@@ -20,7 +20,7 @@ PARAMETERS
 }
 
 resource "azurerm_role_assignment" "website_contributor" {
-  scope                = azurerm_function_app.example.id
+  scope                = data.azurerm_subscription.current.id
   role_definition_name = "Website Contributor"
   principal_id         = azurerm_management_group_policy_assignment.disable_public_network_access.identity.0.principal_id
 }

@@ -176,7 +176,7 @@ resource "azurerm_app_service_plan" "standard" {
   maximum_elastic_worker_count = 3
 
   sku {
-    tier = "Basic"
+    tier = "Standard"
     size = "B1"
   }
 

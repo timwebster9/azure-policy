@@ -97,7 +97,7 @@ resource "azurerm_service_plan" "eptls11" {
 }
 
 # should pass
-# resource "azurerm_app_service_plan" "premiumv2" {
+# resource "azurerm_service_plan" "premiumv2" {
 #   name                = "v2-plan"
 #   location            = azurerm_resource_group.example.location
 #   resource_group_name = azurerm_resource_group.example.name
@@ -121,7 +121,7 @@ resource "azurerm_service_plan" "eptls11" {
 # }
 
 # should pass
-# resource "azurerm_app_service_plan" "premiumv3" {
+# resource "azurerm_service_plan" "premiumv3" {
 #   name                = "v3-plan"
 #   location            = azurerm_resource_group.example.location
 #   resource_group_name = azurerm_resource_group.example.name
@@ -145,7 +145,7 @@ resource "azurerm_service_plan" "eptls11" {
 # }
 
 # should fail
-resource "azurerm_app_service_plan" "basic" {
+resource "azurerm_service_plan" "basic" {
   name                = "basic-plan"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
@@ -168,7 +168,7 @@ resource "azurerm_app_service_plan" "basic" {
 }
 
 #should fail
-resource "azurerm_app_service_plan" "standard" {
+resource "azurerm_service_plan" "standard" {
   name                = "standard-plan"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
@@ -195,7 +195,7 @@ resource "azurerm_function_app" "example" {
   name                       = "timwpolicyfunction908sfsd"
   location                   = azurerm_resource_group.example.location
   resource_group_name        = azurerm_resource_group.example.name
-  app_service_plan_id        = azurerm_app_service_plan.ep.id
+  app_service_plan_id        = azurerm_service_plan.ep.id
   storage_account_name       = azurerm_storage_account.function.name
   storage_account_access_key = azurerm_storage_account.function.primary_access_key
   https_only                 = true  # policy check
@@ -246,7 +246,7 @@ resource "azurerm_function_app" "tls_11" {
   name                       = "timwpolicyfunctionTLS11"
   location                   = azurerm_resource_group.example.location
   resource_group_name        = azurerm_resource_group.example.name
-  app_service_plan_id        = azurerm_app_service_plan.eptls11.id
+  app_service_plan_id        = azurerm_service_plan.eptls11.id
   storage_account_name       = azurerm_storage_account.function.name
   storage_account_access_key = azurerm_storage_account.function.primary_access_key
   https_only                 = true  # policy check

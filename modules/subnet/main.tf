@@ -16,9 +16,8 @@ resource "azurerm_subnet" "example" {
   virtual_network_name = azurerm_virtual_network.example.name
   address_prefixes     = ["10.0.1.0/24"]
 
-#   depends_on = [
-#     azurerm_policy_definition.enforce_routes,
-#     azurerm_management_group_policy_assignment.enforce_routes,
-#     azurerm_management_group_policy_assignment.route_firewall
-#   ]
+  depends_on = [
+    azurerm_policy_definition.pl_network_policies,
+    azurerm_management_group_policy_assignment.pl_network_policies
+  ]
 }

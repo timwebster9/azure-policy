@@ -1,0 +1,17 @@
+{
+    "if": {
+        "allOf": [
+            {
+                "field": "type",
+                "equals": "Microsoft.Network/virtualNetworks/subnets"
+            },
+            {
+                "field": "Microsoft.Network/virtualNetworks/subnets/privateEndpointNetworkPolicies",
+                "notEquals": "Enabled"
+            }
+        ]
+    },
+    "then": {
+        "effect": "[parameters('effect')]"
+    }
+}

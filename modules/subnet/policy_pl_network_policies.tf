@@ -1,7 +1,7 @@
 resource "azurerm_policy_definition" "pl_network_policies" {
   name                  = "pl_network_policies"
   policy_type           = "Custom"
-  mode                  = "Indexed"
+  mode                  = "All"
   display_name          = "Private link network policies should be enabled."
   management_group_id = data.azurerm_management_group.policy_definition_mgmt_group.id
 

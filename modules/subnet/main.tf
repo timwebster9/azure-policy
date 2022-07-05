@@ -11,13 +11,16 @@ resource "azurerm_virtual_network" "example" {
 }
 
 resource "azurerm_subnet" "example" {
-  name                 = "example-subnet"
-  resource_group_name  = azurerm_resource_group.example.name
-  virtual_network_name = azurerm_virtual_network.example.name
-  address_prefixes     = ["10.0.1.0/24"]
+  name                                           = "example-subnet"
+  resource_group_name                            = azurerm_resource_group.example.name
+  virtual_network_name                           = azurerm_virtual_network.example.name
+  address_prefixes                               = ["10.0.1.0/24"]
+  enforce_private_link_endpoint_network_policies = true # disables policy
 
   depends_on = [
     azurerm_policy_definition.pl_network_policies,
+    #azurerm_policy_definition.pl_network_policies_subnet,
     azurerm_management_group_policy_assignment.pl_network_policies
+    #azurerm_management_group_policy_assignment.pl_network_policies_subnet
   ]
 }

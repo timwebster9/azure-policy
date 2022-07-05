@@ -1,13 +1,39 @@
 {
     "if": {
-        "allOf": [
+        "anyOf": [
             {
-                "field": "type",
-                "equals": "Microsoft.Network/virtualNetworks/subnets"
+                "allOf": [
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Network/virtualNetworks/subnets"
+                    },
+                    {
+                        "field": "Microsoft.Network/virtualNetworks/subnets/privateEndpointNetworkPolicies",
+                        "notEquals": "Enabled"
+                    }
+                ]
             },
             {
-                "field": "Microsoft.Network/virtualNetworks/subnets.privateEndpointNetworkPolicies",
-                "notEquals": "Enabled"
+                "allOf": [
+                    {
+                        "field": "type",
+                        "equals": "Microsoft.Network/virtualNetworks"
+                    },
+                    {
+                        "count": {
+                            "field": "Microsoft.Network/virtualNetworks/subnets[*]",
+                            "where": {
+                                "allOf": [
+                                    {
+                                        "field": "Microsoft.Network/virtualNetworks/subnets/privateEndpointNetworkPolicies",
+                                        "notEquals": "Enabled"
+                                    }
+                                ]
+                            }
+                        },
+                        "notEquals": 0
+                    }
+                ]
             }
         ]
     },

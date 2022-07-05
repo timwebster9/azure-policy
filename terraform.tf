@@ -6,7 +6,7 @@ terraform {
     }
     azurerm = {
       source = "azurerm"
-      version = "3.10.0"
+      version = "3.12.0"
     }
   }
   backend "azurerm" {

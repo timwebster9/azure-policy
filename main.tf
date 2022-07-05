@@ -126,15 +126,15 @@
 #     policy_assignment_mgmt_group_name = "parent-mgmt-group"
 # }
 
-module "app_services" {
-    source = "./modules/app_services"
+# module "app_services" {
+#     source = "./modules/app_services"
 
-    location                          = var.location
-    resource_group_name               = "policy-rg"
+#     location                          = var.location
+#     resource_group_name               = "policy-rg"
 
-    policy_definition_mgmt_group_name = "parent-mgmt-group"
-    policy_assignment_mgmt_group_name = "parent-mgmt-group"
-}
+#     policy_definition_mgmt_group_name = "parent-mgmt-group"
+#     policy_assignment_mgmt_group_name = "parent-mgmt-group"
+# }
 
 # module "app_config" {
 #     source = "./modules/app_configuration"
@@ -296,3 +296,13 @@ module "app_services" {
 #     policy_definition_mgmt_group_name = "parent-mgmt-group"
 #     policy_assignment_mgmt_group_name = "parent-mgmt-group"
 # }
+
+module "subnet" {
+    source = "./modules/subnet"
+
+    location                          = var.location
+    resource_group_name               = "policy-rg"
+
+    policy_definition_mgmt_group_name = "parent-mgmt-group"
+    policy_assignment_mgmt_group_name = "parent-mgmt-group"
+}
